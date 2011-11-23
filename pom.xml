@@ -139,8 +139,8 @@
             </activation>
 
             <modules>
-                <module>smileplug-app</module>
-                <module>smileplug-test</module>
+                <module>smileplug-adm-app</module>
+                <module>smileplug-adm-test</module>
             </modules>
 
             <build>
