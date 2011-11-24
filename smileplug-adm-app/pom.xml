@@ -22,7 +22,12 @@
             <artifactId>android</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.springframework.android</groupId>
+            <artifactId>spring-android-rest-template</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

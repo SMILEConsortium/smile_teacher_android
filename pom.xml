@@ -54,6 +54,12 @@
                 <artifactId>android-test</artifactId>
                 <version>${android.sdk.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.springframework.android</groupId>
+                <artifactId>spring-android-rest-template</artifactId>
+                <version>1.0.0.M4</version>
+            </dependency>             
 
         </dependencies>
 
@@ -215,6 +221,21 @@
         </profile>
 
     </profiles>
-
+    
+    <repositories>
+    
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Maven MILESTONE Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        
+        <repository>
+            <id>android-rome-feed-reader-repository</id>
+            <name>Android ROME Feed Reader Repository</name>
+            <url>https://android-rome-feed-reader.googlecode.com/svn/maven2/releases</url>
+        </repository>
+    
+    </repositories>
 
 </project>
