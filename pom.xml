@@ -6,7 +6,7 @@
     <groupId>com.razortooth.smile</groupId>
     <artifactId>smileplug-adm</artifactId>
     <packaging>pom</packaging>
-    <name>smileplug-adm</name>
+    <name>Smileplug Adm</name>
     <version>0.1.0_beta1-SNAPSHOT</version>
 
     <properties>
