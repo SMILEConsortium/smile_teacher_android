@@ -7,31 +7,31 @@ import android.util.Log;
 
 public class DeviceUtil {
 
-	private DeviceUtil(){
+    private DeviceUtil() {
         // Empty
     }
 
-	public static final boolean isConnected(Context context) {
+    public static final boolean isConnected(Context context) {
 
-		// Check the ConnectivityManager
-		ConnectivityManager cm = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+        // Check the ConnectivityManager
+        ConnectivityManager cm = (ConnectivityManager) context
+            .getSystemService(Context.CONNECTIVITY_SERVICE);
 
-		if (cm == null) {
-			Log.e("DeviceUtil", "ConnectivityManager is null");
-			return false;
-		}
+        if (cm == null) {
+            Log.e("DeviceUtil", "ConnectivityManager is null");
+            return false;
+        }
 
-		// Check the NetworkInfo
-		NetworkInfo ni = cm.getActiveNetworkInfo();
+        // Check the NetworkInfo
+        NetworkInfo ni = cm.getActiveNetworkInfo();
 
-		if (ni == null) {
-			Log.e("DeviceUtil", "NetworkInfo is null");
-			return false;
-		}
+        if (ni == null) {
+            Log.e("DeviceUtil", "NetworkInfo is null");
+            return false;
+        }
 
-		return ni.isConnected();
+        return ni.isConnected();
 
-	}
+    }
 
 }

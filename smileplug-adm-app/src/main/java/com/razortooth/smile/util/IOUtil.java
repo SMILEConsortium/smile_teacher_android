@@ -7,16 +7,16 @@ public class IOUtil {
 
     private IOUtil() {
         // Empty
-    } 
+    }
 
-	public static final void silentClose(InputStream is) {
-		try {
-			if (is != null) {
-				is.close();
-			}
-		} catch (IOException e) {
-			// Empty
-		}
-	}
+    public static final void silentClose(InputStream is) {
+        try {
+            if (is != null) {
+                is.close();
+            }
+        } catch (IOException e) {
+            // Empty
+        }
+    }
 
 }
