@@ -7,7 +7,9 @@ import android.util.Log;
 
 public class DeviceUtil {
 
-	private DeviceUtil(){}
+	private DeviceUtil(){
+        // Empty
+    }
 
 	public static final boolean isConnected(Context context) {
 

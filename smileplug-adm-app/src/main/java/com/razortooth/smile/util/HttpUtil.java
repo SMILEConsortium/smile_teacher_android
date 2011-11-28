@@ -17,6 +17,7 @@ import android.accounts.NetworkErrorException;
 public class HttpUtil {
 
 	private HttpUtil() {
+        // Empty
 	}
 
 	public static final InputStream executeGet(String url)
