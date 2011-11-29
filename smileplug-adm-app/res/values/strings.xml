@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="app_name">SMILEPlug</string>
+	
+	<string name="server">Server</string>
+	<string name="connect">Connect</string>
 </resources>
