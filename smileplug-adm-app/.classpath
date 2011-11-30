@@ -8,5 +8,6 @@
 	<classpathentry kind="var" path="M2_REPO/org/springframework/android/spring-android-rest-template/1.0.0.M4/spring-android-rest-template-1.0.0.M4.jar"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="var" path="M2_REPO/net/iharder/base64/2.3.7/base64-2.3.7.jar"/>
+	<classpathentry kind="var" path="M2_REPO/junit/junit/4.8.2/junit-4.8.2.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
