@@ -1,7 +1,7 @@
 package com.razortooth.smile.util;
 
+import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class IOUtil {
 
@@ -9,10 +9,20 @@ public class IOUtil {
         // Empty
     }
 
-    public static final void silentClose(InputStream is) {
+    // public static final void silentClose(InputStream is) {
+    // try {
+    // if (is != null) {
+    // is.close();
+    // }
+    // } catch (IOException e) {
+    // // Empty
+    // }
+    // }
+
+    public static final void silentClose(Closeable c) {
         try {
-            if (is != null) {
-                is.close();
+            if (c != null) {
+                c.close();
             }
         } catch (IOException e) {
             // Empty

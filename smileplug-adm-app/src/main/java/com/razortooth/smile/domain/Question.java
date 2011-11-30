@@ -84,6 +84,10 @@ public class Question implements Comparable<Question> {
         this.answer = answer;
     }
 
+    public boolean hasImage() {
+        return image != null && image.trim().length() > 0;
+    }
+
     @Override
     public int compareTo(Question other) {
         return number - other.number;
