@@ -30,6 +30,22 @@ public class GeneralActivity extends FragmentActivity {
         this.initialisePaging();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.bt_about:
+                break;
+        }
+        return true;
+    }
+
     private void initialisePaging() {
 
         List<Fragment> fragments = new Vector<Fragment>();
