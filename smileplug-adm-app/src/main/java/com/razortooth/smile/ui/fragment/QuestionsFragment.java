@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.razortooth.smile.R;
 
-public class QuestionsFragment extends ManFragment {
+public class QuestionsFragment extends MainFragment {
 
     @Override
     protected int getLayout() {
