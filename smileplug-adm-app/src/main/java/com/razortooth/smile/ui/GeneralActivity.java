@@ -3,6 +3,7 @@ package com.razortooth.smile.ui;
 import java.util.List;
 import java.util.Vector;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -41,6 +42,9 @@ public class GeneralActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bt_about:
+                Dialog aboutDialog = new Dialog(this, R.style.Dialog);
+                aboutDialog.setContentView(R.layout.about);
+                aboutDialog.show();
                 break;
         }
         return true;
