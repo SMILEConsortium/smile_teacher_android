@@ -1,0 +1,2 @@
+- Before run maven, execute this command to install the compatibility-v4-r3.jar file in repository local:
+mvn install:install-file -Dfile=compatibility-v4-r3.jar -Dversion=r3 -DartifactId=compatibility-v4 -DgroupId=android.support -DgeneratePom=true -Dpackaging=jar 
