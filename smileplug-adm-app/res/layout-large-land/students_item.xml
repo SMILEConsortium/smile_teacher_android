@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"> 
+  	
+	<TableLayout
+	  	android:id="@+id/table_status" 
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	  	android:shrinkColumns="*"  
+    	android:stretchColumns="*"
+    	android:layout_below="@id/tv_status"
+    	android:background="#D4D0C8">
+	  	
+	  	<TableRow 
+	  		android:id="@+id/row"
+	  		android:layout_width="wrap_content"
+	   	  	android:layout_height="wrap_content"
+	   	  	android:layout_margin="5dip">
+	  	
+		  	<TextView  
+		  	  	android:id="@+id/tv_name"  
+		      	android:textStyle="bold"
+		      	android:textColor="@android:color/black"
+		      	android:layout_gravity="center"/>
+		           
+		  	<TextView  
+		      	android:id="@+id/tv_question" 
+		      	android:textStyle="bold"  
+		      	android:textColor="@android:color/black"
+		      	android:layout_gravity="center"/>
+		           
+		  	<TextView  
+		    	android:id="@+id/tv_answers"
+		      	android:textStyle="bold"  
+		      	android:textColor="@android:color/black"
+		      	android:layout_gravity="center"/>
+		           
+		  	<TextView  
+		      	android:id="@+id/tv_score"
+		      	android:textStyle="bold"  
+		      	android:textColor="@android:color/black"
+		      	android:layout_gravity="center"/>
+	  	
+	  	</TableRow>
+
+	</TableLayout>
+	
+</RelativeLayout>

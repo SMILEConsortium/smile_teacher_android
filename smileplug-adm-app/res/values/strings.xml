@@ -4,4 +4,36 @@
 	
 	<string name="server">Server</string>
 	<string name="connect">Connect</string>
+	
+	<string name="start_making">Start Marking Questions</string>	    
+	<string name="use_prepared">Use Prepared Questions</string>
+	<string name="start_solving">Start Solving Questions</string>
+	<string name="show_results">Shows Results</string>
+	<string name="students">Students</string>
+	<string name="questions">Questions</string>
+	
+	<string name="question_status">Questions Status</string>
+	<string name="number">Number</string>
+	<string name="owner">Owner</string>	 
+	<string name="correct">%Correct</string>
+	<string name="rating">Rating</string>	
+	<string name="save_questions">Save Questions</string>
+	<string name="students_status">Students Status</string>
+	<string name="students_name">Students Name</string>	   
+	<string name="answers">Answers</string>	    
+	<string name="score">Score</string>	    
+	<string name="total">Total</string>	    
+	<string name="top_scores">Top Scores</string>	    
+	
+	<string name="about">About</string>
+	<string name="about_text">The activity management application for teachers,
+	called the Junction Quiz Controller, serves to manage and
+	save data from the activity via an ad-hoc network. It is a
+	Graphic User Interface-based application that can be
+	launched on and operated from any desktop, laptop, or
+	netbook on which Java is installed. The application basically
+	allows the teacher to control and monitor all of the students’
+	activity in real time. It also allows the teacher to save the
+	data from a given activity for later access.</string>
+	<string name="ok">Ok</string>
 </resources>

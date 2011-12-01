@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:layout_marginLeft="5dip"> 
+  	
+  	<TextView  
+  	  	android:id="@+id/tv_status"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+      	android:text="@string/students_status"  
+      	android:textStyle="bold"
+      	android:textSize="14sp"
+      	android:textColor="@color/black"
+      	android:layout_marginLeft="5dip"
+      	android:layout_marginTop="5dip"/>
+  
+	<TableLayout
+	  	android:id="@+id/table_status" 
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	  	android:shrinkColumns="*"  
+    	android:stretchColumns="*"
+    	android:layout_below="@id/tv_status">
+    	
+    	<View
+			android:id="@+id/separator"  
+			android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:background="@color/white"
+			android:layout_marginLeft="5dip"
+			android:layout_marginTop="5dip"
+			android:layout_below="@id/tv_title"/>
+	  	
+	  	<TableRow 
+	  		android:id="@+id/row"
+	  		android:layout_width="wrap_content"
+	   	  	android:layout_height="wrap_content"
+	   	  	android:layout_marginTop="5dip">
+	  	
+		  	<TextView  
+		  	  	android:id="@+id/tv_name"
+		      	android:text="@string/students_name"
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center"/>
+		           
+		  	<TextView  
+		      	android:id="@+id/tv_question" 
+		      	android:text="@string/questions"   
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center"/>
+		           
+		  	<TextView  
+		    	android:id="@+id/tv_answers"  
+		      	android:text="@string/answers"   
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center"/>
+		           
+		  	<TextView  
+		      	android:id="@+id/tv_score"  
+		      	android:text="@string/score"    
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center"/>
+	  	
+	  	</TableRow>
+	  	
+	  	<ListView 
+			android:id="@+id/list_students"
+		    android:layout_width="wrap_content"
+		  	android:layout_height="80dip"
+		  	android:layout_below="@id/row"
+		  	android:layout_marginTop="5dip"/>
+		  	
+		<View
+			android:id="@+id/separator"  
+			android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:background="@color/white"
+			android:layout_marginLeft="5dip"
+			android:layout_marginTop="5dip"
+			android:layout_below="@id/tv_title"/>
+
+	</TableLayout>
+	
+	<TextView  
+  	  	android:id="@+id/tv_total"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+      	android:text="@string/total"  
+      	android:textStyle="bold"
+      	android:textSize="14sp"
+      	android:textColor="@color/black"
+      	android:layout_below="@id/table_status"
+      	android:layout_marginTop="5dip"
+      	android:layout_marginLeft="5dip"/>
+      	
+	<View
+		android:id="@+id/separator"  
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_marginLeft="5dip"
+		android:layout_marginTop="5dip"
+		android:layout_below="@id/tv_total"/>      	
+	 
+    <TableLayout
+	  	android:id="@+id/total" 
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	  	android:shrinkColumns="*"  
+    	android:stretchColumns="*"
+    	android:layout_below="@id/tv_total">
+	  	
+	  	<TableRow 
+	  		android:id="@+id/row"
+	  		android:layout_width="wrap_content"
+	   	  	android:layout_height="wrap_content"
+	   	  	android:layout_margin="5dip">
+    	
+	    	<TextView  
+		  	  	android:id="@+id/tv_name"
+		  	  	android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+		      	android:text="Students: "
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center"
+		      	android:layout_marginTop="6dip"/>
+		           
+		  	<TextView  
+		      	android:id="@+id/tv_question" 
+		      	android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+		      	android:text="Question: " 
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center"
+		      	android:layout_marginTop="6dip"/>
+		           
+		  	<TextView  
+		    	android:id="@+id/tv_answers"  
+		    	android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+		      	android:text="Answers: "  
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center"
+		      	android:layout_marginTop="6dip"/>
+	    	
+	    </TableRow>
+    
+	</TableLayout>
+	
+	<View
+		android:id="@+id/separator"  
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_marginLeft="5dip"
+		android:layout_marginTop="5dip"
+		android:layout_below="@id/total"/>
+	
+	<TextView  
+  	  	android:id="@+id/tv_top_scorers"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+      	android:text="@string/top_scores"  
+      	android:textStyle="bold"
+      	android:textSize="14sp"
+      	android:textColor="@color/black"
+      	android:layout_below="@id/separator"
+      	android:layout_marginTop="5dip"
+      	android:layout_marginLeft="5dip"/>
+    
+    <LinearLayout
+    	android:id="@+id/top_scorers" 
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/tv_top_scorers"
+    	android:orientation="vertical">
+    	
+    	<View
+			android:id="@+id/separator"  
+			android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:background="@color/white"
+			android:layout_marginLeft="5dip"
+			android:layout_marginTop="5dip"
+			android:layout_below="@id/total"/>
+    	
+  		<TextView  
+	    	android:id="@+id/tv_top"  
+	    	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+	      	android:text="Top Scorer(s): "
+	      	android:textColor="@color/black"
+	      	android:layout_marginLeft="5dip"
+	      	android:layout_marginTop="5dip"/>
+	      	
+	    <TextView  
+	    	android:id="@+id/tv_rating"  
+	    	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+	      	android:text="Highest Rating: "
+	      	android:textColor="@color/black"
+	      	android:layout_marginLeft="5dip"/>
+	      	
+	    <TextView  
+	    	android:id="@+id/tv_creator"  
+	    	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+	      	android:text="Question(s) created by: "
+	      	android:textColor="@color/black"
+	      	android:layout_marginLeft="5dip"
+	      	android:layout_marginBottom="5dip"/>
+	      	
+		<View
+			android:id="@+id/separator"  
+			android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:background="@color/white"
+			android:layout_marginLeft="5dip"
+			android:layout_below="@id/tv_creator"/>			      	
+	
+	</LinearLayout>
+	
+	<View
+		android:id="@+id/separator2" 
+		android:layout_width="2dip"
+		android:layout_height="fill_parent"
+		android:background="@color/black"
+		android:layout_alignParentRight="true"/>        
+  
+</RelativeLayout>

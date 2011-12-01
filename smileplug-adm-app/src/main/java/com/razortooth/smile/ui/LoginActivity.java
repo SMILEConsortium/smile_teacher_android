@@ -2,6 +2,7 @@ package com.razortooth.smile.ui;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -43,9 +44,9 @@ public class LoginActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
         try {
             new SmilePlugServerManager().connect(ip.toString(), this);
-            // Intent intent = new Intent(this, ".class"); TODO: Change to start main activity
-            // intent.putExtra("ip", ip.toString());
-            // startActivity(intent);
+            Intent intent = new Intent(this, GeneralActivity.class);
+            intent.putExtra(GeneralActivity.IP, ip.toString());
+            startActivity(intent);
             ActivityUtil.showLongToast(this, "Connection successfully established");
         } catch (NetworkErrorException e) {
             DialogUtil.checkConnection(this);
