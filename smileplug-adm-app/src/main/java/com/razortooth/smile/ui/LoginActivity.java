@@ -44,7 +44,7 @@ public class LoginActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
         try {
             new SmilePlugServerManager().connect(ip.toString(), this);
-            Intent intent = new Intent(this, GeneralActivity.class);
+            Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
             intent.putExtra(GeneralActivity.IP, ip.toString());
             startActivity(intent);
             ActivityUtil.showLongToast(this, "Connection successfully established");

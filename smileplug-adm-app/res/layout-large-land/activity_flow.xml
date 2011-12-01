@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="200dip"
+  	android:layout_height="wrap_content"
+  	android:orientation="vertical"
+  	android:background="@drawable/rounded_border"
+  	android:layout_gravity="center"
+  	android:gravity="center_horizontal">
+  
+  	<TextView 
+	  	android:id="@+id/tv_title"
+	  	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dip"
+		android:text="@string/choose_a_option"
+		android:textColor="@color/black"
+		android:textSize="14sp"/>
+		
+	<View
+		android:id="@+id/separator"  
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_marginTop="5dip"
+		android:layout_below="@id/tv_title"/>
+	
+	<Button 
+  		android:id="@+id/button1"
+  		android:layout_width="120dip"
+  		android:layout_height="50dip"
+  		android:layout_gravity="center_horizontal"
+  		android:text="@string/start_making"
+  		android:textSize="12sp"
+  		android:layout_marginTop="10dip"/>
+  		
+	<Button 
+  		android:id="@+id/button2"
+  		android:layout_width="120dip"
+  		android:layout_height="50dip"
+  		android:layout_gravity="center_horizontal"
+  		android:text="@string/use_prepared"
+  		android:textSize="12sp"
+  		android:layout_marginTop="10dip"
+  		android:layout_marginBottom="10dip"/>					
+    
+</LinearLayout>

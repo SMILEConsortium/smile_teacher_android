@@ -21,9 +21,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> 
         
-		<activity android:name=".ui.GeneralActivity" android:screenOrientation="landscape"/>		    
+		<activity android:name=".ui.GeneralActivity" android:screenOrientation="landscape"/>
+		<activity android:name=".ui.ChooseActivityFlowDialog" android:screenOrientation="landscape" android:theme="@style/Dialog"/>		    
+		<activity android:name=".ui.UsePreparedQuestionsActivity" android:screenOrientation="landscape" android:theme="@style/Theme.Transparent"/>
     
     </application>
 
