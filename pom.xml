@@ -10,7 +10,7 @@
     <version>0.1.0_beta1-SNAPSHOT</version>
 
     <properties>
-    
+
         <java.version>1.6</java.version>
         <maven.version>3.0.3</maven.version>
 
@@ -20,9 +20,9 @@
         <android.device.id>2.1</android.device.id>
         <android.device.file>${user.home}\.android\avd\${android.device.id}.avd</android.device.file>
         <android.device.wait>50000</android.device.wait>
-        
+
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
-        
+
     </properties>
 
     <dependencyManagement>
@@ -54,12 +54,30 @@
                 <artifactId>android-test</artifactId>
                 <version>${android.sdk.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.springframework.android</groupId>
                 <artifactId>spring-android-rest-template</artifactId>
                 <version>1.0.0.M4</version>
-            </dependency>             
+            </dependency>
+
+            <dependency>
+                <groupId>net.iharder</groupId>
+                <artifactId>base64</artifactId>
+                <version>2.3.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.2</version>
+            </dependency>
+			
+			<dependency>
+                <groupId>android.support</groupId>
+                <artifactId>compatibility-v4</artifactId>
+                <version>r3</version>
+            </dependency> 
 
         </dependencies>
 
@@ -221,21 +239,21 @@
         </profile>
 
     </profiles>
-    
+
     <repositories>
-    
+
         <repository>
             <id>spring-milestone</id>
             <name>Spring Maven MILESTONE Repository</name>
             <url>http://maven.springframework.org/milestone</url>
         </repository>
-        
+
         <repository>
             <id>android-rome-feed-reader-repository</id>
             <name>Android ROME Feed Reader Repository</name>
             <url>https://android-rome-feed-reader.googlecode.com/svn/maven2/releases</url>
         </repository>
-    
+
     </repositories>
 
 </project>
