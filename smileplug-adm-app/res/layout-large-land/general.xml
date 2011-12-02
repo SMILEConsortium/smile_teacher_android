@@ -13,7 +13,7 @@
 		android:layout_alignParentLeft="true">
 	  		
 		<Button 
-	  		android:id="@+id/button3"
+	  		android:id="@+id/bt_solve"
 	  		android:layout_width="120dip"
 	  		android:layout_height="50dip"
 	  		android:layout_gravity="center_horizontal"
@@ -22,13 +22,33 @@
 	  		android:layout_marginTop="10dip"/>
 	  		
 		<Button 
-	  		android:id="@+id/button4"
+	  		android:id="@+id/bt_results"
 	  		android:layout_width="120dip"
 	  		android:layout_height="50dip"
 	  		android:layout_gravity="center_horizontal"
 	  		android:text="@string/show_results"
 	  		android:textSize="12sp"
-	  		android:layout_marginTop="10dip"/>	  			  			  		
+	  		android:layout_marginTop="10dip"/>	
+	  		
+		<TextView
+	  		android:id="@+id/tv_remaining_time"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:text="@string/remaining_time"
+	  		android:textColor="@color/black"
+	  		android:textSize="14sp"
+	  		android:layout_gravity="center_horizontal"
+	  		android:layout_marginTop="170dip"/>		
+	  		
+		<TextView
+	  		android:id="@+id/tv_time"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:text="00:00:00"
+	  		android:textColor="@color/black"
+	  		android:textSize="14sp"
+	  		android:layout_gravity="center_horizontal"
+	  		android:layout_marginTop="5dip"/>	  			  		
 	
 	</LinearLayout>
 	

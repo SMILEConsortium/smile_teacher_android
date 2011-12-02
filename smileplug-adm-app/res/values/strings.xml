@@ -8,7 +8,7 @@
 	<string name="start_making">Start Making Questions</string>	    
 	<string name="use_prepared">Use Prepared Questions</string>
 	<string name="start_solving">Start Solving Questions</string>
-	<string name="show_results">Shows Results</string>
+	<string name="show_results">Show Results</string>
 	<string name="students">Students</string>
 	<string name="questions">Questions</string>
 	
@@ -39,4 +39,12 @@
 	<string name="ok">Ok</string>
 	
 	<string name="choose_a_option">Choose a option below : </string>
+	<string name="remaining_time">Remaining Time</string>	
+	<string name="use_time">Use Time Limit Mode</string>	
+	<string name="select">"Select one question: "</string>	
+	<string name="seconds">Seconds</string>	
+	<string name="minutes">Minutes</string>	
+	<string name="hours">Hours</string>	
+	
+	<string name="connection_established">Connection established</string>
 </resources>

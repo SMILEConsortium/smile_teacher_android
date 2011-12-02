@@ -47,7 +47,9 @@ public class LoginActivity extends Activity implements OnClickListener {
             Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
             intent.putExtra(GeneralActivity.IP, ip.toString());
             startActivity(intent);
-            ActivityUtil.showLongToast(this, "Connection successfully established");
+            ActivityUtil.showLongToast(this, R.string.connection_established);
+
+            this.finish();
         } catch (NetworkErrorException e) {
             DialogUtil.checkConnection(this);
         }
