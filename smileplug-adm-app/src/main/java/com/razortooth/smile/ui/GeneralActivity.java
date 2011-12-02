@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.razortooth.smile.R;
 import com.razortooth.smile.ui.adapter.PagerAdapter;
@@ -28,16 +30,16 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     public static final String SECONDS = "seconds";
 
     // private String ip;
-    // private String hours;
-    // private String minutes;
-    // private String seconds;
+    private String hours;
+    private String minutes;
+    private String seconds;
 
     private PagerAdapter mPagerAdapter;
 
     private Button solve;
     private Button results;
 
-    // private TextView time;
+    private TextView time;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,13 +47,13 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
         setContentView(R.layout.general);
 
         // ip = this.getIntent().getStringExtra(IP);
-        // hours = this.getIntent().getStringExtra(HOURS);
-        // minutes = this.getIntent().getStringExtra(MINUTES);
-        // seconds = this.getIntent().getStringExtra(SECONDS);
+        hours = this.getIntent().getStringExtra(HOURS);
+        minutes = this.getIntent().getStringExtra(MINUTES);
+        seconds = this.getIntent().getStringExtra(SECONDS);
 
         solve = (Button) findViewById(R.id.bt_solve);
         results = (Button) findViewById(R.id.bt_results);
-        // time = (TextView) findViewById(R.id.tv_time);
+        time = (TextView) findViewById(R.id.tv_time);
 
         this.initialisePaging();
     }
@@ -62,6 +64,62 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
 
         solve.setOnClickListener(this);
         results.setOnClickListener(this);
+        results.setEnabled(false);
+        time.setText("00:00:00");
+
+        if (hours != null | seconds != null | minutes != null) {
+            solve.setEnabled(false);
+            countDownTimer();
+        }
+    }
+
+    public String formatTime(long millis) {
+        String output = "00:00:00";
+        long seconds = millis / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+
+        seconds = seconds % 60;
+        minutes = minutes % 60;
+        hours = hours % 60;
+
+        String secondsD = String.valueOf(seconds);
+        String minutesD = String.valueOf(minutes);
+        String hoursD = String.valueOf(hours);
+
+        if (seconds < 10) {
+            secondsD = "0" + seconds;
+        }
+        if (minutes < 10) {
+            minutesD = "0" + minutes;
+        }
+        if (hours < 10) {
+            hoursD = "0" + hours;
+        }
+
+        output = hoursD + " : " + minutesD + " : " + secondsD;
+        return output;
+    }
+
+    private void countDownTimer() {
+        long hr = (Integer.parseInt(hours) * 3600) * 1000;
+        long min = (Integer.parseInt(minutes) * 60) * 1000;
+        long sec = Integer.parseInt(seconds) * 1000;
+        long count = hr + min + sec;
+
+        new CountDownTimer(count, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                time.setText("" + formatTime(millisUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+                time.setText("Done!");
+                results.setEnabled(true);
+            }
+        }.start();
     }
 
     @Override
