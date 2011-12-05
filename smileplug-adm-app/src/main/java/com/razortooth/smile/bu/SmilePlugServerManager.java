@@ -38,44 +38,13 @@ public class SmilePlugServerManager {
     }
 
     public void startSolvingQuestions(String ip, Context context) throws NetworkErrorException {
-        connect(ip, context);
-
-        InputStream is = null;
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_SOLVING_QUESTIONS_URL);
-
-        try {
-            is = HttpUtil.executeGet(url);
-        } catch (NetworkErrorException e) {
-            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
-        } finally {
-            IOUtil.silentClose(is);
-        }
-
-        if (is == null) {
-            throw new NetworkErrorException("Service unavailable");
-        }
-
+        put(ip, context, url);
     }
 
     public void showResults(String ip, Context context) throws NetworkErrorException {
-
-        connect(ip, context);
-
-        InputStream is = null;
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.SHOW_RESULTS_URL);
-
-        try {
-            is = HttpUtil.executeGet(url);
-        } catch (NetworkErrorException e) {
-            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
-        } finally {
-            IOUtil.silentClose(is);
-        }
-
-        if (is == null) {
-            throw new NetworkErrorException("Service unavailable");
-        }
-
+        put(ip, context, url);
     }
 
     private void checkServer(String ip) throws NetworkErrorException {
@@ -105,6 +74,24 @@ public class SmilePlugServerManager {
             throw new NetworkErrorException("Connection unavailable");
         }
 
+    }
+
+    private void put(String ip, Context context, String url) throws NetworkErrorException {
+        connect(ip, context);
+
+        InputStream is = null;
+
+        try {
+            is = HttpUtil.executePut(url);
+        } catch (NetworkErrorException e) {
+            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+        } finally {
+            IOUtil.silentClose(is);
+        }
+
+        if (is == null) {
+            throw new NetworkErrorException("Service unavailable");
+        }
     }
 
 }
