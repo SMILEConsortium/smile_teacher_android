@@ -3,7 +3,9 @@ package com.razortooth.smile.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.accounts.NetworkErrorException;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,10 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.SmilePlugServerManager;
+import com.razortooth.smile.util.ActivityUtil;
+import com.razortooth.smile.util.DialogUtil;
+import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class UsePreparedQuestionsActivity extends Activity implements OnClickListener {
 
@@ -98,16 +104,54 @@ public class UsePreparedQuestionsActivity extends Activity implements OnClickLis
                 }
                 break;
             case R.id.bt_ok:
-                Intent intent = new Intent(this, GeneralActivity.class);
-                intent.putExtra(GeneralActivity.IP, ip);
-                intent.putExtra(GeneralActivity.HOURS, hours.getSelectedItem().toString());
-                intent.putExtra(GeneralActivity.MINUTES, minutes.getSelectedItem().toString());
-                intent.putExtra(GeneralActivity.SECONDS, seconds.getSelectedItem().toString());
-
-                this.finish();
-
-                startActivity(intent);
+                new LoadTask(this).execute();
                 break;
+        }
+    }
+
+    private void openGeneralActivity() {
+        Intent intent = new Intent(this, GeneralActivity.class);
+        intent.putExtra(GeneralActivity.IP, ip);
+        intent.putExtra(GeneralActivity.HOURS, hours.getSelectedItem().toString());
+        intent.putExtra(GeneralActivity.MINUTES, minutes.getSelectedItem().toString());
+        intent.putExtra(GeneralActivity.SECONDS, seconds.getSelectedItem().toString());
+        startActivity(intent);
+
+        ActivityUtil.showLongToast(this, R.string.start_making);
+
+        this.finish();
+    }
+
+    private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {
+
+        private Context context;
+
+        public LoadTask(Activity context) {
+            super(context);
+
+            this.context = context;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                new SmilePlugServerManager().startMakingQuestions(ip, context);
+
+                return true;
+            } catch (NetworkErrorException e) {
+
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean connected) {
+            super.onPostExecute(connected);
+            if (connected == false) {
+                DialogUtil.checkConnection(UsePreparedQuestionsActivity.this);
+            } else {
+                UsePreparedQuestionsActivity.this.openGeneralActivity();
+            }
         }
     }
 }

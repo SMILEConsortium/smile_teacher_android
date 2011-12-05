@@ -3,6 +3,7 @@ package com.razortooth.smile.ui;
 import java.util.List;
 import java.util.Vector;
 
+import android.accounts.NetworkErrorException;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -18,9 +19,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.SmilePlugServerManager;
 import com.razortooth.smile.ui.adapter.PagerAdapter;
 import com.razortooth.smile.ui.fragment.QuestionsFragment;
 import com.razortooth.smile.ui.fragment.StudentsFragment;
+import com.razortooth.smile.util.ActivityUtil;
 
 public class GeneralActivity extends FragmentActivity implements OnClickListener {
 
@@ -29,7 +32,7 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     public static final String MINUTES = "minutes";
     public static final String SECONDS = "seconds";
 
-    // private String ip;
+    private String ip;
     private String hours;
     private String minutes;
     private String seconds;
@@ -40,13 +43,14 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     private Button results;
 
     private TextView time;
+    private TextView remaining;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general);
 
-        // ip = this.getIntent().getStringExtra(IP);
+        ip = this.getIntent().getStringExtra(IP);
         hours = this.getIntent().getStringExtra(HOURS);
         minutes = this.getIntent().getStringExtra(MINUTES);
         seconds = this.getIntent().getStringExtra(SECONDS);
@@ -54,6 +58,7 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
         solve = (Button) findViewById(R.id.bt_solve);
         results = (Button) findViewById(R.id.bt_results);
         time = (TextView) findViewById(R.id.tv_time);
+        remaining = (TextView) findViewById(R.id.tv_remaining_time);
 
         this.initialisePaging();
     }
@@ -68,8 +73,10 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
         time.setText("00:00:00");
 
         if (hours != null | seconds != null | minutes != null) {
-            solve.setEnabled(false);
             countDownTimer();
+        } else {
+            time.setVisibility(View.GONE);
+            remaining.setVisibility(View.GONE);
         }
     }
 
@@ -157,8 +164,25 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_solve:
+                try {
+                    new SmilePlugServerManager().startSolvingQuestions(ip, this);
+
+                    ActivityUtil.showLongToast(this, R.string.start_solving);
+
+                    results.setEnabled(true);
+                    solve.setEnabled(false);
+                } catch (NetworkErrorException e) {
+                    new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+                }
                 break;
             case R.id.bt_results:
+                try {
+                    new SmilePlugServerManager().showResults(ip, this);
+
+                    ActivityUtil.showLongToast(this, R.string.show_results);
+                } catch (NetworkErrorException e) {
+                    new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+                }
                 break;
         }
     }

@@ -10,7 +10,7 @@ import android.text.Spanned;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.razortooth.smile.R;
 import com.razortooth.smile.bu.SmilePlugServerManager;
@@ -20,7 +20,7 @@ import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
-    private EditText ip;
+    private TextView ip;
     private Button connect;
 
     @Override
@@ -29,7 +29,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
         setContentView(R.layout.login);
 
-        ip = (EditText) findViewById(R.id.et_server_ip);
+        ip = (TextView) findViewById(R.id.et_server_ip);
         connect = (Button) findViewById(R.id.bt_connect);
     }
 
@@ -89,7 +89,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     private void loading() {
         Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
-        intent.putExtra(GeneralActivity.IP, ip.toString());
+        intent.putExtra(GeneralActivity.IP, ip.getText().toString());
         startActivity(intent);
         ActivityUtil.showLongToast(this, R.string.connection_established);
 
@@ -109,7 +109,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                new SmilePlugServerManager().connect(ip.toString(), context);
+                new SmilePlugServerManager().connect(ip.getText().toString(), context);
 
                 return true;
             } catch (NetworkErrorException e) {

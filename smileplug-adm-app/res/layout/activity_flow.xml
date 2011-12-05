@@ -26,7 +26,7 @@
 		android:layout_below="@id/tv_title"/>
 	
 	<Button 
-  		android:id="@+id/button1"
+  		android:id="@+id/bt_start"
   		android:layout_width="120dip"
   		android:layout_height="50dip"
   		android:layout_gravity="center_horizontal"
@@ -35,7 +35,7 @@
   		android:layout_marginTop="10dip"/>
   		
 	<Button 
-  		android:id="@+id/button2"
+  		android:id="@+id/bt_use_prerared"
   		android:layout_width="120dip"
   		android:layout_height="50dip"
   		android:layout_gravity="center_horizontal"
