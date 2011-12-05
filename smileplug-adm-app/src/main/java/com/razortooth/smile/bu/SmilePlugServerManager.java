@@ -12,26 +12,52 @@ import com.razortooth.smile.util.SmilePlugUtil;
 
 public class SmilePlugServerManager {
 
-    public boolean connect(String ip, Context context) throws NetworkErrorException {
+    public void connect(String ip, Context context) throws NetworkErrorException {
+        checkConnection(context);
+        checkServer(ip);
+    }
 
-        // Check connection
-        boolean isConnected = DeviceUtil.isConnected(context);
-        if (!isConnected) {
-            throw new NetworkErrorException("Connection unavailable");
-        }
+    public void startMakingQuestions(String ip, Context context) throws NetworkErrorException {
+        connect(ip, context);
+        // TODO: Implements
+    }
 
-        // Check the server
+    public void startSolvingQuestions(String ip, Context context) throws NetworkErrorException {
+        connect(ip, context);
+        // TODO: Implements
+    }
+
+    public void showResults(String ip, Context context) throws NetworkErrorException {
+        connect(ip, context);
+        // TODO: Implements
+    }
+
+    private void checkServer(String ip) throws NetworkErrorException {
+
         InputStream is = null;
         String url = SmilePlugUtil.createUrl(ip);
+
         try {
             is = HttpUtil.executeGet(url);
         } catch (NetworkErrorException e) {
-            throw new NetworkErrorException("Server unavailable");
+            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
         } finally {
             IOUtil.silentClose(is);
         }
 
-        return is != null;
+        if (is == null) {
+            throw new NetworkErrorException("Server unavailable");
+        }
+
+    }
+
+    private void checkConnection(Context context) throws NetworkErrorException {
+
+        boolean isConnected = DeviceUtil.isConnected(context);
+
+        if (!isConnected) {
+            throw new NetworkErrorException("Connection unavailable");
+        }
 
     }
 
