@@ -2,7 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   	android:layout_width="fill_parent"
   	android:layout_height="fill_parent"
-  	android:layout_marginLeft="5dip"> 
+  	android:layout_marginLeft="5dip"
+  	android:layout_marginRight="5dip">
+  	
+    <View 
+  		android:id="@+id/separator1"
+		android:layout_width="85dip"
+		android:layout_height="3dip"
+		android:background="#FFFF0000"
+		android:layout_marginLeft="100dip"
+		android:layout_toRightOf="@id/buttons"/>
+  	
+    <View 
+  		android:id="@+id/separator2"
+		android:layout_width="fill_parent"
+		android:layout_height="2dip"
+		android:background="@color/black"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:layout_marginTop="3dip"
+		android:layout_toRightOf="@id/buttons"
+		android:layout_below="@id/separator1"/>
   	
   	<TextView  
   	  	android:id="@+id/tv_status"
@@ -13,7 +33,8 @@
       	android:textSize="14sp"
       	android:textColor="@color/black"
       	android:layout_marginLeft="5dip"
-      	android:layout_marginTop="5dip"/>
+      	android:layout_marginTop="5dip"
+      	android:layout_below="@id/separator1"/>
   
 	<TableLayout
 	  	android:id="@+id/table_status" 
@@ -21,7 +42,8 @@
 	  	android:layout_height="wrap_content"
 	  	android:shrinkColumns="*"  
     	android:stretchColumns="*"
-    	android:layout_below="@id/tv_status">
+    	android:layout_below="@id/tv_status"
+    	android:layout_marginRight="5dip">
     	
     	<View
 			android:id="@+id/separator"  
@@ -67,7 +89,7 @@
 	  	<ListView 
 			android:id="@+id/list_students"
 		    android:layout_width="wrap_content"
-		  	android:layout_height="80dip"
+		  	android:layout_height="100dip"
 		  	android:layout_below="@id/row"
 		  	android:layout_marginTop="5dip"/>
 		  	
@@ -101,6 +123,7 @@
 		android:background="@color/white"
 		android:layout_marginLeft="5dip"
 		android:layout_marginTop="5dip"
+		android:layout_marginRight="5dip"
 		android:layout_below="@id/tv_total"/>      	
 	 
     <TableLayout
@@ -155,6 +178,7 @@
 		android:background="@color/white"
 		android:layout_marginLeft="5dip"
 		android:layout_marginTop="5dip"
+		android:layout_marginRight="5dip"
 		android:layout_below="@id/total"/>
 	
 	<TextView  
@@ -174,7 +198,8 @@
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:layout_below="@id/tv_top_scorers"
-    	android:orientation="vertical">
+    	android:orientation="vertical"
+    	android:layout_marginRight="5dip">
     	
     	<View
 			android:id="@+id/separator"  
@@ -226,6 +251,7 @@
 		android:layout_width="2dip"
 		android:layout_height="fill_parent"
 		android:background="@color/black"
-		android:layout_alignParentRight="true"/>        
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"/>        
   
 </RelativeLayout>
