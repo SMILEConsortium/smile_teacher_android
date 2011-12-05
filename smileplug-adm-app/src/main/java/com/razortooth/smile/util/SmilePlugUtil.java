@@ -7,6 +7,10 @@ public class SmilePlugUtil {
     private static final String SMILEPLUG_SERVER_DIR = Constants.SERVER_DIR;
     private static final String SMILEPLUG_SERVER_URL = "http://%s/" + SMILEPLUG_SERVER_DIR + "/";
 
+    public static final String START_MAKING_QUESTIONS_URL = "startmakingquestions";
+    public static final String START_SOLVING_QUESTIONS_URL = "startsolvingquestions";
+    public static final String SHOW_RESULTS_URL = "showresults";
+
     private SmilePlugUtil() {
         // Empty
     }

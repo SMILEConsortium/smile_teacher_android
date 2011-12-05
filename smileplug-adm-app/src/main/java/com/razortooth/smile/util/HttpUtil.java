@@ -10,6 +10,8 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.accounts.NetworkErrorException;
@@ -20,21 +22,20 @@ public class HttpUtil {
         // Empty
     }
 
-    public static final InputStream executeGet(String url) throws NetworkErrorException {
+    private static final InputStream executeMethod(HttpUriRequest request)
+        throws NetworkErrorException {
 
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(url);
 
-        // Execute the request
+        // Execute
         HttpResponse response = null;
         try {
             response = client.execute(request);
         } catch (ClientProtocolException e) {
             throw new NetworkErrorException(
-                "Unexpected error executing HTTP Get:" + e.getMessage(), e);
+                "Unexpected error executing request: " + e.getMessage(), e);
         } catch (IOException e) {
-            throw new NetworkErrorException("Unexpected error executing HTTP Get" + e.getMessage(),
-                e);
+            throw new NetworkErrorException("Unexpected error request: " + e.getMessage(), e);
         }
 
         // Check the status code
@@ -57,6 +58,16 @@ public class HttpUtil {
                 + e.getMessage(), e);
         }
 
+    }
+
+    public static final InputStream executePut(String url) throws NetworkErrorException {
+        HttpPut put = new HttpPut(url);
+        return executeMethod(put);
+    }
+
+    public static final InputStream executeGet(String url) throws NetworkErrorException {
+        HttpGet get = new HttpGet(url);
+        return executeMethod(get);
     }
 
 }

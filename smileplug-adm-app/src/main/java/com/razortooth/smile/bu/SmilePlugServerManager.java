@@ -19,17 +19,63 @@ public class SmilePlugServerManager {
 
     public void startMakingQuestions(String ip, Context context) throws NetworkErrorException {
         connect(ip, context);
-        // TODO: Implements
+
+        InputStream is = null;
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_MAKING_QUESTIONS_URL);
+
+        try {
+            is = HttpUtil.executeGet(url);
+        } catch (NetworkErrorException e) {
+            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+        } finally {
+            IOUtil.silentClose(is);
+        }
+
+        if (is == null) {
+            throw new NetworkErrorException("Service unavailable");
+        }
+
     }
 
     public void startSolvingQuestions(String ip, Context context) throws NetworkErrorException {
         connect(ip, context);
-        // TODO: Implements
+
+        InputStream is = null;
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_SOLVING_QUESTIONS_URL);
+
+        try {
+            is = HttpUtil.executeGet(url);
+        } catch (NetworkErrorException e) {
+            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+        } finally {
+            IOUtil.silentClose(is);
+        }
+
+        if (is == null) {
+            throw new NetworkErrorException("Service unavailable");
+        }
+
     }
 
     public void showResults(String ip, Context context) throws NetworkErrorException {
+
         connect(ip, context);
-        // TODO: Implements
+
+        InputStream is = null;
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.SHOW_RESULTS_URL);
+
+        try {
+            is = HttpUtil.executeGet(url);
+        } catch (NetworkErrorException e) {
+            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+        } finally {
+            IOUtil.silentClose(is);
+        }
+
+        if (is == null) {
+            throw new NetworkErrorException("Service unavailable");
+        }
+
     }
 
     private void checkServer(String ip) throws NetworkErrorException {
