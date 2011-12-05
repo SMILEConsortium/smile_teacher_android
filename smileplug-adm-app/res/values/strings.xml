@@ -4,6 +4,7 @@
 	
 	<string name="server">Server</string>
 	<string name="connect">Connect</string>
+	<string name="loading">Loading...</string>
 	
 	<string name="start_making">Start Making Questions</string>	    
 	<string name="use_prepared">Use Prepared Questions</string>
@@ -16,12 +17,12 @@
 	<string name="number">Number</string>
 	<string name="owner">Owner</string>	 
 	<string name="correct">%Correct</string>
-	<string name="rating">Rating</string>	
+	<string name="rating">Highest Rating: </string>	
 	
 	<string name="save_questions">Save Questions</string>
 	<string name="students_status">Student Status</string>
 	<string name="students_name">Students Name</string>	   
-	<string name="answers">Answers</string>	    
+	<string name="answers">Answers: </string>	    
 	<string name="score">Score</string>	    
 	<string name="total">Total</string>	    
 	<string name="top_scores">Top Scores</string>	    
@@ -41,10 +42,15 @@
 	<string name="choose_a_option">Choose a option below : </string>
 	<string name="remaining_time">Remaining Time</string>	
 	<string name="use_time">Use Time Limit Mode</string>	
-	<string name="select">"Select one question: "</string>	
+	<string name="select">Select one question: </string>	
 	<string name="seconds">Seconds</string>	
 	<string name="minutes">Minutes</string>	
 	<string name="hours">Hours</string>	
 	
-	<string name="connection_established">Connection established</string>
+	<string name="connection_established">Connection established</string>	
+	
+	<string name="created_by">Question(s) created by: </string>
+	<string name="top_scorer">Top Scorer(s): </string>
+	<string name="question">Question: </string>
+	<string name="student">Students: </string>
 </resources>

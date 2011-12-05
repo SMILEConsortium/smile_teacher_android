@@ -6,4 +6,6 @@ public class Constants {
     public static final String LOG_ID = APP_ID;
     public static final String SERVER_DIR = "smile";
 
+    public static final String LOG_CATEGORY = "SMILEPLUG";
+
 }

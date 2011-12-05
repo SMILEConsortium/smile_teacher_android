@@ -2,6 +2,7 @@ package com.razortooth.smile.ui;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -15,6 +16,7 @@ import com.razortooth.smile.R;
 import com.razortooth.smile.bu.SmilePlugServerManager;
 import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.DialogUtil;
+import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
@@ -42,17 +44,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        try {
-            new SmilePlugServerManager().connect(ip.toString(), this);
-            Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
-            intent.putExtra(GeneralActivity.IP, ip.toString());
-            startActivity(intent);
-            ActivityUtil.showLongToast(this, R.string.connection_established);
-
-            this.finish();
-        } catch (NetworkErrorException e) {
-            DialogUtil.checkConnection(this);
-        }
+        new LoadTask(this).execute();
     }
 
     private void validateIPAddress() {
@@ -93,5 +85,46 @@ public class LoginActivity extends Activity implements OnClickListener {
             }
         };
         ip.setFilters(filters);
+    }
+
+    private void loading() {
+        Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
+        intent.putExtra(GeneralActivity.IP, ip.toString());
+        startActivity(intent);
+        ActivityUtil.showLongToast(this, R.string.connection_established);
+
+        this.finish();
+    }
+
+    private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {
+
+        private Context context;
+
+        public LoadTask(Activity context) {
+            super(context);
+
+            this.context = context;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                new SmilePlugServerManager().connect(ip.toString(), context);
+
+                return true;
+            } catch (NetworkErrorException e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean connected) {
+            super.onPostExecute(connected);
+            if (connected == false) {
+                DialogUtil.checkConnection(LoginActivity.this);
+            } else {
+                LoginActivity.this.loading();
+            }
+        }
     }
 }
