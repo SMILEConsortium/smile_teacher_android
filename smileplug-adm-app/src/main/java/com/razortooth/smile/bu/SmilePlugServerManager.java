@@ -18,23 +18,8 @@ public class SmilePlugServerManager {
     }
 
     public void startMakingQuestions(String ip, Context context) throws NetworkErrorException {
-        connect(ip, context);
-
-        InputStream is = null;
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_MAKING_QUESTIONS_URL);
-
-        try {
-            is = HttpUtil.executeGet(url);
-        } catch (NetworkErrorException e) {
-            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
-        } finally {
-            IOUtil.silentClose(is);
-        }
-
-        if (is == null) {
-            throw new NetworkErrorException("Service unavailable");
-        }
-
+        put(ip, context, url);
     }
 
     public void startSolvingQuestions(String ip, Context context) throws NetworkErrorException {
@@ -84,7 +69,7 @@ public class SmilePlugServerManager {
         try {
             is = HttpUtil.executePut(url);
         } catch (NetworkErrorException e) {
-            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+            throw new NetworkErrorException("Connection error: " + e.getMessage(), e);
         } finally {
             IOUtil.silentClose(is);
         }
