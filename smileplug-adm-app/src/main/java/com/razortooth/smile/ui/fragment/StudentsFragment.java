@@ -1,11 +1,14 @@
 package com.razortooth.smile.ui.fragment;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.razortooth.smile.R;
@@ -16,8 +19,13 @@ import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class StudentsFragment extends MainFragment {
 
+    private static final int SLEEP_TIME = 2000;
+
     private static final String PARAM_STATUS = "status";
-    private List<StudentStatus> statusList;
+    private final List<StudentStatus> statusList = new ArrayList<StudentStatus>();
+
+    private UpdateListHandler handler;
+    private ArrayAdapter<StudentStatus> adapter;
 
     @Override
     protected int getLayout() {
@@ -30,11 +38,18 @@ public class StudentsFragment extends MainFragment {
         super.onActivityCreated(savedInstanceState);
 
         if (savedInstanceState != null) {
-            statusList = (List<StudentStatus>) savedInstanceState.getSerializable(PARAM_STATUS);
+            List<StudentStatus> tmp = (List<StudentStatus>) savedInstanceState
+                .getSerializable(PARAM_STATUS);
+            updateListAndListView(tmp);
         } else {
-            statusList = null;
             new LoadStatusListTask(getActivity()).execute();
         }
+
+        adapter = new StudentsStatusListAdapter(getActivity(), statusList);
+        ListView list = (ListView) getActivity().findViewById(R.id.list_students);
+        list.setAdapter(adapter);
+
+        handler = new UpdateListHandler();
     }
 
     @Override
@@ -43,18 +58,9 @@ public class StudentsFragment extends MainFragment {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    private void LoadList() {
-        StudentsStatusListAdapter adapter;
-        adapter = new StudentsStatusListAdapter(getActivity(), statusList);
-
-        ListView list = (ListView) getActivity().findViewById(R.id.list_students);
-        list.setAdapter(adapter);
-        // list.setOnItemClickListener(new OpenItemDetailsListener());
+    private List<StudentStatus> loadList() {
+        StudentsManager statusManager = new StudentsManager();
+        return statusManager.getStudentStatusList(getActivity());
     }
 
     // private class OpenItemDetailsListener implements OnItemClickListener {
@@ -70,33 +76,50 @@ public class StudentsFragment extends MainFragment {
     // }
     // }
 
-    private class LoadStatusListTask extends ProgressDialogAsyncTask<Void, List<StudentStatus>> {
+    private void updateListAndListView(List<StudentStatus> newContent) {
 
-        private Context context;
+        statusList.clear();
+        if (newContent != null) {
+            statusList.addAll(newContent);
+        }
+
+        adapter.notifyDataSetChanged();
+
+        handler.sleep(SLEEP_TIME);
+    }
+
+    private class LoadStatusListTask extends ProgressDialogAsyncTask<Void, List<StudentStatus>> {
 
         public LoadStatusListTask(Activity context) {
             super(context);
-
-            this.context = context;
         }
 
         @Override
         protected List<StudentStatus> doInBackground(Void... params) {
-            List<StudentStatus> studentsList = null;
-
-            StudentsManager statusManager = new StudentsManager();
-            studentsList = statusManager.getStudentStatusList(context);
-
-            return studentsList;
+            return loadList();
         }
 
         @Override
         protected void onPostExecute(List<StudentStatus> statusList) {
             if (statusList != null) {
-                StudentsFragment.this.statusList = statusList;
-                StudentsFragment.this.LoadList();
+                updateListAndListView(statusList);
             }
             super.onPostExecute(statusList);
         }
+    }
+
+    private class UpdateListHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            List<StudentStatus> tmp = loadList();
+            updateListAndListView(tmp);
+        }
+
+        public void sleep(long delayMillis) {
+            removeMessages(0);
+            sendMessageDelayed(obtainMessage(0), delayMillis);
+        }
+
     }
 }

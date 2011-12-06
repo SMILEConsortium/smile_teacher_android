@@ -2,28 +2,21 @@ package com.razortooth.smile.ui.adapter;
 
 import java.util.List;
 
-import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
 import com.razortooth.smile.domain.StudentStatus;
 
-public class StudentsStatusListAdapter extends BaseListAdapter<StudentStatus> {
+public class StudentsStatusListAdapter extends ArrayAdapter<StudentStatus> {
 
-    private static final int LAYOUT = R.layout.students;
-    private static final int[] LAYOUT_ITEMS = { R.id.tv_name, R.id.tv_question, R.id.tv_answers,
-        R.id.tv_score };
-
-    public StudentsStatusListAdapter(Activity context, List<StudentStatus> items) {
-        super(context, items, LAYOUT, LAYOUT_ITEMS);
-    }
-
-    @Override
-    protected String getValue(StudentStatus item, int layoutItem) {
-        return null;
+    public StudentsStatusListAdapter(Context context, List<StudentStatus> items) {
+        super(context, 0, items);
     }
 
     @Override
@@ -32,8 +25,10 @@ public class StudentsStatusListAdapter extends BaseListAdapter<StudentStatus> {
         final StudentStatus studentStatus = getItem(position);
 
         if (convertView == null) {
-            convertView = context.getLayoutInflater()
-                .inflate(R.layout.students_item, parent, false);
+            Context context = getContext();
+            LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.students_item, parent, false);
         }
 
         TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
@@ -54,8 +49,4 @@ public class StudentsStatusListAdapter extends BaseListAdapter<StudentStatus> {
 
     }
 
-    @Override
-    protected boolean hasAsynchronousImageLoading() {
-        return false;
-    }
 }
