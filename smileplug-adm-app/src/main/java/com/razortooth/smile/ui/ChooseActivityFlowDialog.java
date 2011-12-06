@@ -47,7 +47,7 @@ public class ChooseActivityFlowDialog extends Activity implements OnClickListene
         switch (v.getId()) {
             case R.id.bt_start:
                 new LoadTask(this).execute();
-                ActivityUtil.showLongToast(this, R.string.start_making);
+                ActivityUtil.showLongToast(this, R.string.starting);
                 break;
 
             case R.id.bt_use_prerared:

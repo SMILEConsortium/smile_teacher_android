@@ -117,7 +117,7 @@ public class UsePreparedQuestionsActivity extends Activity implements OnClickLis
         intent.putExtra(GeneralActivity.SECONDS, seconds.getSelectedItem().toString());
         startActivity(intent);
 
-        ActivityUtil.showLongToast(this, R.string.start_making);
+        ActivityUtil.showLongToast(this, R.string.starting);
 
         this.finish();
     }

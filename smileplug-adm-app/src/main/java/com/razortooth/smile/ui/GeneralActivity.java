@@ -167,7 +167,7 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
                 try {
                     new SmilePlugServerManager().startSolvingQuestions(ip, this);
 
-                    ActivityUtil.showLongToast(this, R.string.start_solving);
+                    ActivityUtil.showLongToast(this, R.string.solving);
 
                     results.setEnabled(true);
                     solve.setEnabled(false);
@@ -179,7 +179,7 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
                 try {
                     new SmilePlugServerManager().showResults(ip, this);
 
-                    ActivityUtil.showLongToast(this, R.string.show_results);
+                    ActivityUtil.showLongToast(this, R.string.showing);
                 } catch (NetworkErrorException e) {
                     new NetworkErrorException("Connection errror: " + e.getMessage(), e);
                 }

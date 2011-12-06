@@ -39,7 +39,7 @@
 	data from a given activity for later access.</string>
 	<string name="ok">Ok</string>
 	
-	<string name="choose_a_option">Choose a option below : </string>
+	<string name="choose_a_option">Choose an option below : </string>
 	<string name="remaining_time">Remaining Time</string>	
 	<string name="use_time">Use Time Limit Mode</string>	
 	<string name="select">Select one question: </string>	
@@ -53,4 +53,8 @@
 	<string name="top_scorer">Top Scorer(s): </string>
 	<string name="question">Question: </string>
 	<string name="student">Students: </string>
+	
+	<string name="starting">Starting...</string>
+	<string name="solving">Solving...</string>
+	<string name="showing">Showing results</string>
 </resources>

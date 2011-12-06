@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import com.razortooth.smile.R;
 import com.razortooth.smile.bu.SmilePlugServerManager;
 import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.DialogUtil;
+import com.razortooth.smile.util.IPAddressValidatorUtil;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class LoginActivity extends Activity implements OnClickListener {
@@ -37,9 +40,12 @@ public class LoginActivity extends Activity implements OnClickListener {
     protected void onResume() {
         super.onResume();
 
-        validateIPAddress();
+        FormattingIPAddress();
 
+        connect.setEnabled(false);
         connect.setOnClickListener(this);
+
+        ip.addTextChangedListener(new TextChanged());
     }
 
     @Override
@@ -47,7 +53,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         new LoadTask(this).execute();
     }
 
-    private void validateIPAddress() {
+    private void FormattingIPAddress() {
         InputFilter[] filters = new InputFilter[1];
         filters[0] = new InputFilter() {
             @Override
@@ -85,6 +91,29 @@ public class LoginActivity extends Activity implements OnClickListener {
             }
         };
         ip.setFilters(filters);
+    }
+
+    private class TextChanged implements TextWatcher {
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // nothing
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // nothing
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            IPAddressValidatorUtil ipUtil = new IPAddressValidatorUtil();
+            if (ipUtil.validate(ip.getText().toString())) {
+                connect.setEnabled(true);
+            } else {
+                connect.setEnabled(false);
+            }
+        }
     }
 
     private void loading() {
