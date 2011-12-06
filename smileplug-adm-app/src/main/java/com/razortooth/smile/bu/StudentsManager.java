@@ -22,20 +22,44 @@ public class StudentsManager {
 
         StudentStatus s1 = new StudentStatus();
         s1.setMade(false);
-        s1.setName("Joaozinho");
+        s1.setName("Dean");
         s1.setScore(5);
         s1.setSolved(true);
-        s1.setUsername("joaozinho");
+        s1.setUsername("dean");
 
         StudentStatus s2 = new StudentStatus();
-        s1.setMade(true);
-        s1.setName("Zezinho");
-        s1.setScore(4);
-        s1.setSolved(false);
-        s1.setUsername("zezinho");
+        s2.setMade(true);
+        s2.setName("Peter");
+        s2.setScore(4);
+        s2.setSolved(false);
+        s2.setUsername("peter");
+
+        StudentStatus s3 = new StudentStatus();
+        s3.setMade(true);
+        s3.setName("Jhon");
+        s3.setScore(3);
+        s3.setSolved(false);
+        s3.setUsername("jhon");
+
+        StudentStatus s4 = new StudentStatus();
+        s4.setMade(true);
+        s4.setName("Tom");
+        s4.setScore(4);
+        s4.setSolved(false);
+        s4.setUsername("tom");
+
+        StudentStatus s5 = new StudentStatus();
+        s5.setMade(true);
+        s5.setName("James");
+        s5.setScore(5);
+        s5.setSolved(true);
+        s5.setUsername("james");
 
         result.add(s1);
         result.add(s2);
+        result.add(s3);
+        result.add(s4);
+        result.add(s5);
 
         return result;
 
