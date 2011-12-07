@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -55,6 +56,11 @@ public class StudentsFragment extends MainFragment {
         list.setAdapter(adapter);
         list.setOnItemClickListener(new OpenItemDetailsListener());
 
+        TextView tv_top_title = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
+        tv_top_title.setVisibility(View.GONE);
+
+        LinearLayout ll_top = (LinearLayout) getActivity().findViewById(R.id.top_scorers);
+        ll_top.setVisibility(View.GONE);
     }
 
     @Override
@@ -97,8 +103,8 @@ public class StudentsFragment extends MainFragment {
                 int x = 0, y = 0;
                 for (StudentStatus element : statusList) {
                     StudentStatus studentStatus = element;
-                    x = x + (studentStatus.isMade() == true ? 1 : 0);
-                    y = y + (studentStatus.isSolved() == true ? 1 : 0);
+                    x = x + (studentStatus.isMade() ? 1 : 0);
+                    y = y + (studentStatus.isSolved() ? 1 : 0);
                 }
 
                 TextView tv_question = (TextView) getActivity().findViewById(R.id.tl_questions);
