@@ -6,9 +6,9 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -25,12 +25,11 @@ import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class StudentsFragment extends MainFragment {
 
-    private static final int SLEEP_TIME = 5000;
+    private static final int AUTO_UPDATE_TIME = 5000;
 
     private static final String PARAM_STATUS = "status";
     private final List<StudentStatus> statusList = new ArrayList<StudentStatus>();
 
-    private UpdateListHandler handler;
     private ArrayAdapter<StudentStatus> adapter;
 
     @Override
@@ -56,7 +55,6 @@ public class StudentsFragment extends MainFragment {
         list.setAdapter(adapter);
         list.setOnItemClickListener(new OpenItemDetailsListener());
 
-        handler = new UpdateListHandler();
     }
 
     @Override
@@ -92,7 +90,6 @@ public class StudentsFragment extends MainFragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter.notifyDataSetChanged();
 
                 TextView tv_name = (TextView) getActivity().findViewById(R.id.tl_students);
                 tv_name.setText(getString(R.string.students) + ": " + statusList.size());
@@ -110,9 +107,13 @@ public class StudentsFragment extends MainFragment {
                 TextView tv_answers = (TextView) getActivity().findViewById(R.id.tl_answers);
                 tv_answers.setText(getString(R.string.answers) + ": " + y);
             }
+
         });
 
-        handler.sleep(SLEEP_TIME);
+        adapter.notifyDataSetChanged();
+
+        new Handler().postDelayed(new UpdateStudentsRunnable(), AUTO_UPDATE_TIME);
+
     }
 
     private class LoadStatusListTask extends ProgressDialogAsyncTask<Void, List<StudentStatus>> {
@@ -135,18 +136,25 @@ public class StudentsFragment extends MainFragment {
         }
     }
 
-    private class UpdateListHandler extends Handler {
+    private final class UpdateStudentsRunnable implements Runnable {
+        @Override
+        public void run() {
+            new UpdateStudentsTask().execute();
+        }
+    }
+
+    private class UpdateStudentsTask extends AsyncTask<Void, Void, List<StudentStatus>> {
 
         @Override
-        public void handleMessage(Message msg) {
-            List<StudentStatus> tmp = loadList();
-            updateListAndListView(tmp);
+        protected List<StudentStatus> doInBackground(Void... arg0) {
+            return loadList();
         }
 
-        public void sleep(long delayMillis) {
-            removeMessages(0);
-            sendMessageDelayed(obtainMessage(0), delayMillis);
+        @Override
+        protected void onPostExecute(List<StudentStatus> result) {
+            updateListAndListView(result);
         }
 
     }
+
 }
