@@ -5,15 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.razortooth.smile.R;
 import com.razortooth.smile.bu.StudentsManager;
 import com.razortooth.smile.domain.StudentStatus;
+import com.razortooth.smile.ui.StudentsStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.StudentsStatusListAdapter;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
@@ -48,6 +53,7 @@ public class StudentsFragment extends MainFragment {
         adapter = new StudentsStatusListAdapter(getActivity(), statusList);
         ListView list = (ListView) getActivity().findViewById(R.id.list_students);
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new OpenItemDetailsListener());
 
         handler = new UpdateListHandler();
     }
@@ -63,18 +69,17 @@ public class StudentsFragment extends MainFragment {
         return statusManager.getStudentStatusList(getActivity());
     }
 
-    // private class OpenItemDetailsListener implements OnItemClickListener {
-    //
-    // @Override
-    // public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-    // StudentStatus studentsStatus = statusList.get(position);
-    //
-    // Intent intent = new Intent(getActivity(), StudentsStatusDetailsActivity.class);
-    // intent.putExtra(StudentsStatusDetailsActivity.PARAM_STUDENTS_STATUS,
-    // (Serializable) studentsStatus);
-    // startActivity(intent);
-    // }
-    // }
+    private class OpenItemDetailsListener implements OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+            StudentStatus studentsStatus = statusList.get(position);
+
+            Intent intent = new Intent(getActivity(), StudentsStatusDetailsActivity.class);
+            intent.putExtra(StudentsStatusDetailsActivity.PARAM_STUDENTS_STATUS, studentsStatus);
+            startActivity(intent);
+        }
+    }
 
     private void updateListAndListView(List<StudentStatus> newContent) {
 

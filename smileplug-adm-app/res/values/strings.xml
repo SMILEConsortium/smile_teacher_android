@@ -58,4 +58,13 @@
 	<string name="starting">Starting...</string>
 	<string name="solving">Solving...</string>
 	<string name="showing">Showing results</string>
+	
+	<string name="question_number">Question Number</string>
+	<string name="correct_answer">Correct Answer</string>
+	<string name="chosen_answer">Chosen Answer</string>
+	<string name="give_rating">Give Rating</string>
+	
+	<string name="scoreboard_of">Scoreboard of</string>
+	
+	<string name="score_board">Score Board</string>
 </resources>

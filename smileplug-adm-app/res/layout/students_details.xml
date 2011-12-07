@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="400dip"
+  	android:layout_height="325dip"
+  	android:orientation="vertical"
+  	android:background="@drawable/rounded_border"
+  	android:layout_gravity="center"
+  	android:gravity="center_horizontal">
+  	
+    <TextView  
+  	  	android:id="@+id/tv_title"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:text="@string/score_board"
+      	android:textStyle="bold"
+      	android:textSize="16sp"
+      	android:textColor="@color/black"
+      	android:layout_marginTop="10dip"/>
+    
+    <View
+		android:id="@+id/separator"  
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_margin="5dip"/>
+  	
+    <TextView  
+  	  	android:id="@+id/tv_name"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+      	android:textStyle="bold"
+      	android:textSize="14sp"
+      	android:textColor="@color/black"
+      	android:layout_marginTop="15dip"/>
+    
+    <TextView  
+  	  	android:id="@+id/tv_score"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+      	android:textStyle="bold"
+      	android:textSize="14sp"
+      	android:textColor="@color/black"
+      	android:layout_marginTop="5dip"/>
+    
+    <LinearLayout 
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="fill_parent"
+	  	android:layout_marginTop="10dip"
+	  	android:orientation="horizontal">
+        
+        <TableLayout
+		  	android:id="@+id/table_status" 
+		  	android:layout_width="fill_parent"
+		  	android:layout_height="wrap_content"
+		  	android:shrinkColumns="*"  
+	    	android:stretchColumns="*"
+	    	android:layout_margin="5dip">
+	    	
+	    	<View
+				android:id="@+id/separator"  
+				android:layout_width="fill_parent"
+				android:layout_height="1dip"
+				android:background="@color/white"
+				android:layout_marginTop="5dip"/>
+		  	
+		  	<TableRow 
+		  		android:id="@+id/row"
+		  		android:layout_width="wrap_content"
+		   	  	android:layout_height="wrap_content"
+		   	  	android:layout_marginTop="5dip">
+		  	
+			  	<TextView  
+			  	  	android:id="@+id/number"
+			  	  	android:layout_width="20dip"
+		  			android:layout_height="wrap_content"
+			      	android:text="@string/question_number"
+			      	android:textColor="@color/black"
+			      	android:layout_marginLeft="5dip"
+			      	android:layout_marginRight="5dip"
+			      	android:gravity="center"/>
+			           
+			  	<TextView  
+			      	android:id="@+id/correct" 
+			      	android:layout_width="20dip"
+		  			android:layout_height="wrap_content"
+			      	android:text="@string/correct_answer"   
+			      	android:textColor="@color/black"
+			      	android:layout_marginLeft="5dip"
+			      	android:layout_marginRight="5dip"
+			      	android:gravity="center"/>
+			           
+			  	<TextView  
+			    	android:id="@+id/chosen"  
+			    	android:layout_width="20dip"
+		  			android:layout_height="wrap_content"
+			      	android:text="@string/chosen_answer"   
+			      	android:textColor="@color/black"
+			      	android:layout_marginLeft="5dip"
+			      	android:layout_marginRight="5dip"
+			      	android:gravity="center"/>
+			           
+			  	<TextView  
+			      	android:id="@+id/rating"  
+			      	android:layout_width="10dip"
+		  			android:layout_height="wrap_content"
+			      	android:text="@string/give_rating"    
+			      	android:textColor="@color/black"
+			      	android:layout_marginRight="5dip"
+			      	android:gravity="center"
+			      	android:layout_gravity="center"/>
+		  	
+		  	</TableRow>
+		  	
+		  	<View
+				android:id="@+id/separator"  
+				android:layout_width="fill_parent"
+				android:layout_height="1dip"
+				android:background="@color/white"
+				android:layout_marginTop="5dip"/>
+		  	
+		  	<ListView 
+				android:id="@+id/list"
+			    android:layout_width="wrap_content"
+			  	android:layout_height="wrap_content"
+			  	android:layout_below="@id/row"/>
+	
+		</TableLayout>
+        
+    </LinearLayout>
+  	
+</LinearLayout>

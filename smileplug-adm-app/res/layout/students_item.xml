@@ -23,7 +23,9 @@
         android:layout_marginRight="92dip"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:focusable="false"
+        android:clickable="false" />
 
     <RadioButton
         android:id="@+id/tv_answers"
@@ -32,7 +34,9 @@
         android:layout_marginRight="50dip"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:focusable="false"
+        android:clickable="false" />
 
     <TextView
         android:id="@+id/tv_score"
