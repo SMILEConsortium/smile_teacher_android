@@ -4,7 +4,8 @@
   	android:layout_height="fill_parent"
   	android:layout_margin="5dip"
   	android:gravity="center_vertical"
-  	android:orientation="horizontal">
+  	android:orientation="horizontal"
+  	android:background="@color/gray">
   	
   	<TextView
         android:id="@+id/tv_name"
@@ -15,28 +16,28 @@
         android:textColor="@color/black"
         android:textStyle="bold" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/tv_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="45dip"
+        android:layout_marginLeft="55dip"
         android:layout_marginRight="92dip"
+        android:button="@drawable/checkbox"
         android:gravity="center"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:focusable="false"
-        android:clickable="false" />
+        android:focusable="false" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/tv_answers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="50dip"
+        android:layout_marginRight="40dip"
+        android:button="@drawable/checkbox"
         android:gravity="center"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:focusable="false"
-        android:clickable="false" />
+        android:focusable="false" />
 
     <TextView
         android:id="@+id/tv_score"

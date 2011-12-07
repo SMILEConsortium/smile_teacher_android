@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.RadioButton;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
@@ -34,11 +34,11 @@ public class StudentsStatusListAdapter extends ArrayAdapter<StudentStatus> {
         TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
         tv_name.setText(studentStatus.getName());
 
-        RadioButton tv_question = (RadioButton) convertView.findViewById(R.id.tv_question);
+        CheckBox tv_question = (CheckBox) convertView.findViewById(R.id.tv_question);
         tv_question.setChecked(studentStatus.isMade());
         tv_question.setClickable(false);
 
-        RadioButton tv_answers = (RadioButton) convertView.findViewById(R.id.tv_answers);
+        CheckBox tv_answers = (CheckBox) convertView.findViewById(R.id.tv_answers);
         tv_answers.setChecked(studentStatus.isSolved());
         tv_answers.setClickable(false);
 

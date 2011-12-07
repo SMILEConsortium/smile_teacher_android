@@ -24,7 +24,7 @@ import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class StudentsFragment extends MainFragment {
 
-    private static final int SLEEP_TIME = 2000;
+    private static final int SLEEP_TIME = 5000;
 
     private static final String PARAM_STATUS = "status";
     private final List<StudentStatus> statusList = new ArrayList<StudentStatus>();

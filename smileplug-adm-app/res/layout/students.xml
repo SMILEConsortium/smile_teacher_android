@@ -68,13 +68,13 @@
 		           
 		  	<TextView  
 		      	android:id="@+id/tv_question" 
-		      	android:text="@string/questions"   
+		      	android:text="@string/question"   
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"/>
 		           
 		  	<TextView  
 		    	android:id="@+id/tv_answers"  
-		      	android:text="@string/answers_table"   
+		      	android:text="@string/answers"   
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"/>
 		           
@@ -151,28 +151,25 @@
 	   	  	android:layout_margin="5dip">
     	
 	    	<TextView  
-		  	  	android:id="@+id/tv_name"
+		  	  	android:id="@+id/tl_students"
 		  	  	android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
-		      	android:text="@string/student"
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"
 		      	android:layout_marginTop="6dip"/>
 		           
 		  	<TextView  
-		      	android:id="@+id/tv_question" 
+		      	android:id="@+id/tl_questions" 
 		      	android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
-		      	android:text="@string/question" 
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"
 		      	android:layout_marginTop="6dip"/>
 		           
 		  	<TextView  
-		    	android:id="@+id/tv_answers"  
+		    	android:id="@+id/tl_answers"  
 		    	android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
-		      	android:text="@string/answers"  
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"
 		      	android:layout_marginTop="6dip"/>

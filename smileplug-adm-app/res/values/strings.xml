@@ -12,7 +12,6 @@
 	<string name="show_results">Show Results</string>
 	<string name="students">Students</string>
 	<string name="questions">Questions</string>
-	<string name="answers_table">Answers</string>
 	
 	<string name="question_status">Question Status</string>
 	<string name="number">Number</string>
@@ -51,9 +50,9 @@
 	
 	<string name="created_by">Question(s) created by: </string>
 	<string name="top_scorer">Top Scorer(s): </string>
-	<string name="answers">Answers: </string>
-	<string name="question">Question: </string>
-	<string name="student">Students: </string>
+	<string name="answers">Answers</string>
+	<string name="question">Question</string>
+	<string name="student">Students</string>
 	
 	<string name="starting">Starting...</string>
 	<string name="solving">Solving...</string>
