@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.razortooth.smile.R;
 import com.razortooth.smile.bu.StudentsManager;
@@ -88,7 +89,28 @@ public class StudentsFragment extends MainFragment {
             statusList.addAll(newContent);
         }
 
-        adapter.notifyDataSetChanged();
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+
+                TextView tv_name = (TextView) getActivity().findViewById(R.id.tl_students);
+                tv_name.setText(getString(R.string.students) + ": " + statusList.size());
+
+                int x = 0, y = 0;
+                for (StudentStatus element : statusList) {
+                    StudentStatus studentStatus = element;
+                    x = x + (studentStatus.isMade() == true ? 1 : 0);
+                    y = y + (studentStatus.isSolved() == true ? 1 : 0);
+                }
+
+                TextView tv_question = (TextView) getActivity().findViewById(R.id.tl_questions);
+                tv_question.setText(getString(R.string.questions) + ": " + x);
+
+                TextView tv_answers = (TextView) getActivity().findViewById(R.id.tl_answers);
+                tv_answers.setText(getString(R.string.answers) + ": " + y);
+            }
+        });
 
         handler.sleep(SLEEP_TIME);
     }
