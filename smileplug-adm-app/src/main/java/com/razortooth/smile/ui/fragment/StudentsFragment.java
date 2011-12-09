@@ -23,6 +23,7 @@ import com.razortooth.smile.bu.BoardManager;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.domain.Student;
+import com.razortooth.smile.ui.GeneralActivity;
 import com.razortooth.smile.ui.StudentsStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.StudentListAdapter;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
@@ -37,6 +38,8 @@ public class StudentsFragment extends MainFragment {
 
     private ArrayAdapter<Student> adapter;
     private Board board;
+
+    private boolean run;
 
     @Override
     protected int getLayout() {
@@ -65,6 +68,21 @@ public class StudentsFragment extends MainFragment {
 
         LinearLayout ll_top = (LinearLayout) getActivity().findViewById(R.id.top_scorers);
         ll_top.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        run = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        run = false;
+        getActivity().finish();
     }
 
     @Override
@@ -100,22 +118,25 @@ public class StudentsFragment extends MainFragment {
             students.addAll(newStudents);
         }
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+        if (run && GeneralActivity.pageViewIndex == 0) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
 
-                TextView tv_name = (TextView) getActivity().findViewById(R.id.tl_students);
-                tv_name.setText(getString(R.string.students) + ": " + students.size());
+                    TextView tv_name = (TextView) getActivity().findViewById(R.id.tl_students);
+                    tv_name.setText(getString(R.string.students) + ": " + students.size());
 
-                TextView tv_question = (TextView) getActivity().findViewById(R.id.tl_questions);
-                tv_question.setText(getString(R.string.questions) + ": "
-                    + board.getQuestionsNumber());
+                    TextView tv_question = (TextView) getActivity().findViewById(R.id.tl_questions);
+                    tv_question.setText(getString(R.string.questions) + ": "
+                        + board.getQuestionsNumber());
 
-                TextView tv_answers = (TextView) getActivity().findViewById(R.id.tl_answers);
-                tv_answers.setText(getString(R.string.answers) + ": " + board.getAnswersNumber());
-            }
+                    TextView tv_answers = (TextView) getActivity().findViewById(R.id.tl_answers);
+                    tv_answers.setText(getString(R.string.answers) + ": "
+                        + board.getAnswersNumber());
+                }
 
-        });
+            });
+        }
 
         adapter.notifyDataSetChanged();
 
@@ -166,12 +187,12 @@ public class StudentsFragment extends MainFragment {
         protected Board doInBackground(Void... arg0) {
 
             try {
-                return loadBoard();
+                if (run && GeneralActivity.pageViewIndex == 0) {
+                    return loadBoard();
+                }
             } catch (NetworkErrorException e) {
-                // TODO Auto-generated catch block
-            } catch (DataAccessException e) {
-                // TODO Auto-generated catch block
-            }
+
+            } catch (DataAccessException e) {}
 
             return null;
         }

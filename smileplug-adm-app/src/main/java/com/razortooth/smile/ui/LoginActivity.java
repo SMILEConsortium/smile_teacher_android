@@ -39,12 +39,15 @@ public class LoginActivity extends Activity implements OnClickListener {
     protected void onResume() {
         super.onResume();
 
-        FormattingIPAddress();
+        formattingIPAddress();
 
         connect.setEnabled(false);
         connect.setOnClickListener(this);
 
+        ip.setText("");
         ip.addTextChangedListener(new TextChanged());
+
+        this.setVisible(true);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         new LoadTask(this).execute();
     }
 
-    private void FormattingIPAddress() {
+    private void formattingIPAddress() {
         InputFilter[] filters = new InputFilter[1];
         filters[0] = new InputFilter() {
             @Override
@@ -121,7 +124,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         startActivity(intent);
         ActivityUtil.showLongToast(this, R.string.connection_established);
 
-        this.finish();
+        this.setVisible(false);
     }
 
     private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {
