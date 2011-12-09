@@ -86,21 +86,21 @@
 	  	
 	  	</TableRow>
 	  	
-		<View
-			android:id="@+id/separator_list"  
+	  	<View
+			android:id="@+id/separator"  
 			android:layout_width="fill_parent"
 			android:layout_height="1dip"
 			android:background="@color/white"
 			android:layout_marginLeft="5dip"
 			android:layout_marginTop="5dip"
 			android:layout_below="@id/tv_title"/>
-		
-		<ListView 
+	  	
+	  	<ListView 
 			android:id="@+id/list_students"
 		    android:layout_width="wrap_content"
 		  	android:layout_height="wrap_content"
 		  	android:layout_below="@id/row"
-		  	android:layout_above="@id/separator_list"
+		  	android:layout_above="@id/separator"
 		  	android:layout_marginTop="5dip"
 		  	android:layout_marginLeft="5dip"/>
 
