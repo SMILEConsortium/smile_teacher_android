@@ -1,9 +1,14 @@
 package com.razortooth.smile.domain;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Student implements Comparable<Student> {
+public class Student implements Serializable, Comparable<Student> {
+
+    private static final long serialVersionUID = 1L;
 
     private final String ip;
     private final String name;
@@ -58,6 +63,10 @@ public class Student implements Comparable<Student> {
         ratings.put(question, answer);
     }
 
+    public int getAnswered() {
+        return answers.size();
+    }
+
     public int getScore() {
 
         int score = 0;
@@ -71,6 +80,26 @@ public class Student implements Comparable<Student> {
         }
 
         return score;
+
+    }
+
+    public List<StudentQuestionDetail> getDetails() {
+
+        List<StudentQuestionDetail> result = new ArrayList<StudentQuestionDetail>();
+
+        for (Question q : answers.keySet()) {
+
+            Integer a = answers.get(q);
+            Integer r = ratings.get(q);
+
+            StudentQuestionDetail sqd;
+            sqd = new StudentQuestionDetail(q.getNumber(), q.getAnswer(), a, r);
+
+            result.add(sqd);
+
+        }
+
+        return result;
 
     }
 

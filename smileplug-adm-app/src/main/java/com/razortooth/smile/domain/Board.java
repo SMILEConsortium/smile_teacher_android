@@ -1,6 +1,7 @@
 package com.razortooth.smile.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Board implements Serializable {
@@ -12,8 +13,8 @@ public class Board implements Serializable {
 
     public Board(Collection<Student> students, Collection<Question> questions) {
         super();
-        this.students = students;
-        this.questions = questions;
+        this.students = new ArrayList<Student>(students);
+        this.questions = new ArrayList<Question>(questions);
     }
 
     public Collection<Student> getStudents() {

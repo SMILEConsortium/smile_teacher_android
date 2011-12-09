@@ -1,9 +1,12 @@
 package com.razortooth.smile.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final int number;
     private final String owner;

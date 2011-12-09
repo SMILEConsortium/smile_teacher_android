@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import com.razortooth.smile.bu.BoardManager;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.domain.Student;
+import com.razortooth.smile.ui.StudentsStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.StudentListAdapter;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
@@ -80,14 +82,11 @@ public class StudentsFragment extends MainFragment {
 
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+            Student s = students.get(position);
 
-            // TODO: Refactor
-
-            // Student studentsStatus = students.get(position);
-
-            // Intent intent = new Intent(getActivity(), StudentsStatusDetailsActivity.class);
-            // intent.putExtra(StudentsStatusDetailsActivity.PARAM_STUDENTS_STATUS, studentsStatus);
-            // startActivity(intent);
+            Intent intent = new Intent(getActivity(), StudentsStatusDetailsActivity.class);
+            intent.putExtra(StudentsStatusDetailsActivity.PARAM_STUDENTS, s);
+            startActivity(intent);
         }
     }
 
