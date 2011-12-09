@@ -10,6 +10,7 @@ public class SmilePlugUtil {
     public static final String START_MAKING_QUESTIONS_URL = "startmakingquestions";
     public static final String START_SOLVING_QUESTIONS_URL = "startsolvingquestions";
     public static final String SHOW_RESULTS_URL = "showresults";
+    public static final String ALL_DATA_URL = "all";
 
     private SmilePlugUtil() {
         // Empty
