@@ -45,7 +45,10 @@ public class LoginActivity extends Activity implements OnClickListener {
         connect.setEnabled(false);
         connect.setOnClickListener(this);
 
+        ip.setText("");
         ip.addTextChangedListener(new TextChanged());
+
+        this.setVisible(true);
     }
 
     @Override
@@ -122,7 +125,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         startActivity(intent);
         ActivityUtil.showLongToast(this, R.string.connection_established);
 
-        this.finish();
+        this.setVisible(false);
     }
 
     private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {

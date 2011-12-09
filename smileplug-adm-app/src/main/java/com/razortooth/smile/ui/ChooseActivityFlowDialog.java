@@ -54,6 +54,7 @@ public class ChooseActivityFlowDialog extends Activity implements OnClickListene
                 Intent intent = new Intent(this, UsePreparedQuestionsActivity.class);
                 intent.putExtra(GeneralActivity.IP, ip);
                 startActivity(intent);
+                this.finish();
                 break;
         }
     }
@@ -62,6 +63,8 @@ public class ChooseActivityFlowDialog extends Activity implements OnClickListene
         Intent intent = new Intent(this, GeneralActivity.class);
         intent.putExtra(GeneralActivity.IP, ip);
         startActivity(intent);
+
+        this.finish();
     }
 
     private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {

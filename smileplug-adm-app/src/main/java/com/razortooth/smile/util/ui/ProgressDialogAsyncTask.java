@@ -56,6 +56,7 @@ public abstract class ProgressDialogAsyncTask<Params, Result> extends
     protected void onPostExecute(Result result) {
         if (pd != null) {
             pd.hide();
+            pd.dismiss();
             pd = null;
         }
         if (e != null) {
@@ -63,7 +64,7 @@ public abstract class ProgressDialogAsyncTask<Params, Result> extends
             String msg;
 
             if (errorMessageStringId == null) {
-                msg = "Não foi possível atualizar o conteúdo. Por favor tente novamente.";
+                msg = "Not possible update the data. Please try again.";
             } else {
                 msg = context.getString(errorMessageStringId);
             }

@@ -10,12 +10,17 @@ import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
@@ -44,6 +49,8 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
 
     private TextView time;
     private TextView remaining;
+
+    public static int pageViewIndex;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -137,6 +144,13 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+        this.finish();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bt_about:
@@ -158,6 +172,23 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
         ViewPager mPager = (ViewPager) super.findViewById(R.id.awesomepager);
         mPager.setAdapter(this.mPagerAdapter);
         mPager.setCurrentItem(0);
+        mPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int currentIndex) {
+                pageViewIndex = currentIndex;
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+                // nothing
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+                // nothing
+            }
+        });
     }
 
     @Override
@@ -180,6 +211,20 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
                     new SmilePlugServerManager().showResults(ip, this);
 
                     ActivityUtil.showLongToast(this, R.string.showing);
+
+                    TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
+                        LayoutParams.WRAP_CONTENT, 150);
+
+                    ListView list = (ListView) this.findViewById(R.id.list_students);
+                    list.setLayoutParams(layoutParams);
+                    list.setPadding(5, 0, 0, 0);
+
+                    TextView tv_top_title = (TextView) this.findViewById(R.id.tv_top_scorers);
+                    tv_top_title.setVisibility(View.VISIBLE);
+
+                    LinearLayout ll_top = (LinearLayout) this.findViewById(R.id.top_scorers);
+                    ll_top.setVisibility(View.VISIBLE);
+
                 } catch (NetworkErrorException e) {
                     new NetworkErrorException("Connection errror: " + e.getMessage(), e);
                 }

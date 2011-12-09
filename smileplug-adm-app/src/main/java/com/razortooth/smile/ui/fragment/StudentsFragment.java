@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.razortooth.smile.R;
 import com.razortooth.smile.bu.StudentsManager;
 import com.razortooth.smile.domain.StudentStatus;
+import com.razortooth.smile.ui.GeneralActivity;
 import com.razortooth.smile.ui.StudentsStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.StudentsStatusListAdapter;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
@@ -32,6 +33,8 @@ public class StudentsFragment extends MainFragment {
     private final List<StudentStatus> statusList = new ArrayList<StudentStatus>();
 
     private ArrayAdapter<StudentStatus> adapter;
+
+    private boolean run;
 
     @Override
     protected int getLayout() {
@@ -53,14 +56,31 @@ public class StudentsFragment extends MainFragment {
 
         adapter = new StudentsStatusListAdapter(getActivity(), statusList);
         ListView list = (ListView) getActivity().findViewById(R.id.list_students);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new OpenItemDetailsListener());
+        if (adapter != null) {
+            list.setAdapter(adapter);
+            list.setOnItemClickListener(new OpenItemDetailsListener());
+        }
 
         TextView tv_top_title = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
         tv_top_title.setVisibility(View.GONE);
 
         LinearLayout ll_top = (LinearLayout) getActivity().findViewById(R.id.top_scorers);
         ll_top.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        run = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        run = false;
+        getActivity().finish();
     }
 
     @Override
@@ -93,28 +113,29 @@ public class StudentsFragment extends MainFragment {
             statusList.addAll(newContent);
         }
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+        if (run && GeneralActivity.pageViewIndex == 0) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
 
-                TextView tv_name = (TextView) getActivity().findViewById(R.id.tl_students);
-                tv_name.setText(getString(R.string.students) + ": " + statusList.size());
+                    TextView tv_name = (TextView) getActivity().findViewById(R.id.tl_students);
+                    tv_name.setText(getString(R.string.students) + ": " + statusList.size());
 
-                int x = 0, y = 0;
-                for (StudentStatus element : statusList) {
-                    StudentStatus studentStatus = element;
-                    x = x + (studentStatus.isMade() ? 1 : 0);
-                    y = y + (studentStatus.isSolved() ? 1 : 0);
+                    int x = 0, y = 0;
+                    for (StudentStatus element : statusList) {
+                        StudentStatus studentStatus = element;
+                        x = x + (studentStatus.isMade() ? 1 : 0);
+                        y = y + (studentStatus.isSolved() ? 1 : 0);
+                    }
+
+                    TextView tv_question = (TextView) getActivity().findViewById(R.id.tl_questions);
+                    tv_question.setText(getString(R.string.questions) + ": " + x);
+
+                    TextView tv_answers = (TextView) getActivity().findViewById(R.id.tl_answers);
+                    tv_answers.setText(getString(R.string.answers) + ": " + y);
                 }
-
-                TextView tv_question = (TextView) getActivity().findViewById(R.id.tl_questions);
-                tv_question.setText(getString(R.string.questions) + ": " + x);
-
-                TextView tv_answers = (TextView) getActivity().findViewById(R.id.tl_answers);
-                tv_answers.setText(getString(R.string.answers) + ": " + y);
-            }
-
-        });
+            });
+        }
 
         adapter.notifyDataSetChanged();
 

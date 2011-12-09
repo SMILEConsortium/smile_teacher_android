@@ -68,6 +68,13 @@ public class QuestionsFragment extends MainFragment implements OnClickListener {
         save.setOnClickListener(this);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        getActivity().finish();
+    }
+
     private void updateListAndListView(List<QuestionStatus> newContent) {
 
         statusList.clear();
