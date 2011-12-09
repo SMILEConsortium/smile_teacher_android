@@ -85,7 +85,7 @@
 			android:layout_below="@id/tv_title"/>
 	  	
 	  	<ListView 
-			android:id="@+id/list_students"
+			android:id="@+id/list_questions"
 		    android:layout_width="fill_parent"
 		  	android:layout_height="220dip"
 		  	android:layout_below="@id/row"/>
@@ -97,12 +97,12 @@
 			android:background="@color/white"
 			android:layout_marginLeft="5dip"
 			android:layout_marginTop="5dip"
-			android:layout_below="@id/list_students"/>				  	
+			android:layout_below="@id/list_questions"/>				  	
 
 	</TableLayout>
 	
 	<Button 
-  		android:id="@+id/button1"
+  		android:id="@+id/bt_save"
   		android:layout_width="120dip"
   		android:layout_height="50dip"
   		android:layout_gravity="center_horizontal"

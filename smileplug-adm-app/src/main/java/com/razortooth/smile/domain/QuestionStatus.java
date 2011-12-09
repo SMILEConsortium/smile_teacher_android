@@ -1,6 +1,10 @@
 package com.razortooth.smile.domain;
 
-public class QuestionStatus implements Comparable<QuestionStatus> {
+import java.io.Serializable;
+
+public class QuestionStatus implements Comparable<QuestionStatus>, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int number;
     private String owner;
