@@ -11,18 +11,18 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
-import com.razortooth.smile.domain.ScoreBoardItem;
+import com.razortooth.smile.domain.StudentQuestionDetail;
 
-public class ScoreBoardListAdapter extends ArrayAdapter<ScoreBoardItem> {
+public class StudentQuestionDetailAdapter extends ArrayAdapter<StudentQuestionDetail> {
 
-    public ScoreBoardListAdapter(Activity context, List<ScoreBoardItem> items) {
+    public StudentQuestionDetailAdapter(Activity context, List<StudentQuestionDetail> items) {
         super(context, 0, items);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        final ScoreBoardItem scoreBoardItem = getItem(position);
+        final StudentQuestionDetail item = getItem(position);
 
         if (convertView == null) {
             Context context = getContext();
@@ -32,16 +32,16 @@ public class ScoreBoardListAdapter extends ArrayAdapter<ScoreBoardItem> {
         }
 
         TextView tv_number = (TextView) convertView.findViewById(R.id.tv_number);
-        tv_number.setText(String.valueOf(scoreBoardItem.getQuestionNumber()));
+        tv_number.setText(String.valueOf(item.getNumber()));
 
         TextView tv_correct = (TextView) convertView.findViewById(R.id.tv_correct);
-        tv_correct.setText(String.valueOf(scoreBoardItem.getCorrectAnswer()));
+        tv_correct.setText(String.valueOf(item.getAnswer()));
 
         TextView tv_chosen = (TextView) convertView.findViewById(R.id.tv_chosen);
-        tv_chosen.setText(String.valueOf(scoreBoardItem.getChosenAnswer()));
+        tv_chosen.setText(String.valueOf(item.getChosenAnswer()));
 
         TextView tv_rating = (TextView) convertView.findViewById(R.id.tv_rating);
-        tv_rating.setText(String.valueOf(scoreBoardItem.getGivenRating()));
+        tv_rating.setText(String.valueOf(item.getChosenRating()));
 
         return convertView;
     }

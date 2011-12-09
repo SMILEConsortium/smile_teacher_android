@@ -31,7 +31,6 @@ public class LoginActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.login);
-
         ip = (TextView) findViewById(R.id.et_server_ip);
         connect = (Button) findViewById(R.id.bt_connect);
     }

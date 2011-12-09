@@ -67,4 +67,9 @@ public class IOUtil {
 
     }
 
+    public static String loadContent(InputStream in, String encoding) throws IOException {
+        byte[] bytes = loadBytes(in);
+        return new String(bytes, encoding);
+    }
+
 }

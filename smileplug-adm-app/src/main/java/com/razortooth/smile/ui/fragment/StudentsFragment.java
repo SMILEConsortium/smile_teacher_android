@@ -1,9 +1,10 @@
 package com.razortooth.smile.ui.fragment;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -18,40 +19,43 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
-import com.razortooth.smile.bu.StudentsManager;
-import com.razortooth.smile.domain.StudentStatus;
+import com.razortooth.smile.bu.BoardManager;
+import com.razortooth.smile.bu.exception.DataAccessException;
+import com.razortooth.smile.domain.Board;
+import com.razortooth.smile.domain.Student;
 import com.razortooth.smile.ui.StudentsStatusDetailsActivity;
-import com.razortooth.smile.ui.adapter.StudentsStatusListAdapter;
+import com.razortooth.smile.ui.adapter.StudentListAdapter;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class StudentsFragment extends MainFragment {
 
     private static final int AUTO_UPDATE_TIME = 5000;
 
-    private static final String PARAM_STATUS = "status";
-    private final List<StudentStatus> statusList = new ArrayList<StudentStatus>();
+    private static final String PARAM_BOARD = "board";
 
-    private ArrayAdapter<StudentStatus> adapter;
+    private final List<Student> students = new ArrayList<Student>();
+
+    private ArrayAdapter<Student> adapter;
+    private Board board;
 
     @Override
     protected int getLayout() {
         return R.layout.students;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
 
         if (savedInstanceState != null) {
-            List<StudentStatus> tmp = (List<StudentStatus>) savedInstanceState
-                .getSerializable(PARAM_STATUS);
+            Board tmp = (Board) savedInstanceState.getSerializable(PARAM_BOARD);
             updateListAndListView(tmp);
         } else {
-            new LoadStatusListTask(getActivity()).execute();
+            new LoadBoardTask(getActivity()).execute();
         }
 
-        adapter = new StudentsStatusListAdapter(getActivity(), statusList);
+        adapter = new StudentListAdapter(getActivity(), students);
         ListView list = (ListView) getActivity().findViewById(R.id.list_students);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new OpenItemDetailsListener());
@@ -65,32 +69,35 @@ public class StudentsFragment extends MainFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(PARAM_STATUS, (Serializable) statusList);
+        outState.putSerializable(PARAM_BOARD, board);
         super.onSaveInstanceState(outState);
     }
 
-    private List<StudentStatus> loadList() {
-        StudentsManager statusManager = new StudentsManager();
-        return statusManager.getStudentStatusList(getActivity());
+    private Board loadBoard() throws NetworkErrorException, DataAccessException {
+        String ip = null; // TODO: IP
+        return new BoardManager().getBoard(ip, getActivity());
     }
 
     private class OpenItemDetailsListener implements OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-            StudentStatus studentsStatus = statusList.get(position);
+            Student s = students.get(position);
 
             Intent intent = new Intent(getActivity(), StudentsStatusDetailsActivity.class);
-            intent.putExtra(StudentsStatusDetailsActivity.PARAM_STUDENTS_STATUS, studentsStatus);
+            intent.putExtra(StudentsStatusDetailsActivity.PARAM_STUDENTS, s);
             startActivity(intent);
         }
     }
 
-    private void updateListAndListView(List<StudentStatus> newContent) {
+    private void updateListAndListView(Board newBoard) {
 
-        statusList.clear();
-        if (newContent != null) {
-            statusList.addAll(newContent);
+        students.clear();
+        board = newBoard;
+
+        Collection<Student> newStudents = newBoard.getStudents();
+        if (newStudents != null) {
+            students.addAll(newStudents);
         }
 
         getActivity().runOnUiThread(new Runnable() {
@@ -98,20 +105,14 @@ public class StudentsFragment extends MainFragment {
             public void run() {
 
                 TextView tv_name = (TextView) getActivity().findViewById(R.id.tl_students);
-                tv_name.setText(getString(R.string.students) + ": " + statusList.size());
-
-                int x = 0, y = 0;
-                for (StudentStatus element : statusList) {
-                    StudentStatus studentStatus = element;
-                    x = x + (studentStatus.isMade() ? 1 : 0);
-                    y = y + (studentStatus.isSolved() ? 1 : 0);
-                }
+                tv_name.setText(getString(R.string.students) + ": " + students.size());
 
                 TextView tv_question = (TextView) getActivity().findViewById(R.id.tl_questions);
-                tv_question.setText(getString(R.string.questions) + ": " + x);
+                tv_question.setText(getString(R.string.questions) + ": "
+                    + board.getQuestionsNumber());
 
                 TextView tv_answers = (TextView) getActivity().findViewById(R.id.tl_answers);
-                tv_answers.setText(getString(R.string.answers) + ": " + y);
+                tv_answers.setText(getString(R.string.answers) + ": " + board.getAnswersNumber());
             }
 
         });
@@ -122,23 +123,33 @@ public class StudentsFragment extends MainFragment {
 
     }
 
-    private class LoadStatusListTask extends ProgressDialogAsyncTask<Void, List<StudentStatus>> {
+    private class LoadBoardTask extends ProgressDialogAsyncTask<Void, Board> {
 
-        public LoadStatusListTask(Activity context) {
+        public LoadBoardTask(Activity context) {
             super(context);
         }
 
         @Override
-        protected List<StudentStatus> doInBackground(Void... params) {
-            return loadList();
+        protected Board doInBackground(Void... params) {
+
+            try {
+                return loadBoard();
+            } catch (NetworkErrorException e) {
+                handleException(e);
+            } catch (DataAccessException e) {
+                handleException(e);
+            }
+
+            return null;
+
         }
 
         @Override
-        protected void onPostExecute(List<StudentStatus> statusList) {
-            if (statusList != null) {
-                updateListAndListView(statusList);
+        protected void onPostExecute(Board board) {
+            if (board != null) {
+                updateListAndListView(board);
             }
-            super.onPostExecute(statusList);
+            super.onPostExecute(board);
         }
     }
 
@@ -149,15 +160,24 @@ public class StudentsFragment extends MainFragment {
         }
     }
 
-    private class UpdateStudentsTask extends AsyncTask<Void, Void, List<StudentStatus>> {
+    private class UpdateStudentsTask extends AsyncTask<Void, Void, Board> {
 
         @Override
-        protected List<StudentStatus> doInBackground(Void... arg0) {
-            return loadList();
+        protected Board doInBackground(Void... arg0) {
+
+            try {
+                return loadBoard();
+            } catch (NetworkErrorException e) {
+                // TODO Auto-generated catch block
+            } catch (DataAccessException e) {
+                // TODO Auto-generated catch block
+            }
+
+            return null;
         }
 
         @Override
-        protected void onPostExecute(List<StudentStatus> result) {
+        protected void onPostExecute(Board result) {
             updateListAndListView(result);
         }
 

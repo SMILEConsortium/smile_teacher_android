@@ -5,7 +5,6 @@
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/android/spring-android-rest-template/1.0.0.M4/spring-android-rest-template-1.0.0.M4.jar"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="var" path="M2_REPO/android/support/compatibility-v4/r3/compatibility-v4-r3.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/iharder/base64/2.3.7/base64-2.3.7.jar"/>

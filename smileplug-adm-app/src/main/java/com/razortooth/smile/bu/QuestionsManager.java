@@ -150,16 +150,8 @@ public class QuestionsManager {
                         // TODO: Load Image
                     }
 
-                    Question q = new Question();
-                    q.setNumber(number);
-                    q.setQuestion(question);
-                    q.setOption1(option1);
-                    q.setOption2(option2);
-                    q.setOption3(option3);
-                    q.setOption4(option4);
-                    q.setAnswer(answer);
-                    q.setOwner(owner);
-                    q.setImage(image);
+                    Question q = new Question(number, owner, question, option1, option2, option3,
+                        option4, answer, image);
 
                     result.add(q);
                 }
