@@ -113,12 +113,12 @@ public class StudentsFragment extends MainFragment {
         students.clear();
         board = newBoard;
 
-        Collection<Student> newStudents = newBoard.getStudents();
-        if (newStudents != null) {
-            students.addAll(newStudents);
-        }
-
         if (run && GeneralActivity.pageViewIndex == 0) {
+            Collection<Student> newStudents = newBoard.getStudents();
+            if (newStudents != null) {
+                students.addAll(newStudents);
+            }
+
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
