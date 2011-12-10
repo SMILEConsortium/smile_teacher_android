@@ -82,12 +82,42 @@ public class Question implements Serializable {
         answers.add(answer);
     }
 
+    public double getHitAverage() {
+
+        int corrects = 0;
+        int n = 0;
+
+        for (Integer i : answers) {
+            n++;
+            corrects += i == answer ? 1 : 0;
+        }
+
+        return corrects / n;
+
+    }
+
     public List<Integer> getRatings() {
         return ratings;
     }
 
     public void addRating(int rating) {
         ratings.add(rating);
+    }
+
+    public double getRating() {
+
+        int total = 0;
+        int n = 0;
+
+        for (Integer i : ratings) {
+            if (i > 0) {
+                total += i;
+                n++;
+            }
+        }
+
+        return total / n;
+
     }
 
 }

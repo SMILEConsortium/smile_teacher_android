@@ -73,14 +73,12 @@ public class StudentsFragment extends MainFragment {
     @Override
     public void onResume() {
         super.onResume();
-
         run = true;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
         run = false;
         getActivity().finish();
     }

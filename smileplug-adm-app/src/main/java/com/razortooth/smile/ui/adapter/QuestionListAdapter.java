@@ -7,22 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
-import com.razortooth.smile.domain.QuestionStatus;
+import com.razortooth.smile.domain.Question;
 
-public class QuestionsStatusListAdapter extends ArrayAdapter<QuestionStatus> {
+public class QuestionListAdapter extends ArrayAdapter<Question> {
 
-    public QuestionsStatusListAdapter(Context context, List<QuestionStatus> items) {
+    public QuestionListAdapter(Context context, List<Question> items) {
         super(context, 0, items);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        final QuestionStatus questionsStatus = getItem(position);
+        final Question question = getItem(position);
 
         if (convertView == null) {
             Context context = getContext();
@@ -32,16 +31,16 @@ public class QuestionsStatusListAdapter extends ArrayAdapter<QuestionStatus> {
         }
 
         TextView tv_number = (TextView) convertView.findViewById(R.id.tv_number);
-        tv_number.setText(String.valueOf(questionsStatus.getNumber()));
+        tv_number.setText(String.valueOf(question.getNumber()));
 
-        TextView tv_owner = (CheckBox) convertView.findViewById(R.id.tv_owner);
-        tv_owner.setText(questionsStatus.getOwner());
+        TextView tv_owner = (TextView) convertView.findViewById(R.id.tv_owner);
+        tv_owner.setText(question.getOwner());
 
-        TextView tv_hit_average = (CheckBox) convertView.findViewById(R.id.tv_hit_average);
-        tv_hit_average.setText(String.valueOf(questionsStatus.getHitAverage()));
+        TextView tv_hit_average = (TextView) convertView.findViewById(R.id.tv_hit_average);
+        tv_hit_average.setText(String.valueOf(question.getHitAverage()));
 
         TextView tv_rating = (TextView) convertView.findViewById(R.id.tv_rating);
-        tv_rating.setText(String.valueOf(questionsStatus.getRating()));
+        tv_rating.setText(String.valueOf(question.getRating()));
 
         return convertView;
     }
