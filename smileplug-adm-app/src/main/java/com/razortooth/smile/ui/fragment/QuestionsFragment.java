@@ -1,8 +1,10 @@
 package com.razortooth.smile.ui.fragment;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,18 +16,26 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.razortooth.smile.R;
-import com.razortooth.smile.domain.QuestionStatus;
-import com.razortooth.smile.ui.adapter.QuestionsStatusListAdapter;
+import com.razortooth.smile.bu.BoardManager;
+import com.razortooth.smile.bu.exception.DataAccessException;
+import com.razortooth.smile.domain.Board;
+import com.razortooth.smile.domain.Question;
+import com.razortooth.smile.ui.GeneralActivity;
+import com.razortooth.smile.ui.adapter.QuestionListAdapter;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class QuestionsFragment extends MainFragment implements OnClickListener {
 
     private static final int AUTO_UPDATE_TIME = 5000;
 
-    private static final String PARAM_STATUS = "status";
-    private final List<QuestionStatus> statusList = new ArrayList<QuestionStatus>();
+    private static final String PARAM_BOARD = "board";
 
-    private ArrayAdapter<QuestionStatus> adapter;
+    private final List<Question> questions = new ArrayList<Question>();
+
+    private ArrayAdapter<Question> adapter;
+    private Board board;
+
+    private boolean run;
 
     private Button save;
 
@@ -34,52 +44,62 @@ public class QuestionsFragment extends MainFragment implements OnClickListener {
         return R.layout.questions;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
 
         if (savedInstanceState != null) {
-            List<QuestionStatus> tmp = (List<QuestionStatus>) savedInstanceState
-                .getSerializable(PARAM_STATUS);
+            Board tmp = (Board) savedInstanceState.getSerializable(PARAM_BOARD);
             updateListAndListView(tmp);
         } else {
-            new LoadStatusListTask(getActivity()).execute();
+            new LoadBoardTask(getActivity()).execute();
         }
 
-        adapter = new QuestionsStatusListAdapter(getActivity(), statusList);
+        adapter = new QuestionListAdapter(getActivity(), questions);
         ListView list = (ListView) getActivity().findViewById(R.id.list_questions);
-        if (adapter != null) {
-            list.setAdapter(adapter);
-        }
+        list.setAdapter(adapter);
 
         save = (Button) getActivity().findViewById(R.id.bt_save);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        save.setOnClickListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        save.setOnClickListener(this);
+        run = true;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
+        run = false;
         getActivity().finish();
     }
 
-    private void updateListAndListView(List<QuestionStatus> newContent) {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(PARAM_BOARD, board);
+        super.onSaveInstanceState(outState);
+    }
 
-        statusList.clear();
-        if (newContent != null) {
-            statusList.addAll(newContent);
+    private Board loadBoard() throws NetworkErrorException, DataAccessException {
+        String ip = null; // TODO: IP
+        return new BoardManager().getBoard(ip, getActivity());
+    }
+
+    private void updateListAndListView(Board newBoard) {
+
+        questions.clear();
+        board = newBoard;
+
+        if (run && GeneralActivity.pageViewIndex == 1) {
+
+            Collection<Question> newQuestions = newBoard.getQuestions();
+            if (newQuestions != null) {
+                questions.addAll(newQuestions);
+            }
+
         }
 
         adapter.notifyDataSetChanged();
@@ -88,27 +108,33 @@ public class QuestionsFragment extends MainFragment implements OnClickListener {
 
     }
 
-    private List<QuestionStatus> loadList() {
-        return null;
-    }
+    private class LoadBoardTask extends ProgressDialogAsyncTask<Void, Board> {
 
-    private class LoadStatusListTask extends ProgressDialogAsyncTask<Void, List<QuestionStatus>> {
-
-        public LoadStatusListTask(Activity context) {
+        public LoadBoardTask(Activity context) {
             super(context);
         }
 
         @Override
-        protected List<QuestionStatus> doInBackground(Void... params) {
-            return loadList();
+        protected Board doInBackground(Void... params) {
+
+            try {
+                return loadBoard();
+            } catch (NetworkErrorException e) {
+                handleException(e);
+            } catch (DataAccessException e) {
+                handleException(e);
+            }
+
+            return null;
+
         }
 
         @Override
-        protected void onPostExecute(List<QuestionStatus> statusList) {
-            if (statusList != null) {
-                updateListAndListView(statusList);
+        protected void onPostExecute(Board board) {
+            if (board != null) {
+                updateListAndListView(board);
             }
-            super.onPostExecute(statusList);
+            super.onPostExecute(board);
         }
     }
 
@@ -119,15 +145,24 @@ public class QuestionsFragment extends MainFragment implements OnClickListener {
         }
     }
 
-    private class UpdateQuestionsTask extends AsyncTask<Void, Void, List<QuestionStatus>> {
+    private class UpdateQuestionsTask extends AsyncTask<Void, Void, Board> {
 
         @Override
-        protected List<QuestionStatus> doInBackground(Void... arg0) {
-            return loadList();
+        protected Board doInBackground(Void... arg0) {
+
+            try {
+                if (run && GeneralActivity.pageViewIndex == 1) {
+                    return loadBoard();
+                }
+            } catch (NetworkErrorException e) {
+
+            } catch (DataAccessException e) {}
+
+            return null;
         }
 
         @Override
-        protected void onPostExecute(List<QuestionStatus> result) {
+        protected void onPostExecute(Board result) {
             updateListAndListView(result);
         }
 
