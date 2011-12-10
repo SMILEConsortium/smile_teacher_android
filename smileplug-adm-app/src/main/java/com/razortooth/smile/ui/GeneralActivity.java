@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Vector;
 
 import android.accounts.NetworkErrorException;
+import android.app.Activity;
 import android.app.Dialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -24,13 +27,25 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.BoardManager;
 import com.razortooth.smile.bu.SmilePlugServerManager;
+import com.razortooth.smile.bu.exception.DataAccessException;
+import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.ui.adapter.PagerAdapter;
+import com.razortooth.smile.ui.fragment.AbstractFragment;
 import com.razortooth.smile.ui.fragment.QuestionsFragment;
 import com.razortooth.smile.ui.fragment.StudentsFragment;
 import com.razortooth.smile.util.ActivityUtil;
+import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class GeneralActivity extends FragmentActivity implements OnClickListener {
+
+    private static final int AUTO_UPDATE_TIME = 5000;
+    private static final String PARAM_BOARD = "board";
+    private Board board;
+
+    private Handler boardHandler;
+    private Runnable boardRunnable;
 
     public static final String IP = "ip";
     public static final String HOURS = "hours";
@@ -42,15 +57,14 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     private String minutes;
     private String seconds;
 
-    private PagerAdapter mPagerAdapter;
-
     private Button solve;
     private Button results;
 
     private TextView time;
     private TextView remaining;
 
-    public static int pageViewIndex;
+    private final List<Fragment> fragments = new Vector<Fragment>();
+    private AbstractFragment activeFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +81,23 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
         time = (TextView) findViewById(R.id.tv_time);
         remaining = (TextView) findViewById(R.id.tv_remaining_time);
 
+        if (savedInstanceState != null) {
+            Board tmp = (Board) savedInstanceState.getSerializable(PARAM_BOARD);
+            updateCurrentFragment(tmp);
+        } else {
+            new LoadBoardTask(this).execute();
+        }
+
+        boardHandler = new Handler();
+        boardRunnable = new UpdateBoardRunnable();
+
         this.initialisePaging();
+    }
+
+    private void updateCurrentFragment(Board newBoard) {
+        board = newBoard;
+        activeFragment.updateFragment(newBoard);
+        boardHandler.postDelayed(boardRunnable, AUTO_UPDATE_TIME);
     }
 
     @Override
@@ -147,6 +177,8 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     protected void onStop() {
         super.onStop();
 
+        boardHandler.removeCallbacks(boardRunnable);
+
         this.finish();
     }
 
@@ -164,35 +196,23 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
 
     private void initialisePaging() {
 
-        List<Fragment> fragments = new Vector<Fragment>();
+        fragments.clear();
         fragments.add(Fragment.instantiate(this, StudentsFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, QuestionsFragment.class.getName()));
-        this.mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        ViewPager mPager = (ViewPager) super.findViewById(R.id.awesomepager);
-        mPager.setAdapter(this.mPagerAdapter);
+        activeFragment = (AbstractFragment) fragments.get(0);
+
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
+
+        ViewPager mPager = (ViewPager) findViewById(R.id.awesomepager);
+        mPager.setAdapter(pagerAdapter);
         mPager.setCurrentItem(0);
-        mPager.setOnPageChangeListener(new OnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int currentIndex) {
-                pageViewIndex = currentIndex;
-            }
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-                // nothing
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-                // nothing
-            }
-        });
+        mPager.setOnPageChangeListener(new FragmentOnPageChangeListener());
     }
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.bt_solve:
                 try {
@@ -231,4 +251,91 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
                 break;
         }
     }
+
+    private final class FragmentOnPageChangeListener implements OnPageChangeListener {
+
+        @Override
+        public void onPageSelected(int currentIndex) {
+            activeFragment = (AbstractFragment) fragments.get(currentIndex);
+            updateCurrentFragment(board);
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+            // nothing
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+            // nothing
+        }
+    }
+
+    private Board loadBoard() throws NetworkErrorException, DataAccessException {
+        return new BoardManager().getBoard(ip, this);
+    }
+
+    private class LoadBoardTask extends ProgressDialogAsyncTask<Void, Board> {
+
+        public LoadBoardTask(Activity context) {
+            super(context);
+        }
+
+        @Override
+        protected Board doInBackground(Void... params) {
+
+            try {
+                return loadBoard();
+            } catch (NetworkErrorException e) {
+                handleException(e);
+            } catch (DataAccessException e) {
+                handleException(e);
+            }
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Board board) {
+            if (board != null) {
+                updateCurrentFragment(board);
+            }
+            super.onPostExecute(board);
+        }
+
+    }
+
+    private final class UpdateBoardRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            new UpdateBoardTask().execute();
+        }
+
+    }
+
+    private class UpdateBoardTask extends AsyncTask<Void, Void, Board> {
+
+        @Override
+        protected Board doInBackground(Void... arg0) {
+
+            try {
+                return loadBoard();
+            } catch (NetworkErrorException e) {
+                // TODO: Exception
+            } catch (DataAccessException e) {
+                // TODO: Exception
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Board result) {
+            updateCurrentFragment(result);
+        }
+
+    }
+
 }
