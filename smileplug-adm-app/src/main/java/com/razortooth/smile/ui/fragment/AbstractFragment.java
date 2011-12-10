@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class MainFragment extends Fragment {
+import com.razortooth.smile.domain.Board;
+
+public abstract class AbstractFragment extends Fragment {
 
     @Override
     public final View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -17,4 +19,6 @@ public abstract class MainFragment extends Fragment {
     }
 
     protected abstract int getLayout();
+
+    public abstract void updateFragment(final Board board);
 }
