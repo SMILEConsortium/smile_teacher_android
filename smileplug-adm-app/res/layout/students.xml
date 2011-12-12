@@ -101,7 +101,6 @@
 		  	android:layout_height="200dip"
 		  	android:layout_below="@id/table_status"
 		  	android:layout_above="@id/separator_list"
-		  	android:layout_marginTop="5dip"
 		  	android:layout_marginLeft="5dip"/>
 
 	</TableLayout>

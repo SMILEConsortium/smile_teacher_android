@@ -42,6 +42,15 @@
 	  	android:shrinkColumns="*"  
     	android:stretchColumns="*"
     	android:layout_below="@id/tv_status">
+    	
+	    <View
+			android:id="@+id/separator"  
+			android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:background="@color/white"
+			android:layout_marginLeft="5dip"
+			android:layout_marginTop="5dip"
+			android:layout_below="@id/tv_title"/>
 	  	
 	  	<TableRow 
 	  		android:id="@+id/row"
@@ -88,7 +97,8 @@
 			android:id="@+id/list_questions"
 		    android:layout_width="fill_parent"
 		  	android:layout_height="220dip"
-		  	android:layout_below="@id/row"/>
+		  	android:layout_below="@id/row"
+		  	android:layout_marginLeft="5dip"/>
 		  	
 		<View
 			android:id="@+id/separator"  

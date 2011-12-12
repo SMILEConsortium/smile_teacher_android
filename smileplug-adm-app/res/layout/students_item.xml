@@ -13,30 +13,27 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dip"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textColor="@color/black"/>
 
     <CheckBox
         android:id="@+id/tv_question"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dip"
         android:layout_marginLeft="55dip"
         android:layout_marginRight="92dip"
         android:button="@drawable/checkbox"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:focusable="false" />
 
     <CheckBox
         android:id="@+id/tv_answers"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dip"
         android:layout_marginRight="40dip"
         android:button="@drawable/checkbox"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:focusable="false" />
 
     <TextView
@@ -44,7 +41,6 @@
         android:layout_width="100dip"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textColor="@color/black"/>
 
 </LinearLayout>

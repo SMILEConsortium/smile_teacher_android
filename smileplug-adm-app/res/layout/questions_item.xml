@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   	android:layout_width="fill_parent"
-  	android:layout_height="fill_parent"
+  	android:layout_height="30dip"
   	android:layout_margin="5dip"
   	android:gravity="center_vertical"
   	android:orientation="horizontal"
@@ -9,35 +9,33 @@
   	
   	<TextView
         android:id="@+id/tv_number"
-        android:layout_width="100dip"
+        android:layout_width="80dip"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dip"
+        android:layout_marginLeft="15dip"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/tv_owner"
         android:layout_width="160dip"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/tv_hit_average"
         android:layout_width="100dip"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/tv_rating"
         android:layout_width="100dip"
         android:layout_height="wrap_content"
+         android:layout_marginLeft="50dip"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textColor="@color/black"/>
 
 </LinearLayout>

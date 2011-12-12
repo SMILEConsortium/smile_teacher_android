@@ -17,7 +17,7 @@
 	<string name="number">Number</string>
 	<string name="owner">Owner</string>	 
 	<string name="correct">%Correct</string>
-	<string name="rating">Highest Rating: </string>	
+	<string name="rating">Highest Rating</string>	
 	
 	<string name="save_questions">Save Questions</string>
 	<string name="students_status">Student Status</string>
