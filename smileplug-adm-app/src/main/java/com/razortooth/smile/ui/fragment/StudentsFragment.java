@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.razortooth.smile.R;
 import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.domain.Student;
-import com.razortooth.smile.ui.StudentsStatusDetailsActivity;
+import com.razortooth.smile.ui.StudentStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.StudentListAdapter;
 
 public class StudentsFragment extends AbstractFragment {
@@ -53,10 +53,10 @@ public class StudentsFragment extends AbstractFragment {
 
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-            Student s = students.get(position);
+            Student student = students.get(position);
 
-            Intent intent = new Intent(getActivity(), StudentsStatusDetailsActivity.class);
-            intent.putExtra(StudentsStatusDetailsActivity.PARAM_STUDENTS, s);
+            Intent intent = new Intent(getActivity(), StudentStatusDetailsActivity.class);
+            intent.putExtra(StudentStatusDetailsActivity.PARAM_STUDENT, student);
             startActivity(intent);
         }
     }

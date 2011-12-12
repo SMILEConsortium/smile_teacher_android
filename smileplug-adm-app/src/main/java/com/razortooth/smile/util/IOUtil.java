@@ -1,5 +1,6 @@
 package com.razortooth.smile.util;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -7,8 +8,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+import com.razortooth.smile.bu.Constants;
 
 public class IOUtil {
+
+    private static final int IO_BUFFER_SIZE = 4 * 1024;
 
     private IOUtil() {
         // Empty
@@ -72,4 +82,21 @@ public class IOUtil {
         return new String(bytes, encoding);
     }
 
+    public static Bitmap loadBitmapFromUrl(String url) {
+        Bitmap bitmap = null;
+        InputStream in = null;
+
+        try {
+            in = new BufferedInputStream(new URL(url).openStream(), IO_BUFFER_SIZE);
+
+            final byte[] data = loadBytes(in);
+            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+        } catch (IOException e) {
+            Log.e(Constants.LOG_CATEGORY, "Could not load Bitmap from: " + url);
+        } finally {
+            silentClose(in);
+        }
+
+        return bitmap;
+    }
 }

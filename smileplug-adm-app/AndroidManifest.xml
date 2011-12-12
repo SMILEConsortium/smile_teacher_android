@@ -26,7 +26,8 @@
 		<activity android:name=".ui.GeneralActivity" android:screenOrientation="landscape"/>
 		<activity android:name=".ui.ChooseActivityFlowDialog" android:screenOrientation="landscape" android:theme="@style/Dialog"/>		    
 		<activity android:name=".ui.UsePreparedQuestionsActivity" android:screenOrientation="landscape" android:theme="@style/Theme.Transparent"/>
-		<activity android:name=".ui.StudentsStatusDetailsActivity" android:screenOrientation="landscape" android:theme="@style/Dialog"/>
+		<activity android:name=".ui.StudentStatusDetailsActivity" android:screenOrientation="landscape" android:theme="@style/Dialog"/>
+		<activity android:name=".ui.QuestionStatusDetailsActivity" android:screenOrientation="landscape" android:theme="@style/Dialog"/>
     
     </application>
 

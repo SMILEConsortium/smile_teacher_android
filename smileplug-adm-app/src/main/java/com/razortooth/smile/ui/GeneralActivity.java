@@ -83,7 +83,9 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
 
         if (savedInstanceState != null) {
             Board tmp = (Board) savedInstanceState.getSerializable(PARAM_BOARD);
+
             updateCurrentFragment(tmp);
+
         } else {
             new LoadBoardTask(this).execute();
         }
@@ -95,9 +97,12 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     }
 
     private void updateCurrentFragment(Board newBoard) {
-        board = newBoard;
-        activeFragment.updateFragment(newBoard);
-        boardHandler.postDelayed(boardRunnable, AUTO_UPDATE_TIME);
+        if (newBoard != null) {
+            board = newBoard;
+            activeFragment.updateFragment(newBoard);
+
+            boardHandler.postDelayed(boardRunnable, AUTO_UPDATE_TIME);
+        }
     }
 
     @Override

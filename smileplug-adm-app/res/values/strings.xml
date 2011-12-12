@@ -48,8 +48,8 @@
 	
 	<string name="connection_established">Connection established</string>	
 	
-	<string name="created_by">Question(s) created by: </string>
-	<string name="top_scorer">Top Scorer(s): </string>
+	<string name="created_by">Question(s) created by</string>
+	<string name="top_scorer">Top Scorer(s)</string>
 	<string name="answers">Answers</string>
 	<string name="question">Question</string>
 	<string name="student">Students</string>
@@ -66,4 +66,10 @@
 	<string name="scoreboard_of">Scoreboard of</string>
 	
 	<string name="score_board">Score Board</string>
+	
+	<string name="create_by">Question create by</string>
+	<string name="alternative1">(1)</string>
+	<string name="alternative2">(2)</string>
+	<string name="alternative3">(3)</string>
+	<string name="alternative4">(4)</string>
 </resources>

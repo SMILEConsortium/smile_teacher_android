@@ -12,9 +12,9 @@ import com.razortooth.smile.domain.Student;
 import com.razortooth.smile.domain.StudentQuestionDetail;
 import com.razortooth.smile.ui.adapter.StudentQuestionDetailAdapter;
 
-public class StudentsStatusDetailsActivity extends Activity {
+public class StudentStatusDetailsActivity extends Activity {
 
-    public static String PARAM_STUDENTS = "students";
+    public static String PARAM_STUDENT = "student";
 
     private Student student;
 
@@ -22,9 +22,9 @@ public class StudentsStatusDetailsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.students_details);
+        setContentView(R.layout.student_details);
 
-        student = (Student) getIntent().getSerializableExtra(PARAM_STUDENTS);
+        student = (Student) getIntent().getSerializableExtra(PARAM_STUDENT);
 
         TextView tv_name = (TextView) findViewById(R.id.tv_name);
         tv_name.setText(getString(R.string.scoreboard_of) + " " + student.getName());
