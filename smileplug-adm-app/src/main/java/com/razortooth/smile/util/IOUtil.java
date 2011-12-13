@@ -1,27 +1,30 @@
 package com.razortooth.smile.util;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.Flushable;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-
-import com.razortooth.smile.bu.Constants;
+import java.io.OutputStream;
 
 public class IOUtil {
 
-    private static final int IO_BUFFER_SIZE = 4 * 1024;
-
     private IOUtil() {
         // Empty
+    }
+
+    public static final void silentFlush(Flushable f) {
+        try {
+            if (f != null) {
+                f.flush();
+            }
+        } catch (IOException e) {
+            // Empty
+        }
     }
 
     public static final void silentClose(Closeable c) {
@@ -77,26 +80,23 @@ public class IOUtil {
 
     }
 
+    public static void saveBytes(File file, byte[] content) throws IOException {
+
+        OutputStream out = null;
+
+        try {
+            out = new FileOutputStream(file);
+            out.write(content);
+        } finally {
+            silentFlush(out);
+            silentClose(out);
+        }
+
+    }
+
     public static String loadContent(InputStream in, String encoding) throws IOException {
         byte[] bytes = loadBytes(in);
         return new String(bytes, encoding);
     }
 
-    public static Bitmap loadBitmapFromUrl(String url) {
-        Bitmap bitmap = null;
-        InputStream in = null;
-
-        try {
-            in = new BufferedInputStream(new URL(url).openStream(), IO_BUFFER_SIZE);
-
-            final byte[] data = loadBytes(in);
-            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-        } catch (IOException e) {
-            Log.e(Constants.LOG_CATEGORY, "Could not load Bitmap from: " + url);
-        } finally {
-            silentClose(in);
-        }
-
-        return bitmap;
-    }
 }

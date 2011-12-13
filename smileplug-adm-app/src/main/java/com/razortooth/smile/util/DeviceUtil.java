@@ -3,6 +3,7 @@ package com.razortooth.smile.util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.util.Log;
 
 public class DeviceUtil {
@@ -32,6 +33,25 @@ public class DeviceUtil {
 
         return ni.isConnected();
 
+    }
+
+    public static final boolean isExternalStorageAvailable() {
+
+        String state = Environment.getExternalStorageState();
+
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public static final boolean isExternalStorageWriteable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
     }
 
 }

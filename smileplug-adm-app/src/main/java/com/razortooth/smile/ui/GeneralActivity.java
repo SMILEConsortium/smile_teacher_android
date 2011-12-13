@@ -248,25 +248,45 @@ public class GeneralActivity extends FragmentActivity {
         @Override
         public void onClick(View v) {
             try {
-                new SmilePlugServerManager().showResults(ip, GeneralActivity.this);
+                if (btResults.getText().equals(getString(R.string.show_results))) {
+                    btResults.setText(R.string.hide_results);
 
-                ActivityUtil.showLongToast(GeneralActivity.this, R.string.showing);
+                    new SmilePlugServerManager().showResults(ip, GeneralActivity.this);
 
-                TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, 150);
+                    TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
+                        LayoutParams.WRAP_CONTENT, 150);
 
-                ListView lvListStudents = (ListView) GeneralActivity.this
-                    .findViewById(R.id.lv_students);
-                lvListStudents.setLayoutParams(layoutParams);
-                lvListStudents.setPadding(5, 0, 0, 0);
+                    ListView lvListStudents = (ListView) GeneralActivity.this
+                        .findViewById(R.id.lv_students);
+                    lvListStudents.setLayoutParams(layoutParams);
+                    lvListStudents.setPadding(5, 0, 0, 0);
 
-                TextView tvTopTitle = (TextView) GeneralActivity.this
-                    .findViewById(R.id.tv_top_scorers);
-                tvTopTitle.setVisibility(View.VISIBLE);
+                    TextView tvTopTitle = (TextView) GeneralActivity.this
+                        .findViewById(R.id.tv_top_scorers);
+                    tvTopTitle.setVisibility(View.VISIBLE);
 
-                LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
-                    .findViewById(R.id.ll_top_scorers);
-                llTopScorersContainer.setVisibility(View.VISIBLE);
+                    LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
+                        .findViewById(R.id.ll_top_scorers);
+                    llTopScorersContainer.setVisibility(View.VISIBLE);
+                } else {
+                    btResults.setText(R.string.show_results);
+
+                    TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
+                        LayoutParams.WRAP_CONTENT, 275);
+
+                    ListView lvListStudents = (ListView) GeneralActivity.this
+                        .findViewById(R.id.lv_students);
+                    lvListStudents.setLayoutParams(layoutParams);
+                    lvListStudents.setPadding(5, 0, 0, 0);
+
+                    TextView tvTopTitle = (TextView) GeneralActivity.this
+                        .findViewById(R.id.tv_top_scorers);
+                    tvTopTitle.setVisibility(View.GONE);
+
+                    LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
+                        .findViewById(R.id.ll_top_scorers);
+                    llTopScorersContainer.setVisibility(View.GONE);
+                }
 
             } catch (NetworkErrorException e) {
                 new NetworkErrorException("Connection errror: " + e.getMessage(), e);

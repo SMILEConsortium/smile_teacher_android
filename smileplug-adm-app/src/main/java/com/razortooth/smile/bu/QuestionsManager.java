@@ -10,20 +10,70 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import net.iharder.Base64;
+import android.os.Environment;
 import android.util.Log;
 
+import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Question;
+import com.razortooth.smile.util.DeviceUtil;
 import com.razortooth.smile.util.IOUtil;
 
 public class QuestionsManager {
 
+    private static final String QUESTIONS_DIR = Constants.APP_ID;
+    private static final String QUESTIONS_FILE = "jq_export.txt";
     private static final String MARKER = "_@JSQ%_";
 
-    protected void exportQuestions(String filePath, Collection<Question> questions) {
+    private final File questionsDir;
 
-        Log.d("QuestionsManager", "Exporting Questions: " + filePath);
+    public QuestionsManager() throws DataAccessException {
+        questionsDir = createDir();
+    }
 
-        File file = new File(filePath);
+    public File[] getSavedQuestions() throws DataAccessException {
+
+        if (!DeviceUtil.isExternalStorageAvailable()) {
+            throw new DataAccessException("External storage unavailable");
+        }
+
+        return questionsDir.listFiles();
+
+    }
+
+    private File createDir() throws DataAccessException {
+
+        if (!DeviceUtil.isExternalStorageAvailable()) {
+            throw new DataAccessException("External storage unavailable");
+        }
+
+        File external = Environment.getExternalStorageDirectory();
+        File dir = new File(external, QUESTIONS_DIR);
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        return dir;
+
+    }
+
+    public void saveQuestions(String name, Collection<Question> questions)
+        throws DataAccessException {
+
+        if (!DeviceUtil.isExternalStorageWriteable()) {
+            throw new DataAccessException("External storage unavailable");
+        }
+
+        Log.d("QuestionsManager", "Exporting Questions: " + name);
+
+        // TODO: Check
+        File dir = new File(questionsDir, name);
+        boolean ok = dir.mkdirs();
+
+        System.out.println(ok);
+
+        File file = new File(dir, QUESTIONS_FILE);
 
         PrintWriter pw = null;
 
@@ -55,7 +105,9 @@ public class QuestionsManager {
                 pw.println(q.getOwner());
 
                 if (q.hasImage()) {
-                    // Copy image
+                    File img = new File(dir, q.getNumber() + ".jpg");
+                    byte[] imgContent = Base64.decode(q.getImage());
+                    IOUtil.saveBytes(img, imgContent);
                 }
             }
 
@@ -63,22 +115,24 @@ public class QuestionsManager {
             pw.close();
 
         } catch (Exception e) {
-            // TODO: Exception?
+            Log.e("QuestionsManager", "Error saving questions", e);
         } finally {
             IOUtil.silentClose(pw);
         }
 
     }
 
-    protected Collection<Question> readQuestionsFromFile(String filePath) {
+    public Collection<Question> loadQuestions(String name) {
 
         Collection<Question> result = new ArrayList<Question>();
-        Log.d("QuestionsManager", "Importing Questions: " + filePath);
+        Log.d("QuestionsManager", "Importing Questions: " + name);
 
-        File file = new File(filePath);
+        // TODO: Check
+        File dir = new File(questionsDir, name);
+        File file = new File(dir, QUESTIONS_FILE);
 
         if (!file.exists()) {
-            Log.d("QuestionsManager", "File doesn't exists: " + filePath);
+            Log.d("QuestionsManager", "Questions file doesn't exists: " + name);
             return result;
         }
 

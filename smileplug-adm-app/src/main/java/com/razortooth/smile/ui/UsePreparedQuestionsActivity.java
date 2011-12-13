@@ -1,5 +1,6 @@
 package com.razortooth.smile.ui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,15 +9,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.QuestionsManager;
 import com.razortooth.smile.bu.SmilePlugServerManager;
+import com.razortooth.smile.bu.exception.DataAccessException;
+import com.razortooth.smile.ui.adapter.FilesQuestionListAdapter;
 import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.DialogUtil;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
@@ -31,6 +37,9 @@ public class UsePreparedQuestionsActivity extends Activity {
     private Spinner spinnerSeconds;
 
     private String ip;
+
+    private File[] fileQuestions;
+    private ArrayAdapter<File> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +61,18 @@ public class UsePreparedQuestionsActivity extends Activity {
         super.onResume();
 
         btOk.setOnClickListener(new OkButtonListener());
+        btOk.setEnabled(true);
 
         cbQuestions.setOnClickListener(new CbQuestionsButtonListener());
+        cbQuestions.setClickable(true);
 
         spinnerHours.setEnabled(false);
         spinnerMinutes.setEnabled(false);
         spinnerSeconds.setEnabled(false);
 
         loadValuesTime();
+
+        new LoadBoardTask(this).execute();
     }
 
     private void loadValuesTime() {
@@ -126,6 +139,64 @@ public class UsePreparedQuestionsActivity extends Activity {
         ActivityUtil.showLongToast(this, R.string.starting);
 
         this.finish();
+    }
+
+    private File[] getQuestions() throws DataAccessException {
+        return new QuestionsManager().getSavedQuestions();
+    }
+
+    private void loadQuestionsList() {
+        adapter = new FilesQuestionListAdapter(this, fileQuestions);
+        ListView lvListQuestions = (ListView) this.findViewById(R.id.lv_questions);
+        lvListQuestions.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (fileQuestions.length == 0) {
+            Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
+            intent.putExtra(GeneralActivity.PARAM_IP, ip);
+            startActivity(intent);
+        }
+
+        this.finish();
+    }
+
+    private class LoadBoardTask extends ProgressDialogAsyncTask<Void, File[]> {
+
+        public LoadBoardTask(Activity context) {
+            super(context);
+        }
+
+        @Override
+        protected File[] doInBackground(Void... params) {
+
+            try {
+                return getQuestions();
+            } catch (DataAccessException e) {
+                Log.e("UsePreparedQuestions", "Error get questions: ", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(File[] fileQuestions) {
+            if (fileQuestions != null) {
+                UsePreparedQuestionsActivity.this.fileQuestions = fileQuestions;
+                UsePreparedQuestionsActivity.this.loadQuestionsList();
+                if (fileQuestions.length == 0) {
+                    btOk.setEnabled(false);
+                    cbQuestions.setClickable(false);
+
+                    ActivityUtil.showLongToast(UsePreparedQuestionsActivity.this,
+                        "No Results Found");
+                }
+            }
+            super.onPostExecute(fileQuestions);
+        }
+
     }
 
     private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {

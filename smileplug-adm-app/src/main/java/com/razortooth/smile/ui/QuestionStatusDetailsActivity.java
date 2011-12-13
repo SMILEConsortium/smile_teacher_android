@@ -1,15 +1,20 @@
 package com.razortooth.smile.ui;
 
+import java.io.IOException;
+
+import net.iharder.Base64;
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.domain.Question;
-import com.razortooth.smile.util.IOUtil;
 
 public class QuestionStatusDetailsActivity extends Activity {
 
@@ -30,11 +35,14 @@ public class QuestionStatusDetailsActivity extends Activity {
 
         ImageView tvImage = (ImageView) findViewById(R.id.iv_image);
         if (question.hasImage()) {
-            // Bitmap bmp = IOUtil.loadBitmapFromUrl(question.getImage());
-            // Just for tests
-            Bitmap bmp = IOUtil
-                .loadBitmapFromUrl("http://t1.gstatic.com/images?q=tbn:ANd9GcSL9LKsICD7PDcC74QBfE8lW_asswywLtYHabQTG_FVSxLpZWbE");
-            tvImage.setImageBitmap(bmp);
+            byte[] imgContent;
+            try {
+                imgContent = Base64.decode(question.getImage());
+                Bitmap bmp = BitmapFactory.decodeByteArray(imgContent, 0, imgContent.length);
+                tvImage.setImageBitmap(bmp);
+            } catch (IOException e) {
+                Log.e(Constants.LOG_CATEGORY, "Error decode image: ", e);
+            }
         } else {
             tvImage.setVisibility(View.GONE);
         }
