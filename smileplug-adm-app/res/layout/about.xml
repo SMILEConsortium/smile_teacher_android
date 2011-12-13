@@ -18,15 +18,15 @@
 		android:textSize="14sp"/>
 		
 	<View
-		android:id="@+id/separator"  
+		android:id="@+id/view_separator"  
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
 		android:background="@color/white"
-		android:layout_marginTop="5dip"
+		android:layout_margin="5dip"
 		android:layout_below="@id/tv_title"/>
 	
 	<ScrollView 
-	    android:id="@+id/about_text"
+	    android:id="@+id/sv_about_text"
 	    android:layout_width="230dip"
 	    android:layout_height="280dip"
 	    android:layout_marginTop="10dip">

@@ -5,7 +5,7 @@
 	android:background="@color/gray">
 		
 	<LinearLayout 
-		android:id="@+id/buttons"
+		android:id="@+id/ll_buttons"
 		android:layout_width="130dip"
 		android:layout_height="fill_parent"
 		android:orientation="vertical"
@@ -50,18 +50,9 @@
 	  		android:layout_marginTop="5dip"/>	  			  		
 	
 	</LinearLayout>
-	
-<!-- 	<View  -->
-<!--   		android:id="@+id/separator1" -->
-<!-- 		android:layout_width="fill_parent" -->
-<!-- 		android:layout_height="2dip" -->
-<!-- 		android:background="@color/black" -->
-<!-- 		android:layout_marginTop="50dip" -->
-<!-- 		android:layout_marginLeft="5dip" -->
-<!-- 		android:layout_toRightOf="@id/buttons"/> -->
-	
+		
 	<TextView
-  		android:id="@+id/students_button"
+  		android:id="@+id/tv_students"
   		android:layout_width="wrap_content"
   		android:layout_height="wrap_content"
   		android:text="@string/students"
@@ -70,10 +61,10 @@
   		android:textStyle="bold"
   		android:layout_marginTop="15dip"
   		android:layout_marginLeft="100dip"
-  		android:layout_toRightOf="@id/buttons"/>
+  		android:layout_toRightOf="@id/ll_buttons"/>
   		
 	<TextView
-  		android:id="@+id/questions_button"
+  		android:id="@+id/tv_questions"
   		android:layout_width="wrap_content"
   		android:layout_height="wrap_content"
   		android:text="@string/questions"
@@ -82,27 +73,27 @@
   		android:textStyle="bold"
   		android:layout_marginTop="15dip"
   		android:layout_marginLeft="180dip"
-  		android:layout_toRightOf="@id/students_button"/>
+  		android:layout_toRightOf="@id/tv_students"/>
   	
 	<View
-		android:id="@+id/separator2" 
+		android:id="@+id/view_separator2" 
 		android:layout_width="2dip"
 		android:layout_height="fill_parent"
 		android:background="@color/black"
-		android:layout_toRightOf="@id/buttons"/>
+		android:layout_toRightOf="@id/ll_buttons"/>
 	
 	<LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:orientation="vertical"
-	    android:layout_toRightOf="@id/buttons"
-	    android:layout_below="@id/students_button"
+	    android:layout_toRightOf="@id/ll_buttons"
+	    android:layout_below="@id/tv_students"
 	    android:layout_marginTop="5dip">
 	
 		<android.support.v4.view.ViewPager
+		    android:id="@+id/vp_awesomepager"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/awesomepager"/>
+			android:layout_height="wrap_content"/>
 	
 	</LinearLayout>  	
   

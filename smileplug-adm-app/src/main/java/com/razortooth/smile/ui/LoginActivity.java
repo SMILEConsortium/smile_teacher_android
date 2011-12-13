@@ -21,18 +21,18 @@ import com.razortooth.smile.util.DialogUtil;
 import com.razortooth.smile.util.IPAddressValidatorUtil;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
-public class LoginActivity extends Activity implements OnClickListener {
+public class LoginActivity extends Activity {
 
-    private TextView ip;
-    private Button connect;
+    private TextView tvIp;
+    private Button btConnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.login);
-        ip = (TextView) findViewById(R.id.et_server_ip);
-        connect = (Button) findViewById(R.id.bt_connect);
+        tvIp = (TextView) findViewById(R.id.et_server_ip);
+        btConnect = (Button) findViewById(R.id.bt_connect);
     }
 
     @Override
@@ -41,18 +41,21 @@ public class LoginActivity extends Activity implements OnClickListener {
 
         formattingIPAddress();
 
-        connect.setEnabled(false);
-        connect.setOnClickListener(this);
+        btConnect.setEnabled(false);
+        btConnect.setOnClickListener(new ConnectButtonListener());
 
-        ip.setText("");
-        ip.addTextChangedListener(new TextChanged());
+        tvIp.setText("");
+        tvIp.addTextChangedListener(new TextChanged());
 
         this.setVisible(true);
     }
 
-    @Override
-    public void onClick(View v) {
-        new LoadTask(this).execute();
+    private class ConnectButtonListener implements OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            new LoadTask(LoginActivity.this).execute();
+        }
     }
 
     private void formattingIPAddress() {
@@ -92,7 +95,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                 return null;
             }
         };
-        ip.setFilters(filters);
+        tvIp.setFilters(filters);
     }
 
     private class TextChanged implements TextWatcher {
@@ -110,17 +113,17 @@ public class LoginActivity extends Activity implements OnClickListener {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             IPAddressValidatorUtil ipUtil = new IPAddressValidatorUtil();
-            if (ipUtil.validate(ip.getText().toString())) {
-                connect.setEnabled(true);
+            if (ipUtil.validate(tvIp.getText().toString())) {
+                btConnect.setEnabled(true);
             } else {
-                connect.setEnabled(false);
+                btConnect.setEnabled(false);
             }
         }
     }
 
     private void loading() {
         Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
-        intent.putExtra(GeneralActivity.IP, ip.getText().toString());
+        intent.putExtra(GeneralActivity.PARAM_IP, tvIp.getText().toString());
         startActivity(intent);
         ActivityUtil.showLongToast(this, R.string.connection_established);
 
@@ -140,10 +143,11 @@ public class LoginActivity extends Activity implements OnClickListener {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                new SmilePlugServerManager().connect(ip.getText().toString(), context);
+                new SmilePlugServerManager().connect(tvIp.getText().toString(), context);
 
                 return true;
             } catch (NetworkErrorException e) {
+                handleException(e);
                 return false;
             }
         }

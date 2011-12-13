@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 
 import com.razortooth.smile.R;
 import com.razortooth.smile.bu.BoardManager;
+import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.bu.SmilePlugServerManager;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
@@ -38,7 +40,7 @@ import com.razortooth.smile.ui.fragment.StudentsFragment;
 import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
-public class GeneralActivity extends FragmentActivity implements OnClickListener {
+public class GeneralActivity extends FragmentActivity {
 
     private static final int AUTO_UPDATE_TIME = 5000;
     private static final String PARAM_BOARD = "board";
@@ -47,21 +49,21 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     private Handler boardHandler;
     private Runnable boardRunnable;
 
-    public static final String IP = "ip";
-    public static final String HOURS = "hours";
-    public static final String MINUTES = "minutes";
-    public static final String SECONDS = "seconds";
+    public static final String PARAM_IP = "ip";
+    public static final String PARAM_HOURS = "hours";
+    public static final String PARAM_MINUTES = "minutes";
+    public static final String PARAM_SECONDS = "seconds";
 
     private String ip;
     private String hours;
     private String minutes;
     private String seconds;
 
-    private Button solve;
-    private Button results;
+    private Button btSolve;
+    private Button btResults;
 
-    private TextView time;
-    private TextView remaining;
+    private TextView tvTime;
+    private TextView tvRemaining;
 
     private final List<Fragment> fragments = new Vector<Fragment>();
     private AbstractFragment activeFragment;
@@ -71,15 +73,15 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general);
 
-        ip = this.getIntent().getStringExtra(IP);
-        hours = this.getIntent().getStringExtra(HOURS);
-        minutes = this.getIntent().getStringExtra(MINUTES);
-        seconds = this.getIntent().getStringExtra(SECONDS);
+        ip = this.getIntent().getStringExtra(PARAM_IP);
+        hours = this.getIntent().getStringExtra(PARAM_HOURS);
+        minutes = this.getIntent().getStringExtra(PARAM_MINUTES);
+        seconds = this.getIntent().getStringExtra(PARAM_SECONDS);
 
-        solve = (Button) findViewById(R.id.bt_solve);
-        results = (Button) findViewById(R.id.bt_results);
-        time = (TextView) findViewById(R.id.tv_time);
-        remaining = (TextView) findViewById(R.id.tv_remaining_time);
+        btSolve = (Button) findViewById(R.id.bt_solve);
+        btResults = (Button) findViewById(R.id.bt_results);
+        tvTime = (TextView) findViewById(R.id.tv_time);
+        tvRemaining = (TextView) findViewById(R.id.tv_remaining_time);
 
         if (savedInstanceState != null) {
             Board tmp = (Board) savedInstanceState.getSerializable(PARAM_BOARD);
@@ -109,16 +111,16 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
     protected void onResume() {
         super.onResume();
 
-        solve.setOnClickListener(this);
-        results.setOnClickListener(this);
-        results.setEnabled(false);
-        time.setText("00:00:00");
+        btSolve.setOnClickListener(new SolveButtonListener());
+        btResults.setOnClickListener(new ResultsButtonListener());
+        btResults.setEnabled(false);
+        tvTime.setText("00:00:00");
 
         if (hours != null | seconds != null | minutes != null) {
             countDownTimer();
         } else {
-            time.setVisibility(View.GONE);
-            remaining.setVisibility(View.GONE);
+            tvTime.setVisibility(View.GONE);
+            tvRemaining.setVisibility(View.GONE);
         }
     }
 
@@ -156,19 +158,26 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
         long sec = Integer.parseInt(seconds) * 1000;
         long count = hr + min + sec;
 
-        new CountDownTimer(count, 1000) {
+        new countDownTimerListener(count, 1000).start();
+    }
 
-            @Override
-            public void onTick(long millisUntilFinished) {
-                time.setText("" + formatTime(millisUntilFinished));
-            }
+    private class countDownTimerListener extends CountDownTimer {
 
-            @Override
-            public void onFinish() {
-                time.setText("Done!");
-                results.setEnabled(true);
-            }
-        }.start();
+        public countDownTimerListener(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onFinish() {
+            tvTime.setText("Done!");
+            btResults.setEnabled(true);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            tvTime.setText("" + formatTime(millisUntilFinished));
+        }
+
     }
 
     @Override
@@ -209,51 +218,59 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
 
-        ViewPager mPager = (ViewPager) findViewById(R.id.awesomepager);
+        ViewPager mPager = (ViewPager) findViewById(R.id.vp_awesomepager);
         mPager.setAdapter(pagerAdapter);
         mPager.setCurrentItem(0);
         mPager.setOnPageChangeListener(new FragmentOnPageChangeListener());
     }
 
-    @Override
-    public void onClick(View v) {
+    private class SolveButtonListener implements OnClickListener {
 
-        switch (v.getId()) {
-            case R.id.bt_solve:
-                try {
-                    new SmilePlugServerManager().startSolvingQuestions(ip, this);
+        @Override
+        public void onClick(View v) {
+            try {
+                new SmilePlugServerManager().startSolvingQuestions(ip, GeneralActivity.this);
 
-                    ActivityUtil.showLongToast(this, R.string.solving);
+                ActivityUtil.showLongToast(GeneralActivity.this, R.string.solving);
 
-                    results.setEnabled(true);
-                    solve.setEnabled(false);
-                } catch (NetworkErrorException e) {
-                    new NetworkErrorException("Connection errror: " + e.getMessage(), e);
-                }
-                break;
-            case R.id.bt_results:
-                try {
-                    new SmilePlugServerManager().showResults(ip, this);
+                btResults.setEnabled(true);
+                btSolve.setEnabled(false);
+            } catch (NetworkErrorException e) {
+                new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+            }
+        }
+    }
 
-                    ActivityUtil.showLongToast(this, R.string.showing);
+    private class ResultsButtonListener implements OnClickListener {
 
-                    TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
-                        LayoutParams.WRAP_CONTENT, 150);
+        @Override
+        public void onClick(View v) {
+            try {
+                new SmilePlugServerManager().showResults(ip, GeneralActivity.this);
 
-                    ListView list = (ListView) this.findViewById(R.id.list_students);
-                    list.setLayoutParams(layoutParams);
-                    list.setPadding(5, 0, 0, 0);
+                ActivityUtil.showLongToast(GeneralActivity.this, R.string.showing);
 
-                    TextView tv_top_title = (TextView) this.findViewById(R.id.tv_top_scorers);
-                    tv_top_title.setVisibility(View.VISIBLE);
+                TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT, 150);
 
-                    LinearLayout ll_top = (LinearLayout) this.findViewById(R.id.top_scorers);
-                    ll_top.setVisibility(View.VISIBLE);
+                ListView lvListStudents = (ListView) GeneralActivity.this
+                    .findViewById(R.id.lv_students);
+                lvListStudents.setLayoutParams(layoutParams);
+                lvListStudents.setPadding(5, 0, 0, 5);
 
-                } catch (NetworkErrorException e) {
-                    new NetworkErrorException("Connection errror: " + e.getMessage(), e);
-                }
-                break;
+                TextView tvTopTitle = (TextView) GeneralActivity.this
+                    .findViewById(R.id.tv_top_scorers);
+                tvTopTitle.setVisibility(View.VISIBLE);
+
+                LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
+                    .findViewById(R.id.ll_top_scorers);
+                llTopScorersContainer.setVisibility(View.VISIBLE);
+
+            } catch (NetworkErrorException e) {
+                new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+            }
         }
     }
 
@@ -328,9 +345,9 @@ public class GeneralActivity extends FragmentActivity implements OnClickListener
             try {
                 return loadBoard();
             } catch (NetworkErrorException e) {
-                // TODO: Exception
+                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
             } catch (DataAccessException e) {
-                // TODO: Exception
+                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
             }
 
             return null;

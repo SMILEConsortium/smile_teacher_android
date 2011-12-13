@@ -72,4 +72,6 @@
 	<string name="alternative2">(2)</string>
 	<string name="alternative3">(3)</string>
 	<string name="alternative4">(4)</string>
+	
+	<string name="saved">Saved</string>	    
 </resources>

@@ -28,7 +28,7 @@ public class QuestionStatusDetailsActivity extends Activity {
         TextView tvOwner = (TextView) findViewById(R.id.tv_create_by);
         tvOwner.setText("( " + getString(R.string.create_by) + " " + question.getOwner() + " )");
 
-        ImageView tvImage = (ImageView) findViewById(R.id.tv_image);
+        ImageView tvImage = (ImageView) findViewById(R.id.iv_image);
         if (question.hasImage()) {
             // Bitmap bmp = IOUtil.loadBitmapFromUrl(question.getImage());
             // Just for tests
@@ -74,7 +74,7 @@ public class QuestionStatusDetailsActivity extends Activity {
             tvAlternative4.setVisibility(View.GONE);
         }
 
-        TextView tvHitAverage = (TextView) findViewById(R.id.tv_correct_answer);
-        tvHitAverage.setText(getString(R.string.correct_answer) + ": " + question.getAnswer());
+        TextView tvCorrectAnswer = (TextView) findViewById(R.id.tv_correct_answer);
+        tvCorrectAnswer.setText(getString(R.string.correct_answer) + ": " + question.getAnswer());
     }
 }

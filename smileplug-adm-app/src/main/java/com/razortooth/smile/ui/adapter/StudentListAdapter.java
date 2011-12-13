@@ -31,19 +31,19 @@ public class StudentListAdapter extends ArrayAdapter<Student> {
             convertView = inflater.inflate(R.layout.students_item, parent, false);
         }
 
-        TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
-        tv_name.setText(student.getName());
+        TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
+        tvName.setText(student.getName());
 
-        CheckBox tv_question = (CheckBox) convertView.findViewById(R.id.tv_question);
-        tv_question.setChecked(student.isMade());
-        tv_question.setClickable(false);
+        CheckBox cbQuestion = (CheckBox) convertView.findViewById(R.id.tv_question);
+        cbQuestion.setChecked(student.isMade());
+        cbQuestion.setClickable(false);
 
-        CheckBox tv_answers = (CheckBox) convertView.findViewById(R.id.tv_answers);
-        tv_answers.setChecked(student.isSolved());
-        tv_answers.setClickable(false);
+        CheckBox tvAnswers = (CheckBox) convertView.findViewById(R.id.tv_answers);
+        tvAnswers.setChecked(student.isSolved());
+        tvAnswers.setClickable(false);
 
-        TextView tv_score = (TextView) convertView.findViewById(R.id.tv_score);
-        tv_score.setText(String.valueOf(student.getScore()));
+        TextView tvScore = (TextView) convertView.findViewById(R.id.tv_score);
+        tvScore.setText(String.valueOf(student.getScore()));
 
         return convertView;
 

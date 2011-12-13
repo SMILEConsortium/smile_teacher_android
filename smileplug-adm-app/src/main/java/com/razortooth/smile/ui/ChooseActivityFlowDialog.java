@@ -15,12 +15,12 @@ import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.DialogUtil;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
-public class ChooseActivityFlowDialog extends Activity implements OnClickListener {
+public class ChooseActivityFlowDialog extends Activity {
 
     private String ip;
 
-    private Button start;
-    private Button use;
+    private Button btStart;
+    private Button btUse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,40 +28,44 @@ public class ChooseActivityFlowDialog extends Activity implements OnClickListene
 
         setContentView(R.layout.activity_flow);
 
-        start = (Button) findViewById(R.id.bt_start);
-        use = (Button) findViewById(R.id.bt_use_prerared);
+        btStart = (Button) findViewById(R.id.bt_start);
+        btUse = (Button) findViewById(R.id.bt_use_prerared);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        ip = this.getIntent().getStringExtra(GeneralActivity.IP);
+        ip = this.getIntent().getStringExtra(GeneralActivity.PARAM_IP);
 
-        start.setOnClickListener(this);
-        use.setOnClickListener(this);
+        btStart.setOnClickListener(new StartButtonListener());
+        btUse.setOnClickListener(new UsePreparedQuestionsButtonListener());
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bt_start:
-                new LoadTask(this).execute();
-                ActivityUtil.showLongToast(this, R.string.starting);
-                break;
+    private class StartButtonListener implements OnClickListener {
 
-            case R.id.bt_use_prerared:
-                Intent intent = new Intent(this, UsePreparedQuestionsActivity.class);
-                intent.putExtra(GeneralActivity.IP, ip);
-                startActivity(intent);
-                this.finish();
-                break;
+        @Override
+        public void onClick(View v) {
+            new LoadTask(ChooseActivityFlowDialog.this).execute();
+            ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.starting);
+        }
+    }
+
+    private class UsePreparedQuestionsButtonListener implements OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(ChooseActivityFlowDialog.this,
+                UsePreparedQuestionsActivity.class);
+            intent.putExtra(GeneralActivity.PARAM_IP, ip);
+            startActivity(intent);
+            ChooseActivityFlowDialog.this.finish();
         }
     }
 
     private void openGeneralActivity() {
         Intent intent = new Intent(this, GeneralActivity.class);
-        intent.putExtra(GeneralActivity.IP, ip);
+        intent.putExtra(GeneralActivity.PARAM_IP, ip);
         startActivity(intent);
 
         this.finish();
@@ -84,6 +88,7 @@ public class ChooseActivityFlowDialog extends Activity implements OnClickListene
 
                 return true;
             } catch (NetworkErrorException e) {
+                handleException(e);
                 return false;
             }
         }

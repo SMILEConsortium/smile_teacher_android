@@ -26,6 +26,8 @@ public class StudentsFragment extends AbstractFragment {
 
     private ArrayAdapter<Student> adapter;
 
+    private boolean run;
+
     @Override
     protected int getLayout() {
         return R.layout.students;
@@ -37,16 +39,31 @@ public class StudentsFragment extends AbstractFragment {
         super.onActivityCreated(savedInstanceState);
 
         adapter = new StudentListAdapter(getActivity(), students);
-        ListView list = (ListView) getActivity().findViewById(R.id.list_students);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new OpenItemDetailsListener());
+        ListView lvListStudents = (ListView) getActivity().findViewById(R.id.lv_students);
+        lvListStudents.setAdapter(adapter);
+        lvListStudents.setOnItemClickListener(new OpenItemDetailsListener());
 
-        TextView tv_top_title = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
-        tv_top_title.setVisibility(View.GONE);
+        TextView tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
+        tvTopTitle.setVisibility(View.GONE);
 
-        LinearLayout ll_top = (LinearLayout) getActivity().findViewById(R.id.top_scorers);
-        ll_top.setVisibility(View.GONE);
+        LinearLayout llTopScorersConatainer = (LinearLayout) getActivity().findViewById(
+            R.id.ll_top_scorers);
+        llTopScorersConatainer.setVisibility(View.GONE);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        run = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        run = false;
     }
 
     private class OpenItemDetailsListener implements OnItemClickListener {
@@ -66,27 +83,31 @@ public class StudentsFragment extends AbstractFragment {
 
         students.clear();
 
-        Collection<Student> newStudents = board.getStudents();
-        if (newStudents != null) {
-            students.addAll(newStudents);
-        }
-
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                TextView tv_name = (TextView) getActivity().findViewById(R.id.tl_students);
-                tv_name.setText(getString(R.string.students) + ": " + students.size());
-
-                TextView tv_question = (TextView) getActivity().findViewById(R.id.tl_questions);
-                tv_question.setText(getString(R.string.questions) + ": "
-                    + board.getQuestionsNumber());
-
-                TextView tv_answers = (TextView) getActivity().findViewById(R.id.tl_answers);
-                tv_answers.setText(getString(R.string.answers) + ": " + board.getAnswersNumber());
+        if (run) {
+            Collection<Student> newStudents = board.getStudents();
+            if (newStudents != null) {
+                students.addAll(newStudents);
             }
 
-        });
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    TextView tvName = (TextView) getActivity().findViewById(R.id.tv_total_students);
+                    tvName.setText(getString(R.string.students) + ": " + students.size());
+
+                    TextView tvQuestion = (TextView) getActivity().findViewById(
+                        R.id.tv_total_questions);
+                    tvQuestion.setText(getString(R.string.questions) + ": "
+                        + board.getQuestionsNumber());
+
+                    TextView tvAnswers = (TextView) getActivity().findViewById(
+                        R.id.tv_total_answers);
+                    tvAnswers.setText(getString(R.string.answers) + ": " + board.getAnswersNumber());
+                }
+
+            });
+        }
 
         adapter.notifyDataSetChanged();
 

@@ -30,17 +30,17 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             convertView = inflater.inflate(R.layout.questions_item, parent, false);
         }
 
-        TextView tv_number = (TextView) convertView.findViewById(R.id.tv_number);
-        tv_number.setText(String.valueOf(question.getNumber()));
+        TextView tvNumber = (TextView) convertView.findViewById(R.id.tv_number);
+        tvNumber.setText(String.valueOf(question.getNumber()));
 
-        TextView tv_owner = (TextView) convertView.findViewById(R.id.tv_owner);
-        tv_owner.setText(question.getOwner());
+        TextView tvOwner = (TextView) convertView.findViewById(R.id.tv_owner);
+        tvOwner.setText(question.getOwner());
 
-        TextView tv_hit_average = (TextView) convertView.findViewById(R.id.tv_hit_average);
-        tv_hit_average.setText(String.valueOf(question.getHitAverage()));
+        TextView tvHitAverage = (TextView) convertView.findViewById(R.id.tv_hit_average);
+        tvHitAverage.setText(String.valueOf(question.getHitAverage()));
 
-        TextView tv_rating = (TextView) convertView.findViewById(R.id.tv_rating);
-        tv_rating.setText(String.valueOf(question.getRating()));
+        TextView tvRating = (TextView) convertView.findViewById(R.id.tv_rating);
+        tvRating.setText(String.valueOf(question.getRating()));
 
         return convertView;
     }

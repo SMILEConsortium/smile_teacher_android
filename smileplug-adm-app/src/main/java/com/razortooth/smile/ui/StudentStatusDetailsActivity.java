@@ -26,18 +26,18 @@ public class StudentStatusDetailsActivity extends Activity {
 
         student = (Student) getIntent().getSerializableExtra(PARAM_STUDENT);
 
-        TextView tv_name = (TextView) findViewById(R.id.tv_name);
-        tv_name.setText(getString(R.string.scoreboard_of) + " " + student.getName());
+        TextView tvName = (TextView) findViewById(R.id.tv_name);
+        tvName.setText(getString(R.string.scoreboard_of) + " " + student.getName());
 
         String score = String.valueOf(student.getScore());
         String total = String.valueOf(student.getAnswered());
 
-        TextView tv_score = (TextView) findViewById(R.id.tv_score);
-        tv_score.setText(getString(R.string.score) + " " + score + "/" + total);
+        TextView tvScore = (TextView) findViewById(R.id.tv_score);
+        tvScore.setText(getString(R.string.score) + " " + score + "/" + total);
 
-        List<StudentQuestionDetail> items = student.getDetails();
-        StudentQuestionDetailAdapter adapter = new StudentQuestionDetailAdapter(this, items);
-        ListView list = (ListView) findViewById(R.id.list);
-        list.setAdapter(adapter);
+        List<StudentQuestionDetail> studentQuestionDetails = student.getDetails();
+        StudentQuestionDetailAdapter adapter = new StudentQuestionDetailAdapter(this, studentQuestionDetails);
+        ListView lvListQuestionDetails = (ListView) findViewById(R.id.list);
+        lvListQuestionDetails.setAdapter(adapter);
     }
 }

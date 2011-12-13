@@ -6,22 +6,22 @@
   	android:layout_marginRight="5dip"> 
   	
     <View 
-  		android:id="@+id/separator1"
+  		android:id="@+id/view_separator1"
 		android:layout_width="85dip"
 		android:layout_height="3dip"
 		android:background="#FFFF0000"
 		android:layout_marginLeft="371dip"
-		android:layout_toRightOf="@id/buttons"/>
+		android:layout_toRightOf="@id/ll_buttons"/>
   	
     <View 
-  		android:id="@+id/separator2"
+  		android:id="@+id/view_separator2"
 		android:layout_width="fill_parent"
 		android:layout_height="2dip"
 		android:background="@color/black"
 		android:layout_marginLeft="5dip"
 		android:layout_marginTop="3dip"
-		android:layout_toRightOf="@id/buttons"
-		android:layout_below="@id/separator1"/>
+		android:layout_toRightOf="@id/ll_buttons"
+		android:layout_below="@id/view_separator1"/>
   	
   	<TextView  
   	  	android:id="@+id/tv_status"
@@ -33,10 +33,10 @@
       	android:textColor="@color/black"
       	android:layout_marginLeft="5dip"
       	android:layout_marginTop="5dip"
-      	android:layout_below="@id/separator1"/>
+      	android:layout_below="@id/view_separator1"/>
   
 	<TableLayout
-	  	android:id="@+id/table_status" 
+	  	android:id="@+id/tl_status" 
 	  	android:layout_width="fill_parent"
 	  	android:layout_height="wrap_content"
 	  	android:shrinkColumns="*"  
@@ -44,7 +44,7 @@
     	android:layout_below="@id/tv_status">
     	
 	    <View
-			android:id="@+id/separator"  
+			android:id="@+id/view_separator"  
 			android:layout_width="fill_parent"
 			android:layout_height="1dip"
 			android:background="@color/white"
@@ -53,7 +53,7 @@
 			android:layout_below="@id/tv_title"/>
 	  	
 	  	<TableRow 
-	  		android:id="@+id/row"
+	  		android:id="@+id/tr_row"
 	  		android:layout_width="wrap_content"
 	   	  	android:layout_height="wrap_content"
 	   	  	android:layout_marginTop="5dip">
@@ -85,7 +85,7 @@
 	  	</TableRow>
 	  	
 	  	<View
-			android:id="@+id/separator"  
+			android:id="@+id/view_separator"  
 			android:layout_width="fill_parent"
 			android:layout_height="1dip"
 			android:background="@color/white"
@@ -94,20 +94,20 @@
 			android:layout_below="@id/tv_title"/>
 	  	
 	  	<ListView 
-			android:id="@+id/list_questions"
+			android:id="@+id/lv_questions"
 		    android:layout_width="fill_parent"
 		  	android:layout_height="220dip"
-		  	android:layout_below="@id/row"
+		  	android:layout_below="@id/tr_row"
 		  	android:layout_marginLeft="5dip"/>
 		  	
 		<View
-			android:id="@+id/separator"  
+			android:id="@+id/view_separator"  
 			android:layout_width="fill_parent"
 			android:layout_height="1dip"
 			android:background="@color/white"
 			android:layout_marginLeft="5dip"
 			android:layout_marginTop="5dip"
-			android:layout_below="@id/list_questions"/>				  	
+			android:layout_below="@id/lv_questions"/>				  	
 
 	</TableLayout>
 	
@@ -120,7 +120,7 @@
   		android:textSize="12sp"
   		android:layout_marginTop="10dip"
   		android:layout_marginRight="10dip"
-  		android:layout_below="@id/table_status"
+  		android:layout_below="@id/tl_status"
   		android:layout_alignParentRight="true"/>
 	
 </RelativeLayout>

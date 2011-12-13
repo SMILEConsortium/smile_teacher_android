@@ -18,7 +18,7 @@
       	android:layout_marginTop="10dip"/>
     
     <View
-		android:id="@+id/separator"  
+		android:id="@+id/view_separator"  
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
 		android:background="@color/white"
@@ -49,7 +49,7 @@
 	  	android:orientation="horizontal">
         
         <TableLayout
-		  	android:id="@+id/table_status" 
+		  	android:id="@+id/tl_status" 
 		  	android:layout_width="fill_parent"
 		  	android:layout_height="wrap_content"
 		  	android:shrinkColumns="*"  
@@ -57,20 +57,20 @@
 	    	android:layout_margin="5dip">
 	    	
 	    	<View
-				android:id="@+id/separator"  
+				android:id="@+id/view_separator"  
 				android:layout_width="fill_parent"
 				android:layout_height="1dip"
 				android:background="@color/white"
 				android:layout_marginTop="5dip"/>
 		  	
 		  	<TableRow 
-		  		android:id="@+id/row"
+		  		android:id="@+id/tr_row"
 		  		android:layout_width="wrap_content"
 		   	  	android:layout_height="wrap_content"
 		   	  	android:layout_marginTop="5dip">
 		  	
 			  	<TextView  
-			  	  	android:id="@+id/number"
+			  	  	android:id="@+id/tv_title_number"
 			  	  	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/question_number"
@@ -80,7 +80,7 @@
 			      	android:gravity="center"/>
 			           
 			  	<TextView  
-			      	android:id="@+id/correct" 
+			      	android:id="@+id/tv_title_correct" 
 			      	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/correct_answer"   
@@ -90,7 +90,7 @@
 			      	android:gravity="center"/>
 			           
 			  	<TextView  
-			    	android:id="@+id/chosen"  
+			    	android:id="@+id/tv_title_chosen"  
 			    	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/chosen_answer"   
@@ -100,7 +100,7 @@
 			      	android:gravity="center"/>
 			           
 			  	<TextView  
-			      	android:id="@+id/rating"  
+			      	android:id="@+id/tv_title_rating"  
 			      	android:layout_width="10dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/give_rating"    
@@ -112,7 +112,7 @@
 		  	</TableRow>
 		  	
 		  	<View
-				android:id="@+id/separator"  
+				android:id="@+id/view_separator"  
 				android:layout_width="fill_parent"
 				android:layout_height="1dip"
 				android:background="@color/white"
@@ -122,7 +122,7 @@
 				android:id="@+id/list"
 			    android:layout_width="wrap_content"
 			  	android:layout_height="wrap_content"
-			  	android:layout_below="@id/row"/>
+			  	android:layout_below="@id/tr_row"/>
 	
 		</TableLayout>
         

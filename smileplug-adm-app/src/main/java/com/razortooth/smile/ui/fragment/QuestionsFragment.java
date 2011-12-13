@@ -19,13 +19,14 @@ import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.ui.QuestionStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.QuestionListAdapter;
+import com.razortooth.smile.util.ActivityUtil;
 
-public class QuestionsFragment extends AbstractFragment implements OnClickListener {
+public class QuestionsFragment extends AbstractFragment {
 
     private final List<Question> questions = new ArrayList<Question>();
     private ArrayAdapter<Question> adapter;
 
-    private Button save;
+    private Button btSave;
 
     @Override
     protected int getLayout() {
@@ -38,12 +39,12 @@ public class QuestionsFragment extends AbstractFragment implements OnClickListen
         super.onActivityCreated(savedInstanceState);
 
         adapter = new QuestionListAdapter(getActivity(), questions);
-        ListView list = (ListView) getActivity().findViewById(R.id.list_questions);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new OpenItemDetailsListener());
+        ListView lvListQuestions = (ListView) getActivity().findViewById(R.id.lv_questions);
+        lvListQuestions.setAdapter(adapter);
+        lvListQuestions.setOnItemClickListener(new OpenItemDetailsListener());
 
-        save = (Button) getActivity().findViewById(R.id.bt_save);
-        save.setOnClickListener(this);
+        btSave = (Button) getActivity().findViewById(R.id.bt_save);
+        btSave.setOnClickListener(new SaveButtonListener());
     }
 
     private class OpenItemDetailsListener implements OnItemClickListener {
@@ -72,10 +73,12 @@ public class QuestionsFragment extends AbstractFragment implements OnClickListen
 
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.bt_save) {
-            // save questions
+    private class SaveButtonListener implements OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            ActivityUtil.showLongToast(QuestionsFragment.this.getActivity(), R.string.saved);
+            // save questions action
         }
     }
 }

@@ -31,17 +31,17 @@ public class StudentQuestionDetailAdapter extends ArrayAdapter<StudentQuestionDe
             convertView = inflater.inflate(R.layout.students_details_item, parent, false);
         }
 
-        TextView tv_number = (TextView) convertView.findViewById(R.id.tv_number);
-        tv_number.setText(String.valueOf(item.getNumber()));
+        TextView tvNumber = (TextView) convertView.findViewById(R.id.tv_number);
+        tvNumber.setText(String.valueOf(item.getNumber()));
 
-        TextView tv_correct = (TextView) convertView.findViewById(R.id.tv_correct);
-        tv_correct.setText(String.valueOf(item.getAnswer()));
+        TextView tvCorrect = (TextView) convertView.findViewById(R.id.tv_correct);
+        tvCorrect.setText(String.valueOf(item.getAnswer()));
 
-        TextView tv_chosen = (TextView) convertView.findViewById(R.id.tv_chosen);
-        tv_chosen.setText(String.valueOf(item.getChosenAnswer()));
+        TextView tvChosen = (TextView) convertView.findViewById(R.id.tv_chosen);
+        tvChosen.setText(String.valueOf(item.getChosenAnswer()));
 
-        TextView tv_rating = (TextView) convertView.findViewById(R.id.tv_rating);
-        tv_rating.setText(String.valueOf(item.getChosenRating()));
+        TextView tvRating = (TextView) convertView.findViewById(R.id.tv_rating);
+        tvRating.setText(String.valueOf(item.getChosenRating()));
 
         return convertView;
     }
