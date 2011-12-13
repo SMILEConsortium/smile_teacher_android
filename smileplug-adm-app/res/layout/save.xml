@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="200dip"
+  	android:layout_height="180dip"
+  	android:orientation="vertical"
+  	android:background="@drawable/rounded_border"
+  	android:layout_gravity="center"
+  	android:gravity="center_horizontal">
+  
+  	<TextView 
+	  	android:id="@+id/tv_title"
+	  	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dip"
+		android:text="@string/save_questions"
+		android:textColor="@color/black"
+		android:textSize="14sp"/>
+		
+	<View
+		android:id="@+id/view_separator"  
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_margin="5dip"
+		android:layout_below="@id/tv_title"/>
+	
+	<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:text="@string/give_a_name"
+        android:textColor="@color/black" />
+	
+	<EditText 
+	  	android:id="@+id/et_name_file"
+	  	android:layout_width="140dip"
+		android:layout_height="40dip"
+		android:maxLines="1"
+		android:inputType="text"
+        android:singleLine="true"
+        android:layout_marginTop="10dip"/>
+	
+	<Button 
+	  	android:id="@+id/bt_save_file"
+	  	android:layout_width="100dip"
+		android:layout_height="40dip"
+		android:text="@string/ok"
+		android:layout_marginTop="10dip"/>
+	
+</LinearLayout>

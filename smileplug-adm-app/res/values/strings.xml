@@ -20,7 +20,7 @@
 	<string name="correct">%Correct</string>
 	<string name="rating">Highest Rating</string>	
 	
-	<string name="save_questions">Save Questions</string>
+	<string name="save_questions">Save questions</string>
 	<string name="students_status">Student Status</string>
 	<string name="students_name">Students Name</string>	    
 	<string name="score">Score</string>	    
@@ -73,5 +73,7 @@
 	<string name="alternative3">(3)</string>
 	<string name="alternative4">(4)</string>
 	
-	<string name="saved">Saved</string>	    
+	<string name="saved">Saved</string>
+	
+	<string name="give_a_name">"Give a name: "</string>
 </resources>

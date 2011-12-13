@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -13,8 +15,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.QuestionsManager;
+import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.ui.QuestionStatusDetailsActivity;
@@ -77,8 +82,35 @@ public class QuestionsFragment extends AbstractFragment {
 
         @Override
         public void onClick(View v) {
-            ActivityUtil.showLongToast(QuestionsFragment.this.getActivity(), R.string.saved);
-            // save questions action
+            Dialog saveDialog = new Dialog(QuestionsFragment.this.getActivity(), R.style.Dialog);
+            saveDialog.setContentView(R.layout.save);
+            saveDialog.show();
+
+            Button save = (Button) saveDialog.findViewById(R.id.bt_save_file);
+            save.setOnClickListener(new SaveFileDialogListener(saveDialog));
+        }
+
+        public class SaveFileDialogListener implements OnClickListener {
+            private Dialog aboutDialog;
+
+            public SaveFileDialogListener(Dialog aboutDialog) {
+                this.aboutDialog = aboutDialog;
+            }
+
+            @Override
+            public void onClick(View v) {
+                TextView name = (TextView) aboutDialog.findViewById(R.id.et_name_file);
+                try {
+                    if (name.getText().toString().equals("")) {
+                        name.setText("Questions_file");
+                    }
+                    new QuestionsManager().saveQuestions(name.getText().toString(), questions);
+                    aboutDialog.dismiss();
+                } catch (DataAccessException e) {
+                    Log.e("QuestionsFragment", e.getMessage());
+                }
+                ActivityUtil.showLongToast(QuestionsFragment.this.getActivity(), R.string.saved);
+            }
         }
     }
 }
