@@ -31,9 +31,9 @@
       	android:textStyle="bold"
       	android:textSize="14sp"
       	android:textColor="@color/black"
-      	android:layout_marginLeft="5dip"
-      	android:layout_marginTop="5dip"
-      	android:layout_below="@id/view_separator1"/>
+      	android:layout_marginTop="10dip"
+      	android:layout_below="@id/view_separator1"
+      	android:layout_centerHorizontal="true"/>
   
 	<TableLayout
 	  	android:id="@+id/tl_status" 
@@ -96,7 +96,7 @@
 	  	<ListView 
 			android:id="@+id/lv_questions"
 		    android:layout_width="fill_parent"
-		  	android:layout_height="220dip"
+		  	android:layout_height="210dip"
 		  	android:layout_below="@id/tr_row"
 		  	android:layout_marginLeft="5dip"/>
 		  	

@@ -51,7 +51,7 @@
         <TableLayout
 		  	android:id="@+id/tl_status" 
 		  	android:layout_width="fill_parent"
-		  	android:layout_height="wrap_content"
+		  	android:layout_height="fill_parent"
 		  	android:shrinkColumns="*"  
 	    	android:stretchColumns="*"
 	    	android:layout_margin="5dip">
@@ -121,8 +121,9 @@
 		  	<ListView 
 				android:id="@+id/list"
 			    android:layout_width="wrap_content"
-			  	android:layout_height="wrap_content"
-			  	android:layout_below="@id/tr_row"/>
+			  	android:layout_height="fill_parent"
+			  	android:layout_below="@id/tr_row"
+			  	android:layout_marginBottom="10dip"/>
 	
 		</TableLayout>
         

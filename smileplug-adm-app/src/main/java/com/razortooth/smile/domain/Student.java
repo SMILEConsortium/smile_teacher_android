@@ -93,7 +93,7 @@ public class Student implements Serializable, Comparable<Student> {
             Integer r = ratings.get(q);
 
             StudentQuestionDetail sqd;
-            sqd = new StudentQuestionDetail(q.getNumber(), q.getAnswer(), a, r);
+            sqd = new StudentQuestionDetail(q.getNumber(), q.getOwner(), q.getAnswer(), a, r);
 
             result.add(sqd);
 

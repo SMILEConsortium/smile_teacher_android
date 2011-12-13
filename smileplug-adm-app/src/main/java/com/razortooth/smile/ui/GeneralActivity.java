@@ -96,6 +96,16 @@ public class GeneralActivity extends FragmentActivity {
         boardRunnable = new UpdateBoardRunnable();
 
         this.initialisePaging();
+
+        btResults.setEnabled(false);
+        tvTime.setText("00:00:00");
+
+        if (hours != null | seconds != null | minutes != null) {
+            countDownTimer();
+        } else {
+            tvTime.setVisibility(View.GONE);
+            tvRemaining.setVisibility(View.GONE);
+        }
     }
 
     private void updateCurrentFragment(Board newBoard) {
@@ -113,15 +123,6 @@ public class GeneralActivity extends FragmentActivity {
 
         btSolve.setOnClickListener(new SolveButtonListener());
         btResults.setOnClickListener(new ResultsButtonListener());
-        btResults.setEnabled(false);
-        tvTime.setText("00:00:00");
-
-        if (hours != null | seconds != null | minutes != null) {
-            countDownTimer();
-        } else {
-            tvTime.setVisibility(View.GONE);
-            tvRemaining.setVisibility(View.GONE);
-        }
     }
 
     public String formatTime(long millis) {
@@ -257,7 +258,7 @@ public class GeneralActivity extends FragmentActivity {
                 ListView lvListStudents = (ListView) GeneralActivity.this
                     .findViewById(R.id.lv_students);
                 lvListStudents.setLayoutParams(layoutParams);
-                lvListStudents.setPadding(5, 0, 0, 5);
+                lvListStudents.setPadding(5, 0, 0, 0);
 
                 TextView tvTopTitle = (TextView) GeneralActivity.this
                     .findViewById(R.id.tv_top_scorers);

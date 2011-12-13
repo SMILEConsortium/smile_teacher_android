@@ -10,13 +10,16 @@ public class StudentQuestionDetail implements Serializable {
     private final int answer;
     private final int chosenAnswer;
     private final int chosenRating;
+    private final String owner;
 
-    public StudentQuestionDetail(int number, int answer, int chosenAnswer, int chosenRating) {
+    public StudentQuestionDetail(int number, String owner, int answer, int chosenAnswer,
+        int chosenRating) {
         super();
         this.number = number;
         this.answer = answer;
         this.chosenAnswer = chosenAnswer;
         this.chosenRating = chosenRating;
+        this.owner = owner;
     }
 
     public int getNumber() {
@@ -33,6 +36,10 @@ public class StudentQuestionDetail implements Serializable {
 
     public int getChosenRating() {
         return chosenRating;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 
 }
