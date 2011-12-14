@@ -53,6 +53,7 @@ public class GeneralActivity extends FragmentActivity {
     public static final String PARAM_HOURS = "hours";
     public static final String PARAM_MINUTES = "minutes";
     public static final String PARAM_SECONDS = "seconds";
+    public static final String PARAM_FILE = "file";
 
     private String ip;
     private String hours;

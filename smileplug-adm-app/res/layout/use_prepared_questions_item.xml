@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.razortooth.smile.ui.widget.checkbox.CheckableRelativeLayout  
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:marvinlabs="http://schemas.android.com/apk/res/fr.marvinlabs.selectablelisttutorial"
   	android:layout_width="fill_parent"
-  	android:layout_height="30dip"
+  	android:layout_height="fill_parent"
   	android:layout_margin="5dip"
-  	android:gravity="center|center_vertical"
-  	android:orientation="horizontal"
   	android:background="@color/gray">
   	
-  	<TextView
-        android:id="@+id/tv_name_file"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dip"
-        android:gravity="center"
-        android:textColor="@color/black"/>
+	<com.razortooth.smile.ui.widget.checkbox.InertCheckBox 
+	    android:id="@+id/tv_item_checkbox"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_marginRight="5dp"
+		android:layout_alignParentLeft="true" 
+		android:layout_centerVertical="true" 
+		android:focusable="false" 
+		android:button="@drawable/checkbox" />
 
-</LinearLayout>
+	<TextView 
+	    android:id="@+id/tv_file_name"
+		android:layout_width="wrap_content" 
+		android:layout_height="fill_parent"
+		android:layout_centerVertical="true" 
+		android:textSize="13dp"
+		android:textColor="@color/black" 
+		android:focusable="false"
+		android:layout_toRightOf="@id/tv_item_checkbox" />	
+
+</com.razortooth.smile.ui.widget.checkbox.CheckableRelativeLayout>
