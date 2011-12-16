@@ -103,8 +103,6 @@ public class QuestionsManager {
                 pw.println(q.getAnswer());
                 pw.println(MARKER);
                 pw.println(q.getOwner());
-                pw.println(MARKER);
-                pw.println((int) q.getRating());
 
                 if (q.hasImage()) {
                     File img = new File(dir, q.getNumber() + JPG);
@@ -179,7 +177,6 @@ public class QuestionsManager {
                     int answer;
                     String owner = "";
                     boolean hasImage = false;
-                    int rating;
 
                     String sNumber = readUntilMarker(br);
                     number = Integer.valueOf(sNumber);
@@ -206,14 +203,8 @@ public class QuestionsManager {
 
                     owner = readUntilMarker(br);
 
-                    String sRating = readUntilMarker(br);
-                    rating = Integer.valueOf(sRating);
-
                     Question q = new Question(number, owner, question, option1, option2, option3,
                         option4, answer, image);
-
-                    q.addAnswer(answer);
-                    q.addRating(rating);
 
                     result.add(q);
                 }
