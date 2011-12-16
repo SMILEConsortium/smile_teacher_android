@@ -92,7 +92,12 @@ public class Question implements Serializable {
             corrects += i == answer ? 1 : 0;
         }
 
-        return corrects / n;
+        int value = 0;
+        if (corrects != 0 && n != 0) {
+            value = corrects / n;
+        }
+
+        return value;
 
     }
 
@@ -116,7 +121,12 @@ public class Question implements Serializable {
             }
         }
 
-        return total / n;
+        int value = 0;
+        if (total != 0 && n != 0) {
+            value = total / n;
+        }
+
+        return value;
 
     }
 

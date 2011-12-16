@@ -21,6 +21,7 @@ import com.razortooth.smile.util.IOUtil;
 
 public class QuestionsManager {
 
+    private static final String JPG = ".jpg";
     private static final String QUESTIONS_DIR = Constants.APP_ID;
     private static final String QUESTIONS_FILE = "jq_export.txt";
     private static final String MARKER = "_@JSQ%_";
@@ -67,7 +68,6 @@ public class QuestionsManager {
 
         Log.d("QuestionsManager", "Exporting Questions: " + name);
 
-        // TODO: Check
         File dir = new File(questionsDir, name);
         boolean ok = dir.mkdirs();
 
@@ -105,7 +105,7 @@ public class QuestionsManager {
                 pw.println(q.getOwner());
 
                 if (q.hasImage()) {
-                    File img = new File(dir, q.getNumber() + ".jpg");
+                    File img = new File(dir, q.getNumber() + JPG);
                     byte[] imgContent = Base64.decode(q.getImage());
                     IOUtil.saveBytes(img, imgContent);
                 }
@@ -127,7 +127,6 @@ public class QuestionsManager {
         Collection<Question> result = new ArrayList<Question>();
         Log.d("QuestionsManager", "Importing Questions: " + name);
 
-        // TODO: Check
         File dir = new File(questionsDir, name);
         File file = new File(dir, QUESTIONS_FILE);
 
@@ -142,7 +141,7 @@ public class QuestionsManager {
             try {
                 fr = new FileReader(file);
             } catch (FileNotFoundException e1) {
-                // TODO: Exception?
+                Log.e("QuestionsManager", "Error: " + e1.getMessage());
                 return result;
             }
 
@@ -181,9 +180,6 @@ public class QuestionsManager {
 
                     String sNumber = readUntilMarker(br);
                     number = Integer.valueOf(sNumber);
-                    if (number != i) {
-                        break;
-                    }
 
                     question = readUntilMarker(br);
                     option1 = readUntilMarker(br);
@@ -191,18 +187,21 @@ public class QuestionsManager {
                     option3 = readUntilMarker(br);
                     option4 = readUntilMarker(br);
 
-                    String sAnswer = readUntilMarker(br);
-                    answer = Integer.valueOf(sAnswer);
-
-                    owner = readUntilMarker(br);
-
                     String sHasImage = readUntilMarker(br);
                     hasImage = sHasImage.equals("Y");
 
                     String image = null;
                     if (hasImage) {
-                        // TODO: Load Image
+                        File img = new File(dir, number + JPG);
+                        byte[] originalArray = IOUtil.loadBytes(img);
+                        String encodedString = Base64.encodeBytes(originalArray);
+                        image = encodedString;
                     }
+
+                    String sAnswer = readUntilMarker(br);
+                    answer = Integer.valueOf(sAnswer);
+
+                    owner = readUntilMarker(br);
 
                     Question q = new Question(number, owner, question, option1, option2, option3,
                         option4, answer, image);
@@ -211,7 +210,7 @@ public class QuestionsManager {
                 }
 
             } catch (IOException e) {
-                // TODO: Exception
+                Log.e("QuestionsManager", "Error: " + e.getMessage());
             } finally {
                 IOUtil.silentClose(br);
             }

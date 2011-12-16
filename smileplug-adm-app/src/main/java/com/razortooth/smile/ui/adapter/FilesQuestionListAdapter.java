@@ -29,8 +29,8 @@ public class FilesQuestionListAdapter extends ArrayAdapter<File> {
             convertView = inflater.inflate(R.layout.use_prepared_questions_item, parent, false);
         }
 
-        TextView tvNumber = (TextView) convertView.findViewById(R.id.tv_name_file);
-        tvNumber.setText(String.valueOf(fileQuestion.getName()));
+        final TextView tvFileName = (TextView) convertView.findViewById(R.id.tv_file_name);
+        tvFileName.setText(String.valueOf(fileQuestion.getName()));
 
         return convertView;
     }

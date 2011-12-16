@@ -6,12 +6,15 @@ import java.util.List;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,7 +30,7 @@ import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.DialogUtil;
 import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
-public class UsePreparedQuestionsActivity extends Activity {
+public class UsePreparedQuestionsActivity extends ListActivity {
 
     private Button btOk;
     private CheckBox cbQuestions;
@@ -38,8 +41,12 @@ public class UsePreparedQuestionsActivity extends Activity {
 
     private String ip;
 
-    private File[] fileQuestions;
+    private File[] fileQuestionsList;
+    private File fileQuestion;
+
     private ArrayAdapter<File> adapter;
+
+    private ListView lvListQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,8 @@ public class UsePreparedQuestionsActivity extends Activity {
         spinnerHours = (Spinner) findViewById(R.id.sp_hours);
         spinnerMinutes = (Spinner) findViewById(R.id.sp_minutes);
         spinnerSeconds = (Spinner) findViewById(R.id.sp_seconds);
+
+        lvListQuestions = getListView();
     }
 
     @Override
@@ -134,6 +143,7 @@ public class UsePreparedQuestionsActivity extends Activity {
         intent.putExtra(GeneralActivity.PARAM_HOURS, spinnerHours.getSelectedItem().toString());
         intent.putExtra(GeneralActivity.PARAM_MINUTES, spinnerMinutes.getSelectedItem().toString());
         intent.putExtra(GeneralActivity.PARAM_SECONDS, spinnerSeconds.getSelectedItem().toString());
+        intent.putExtra(GeneralActivity.PARAM_FILE, fileQuestion);
         startActivity(intent);
 
         ActivityUtil.showLongToast(this, R.string.starting);
@@ -146,16 +156,35 @@ public class UsePreparedQuestionsActivity extends Activity {
     }
 
     private void loadQuestionsList() {
-        adapter = new FilesQuestionListAdapter(this, fileQuestions);
-        ListView lvListQuestions = (ListView) this.findViewById(R.id.lv_questions);
+        clearSelection();
+        adapter = new FilesQuestionListAdapter(this, fileQuestionsList);
         lvListQuestions.setAdapter(adapter);
+        lvListQuestions.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        lvListQuestions.setItemsCanFocus(false);
+        lvListQuestions.setOnItemClickListener(new ItemClickListener());
+    }
+
+    private class ItemClickListener implements OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+            fileQuestion = adapter.getItem(position);
+        }
+
+    }
+
+    private void clearSelection() {
+        final int itemCount = lvListQuestions.getCount();
+        for (int i = 0; i < itemCount; ++i) {
+            lvListQuestions.setItemChecked(i, false);
+        }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
-        if (fileQuestions.length == 0) {
+        if (fileQuestionsList.length == 0) {
             Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
             intent.putExtra(GeneralActivity.PARAM_IP, ip);
             startActivity(intent);
@@ -184,7 +213,7 @@ public class UsePreparedQuestionsActivity extends Activity {
         @Override
         protected void onPostExecute(File[] fileQuestions) {
             if (fileQuestions != null) {
-                UsePreparedQuestionsActivity.this.fileQuestions = fileQuestions;
+                UsePreparedQuestionsActivity.this.fileQuestionsList = fileQuestions;
                 UsePreparedQuestionsActivity.this.loadQuestionsList();
                 if (fileQuestions.length == 0) {
                     btOk.setEnabled(false);
