@@ -2,6 +2,7 @@ package com.razortooth.smile.ui;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import android.accounts.NetworkErrorException;
@@ -25,6 +26,7 @@ import com.razortooth.smile.R;
 import com.razortooth.smile.bu.QuestionsManager;
 import com.razortooth.smile.bu.SmilePlugServerManager;
 import com.razortooth.smile.bu.exception.DataAccessException;
+import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.ui.adapter.FilesQuestionListAdapter;
 import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.DialogUtil;
@@ -70,10 +72,14 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         super.onResume();
 
         btOk.setOnClickListener(new OkButtonListener());
-        btOk.setEnabled(true);
+        btOk.setEnabled(false);
 
         cbQuestions.setOnClickListener(new CbQuestionsButtonListener());
         cbQuestions.setClickable(true);
+        // cbQuestions.setVisibility(View.GONE);
+
+        // LinearLayout llTime = (LinearLayout) findViewById(R.id.ll_time_container);
+        // llTime.setVisibility(View.GONE);
 
         spinnerHours.setEnabled(false);
         spinnerMinutes.setEnabled(false);
@@ -143,7 +149,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         intent.putExtra(GeneralActivity.PARAM_HOURS, spinnerHours.getSelectedItem().toString());
         intent.putExtra(GeneralActivity.PARAM_MINUTES, spinnerMinutes.getSelectedItem().toString());
         intent.putExtra(GeneralActivity.PARAM_SECONDS, spinnerSeconds.getSelectedItem().toString());
-        intent.putExtra(GeneralActivity.PARAM_FILE, fileQuestion);
         startActivity(intent);
 
         ActivityUtil.showLongToast(this, R.string.starting);
@@ -168,6 +173,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+            btOk.setEnabled(true);
             fileQuestion = adapter.getItem(position);
         }
 
@@ -241,10 +247,16 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                new SmilePlugServerManager().startMakingQuestions(ip, context);
+                Collection<Question> newQuestions = null;
+                newQuestions = new QuestionsManager().loadQuestions(fileQuestion.getName());
+
+                new SmilePlugServerManager().startUsingPreparedQuestions(ip, context, newQuestions);
 
                 return true;
             } catch (NetworkErrorException e) {
+                handleException(e);
+                return false;
+            } catch (DataAccessException e) {
                 handleException(e);
                 return false;
             }

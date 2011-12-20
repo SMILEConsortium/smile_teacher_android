@@ -64,6 +64,7 @@
 	    android:textSize="14sp"/>
 	
 	<LinearLayout 
+	    android:id="@+id/ll_time_container"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"

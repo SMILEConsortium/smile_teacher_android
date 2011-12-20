@@ -44,10 +44,17 @@ public class LoginActivity extends Activity {
         btConnect.setEnabled(false);
         btConnect.setOnClickListener(new ConnectButtonListener());
 
-        tvIp.setText("");
+        // tvIp.setText("");
         tvIp.addTextChangedListener(new TextChanged());
 
         this.setVisible(true);
+
+        IPAddressValidatorUtil ipUtil = new IPAddressValidatorUtil();
+        if (ipUtil.validate(tvIp.getText().toString())) {
+            btConnect.setEnabled(true);
+        } else {
+            btConnect.setEnabled(false);
+        }
     }
 
     private class ConnectButtonListener implements OnClickListener {
@@ -102,12 +109,12 @@ public class LoginActivity extends Activity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            // nothing
+            // Empty
         }
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            // nothing
+            // Empty
         }
 
         @Override
@@ -143,7 +150,7 @@ public class LoginActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                new SmilePlugServerManager().connect(tvIp.getText().toString(), context);
+                SmilePlugServerManager.connect(tvIp.getText().toString(), context);
 
                 return true;
             } catch (NetworkErrorException e) {

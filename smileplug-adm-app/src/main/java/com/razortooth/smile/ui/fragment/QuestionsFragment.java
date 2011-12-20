@@ -1,6 +1,5 @@
 package com.razortooth.smile.ui.fragment;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -35,7 +34,7 @@ public class QuestionsFragment extends AbstractFragment {
 
     private Button btSave;
 
-    private File file;
+    private String ip;
 
     @Override
     protected int getLayout() {
@@ -47,12 +46,12 @@ public class QuestionsFragment extends AbstractFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        adapter = new QuestionListAdapter(getActivity(), questions);
+        ip = getActivity().getIntent().getStringExtra(GeneralActivity.PARAM_IP);
+
+        adapter = new QuestionListAdapter(getActivity(), questions, ip);
         ListView lvListQuestions = (ListView) getActivity().findViewById(R.id.lv_questions);
         lvListQuestions.setAdapter(adapter);
         lvListQuestions.setOnItemClickListener(new OpenItemDetailsListener());
-
-        file = (File) getActivity().getIntent().getSerializableExtra(GeneralActivity.PARAM_FILE);
 
         btSave = (Button) getActivity().findViewById(R.id.bt_save);
         btSave.setOnClickListener(new SaveButtonListener());
@@ -76,11 +75,7 @@ public class QuestionsFragment extends AbstractFragment {
         questions.clear();
 
         Collection<Question> newQuestions = null;
-        if (file != null) {
-            newQuestions = getPreparedQuestions();
-        } else {
-            newQuestions = board.getQuestions();
-        }
+        newQuestions = board.getQuestions();
 
         if (newQuestions != null) {
             questions.addAll(newQuestions);
@@ -88,17 +83,6 @@ public class QuestionsFragment extends AbstractFragment {
 
         adapter.notifyDataSetChanged();
 
-    }
-
-    private Collection<Question> getPreparedQuestions() {
-        Collection<Question> newQuestions = null;
-        try {
-            newQuestions = new QuestionsManager().loadQuestions(file.getName());
-        } catch (DataAccessException e) {
-            Log.e("UsePreparedQuestions", "Error: " + e.getMessage());
-        }
-
-        return newQuestions;
     }
 
     private class SaveButtonListener implements OnClickListener {

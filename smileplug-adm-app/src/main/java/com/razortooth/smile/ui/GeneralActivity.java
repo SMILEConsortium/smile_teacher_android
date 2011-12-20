@@ -53,7 +53,6 @@ public class GeneralActivity extends FragmentActivity {
     public static final String PARAM_HOURS = "hours";
     public static final String PARAM_MINUTES = "minutes";
     public static final String PARAM_SECONDS = "seconds";
-    public static final String PARAM_FILE = "file";
 
     private String ip;
     private String hours;
@@ -98,7 +97,6 @@ public class GeneralActivity extends FragmentActivity {
 
         this.initialisePaging();
 
-        btResults.setEnabled(false);
         tvTime.setText("00:00:00");
 
         if (hours != null | seconds != null | minutes != null) {
@@ -306,12 +304,12 @@ public class GeneralActivity extends FragmentActivity {
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
-            // nothing
+            // Empty
         }
 
         @Override
         public void onPageScrollStateChanged(int arg0) {
-            // nothing
+            // Empty
         }
     }
 

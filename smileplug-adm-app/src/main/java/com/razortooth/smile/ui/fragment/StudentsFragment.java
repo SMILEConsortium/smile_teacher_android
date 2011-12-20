@@ -2,10 +2,11 @@ package com.razortooth.smile.ui.fragment;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONException;
+
+import android.accounts.NetworkErrorException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +18,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.BoardManager;
+import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
+import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.domain.Student;
-import com.razortooth.smile.domain.StudentQuestionDetail;
+import com.razortooth.smile.ui.GeneralActivity;
 import com.razortooth.smile.ui.StudentStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.StudentListAdapter;
 
@@ -29,10 +33,9 @@ public class StudentsFragment extends AbstractFragment {
 
     private ArrayAdapter<Student> adapter;
 
-    private ArrayList<Integer> arrayListTopScorers;
-    private ArrayList<Integer> arrayListRatings;
-
     private boolean run;
+
+    private String ip;
 
     @Override
     protected int getLayout() {
@@ -43,6 +46,8 @@ public class StudentsFragment extends AbstractFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
+
+        ip = getActivity().getIntent().getStringExtra(GeneralActivity.PARAM_IP);
 
         adapter = new StudentListAdapter(getActivity(), students);
         ListView lvListStudents = (ListView) getActivity().findViewById(R.id.lv_students);
@@ -55,9 +60,6 @@ public class StudentsFragment extends AbstractFragment {
         LinearLayout llTopScorersConatainer = (LinearLayout) getActivity().findViewById(
             R.id.ll_top_scorers);
         llTopScorersConatainer.setVisibility(View.GONE);
-
-        arrayListTopScorers = new ArrayList<Integer>();
-        arrayListRatings = new ArrayList<Integer>();
     }
 
     @Override
@@ -124,36 +126,24 @@ public class StudentsFragment extends AbstractFragment {
     }
 
     private void setTopScorersArea() {
-        HashMap<Integer, String> map = new HashMap<Integer, String>();
-        for (Student element : students) {
-            Student student = element;
+        try {
+            Results results = BoardManager.retrieveResults(ip, getActivity());
 
-            arrayListTopScorers.add(new Integer(student.getScore()));
+            TextView tvTopScorersTop = (TextView) getActivity().findViewById(
+                R.id.tv_top_scorers_top);
+            tvTopScorersTop.setText(getString(R.string.top_scorer) + ": "
+                + results.getBestScoredStudentNames().join(", ").replaceAll("\"", ""));
 
-            for (StudentQuestionDetail element2 : student.getDetails()) {
-                StudentQuestionDetail detail = element2;
-
-                arrayListRatings.add(new Integer(detail.getChosenRating()));
-                map.put(detail.getChosenRating(), detail.getOwner());
-            }
-        }
-
-        Integer maxScore = Collections.max(arrayListTopScorers);
-        Integer maxRating = Collections.max(arrayListRatings);
-        String owner = map.get(maxRating);
-
-        TextView tvTopScorersTop = (TextView) getActivity().findViewById(R.id.tv_top_scorers_top);
-        tvTopScorersTop.setText(getString(R.string.top_scorer) + ": " + maxScore);
-
-        TextView tvTopScorersRating = (TextView) getActivity().findViewById(
-            R.id.tv_top_scorers_rating);
-        tvTopScorersRating.setText(getString(R.string.rating) + ": " + new Double(maxRating));
-
-        TextView tvTopScorersCreator = (TextView) getActivity().findViewById(
-            R.id.tv_top_scorers_creator);
-        if (owner != null) {
-            tvTopScorersCreator.setText(getString(R.string.created_by) + ": " + owner);
+            TextView tvTopScorersRating = (TextView) getActivity().findViewById(
+                R.id.tv_top_scorers_rating);
+            tvTopScorersRating.setText(getString(R.string.rating) + ": "
+                + results.getWinnerRating());
+        } catch (NetworkErrorException e) {
+            // TODO
+        } catch (DataAccessException e) {
+            // TODO
+        } catch (JSONException e) {
+            // TODO
         }
     }
-
 }

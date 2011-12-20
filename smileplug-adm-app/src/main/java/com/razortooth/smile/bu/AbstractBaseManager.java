@@ -1,6 +1,9 @@
 package com.razortooth.smile.bu;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
+import org.json.JSONException;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
@@ -12,7 +15,7 @@ import com.razortooth.smile.util.SmilePlugUtil;
 
 public abstract class AbstractBaseManager {
 
-    protected void checkServer(String ip) throws NetworkErrorException {
+    protected static void checkServer(String ip) throws NetworkErrorException {
 
         InputStream is = null;
         String url = SmilePlugUtil.createUrl(ip);
@@ -31,7 +34,7 @@ public abstract class AbstractBaseManager {
 
     }
 
-    protected void checkConnection(Context context) throws NetworkErrorException {
+    protected static void checkConnection(Context context) throws NetworkErrorException {
 
         boolean isConnected = DeviceUtil.isConnected(context);
 
@@ -41,7 +44,8 @@ public abstract class AbstractBaseManager {
 
     }
 
-    protected InputStream get(String ip, Context context, String url) throws NetworkErrorException {
+    protected static InputStream get(String ip, Context context, String url)
+        throws NetworkErrorException {
 
         connect(ip, context);
 
@@ -53,15 +57,20 @@ public abstract class AbstractBaseManager {
 
     }
 
-    protected void put(String ip, Context context, String url) throws NetworkErrorException {
+    protected void put(String ip, Context context, String url, String json)
+        throws NetworkErrorException {
         connect(ip, context);
 
         InputStream is = null;
 
         try {
-            is = HttpUtil.executePut(url);
+            is = HttpUtil.executePut(url, json);
         } catch (NetworkErrorException e) {
             throw new NetworkErrorException("Connection error: " + e.getMessage(), e);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         } finally {
             IOUtil.silentClose(is);
         }
@@ -72,7 +81,7 @@ public abstract class AbstractBaseManager {
 
     }
 
-    protected void connect(String ip, Context context) throws NetworkErrorException {
+    public static void connect(String ip, Context context) throws NetworkErrorException {
         checkConnection(context);
         checkServer(ip);
     }

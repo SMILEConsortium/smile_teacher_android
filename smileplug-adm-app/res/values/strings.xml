@@ -61,13 +61,13 @@
 	<string name="question_number">Question Number</string>
 	<string name="correct_answer">Correct Answer</string>
 	<string name="chosen_answer">Chosen Answer</string>
-	<string name="give_rating">Give Rating</string>
+	<string name="give_rating">Rating</string>
 	
 	<string name="scoreboard_of">Scoreboard of</string>
 	
 	<string name="score_board">Score Board</string>
 	
-	<string name="create_by">Question create by</string>
+	<string name="create_by">Question created by</string>
 	<string name="alternative1">(1)</string>
 	<string name="alternative2">(2)</string>
 	<string name="alternative3">(3)</string>

@@ -25,6 +25,8 @@ public class QuestionsManager {
     private static final String QUESTIONS_DIR = Constants.APP_ID;
     private static final String QUESTIONS_FILE = "jq_export.txt";
     private static final String MARKER = "_@JSQ%_";
+    public static final String TEACHER_NAME = "teacher";
+    public static final String TEACHER_IP = "127.0.0.1";
 
     private final File questionsDir;
 
@@ -175,7 +177,6 @@ public class QuestionsManager {
                     String option3 = "";
                     String option4 = "";
                     int answer;
-                    String owner = "";
                     boolean hasImage = false;
 
                     String sNumber = readUntilMarker(br);
@@ -201,10 +202,8 @@ public class QuestionsManager {
                     String sAnswer = readUntilMarker(br);
                     answer = Integer.valueOf(sAnswer);
 
-                    owner = readUntilMarker(br);
-
-                    Question q = new Question(number, owner, question, option1, option2, option3,
-                        option4, answer, image);
+                    Question q = new Question(number, TEACHER_NAME, TEACHER_IP, question, option1,
+                        option2, option3, option4, answer, image);
 
                     result.add(q);
                 }
