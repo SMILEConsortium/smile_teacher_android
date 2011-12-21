@@ -83,6 +83,7 @@
 		android:layout_toRightOf="@id/ll_buttons"/>
 	
 	<LinearLayout
+	    android:id="@+id/ll_container_fragment"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:orientation="vertical"

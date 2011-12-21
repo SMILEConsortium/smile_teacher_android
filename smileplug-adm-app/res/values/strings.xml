@@ -22,7 +22,7 @@
 	
 	<string name="save_questions">Save questions</string>
 	<string name="students_status">Student Status</string>
-	<string name="students_name">Students Name</string>	    
+	<string name="students_name">Student Name</string>	    
 	<string name="score">Score</string>	    
 	<string name="total">Total</string>	    
 	<string name="top_scores">Top Scorers</string>	    
@@ -76,4 +76,6 @@
 	<string name="saved">Saved</string>
 	
 	<string name="give_a_name">"Give a name: "</string>
+	
+	<string name="load">Load</string>
 </resources>

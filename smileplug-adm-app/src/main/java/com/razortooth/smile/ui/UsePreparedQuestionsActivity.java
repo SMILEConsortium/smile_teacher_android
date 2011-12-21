@@ -27,6 +27,7 @@ import com.razortooth.smile.bu.QuestionsManager;
 import com.razortooth.smile.bu.SmilePlugServerManager;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Question;
+import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.ui.adapter.FilesQuestionListAdapter;
 import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.DialogUtil;
@@ -49,6 +50,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     private ArrayAdapter<File> adapter;
 
     private ListView lvListQuestions;
+    private Results results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         setContentView(R.layout.use_prepared_questions_dialog);
 
         ip = this.getIntent().getStringExtra(GeneralActivity.PARAM_IP);
+        results = (Results) this.getIntent().getSerializableExtra(GeneralActivity.PARAM_RESULTS);
 
         btOk = (Button) findViewById(R.id.bt_ok);
         cbQuestions = (CheckBox) findViewById(R.id.cb_questions);
@@ -146,6 +149,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     private void openGeneralActivity() {
         Intent intent = new Intent(this, GeneralActivity.class);
         intent.putExtra(GeneralActivity.PARAM_IP, ip);
+        intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
         intent.putExtra(GeneralActivity.PARAM_HOURS, spinnerHours.getSelectedItem().toString());
         intent.putExtra(GeneralActivity.PARAM_MINUTES, spinnerMinutes.getSelectedItem().toString());
         intent.putExtra(GeneralActivity.PARAM_SECONDS, spinnerSeconds.getSelectedItem().toString());
@@ -193,6 +197,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         if (fileQuestionsList.length == 0) {
             Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
             intent.putExtra(GeneralActivity.PARAM_IP, ip);
+            intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
             startActivity(intent);
         }
 

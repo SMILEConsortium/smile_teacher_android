@@ -50,7 +50,7 @@ public class BoardManager extends AbstractBaseManager {
 
     }
 
-    public static Results retrieveResults(String ip, Context context) throws DataAccessException,
+    public Results retrieveResults(String ip, Context context) throws DataAccessException,
         NetworkErrorException {
 
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS);
