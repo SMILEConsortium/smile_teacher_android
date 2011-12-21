@@ -2,7 +2,6 @@ package com.razortooth.smile.ui;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -139,18 +138,14 @@ public class LoginActivity extends Activity {
 
     private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {
 
-        private Context context;
-
         public LoadTask(Activity context) {
             super(context);
-
-            this.context = context;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                SmilePlugServerManager.connect(tvIp.getText().toString(), context);
+                new SmilePlugServerManager().connect(tvIp.getText().toString(), context);
 
                 return true;
             } catch (NetworkErrorException e) {

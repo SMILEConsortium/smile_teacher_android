@@ -53,20 +53,23 @@ public class GeneralActivity extends FragmentActivity {
     public static final String PARAM_HOURS = "hours";
     public static final String PARAM_MINUTES = "minutes";
     public static final String PARAM_SECONDS = "seconds";
+    public static final String PARAM_RESULTS = "results";
 
     private String ip;
     private String hours;
     private String minutes;
     private String seconds;
 
-    private Button btSolve;
-    private Button btResults;
+    private Button btSolve, btResults;
 
-    private TextView tvTime;
-    private TextView tvRemaining;
+    private TextView tvTime, tvRemaining;
+    private TextView btnStudents, btnQuestions;
 
     private final List<Fragment> fragments = new Vector<Fragment>();
+
     private AbstractFragment activeFragment;
+
+    private ViewPager viewPagerFragments;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,13 @@ public class GeneralActivity extends FragmentActivity {
             tvTime.setVisibility(View.GONE);
             tvRemaining.setVisibility(View.GONE);
         }
+
+        btnStudents = (TextView) findViewById(R.id.tv_students);
+        btnStudents.setOnClickListener(btnFragmentOnClickListener);
+
+        btnQuestions = (TextView) findViewById(R.id.tv_questions);
+        btnQuestions.setOnClickListener(btnFragmentOnClickListener);
+
     }
 
     private void updateCurrentFragment(Board newBoard) {
@@ -123,6 +133,19 @@ public class GeneralActivity extends FragmentActivity {
         btSolve.setOnClickListener(new SolveButtonListener());
         btResults.setOnClickListener(new ResultsButtonListener());
     }
+
+    Button.OnClickListener btnFragmentOnClickListener = new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+
+            if (v.equals(btnStudents)) {
+                viewPagerFragments.setCurrentItem(0);
+            } else {
+                viewPagerFragments.setCurrentItem(1);
+            }
+        }
+    };
 
     public String formatTime(long millis) {
         String output = "00:00:00";
@@ -218,10 +241,10 @@ public class GeneralActivity extends FragmentActivity {
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
 
-        ViewPager mPager = (ViewPager) findViewById(R.id.vp_awesomepager);
-        mPager.setAdapter(pagerAdapter);
-        mPager.setCurrentItem(0);
-        mPager.setOnPageChangeListener(new FragmentOnPageChangeListener());
+        viewPagerFragments = (ViewPager) findViewById(R.id.vp_awesomepager);
+        viewPagerFragments.setAdapter(pagerAdapter);
+        viewPagerFragments.setCurrentItem(0);
+        viewPagerFragments.setOnPageChangeListener(new FragmentOnPageChangeListener());
     }
 
     private class SolveButtonListener implements OnClickListener {

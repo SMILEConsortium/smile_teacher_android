@@ -67,7 +67,6 @@ public class HttpUtil {
         throws NetworkErrorException, UnsupportedEncodingException, JSONException {
         HttpPut put = new HttpPut(url);
         put.setHeader("Content-Type", "application/json");
-        System.out.println(json);
         put.setEntity(new StringEntity(json));
         return executeMethod(put);
     }

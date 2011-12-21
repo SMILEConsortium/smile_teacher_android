@@ -2,10 +2,11 @@ package com.razortooth.smile.ui.adapter;
 
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.accounts.NetworkErrorException;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
-import com.razortooth.smile.bu.BoardManager;
-import com.razortooth.smile.bu.exception.DataAccessException;
+import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.Results;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
-    private Context context;
-    private String ip;
+    private Results results;
 
-    public QuestionListAdapter(Context context, List<Question> items, String ip) {
+    public QuestionListAdapter(Context context, List<Question> items, Results results) {
         super(context, 0, items);
 
-        this.context = context;
-        this.ip = ip;
+        this.results = results;
     }
 
     @Override
@@ -48,16 +46,14 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         tvOwner.setText(question.getOwner());
 
         try {
-            Results results = BoardManager.retrieveResults(ip, context);
             TextView tvHitAverage = (TextView) convertView.findViewById(R.id.tv_hit_average);
-            tvHitAverage.setText(String.valueOf(results.getQuestionsCorrectPercentage().get(
-                position)));
-        } catch (NetworkErrorException e) {
-            // TODO
-        } catch (DataAccessException e) {
-            // TODO
+            String sQuestionsCorrectPercentage = results == null ? "[0]" : results
+                .getQuestionsCorrectPercentage();
+            JSONArray questionsCorrectPercentage = new JSONArray(sQuestionsCorrectPercentage);
+            tvHitAverage.setText(String.valueOf(questionsCorrectPercentage.length() <= position ? 0
+                : questionsCorrectPercentage.get(position)));
         } catch (JSONException e) {
-            // TODO
+            Log.e(Constants.LOG_CATEGORY, "Error: ", e);
         }
 
         TextView tvRating = (TextView) convertView.findViewById(R.id.tv_rating);

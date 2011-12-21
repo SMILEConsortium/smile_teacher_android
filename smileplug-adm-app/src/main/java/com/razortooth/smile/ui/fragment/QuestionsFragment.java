@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import android.accounts.NetworkErrorException;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +21,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.BoardManager;
+import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.bu.QuestionsManager;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.domain.Question;
+import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.ui.GeneralActivity;
 import com.razortooth.smile.ui.QuestionStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.QuestionListAdapter;
@@ -35,6 +41,9 @@ public class QuestionsFragment extends AbstractFragment {
     private Button btSave;
 
     private String ip;
+    private Results results;
+
+    private boolean run;
 
     @Override
     protected int getLayout() {
@@ -46,15 +55,32 @@ public class QuestionsFragment extends AbstractFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        ip = getActivity().getIntent().getStringExtra(GeneralActivity.PARAM_IP);
+        btSave = (Button) getActivity().findViewById(R.id.bt_save);
+        btSave.setOnClickListener(new SaveButtonListener());
+    }
 
-        adapter = new QuestionListAdapter(getActivity(), questions, ip);
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ip = getActivity().getIntent().getStringExtra(GeneralActivity.PARAM_IP);
+        results = (Results) getActivity().getIntent().getSerializableExtra(
+            GeneralActivity.PARAM_RESULTS);
+        Log.i("test", results == null ? "null" : results.toString());
+
+        adapter = new QuestionListAdapter(getActivity(), questions, results);
         ListView lvListQuestions = (ListView) getActivity().findViewById(R.id.lv_questions);
         lvListQuestions.setAdapter(adapter);
         lvListQuestions.setOnItemClickListener(new OpenItemDetailsListener());
 
-        btSave = (Button) getActivity().findViewById(R.id.bt_save);
-        btSave.setOnClickListener(new SaveButtonListener());
+        run = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        run = false;
     }
 
     private class OpenItemDetailsListener implements OnItemClickListener {
@@ -74,11 +100,15 @@ public class QuestionsFragment extends AbstractFragment {
 
         questions.clear();
 
-        Collection<Question> newQuestions = null;
-        newQuestions = board.getQuestions();
+        if (run) {
+            Collection<Question> newQuestions = null;
+            newQuestions = board.getQuestions();
 
-        if (newQuestions != null) {
-            questions.addAll(newQuestions);
+            if (newQuestions != null) {
+                questions.addAll(newQuestions);
+            }
+
+            new UpdateResultsTask(getActivity()).execute();
         }
 
         adapter.notifyDataSetChanged();
@@ -114,10 +144,42 @@ public class QuestionsFragment extends AbstractFragment {
                     new QuestionsManager().saveQuestions(name.getText().toString(), questions);
                     aboutDialog.dismiss();
                 } catch (DataAccessException e) {
-                    Log.e("QuestionsFragment", e.getMessage());
+                    Log.e(Constants.LOG_CATEGORY, "Error: ", e);
                 }
                 ActivityUtil.showLongToast(QuestionsFragment.this.getActivity(), R.string.saved);
             }
         }
+    }
+
+    private class UpdateResultsTask extends AsyncTask<Void, Void, Results> {
+
+        private Context context;
+
+        private UpdateResultsTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected Results doInBackground(Void... arg0) {
+
+            try {
+                Results retrieveResults = new BoardManager().retrieveResults(ip, context);
+                return retrieveResults;
+            } catch (NetworkErrorException e) {
+                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+            } catch (DataAccessException e) {
+                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Results results) {
+            if (results != null) {
+                QuestionsFragment.this.results = results;
+            }
+        }
+
     }
 }

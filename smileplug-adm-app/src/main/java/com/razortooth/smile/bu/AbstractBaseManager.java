@@ -44,8 +44,7 @@ public abstract class AbstractBaseManager {
 
     }
 
-    protected static InputStream get(String ip, Context context, String url)
-        throws NetworkErrorException {
+    protected InputStream get(String ip, Context context, String url) throws NetworkErrorException {
 
         connect(ip, context);
 
@@ -81,7 +80,7 @@ public abstract class AbstractBaseManager {
 
     }
 
-    public static void connect(String ip, Context context) throws NetworkErrorException {
+    public void connect(String ip, Context context) throws NetworkErrorException {
         checkConnection(context);
         checkServer(ip);
     }

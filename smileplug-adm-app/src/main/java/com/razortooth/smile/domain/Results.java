@@ -1,17 +1,20 @@
 package com.razortooth.smile.domain;
 
+import java.io.Serializable;
+
 import org.json.JSONArray;
 
-public class Results {
+public class Results implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private int winnerScore;
     private float winnerRating;
-    private JSONArray bestScoredStudentNames;
-    private JSONArray bestRatedQuestionStudentNames;
+    private String bestScoredStudentNames;
+    private String bestRatedQuestionStudentNames;
     private int numberOfQuestions;
-    private JSONArray rightAnswers;
-    private JSONArray averageRatings;
-    private JSONArray questionsCorrectPercentage;
+    private String rightAnswers;
+    private String averageRatings;
+    private String questionsCorrectPercentage;
 
     public Results(int winnerScore, float winnerRating, JSONArray bestScoredStudentNames,
         JSONArray bestRatedQuestionStudentNames, int numberOfQuestions, JSONArray rightAnswers,
@@ -19,12 +22,12 @@ public class Results {
         super();
         this.winnerScore = winnerScore;
         this.winnerRating = winnerRating;
-        this.bestScoredStudentNames = bestScoredStudentNames;
-        this.bestRatedQuestionStudentNames = bestRatedQuestionStudentNames;
+        this.bestScoredStudentNames = bestScoredStudentNames.toString();
+        this.bestRatedQuestionStudentNames = bestRatedQuestionStudentNames.toString();
         this.numberOfQuestions = numberOfQuestions;
-        this.rightAnswers = rightAnswers;
-        this.averageRatings = averageRatings;
-        this.questionsCorrectPercentage = questionsCorrectPercentage;
+        this.rightAnswers = rightAnswers.toString();
+        this.averageRatings = averageRatings.toString();
+        this.questionsCorrectPercentage = questionsCorrectPercentage.toString();
     }
 
     public int getWinnerScore() {
@@ -43,19 +46,19 @@ public class Results {
         this.winnerRating = winnerRating;
     }
 
-    public JSONArray getBestScoredStudentNames() {
+    public String getBestScoredStudentNames() {
         return bestScoredStudentNames;
     }
 
-    public void setBestScoredStudentNames(JSONArray bestScoredStudentNames) {
+    public void setBestScoredStudentNames(String bestScoredStudentNames) {
         this.bestScoredStudentNames = bestScoredStudentNames;
     }
 
-    public JSONArray getBestRatedQuestionStudentNames() {
+    public String getBestRatedQuestionStudentNames() {
         return bestRatedQuestionStudentNames;
     }
 
-    public void setBestRatedQuestionStudentNames(JSONArray bestRatedQuestionStudentNames) {
+    public void setBestRatedQuestionStudentNames(String bestRatedQuestionStudentNames) {
         this.bestRatedQuestionStudentNames = bestRatedQuestionStudentNames;
     }
 
@@ -67,27 +70,27 @@ public class Results {
         this.numberOfQuestions = numberOfQuestions;
     }
 
-    public JSONArray getRightAnswers() {
+    public String getRightAnswers() {
         return rightAnswers;
     }
 
-    public void setRightAnswers(JSONArray rightAnswers) {
+    public void setRightAnswers(String rightAnswers) {
         this.rightAnswers = rightAnswers;
     }
 
-    public JSONArray getAverageRatings() {
+    public String getAverageRatings() {
         return averageRatings;
     }
 
-    public void setAverageRatings(JSONArray averageRatings) {
+    public void setAverageRatings(String averageRatings) {
         this.averageRatings = averageRatings;
     }
 
-    public JSONArray getQuestionsCorrectPercentage() {
+    public String getQuestionsCorrectPercentage() {
         return questionsCorrectPercentage;
     }
 
-    public void setQuestionsCorrectPercentage(JSONArray questionsCorrectPercentage) {
+    public void setQuestionsCorrectPercentage(String questionsCorrectPercentage) {
         this.questionsCorrectPercentage = questionsCorrectPercentage;
     }
 }

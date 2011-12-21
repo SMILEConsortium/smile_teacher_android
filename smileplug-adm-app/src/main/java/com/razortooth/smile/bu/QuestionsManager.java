@@ -117,7 +117,7 @@ public class QuestionsManager {
             pw.close();
 
         } catch (Exception e) {
-            Log.e("QuestionsManager", "Error saving questions", e);
+            Log.e(Constants.LOG_CATEGORY, "Error: ", e);
         } finally {
             IOUtil.silentClose(pw);
         }
@@ -143,7 +143,7 @@ public class QuestionsManager {
             try {
                 fr = new FileReader(file);
             } catch (FileNotFoundException e1) {
-                Log.e("QuestionsManager", "Error: " + e1.getMessage());
+                Log.e(Constants.LOG_CATEGORY, "Error: ", e1);
                 return result;
             }
 
@@ -209,7 +209,7 @@ public class QuestionsManager {
                 }
 
             } catch (IOException e) {
-                Log.e("QuestionsManager", "Error: " + e.getMessage());
+                Log.e(Constants.LOG_CATEGORY, "Error: ", e);
             } finally {
                 IOUtil.silentClose(br);
             }
