@@ -2,12 +2,12 @@ package com.razortooth.smile.ui.fragment;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import android.accounts.NetworkErrorException;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,21 +29,25 @@ import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.ui.GeneralActivity;
-import com.razortooth.smile.ui.QuestionStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.QuestionListAdapter;
 import com.razortooth.smile.util.ActivityUtil;
 
 public class QuestionsFragment extends AbstractFragment {
 
     private final List<Question> questions = new ArrayList<Question>();
+    private List<Question> listQuestionsSelected = new ArrayList<Question>();
+
     private ArrayAdapter<Question> adapter;
 
     private Button btSave;
+
+    private ListView lvListQuestions;
 
     private String ip;
     private Results results;
 
     private boolean run;
+    private boolean loadItems;
 
     @Override
     protected int getLayout() {
@@ -56,12 +60,15 @@ public class QuestionsFragment extends AbstractFragment {
         super.onActivityCreated(savedInstanceState);
 
         btSave = (Button) getActivity().findViewById(R.id.bt_save);
-        btSave.setOnClickListener(new SaveButtonListener());
+        lvListQuestions = (ListView) getActivity().findViewById(R.id.lv_questions);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        btSave.setEnabled(true);
+        btSave.setOnClickListener(new SaveButtonListener());
 
         ip = getActivity().getIntent().getStringExtra(GeneralActivity.PARAM_IP);
         results = (Results) getActivity().getIntent().getSerializableExtra(
@@ -69,11 +76,14 @@ public class QuestionsFragment extends AbstractFragment {
         Log.i("test", results == null ? "null" : results.toString());
 
         adapter = new QuestionListAdapter(getActivity(), questions, results);
-        ListView lvListQuestions = (ListView) getActivity().findViewById(R.id.lv_questions);
+
         lvListQuestions.setAdapter(adapter);
-        lvListQuestions.setOnItemClickListener(new OpenItemDetailsListener());
+        lvListQuestions.setOnItemClickListener(new CheckedItemListener());
+        lvListQuestions.setItemsCanFocus(false);
+        lvListQuestions.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         run = true;
+        loadItems = true;
     }
 
     @Override
@@ -83,15 +93,39 @@ public class QuestionsFragment extends AbstractFragment {
         run = false;
     }
 
-    private class OpenItemDetailsListener implements OnItemClickListener {
+    private void loadSelections() {
+        for (int i = 0; i < questions.size(); i++) {
+            if (!lvListQuestions.isItemChecked(i)) {
+                lvListQuestions.setItemChecked(i, true);
+                listQuestionsSelected.add(questions.get(i));
+            }
+        }
+    }
+
+    private class CheckedItemListener implements OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-            Question question = questions.get(position);
 
-            Intent intent = new Intent(getActivity(), QuestionStatusDetailsActivity.class);
-            intent.putExtra(QuestionStatusDetailsActivity.PARAM_QUESTION, question);
-            startActivity(intent);
+            if (lvListQuestions.isItemChecked(position)) {
+                Question question = adapter.getItem(position);
+                listQuestionsSelected.add(question);
+            } else {
+                Question question = adapter.getItem(position);
+                for (Iterator<Question> iterator = listQuestionsSelected.iterator(); iterator
+                    .hasNext();) {
+                    Question item = iterator.next();
+                    if (item.getNumber() == question.getNumber()) {
+                        iterator.remove();
+                    }
+                }
+            }
+
+            if (!listQuestionsSelected.isEmpty()) {
+                btSave.setEnabled(true);
+            } else {
+                btSave.setEnabled(false);
+            }
         }
     }
 
@@ -109,6 +143,13 @@ public class QuestionsFragment extends AbstractFragment {
             }
 
             new UpdateResultsTask(getActivity()).execute();
+
+            if (loadItems) {
+                listQuestionsSelected.clear();
+
+                loadSelections();
+                loadItems = false;
+            }
         }
 
         adapter.notifyDataSetChanged();
@@ -141,7 +182,8 @@ public class QuestionsFragment extends AbstractFragment {
                     if (name.getText().toString().equals("")) {
                         name.setText("Questions_file");
                     }
-                    new QuestionsManager().saveQuestions(name.getText().toString(), questions);
+                    new QuestionsManager().saveQuestions(name.getText().toString(),
+                        listQuestionsSelected);
                     aboutDialog.dismiss();
                 } catch (DataAccessException e) {
                     Log.e(Constants.LOG_CATEGORY, "Error: ", e);

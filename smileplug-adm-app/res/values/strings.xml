@@ -78,4 +78,8 @@
 	<string name="give_a_name">"Give a name: "</string>
 	
 	<string name="load">Load</string>
+	
+	<string name="checkbox">CheckBox</string>
+	
+	<string name="details">Details</string>
 </resources>
