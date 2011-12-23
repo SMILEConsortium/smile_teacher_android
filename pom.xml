@@ -19,7 +19,7 @@
         <android.sdk.home>${env.ANDROID_HOME}</android.sdk.home>
         <android.sdk.version>2.1.2</android.sdk.version>
         <android.device.id>2.1</android.device.id>
-        <android.device.file>${env.ANDROID_HOME}\.android\avd\${android.device.id}.avd</android.device.file>
+        <android.device.file>${user.home}\.android\avd\${android.device.id}.avd</android.device.file>
         <android.device.wait>50000</android.device.wait>
 
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>

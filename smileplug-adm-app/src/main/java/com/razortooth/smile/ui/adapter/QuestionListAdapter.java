@@ -1,12 +1,17 @@
 package com.razortooth.smile.ui.adapter;
 
+import java.io.IOException;
 import java.util.List;
+
+import net.iharder.Base64;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +25,6 @@ import com.razortooth.smile.R;
 import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.Results;
-import com.razortooth.smile.ui.QuestionStatusDetailsActivity;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
     private Results results;
@@ -86,9 +90,74 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, QuestionStatusDetailsActivity.class);
-            intent.putExtra(QuestionStatusDetailsActivity.PARAM_QUESTION, questions);
-            context.startActivity(intent);
+            Dialog detailsDialog = new Dialog(context, R.style.Dialog);
+            detailsDialog.setContentView(R.layout.question_details);
+            detailsDialog.show();
+
+            loadDetails(detailsDialog, questions);
         }
+    }
+
+    private void loadDetails(Dialog detailsDialog, Question questions) {
+        TextView tvOwner = (TextView) detailsDialog.findViewById(R.id.tv_create_by);
+        tvOwner.setText("( " + context.getString(R.string.create_by) + " " + questions.getOwner()
+            + " )");
+
+        ImageView tvImage = (ImageView) detailsDialog.findViewById(R.id.iv_image);
+        if (questions.hasImage()) {
+            byte[] imgContent;
+            try {
+                imgContent = Base64.decode(questions.getImage());
+                Bitmap bmp = BitmapFactory.decodeByteArray(imgContent, 0, imgContent.length);
+                tvImage.setImageBitmap(bmp);
+            } catch (IOException e) {
+                Log.e(Constants.LOG_CATEGORY, "Error decode image: ", e);
+            }
+        } else {
+            tvImage.setVisibility(View.GONE);
+        }
+
+        TextView tvQuestion = (TextView) detailsDialog.findViewById(R.id.tv_question);
+        if (!questions.getQuestion().equals("")) {
+            tvQuestion.setText(questions.getQuestion());
+        } else {
+            tvQuestion.setVisibility(View.GONE);
+        }
+
+        TextView tvAlternative1 = (TextView) detailsDialog.findViewById(R.id.tv_alternative1);
+        if (!questions.getOption1().equals("")) {
+            tvAlternative1.setText(context.getString(R.string.alternative1) + " "
+                + questions.getOption1());
+        } else {
+            tvAlternative1.setVisibility(View.GONE);
+        }
+
+        TextView tvAlternative2 = (TextView) detailsDialog.findViewById(R.id.tv_alternative2);
+        if (!questions.getOption1().equals("")) {
+            tvAlternative2.setText(context.getString(R.string.alternative2) + " "
+                + questions.getOption2());
+        } else {
+            tvAlternative2.setVisibility(View.GONE);
+        }
+
+        TextView tvAlternative3 = (TextView) detailsDialog.findViewById(R.id.tv_alternative3);
+        if (!questions.getOption1().equals("")) {
+            tvAlternative3.setText(context.getString(R.string.alternative3) + " "
+                + questions.getOption3());
+        } else {
+            tvAlternative3.setVisibility(View.GONE);
+        }
+
+        TextView tvAlternative4 = (TextView) detailsDialog.findViewById(R.id.tv_alternative4);
+        if (!questions.getOption1().equals("")) {
+            tvAlternative4.setText(context.getString(R.string.alternative4) + " "
+                + questions.getOption4());
+        } else {
+            tvAlternative4.setVisibility(View.GONE);
+        }
+
+        TextView tvCorrectAnswer = (TextView) detailsDialog.findViewById(R.id.tv_correct_answer);
+        tvCorrectAnswer.setText(context.getString(R.string.correct_answer) + ": "
+            + questions.getAnswer());
     }
 }
