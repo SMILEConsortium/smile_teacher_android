@@ -19,7 +19,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 
     public void startUsingPreparedQuestions(String ip, Context context,
         Collection<Question> questions) throws NetworkErrorException {
-        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.QUESTION);
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.QUESTION_URL);
         if (questions != null) {
             for (Question question : questions) {
                 QuestionWrapper questionWrapper = new QuestionWrapper(question);
@@ -33,7 +33,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 
     public void getResults(String ip, Context context, Collection<Question> questions)
         throws NetworkErrorException {
-        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS);
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS_URL);
         if (questions != null) {
             for (Question question : questions) {
                 QuestionWrapper questionWrapper = new QuestionWrapper(question);

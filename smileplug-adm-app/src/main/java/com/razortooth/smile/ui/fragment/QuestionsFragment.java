@@ -42,6 +42,7 @@ public class QuestionsFragment extends AbstractFragment {
     private Button btSave;
 
     private ListView lvListQuestions;
+    private TextView tvServer;
 
     private String ip;
     private Results results;
@@ -61,19 +62,21 @@ public class QuestionsFragment extends AbstractFragment {
 
         btSave = (Button) getActivity().findViewById(R.id.bt_save);
         lvListQuestions = (ListView) getActivity().findViewById(R.id.lv_questions);
+        tvServer = (TextView) getActivity().findViewById(R.id.tv_server);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        btSave.setEnabled(true);
+        btSave.setEnabled(false);
         btSave.setOnClickListener(new SaveButtonListener());
 
         ip = getActivity().getIntent().getStringExtra(GeneralActivity.PARAM_IP);
         results = (Results) getActivity().getIntent().getSerializableExtra(
             GeneralActivity.PARAM_RESULTS);
-        Log.i("test", results == null ? "null" : results.toString());
+
+        tvServer.setText(ip);
 
         adapter = new QuestionListAdapter(getActivity(), questions, results);
 
@@ -99,6 +102,12 @@ public class QuestionsFragment extends AbstractFragment {
                 lvListQuestions.setItemChecked(i, true);
                 listQuestionsSelected.add(questions.get(i));
             }
+        }
+
+        if (!questions.isEmpty() && !listQuestionsSelected.isEmpty()) {
+            btSave.setEnabled(true);
+        } else {
+            btSave.setEnabled(false);
         }
     }
 

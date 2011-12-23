@@ -81,4 +81,6 @@
 	<string name="checkbox">CheckBox</string>
 	
 	<string name="details">Details</string>
+	
+	<string name="server_connected">Server connected</string>
 </resources>

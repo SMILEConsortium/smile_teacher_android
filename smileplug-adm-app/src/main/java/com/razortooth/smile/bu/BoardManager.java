@@ -53,7 +53,7 @@ public class BoardManager extends AbstractBaseManager {
     public Results retrieveResults(String ip, Context context) throws DataAccessException,
         NetworkErrorException {
 
-        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS);
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS_URL);
         InputStream is = HttpUtil.executeGet(url);
 
         try {

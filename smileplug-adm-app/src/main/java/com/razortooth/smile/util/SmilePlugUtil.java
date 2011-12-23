@@ -12,8 +12,8 @@ public class SmilePlugUtil {
 
     public static final String SHOW_RESULTS_URL = "sendshowresults";
     public static final String ALL_DATA_URL = "all";
-    public static final String QUESTION = "question";
-    public static final String RESULTS = "results";
+    public static final String QUESTION_URL = "question";
+    public static final String RESULTS_URL = "results";
 
     private SmilePlugUtil() {
         // Empty

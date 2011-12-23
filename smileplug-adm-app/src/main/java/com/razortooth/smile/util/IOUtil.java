@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.util.Log;
+
+import com.razortooth.smile.bu.Constants;
+
 public class IOUtil {
 
     private IOUtil() {
@@ -95,8 +99,13 @@ public class IOUtil {
     }
 
     public static String loadContent(InputStream in, String encoding) throws IOException {
-        byte[] bytes = loadBytes(in);
-        return new String(bytes, encoding);
+        try {
+            byte[] bytes = loadBytes(in);
+            return new String(bytes, encoding);
+        } catch (OutOfMemoryError e) {
+            Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+            return "";
+        }
     }
 
 }
