@@ -7,12 +7,13 @@
     <artifactId>smileplug-adm-app</artifactId>
     <packaging>apk</packaging>
     <name>Smileplug Adm - App</name>
-    <version>0.1.0_beta1-SNAPSHOT</version>
+    <!-- Please bump this version to match the server version major/minor string -->
+    <version>0.1.1_beta1-SNAPSHOT</version>
 
     <parent>
         <groupId>com.razortooth.smile</groupId>
         <artifactId>smileplug-adm</artifactId>
-        <version>0.1.0_beta1-SNAPSHOT</version>
+        <version>0.1.1_beta1-SNAPSHOT</version>
     </parent>
 
     <dependencies>
