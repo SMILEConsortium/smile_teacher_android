@@ -2,6 +2,7 @@ package com.razortooth.smile.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -12,7 +13,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
 
 import android.accounts.NetworkErrorException;
 
@@ -60,8 +63,11 @@ public class HttpUtil {
 
     }
 
-    public static final InputStream executePut(String url) throws NetworkErrorException {
+    public static final InputStream executePut(String url, String json)
+        throws NetworkErrorException, UnsupportedEncodingException, JSONException {
         HttpPut put = new HttpPut(url);
+        put.setHeader("Content-Type", "application/json");
+        put.setEntity(new StringEntity(json));
         return executeMethod(put);
     }
 

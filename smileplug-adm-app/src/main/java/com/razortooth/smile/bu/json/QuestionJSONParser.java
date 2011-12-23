@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.razortooth.smile.bu.QuestionsManager;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.Student;
 
@@ -17,15 +18,19 @@ public class QuestionJSONParser {
     private static final String OPTION_4 = "O4";
     private static final String ANSWER = "A";
     private static final String IMAGE = "PIC";
+    private static final String OWNER_NAME = "NAME";
 
     public static final Question process(int number, JSONObject object,
         Map<String, Student> students) {
 
         String ip = object.optString(IP);
 
-        Student owner = students.get(ip);
-        owner.setMade(true);
+        if (!(ip.equals("") || ip.equals(QuestionsManager.TEACHER_IP))) {
+            Student owner = students.get(ip);
+            owner.setMade(true);
+        }
 
+        String name = object.optString(OWNER_NAME);
         String question = object.optString(QUESTION);
         String o1 = object.optString(OPTION_1);
         String o2 = object.optString(OPTION_2);
@@ -34,8 +39,7 @@ public class QuestionJSONParser {
         int answer = Integer.valueOf(object.optString(ANSWER));
         String image = object.optString(IMAGE);
 
-        return new Question(number, owner.getName(), question, o1, o2, o3, o4, answer, image);
+        return new Question(number, name, ip, question, o1, o2, o3, o4, answer, image);
 
     }
-
 }

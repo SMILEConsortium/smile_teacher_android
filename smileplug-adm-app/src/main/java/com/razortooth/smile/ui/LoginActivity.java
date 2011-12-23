@@ -2,7 +2,6 @@ package com.razortooth.smile.ui;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -44,10 +43,17 @@ public class LoginActivity extends Activity {
         btConnect.setEnabled(false);
         btConnect.setOnClickListener(new ConnectButtonListener());
 
-        tvIp.setText("");
+        // tvIp.setText("");
         tvIp.addTextChangedListener(new TextChanged());
 
         this.setVisible(true);
+
+        IPAddressValidatorUtil ipUtil = new IPAddressValidatorUtil();
+        if (ipUtil.validate(tvIp.getText().toString())) {
+            btConnect.setEnabled(true);
+        } else {
+            btConnect.setEnabled(false);
+        }
     }
 
     private class ConnectButtonListener implements OnClickListener {
@@ -102,12 +108,12 @@ public class LoginActivity extends Activity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            // nothing
+            // Empty
         }
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            // nothing
+            // Empty
         }
 
         @Override
@@ -132,12 +138,8 @@ public class LoginActivity extends Activity {
 
     private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {
 
-        private Context context;
-
         public LoadTask(Activity context) {
             super(context);
-
-            this.context = context;
         }
 
         @Override

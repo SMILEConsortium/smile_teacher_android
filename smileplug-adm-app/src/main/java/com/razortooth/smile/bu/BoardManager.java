@@ -17,9 +17,11 @@ import android.content.Context;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.bu.json.AnswersAndRatingsJSONParser;
 import com.razortooth.smile.bu.json.QuestionJSONParser;
+import com.razortooth.smile.bu.json.ResultsJSONParser;
 import com.razortooth.smile.bu.json.StudentJSONParser;
 import com.razortooth.smile.domain.Board;
 import com.razortooth.smile.domain.Question;
+import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.domain.Student;
 import com.razortooth.smile.util.HttpUtil;
 import com.razortooth.smile.util.IOUtil;
@@ -46,6 +48,39 @@ public class BoardManager extends AbstractBaseManager {
             IOUtil.silentClose(is);
         }
 
+    }
+
+    public Results retrieveResults(String ip, Context context) throws DataAccessException,
+        NetworkErrorException {
+
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS);
+        InputStream is = HttpUtil.executeGet(url);
+
+        try {
+            is = get(ip, context, url);
+            return loadResults(is);
+        } finally {
+            IOUtil.silentClose(is);
+        }
+
+    }
+
+    private static Results loadResults(InputStream is) throws DataAccessException {
+        String s;
+        Results results = null;
+        try {
+            s = IOUtil.loadContent(is, ENCODING);
+
+            JSONObject json = new JSONObject(s);
+
+            results = ResultsJSONParser.process(json);
+        } catch (IOException e) {
+            throw new DataAccessException(e);
+        } catch (JSONException e) {
+            throw new DataAccessException(e);
+        }
+
+        return results;
     }
 
     protected Board loadBoard(InputStream is) throws DataAccessException {

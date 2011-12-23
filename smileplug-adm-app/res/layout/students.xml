@@ -223,16 +223,17 @@
     		android:layout_height="wrap_content"
 	      	android:text="@string/rating"
 	      	android:textColor="@color/black"
-	      	android:layout_marginLeft="5dip"/>
-	      	
-	    <TextView  
-	    	android:id="@+id/tv_top_scorers_creator"  
-	    	android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-	      	android:text="@string/created_by"
-	      	android:textColor="@color/black"
 	      	android:layout_marginLeft="5dip"
 	      	android:layout_marginBottom="5dip"/>
+	      	
+<!-- 	    <TextView   -->
+<!-- 	    	android:id="@+id/tv_top_scorers_creator"   -->
+<!-- 	    	android:layout_width="wrap_content" -->
+<!--     		android:layout_height="wrap_content" -->
+<!-- 	      	android:text="@string/created_by" -->
+<!-- 	      	android:textColor="@color/black" -->
+<!-- 	      	android:layout_marginLeft="5dip" -->
+<!-- 	      	android:layout_marginBottom="5dip"/> -->
 	      	
 		<View
 			android:id="@+id/view_separator"  
@@ -240,7 +241,7 @@
 			android:layout_height="1dip"
 			android:background="@color/white"
 			android:layout_marginLeft="5dip"
-			android:layout_below="@id/tv_top_scorers_creator"/>			      	
+			android:layout_below="@id/tv_top_scorers_rating"/>			      	
 	
 	</LinearLayout>
 	

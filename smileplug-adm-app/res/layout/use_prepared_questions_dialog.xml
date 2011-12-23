@@ -64,6 +64,7 @@
 	    android:textSize="14sp"/>
 	
 	<LinearLayout 
+	    android:id="@+id/ll_time_container"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
@@ -123,7 +124,7 @@
   		android:layout_width="100dip"
   		android:layout_height="50dip"
   		android:layout_gravity="center_horizontal"
-  		android:text="@string/ok"
+  		android:text="@string/load"
   		android:textSize="12sp"
   		android:layout_marginTop="10dip"
   		android:layout_marginBottom="10dip"/>					

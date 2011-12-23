@@ -2,12 +2,17 @@ package com.razortooth.smile.ui.fragment;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import android.accounts.NetworkErrorException;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,9 +22,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.BoardManager;
+import com.razortooth.smile.bu.Constants;
+import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
+import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.domain.Student;
-import com.razortooth.smile.domain.StudentQuestionDetail;
+import com.razortooth.smile.ui.GeneralActivity;
 import com.razortooth.smile.ui.StudentStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.StudentListAdapter;
 
@@ -29,10 +38,11 @@ public class StudentsFragment extends AbstractFragment {
 
     private ArrayAdapter<Student> adapter;
 
-    private ArrayList<Integer> arrayListTopScorers;
-    private ArrayList<Integer> arrayListRatings;
+    private Results results;
 
     private boolean run;
+
+    private String ip;
 
     @Override
     protected int getLayout() {
@@ -44,25 +54,26 @@ public class StudentsFragment extends AbstractFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        adapter = new StudentListAdapter(getActivity(), students);
-        ListView lvListStudents = (ListView) getActivity().findViewById(R.id.lv_students);
-        lvListStudents.setAdapter(adapter);
-        lvListStudents.setOnItemClickListener(new OpenItemDetailsListener());
-
         TextView tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
         tvTopTitle.setVisibility(View.GONE);
 
         LinearLayout llTopScorersConatainer = (LinearLayout) getActivity().findViewById(
             R.id.ll_top_scorers);
         llTopScorersConatainer.setVisibility(View.GONE);
-
-        arrayListTopScorers = new ArrayList<Integer>();
-        arrayListRatings = new ArrayList<Integer>();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        ip = getActivity().getIntent().getStringExtra(GeneralActivity.PARAM_IP);
+        results = (Results) getActivity().getIntent().getSerializableExtra(
+            GeneralActivity.PARAM_RESULTS);
+
+        adapter = new StudentListAdapter(getActivity(), students);
+        ListView lvListStudents = (ListView) getActivity().findViewById(R.id.lv_students);
+        lvListStudents.setAdapter(adapter);
+        lvListStudents.setOnItemClickListener(new OpenItemDetailsListener());
 
         run = true;
     }
@@ -97,10 +108,12 @@ public class StudentsFragment extends AbstractFragment {
                 students.addAll(newStudents);
             }
 
+            new UpdateResultsTask(getActivity()).execute();
+
             getActivity().runOnUiThread(new Runnable() {
+
                 @Override
                 public void run() {
-
                     TextView tvName = (TextView) getActivity().findViewById(R.id.tv_total_students);
                     tvName.setText(getString(R.string.students) + ": " + students.size());
 
@@ -113,7 +126,9 @@ public class StudentsFragment extends AbstractFragment {
                         R.id.tv_total_answers);
                     tvAnswers.setText(getString(R.string.answers) + ": " + board.getAnswersNumber());
 
-                    setTopScorersArea();
+                    if (results != null) {
+                        setTopScorersArea(results);
+                    }
                 }
 
             });
@@ -123,37 +138,55 @@ public class StudentsFragment extends AbstractFragment {
 
     }
 
-    private void setTopScorersArea() {
-        HashMap<Integer, String> map = new HashMap<Integer, String>();
-        for (Student element : students) {
-            Student student = element;
+    private class UpdateResultsTask extends AsyncTask<Void, Void, Results> {
 
-            arrayListTopScorers.add(new Integer(student.getScore()));
+        private Context context;
 
-            for (StudentQuestionDetail element2 : student.getDetails()) {
-                StudentQuestionDetail detail = element2;
+        private UpdateResultsTask(Context context) {
+            this.context = context;
+        }
 
-                arrayListRatings.add(new Integer(detail.getChosenRating()));
-                map.put(detail.getChosenRating(), detail.getOwner());
+        @Override
+        protected Results doInBackground(Void... arg0) {
+
+            try {
+                Results retrieveResults = new BoardManager().retrieveResults(ip, context);
+                return retrieveResults;
+            } catch (NetworkErrorException e) {
+                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+            } catch (DataAccessException e) {
+                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Results results) {
+            if (results != null) {
+                StudentsFragment.this.results = results;
             }
         }
 
-        Integer maxScore = Collections.max(arrayListTopScorers);
-        Integer maxRating = Collections.max(arrayListRatings);
-        String owner = map.get(maxRating);
-
-        TextView tvTopScorersTop = (TextView) getActivity().findViewById(R.id.tv_top_scorers_top);
-        tvTopScorersTop.setText(getString(R.string.top_scorer) + ": " + maxScore);
-
-        TextView tvTopScorersRating = (TextView) getActivity().findViewById(
-            R.id.tv_top_scorers_rating);
-        tvTopScorersRating.setText(getString(R.string.rating) + ": " + new Double(maxRating));
-
-        TextView tvTopScorersCreator = (TextView) getActivity().findViewById(
-            R.id.tv_top_scorers_creator);
-        if (owner != null) {
-            tvTopScorersCreator.setText(getString(R.string.created_by) + ": " + owner);
-        }
     }
 
+    private void setTopScorersArea(Results results) {
+        try {
+            TextView tvTopScorersTop = (TextView) getActivity().findViewById(
+                R.id.tv_top_scorers_top);
+
+            String sBestScoredStudentNames = results.getBestScoredStudentNames();
+            JSONArray bestScoredStudentNames = new JSONArray(sBestScoredStudentNames == null ? ""
+                : sBestScoredStudentNames);
+            tvTopScorersTop.setText(getString(R.string.top_scorer) + ": "
+                + bestScoredStudentNames.join(", ").replaceAll("\"", ""));
+
+            TextView tvTopScorersRating = (TextView) getActivity().findViewById(
+                R.id.tv_top_scorers_rating);
+            tvTopScorersRating.setText(getString(R.string.rating) + ": "
+                + results.getWinnerRating());
+        } catch (JSONException e) {
+            Log.e("StudentsFragment", "Error: " + e);
+        }
+    }
 }

@@ -9,7 +9,8 @@ public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final int number;
-    private final String owner;
+    private String owner;
+    private String ip;
     private final String question;
     private final String option1;
     private final String option2;
@@ -20,8 +21,8 @@ public class Question implements Serializable {
     private final List<Integer> answers = new ArrayList<Integer>();
     private final List<Integer> ratings = new ArrayList<Integer>();
 
-    public Question(int number, String owner, String question, String option1, String option2,
-        String option3, String option4, int answer, String image) {
+    public Question(int number, String owner, String ip, String question, String option1,
+        String option2, String option3, String option4, int answer, String image) {
         super();
         this.number = number;
         this.owner = owner;
@@ -40,6 +41,18 @@ public class Question implements Serializable {
 
     public String getOwner() {
         return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public String getQuestion() {
@@ -94,7 +107,7 @@ public class Question implements Serializable {
 
         int value = 0;
         if (corrects != 0 && n != 0) {
-            value = corrects / n;
+            value = (corrects / n) * 100;
         }
 
         return value;
