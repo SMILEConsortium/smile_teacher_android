@@ -1,5 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bt_restart"
+        android:title="Restart"
+        android:icon="@drawable/recycle" />
     <item android:id="@+id/bt_about"
         android:title="About"
         android:icon="@drawable/about" />
+    <item android:id="@+id/bt_exit"
+        android:title="Exit"
+        android:icon="@drawable/close" />
 </menu>

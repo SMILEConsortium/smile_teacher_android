@@ -197,7 +197,8 @@
     	android:layout_height="wrap_content"
     	android:layout_below="@id/tv_top_scorers"
     	android:orientation="vertical"
-    	android:layout_marginRight="5dip">
+    	android:layout_marginRight="5dip"
+    	android:layout_alignParentBottom="true">
     	
     	<View
 			android:id="@+id/view_separator"  
@@ -250,7 +251,6 @@
 		android:layout_width="2dip"
 		android:layout_height="fill_parent"
 		android:background="@color/black"
-		android:layout_alignParentRight="true"
-		android:layout_centerVertical="true"/>        
+		android:layout_alignParentRight="true"/>        
   
 </RelativeLayout>

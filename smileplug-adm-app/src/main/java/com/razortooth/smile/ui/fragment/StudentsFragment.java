@@ -181,10 +181,10 @@ public class StudentsFragment extends AbstractFragment {
             tvTopScorersTop.setText(getString(R.string.top_scorer) + ": "
                 + bestScoredStudentNames.join(", ").replaceAll("\"", ""));
 
+            int winnerRating = (int) results.getWinnerRating();
             TextView tvTopScorersRating = (TextView) getActivity().findViewById(
                 R.id.tv_top_scorers_rating);
-            tvTopScorersRating.setText(getString(R.string.rating) + ": "
-                + results.getWinnerRating());
+            tvTopScorersRating.setText(getString(R.string.rating) + ": " + winnerRating);
         } catch (JSONException e) {
             Log.e("StudentsFragment", "Error: " + e);
         }

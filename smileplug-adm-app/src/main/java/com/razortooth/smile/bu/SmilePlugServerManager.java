@@ -45,6 +45,13 @@ public class SmilePlugServerManager extends AbstractBaseManager {
         startMakingQuestions(ip, context);
     }
 
+    public void resetGame(String ip, Context context) throws NetworkErrorException {
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESET_URL);
+
+        put(ip, context, url, "{}");
+
+    }
+
     public void startSolvingQuestions(String ip, Context context) throws NetworkErrorException {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_SOLVING_QUESTIONS_URL);
         put(ip, context, url, "{}");

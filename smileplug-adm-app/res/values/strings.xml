@@ -83,4 +83,10 @@
 	<string name="details">Details</string>
 	
 	<string name="server_connected">Server connected</string>
+	
+	<string name="reset_game">Reset game</string>
+	
+	<string name="exit">Are you sure you want to exit?</string>
+	
+	<string name="restart_game">Are you sure you want to restart game?</string>
 </resources>

@@ -5,7 +5,11 @@ import java.util.Vector;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -130,8 +134,8 @@ public class GeneralActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
 
-        btSolve.setOnClickListener(new SolveButtonListener());
-        btResults.setOnClickListener(new ResultsButtonListener());
+        btSolve.setOnClickListener(new SolveButtonListener(this));
+        btResults.setOnClickListener(new ResultsButtonListener(this));
     }
 
     Button.OnClickListener btnFragmentOnClickListener = new Button.OnClickListener() {
@@ -222,10 +226,51 @@ public class GeneralActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.bt_restart:
+                AlertDialog.Builder builderRestart = new AlertDialog.Builder(this);
+                builderRestart.setMessage(R.string.restart_game).setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                new SmilePlugServerManager().resetGame(ip, GeneralActivity.this);
+                            } catch (NetworkErrorException e) {
+                                Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+                            }
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+                AlertDialog alertRestart = builderRestart.create();
+                alertRestart.show();
+                break;
             case R.id.bt_about:
                 Dialog aboutDialog = new Dialog(this, R.style.Dialog);
                 aboutDialog.setContentView(R.layout.about);
                 aboutDialog.show();
+                break;
+            case R.id.bt_exit:
+                AlertDialog.Builder builderExit = new AlertDialog.Builder(this);
+                builderExit.setMessage(R.string.exit).setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+                AlertDialog alertExit = builderExit.create();
+                alertExit.show();
                 break;
         }
         return true;
@@ -249,10 +294,16 @@ public class GeneralActivity extends FragmentActivity {
 
     private class SolveButtonListener implements OnClickListener {
 
+        private Context context;
+
+        public SolveButtonListener(Context context) {
+            this.context = context;
+        }
+
         @Override
         public void onClick(View v) {
             try {
-                new SmilePlugServerManager().startSolvingQuestions(ip, GeneralActivity.this);
+                new SmilePlugServerManager().startSolvingQuestions(ip, context);
 
                 ActivityUtil.showLongToast(GeneralActivity.this, R.string.solving);
 
@@ -267,13 +318,19 @@ public class GeneralActivity extends FragmentActivity {
 
     private class ResultsButtonListener implements OnClickListener {
 
+        private Context context;
+
+        public ResultsButtonListener(Context context) {
+            this.context = context;
+        }
+
         @Override
         public void onClick(View v) {
             try {
                 if (btResults.getText().equals(getString(R.string.show_results))) {
                     btResults.setText(R.string.hide_results);
 
-                    new SmilePlugServerManager().showResults(ip, GeneralActivity.this);
+                    new SmilePlugServerManager().showResults(ip, context);
 
                     TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
                         LayoutParams.WRAP_CONTENT, 150);

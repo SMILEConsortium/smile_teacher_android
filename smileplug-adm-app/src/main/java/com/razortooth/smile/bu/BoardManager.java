@@ -94,7 +94,11 @@ public class BoardManager extends AbstractBaseManager {
 
         JSONArray array;
         try {
-            array = new JSONArray(s);
+            if (!s.equals("")) {
+                array = new JSONArray(s);
+            } else {
+                array = new JSONArray();
+            }
         } catch (JSONException e) {
             throw new DataAccessException(e);
         }

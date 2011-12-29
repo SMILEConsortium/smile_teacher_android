@@ -66,8 +66,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             Log.e(Constants.LOG_CATEGORY, "Error: ", e);
         }
 
+        int rating = (int) question.getRating();
         TextView tvRating = (TextView) convertView.findViewById(R.id.tv_rating);
-        tvRating.setText(String.valueOf(question.getRating()));
+        tvRating.setText(String.valueOf(rating));
 
         ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
         ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
