@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
@@ -66,12 +67,14 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             Log.e(Constants.LOG_CATEGORY, "Error: ", e);
         }
 
-        int rating = (int) question.getRating();
-        TextView tvRating = (TextView) convertView.findViewById(R.id.tv_rating);
-        tvRating.setText(String.valueOf(rating));
+        final int rating = (int) question.getRating();
 
         ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
         ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
+
+        final RatingBar ratingBar_Indicator = (RatingBar) convertView
+            .findViewById(R.id.rb_ratingbar);
+        ratingBar_Indicator.setRating(rating);
 
         return convertView;
     }

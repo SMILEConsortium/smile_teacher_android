@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
@@ -201,6 +202,10 @@ public class StudentsFragment extends AbstractFragment {
             TextView tvTopScorersRating = (TextView) getActivity().findViewById(
                 R.id.tv_top_scorers_rating);
             tvTopScorersRating.setText(getString(R.string.rating) + ": " + winnerRating);
+
+            final RatingBar rbRatingBar = (RatingBar) getActivity().findViewById(
+                R.id.rb_ratingbar);
+            rbRatingBar.setRating(winnerRating);
         } catch (JSONException e) {
             Log.e("StudentsFragment", "Error: " + e);
         }

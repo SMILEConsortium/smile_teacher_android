@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
@@ -40,8 +41,8 @@ public class StudentQuestionDetailAdapter extends ArrayAdapter<StudentQuestionDe
         TextView tvChosen = (TextView) convertView.findViewById(R.id.tv_chosen);
         tvChosen.setText(String.valueOf(item.getChosenAnswer()));
 
-        TextView tvRating = (TextView) convertView.findViewById(R.id.tv_rating);
-        tvRating.setText(String.valueOf(item.getChosenRating()));
+        final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
+        rbRatingBar.setRating(item.getChosenRating());
 
         return convertView;
     }

@@ -18,9 +18,9 @@
         android:id="@+id/tl_status"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
         android:layout_marginRight="5dip"
         android:layout_marginTop="5dip"
-        android:layout_marginBottom="5dip"
         android:shrinkColumns="*"
         android:stretchColumns="*" >
 
@@ -28,39 +28,41 @@
             android:id="@+id/tr_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_marginLeft="20dip" >
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="5dip" >
 
             <TextView
                 android:id="@+id/tv_number"
                 android:layout_width="20dip"
-		  		android:layout_height="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/black"
-                android:paddingRight="20dip"/>
+                android:paddingRight="20dip"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_correct"
                 android:layout_width="20dip"
-		  		android:layout_height="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/black"
-                android:paddingLeft="10dip"/>
+                android:paddingLeft="10dip"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_chosen"
                 android:layout_width="20dip"
-		  		android:layout_height="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/black"
-                android:paddingLeft="30dip"/>
+                android:paddingLeft="30dip"
+                android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/tv_rating"
-                android:layout_width="20dip"
-		  		android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"/>
+            <RatingBar
+                android:id="@+id/rb_ratingbar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="5dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:numStars="5" />
+
         </TableRow>
     </TableLayout>
 

@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
@@ -181,6 +182,10 @@ public class StudentStatusDetailsActivity extends Activity {
             TextView tvAverageRating = (TextView) detailsDialog
                 .findViewById(R.id.tv_average_rating);
             tvAverageRating.setText("Average rating: " + chosenRating);
+
+            final RatingBar rbRatingBar = (RatingBar) detailsDialog
+                .findViewById(R.id.rb_ratingbar);
+            rbRatingBar.setRating(chosenRating);
         }
     }
 }
