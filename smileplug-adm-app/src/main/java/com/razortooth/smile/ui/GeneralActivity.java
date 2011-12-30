@@ -234,6 +234,7 @@ public class GeneralActivity extends FragmentActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             try {
                                 new SmilePlugServerManager().resetGame(ip, GeneralActivity.this);
+                                GeneralActivity.this.finish();
                             } catch (NetworkErrorException e) {
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
                             }
