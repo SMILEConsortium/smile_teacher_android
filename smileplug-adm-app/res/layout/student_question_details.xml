@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+  	android:layout_width="650dip"
+  	android:layout_height="355dip"
+  	android:orientation="vertical"
+  	android:background="@drawable/rounded_border"
+  	android:layout_gravity="center"
+  	android:gravity="center_horizontal">
+  	
+    <TextView  
+  	  	android:id="@+id/tv_title"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:text="@string/question"
+      	android:textStyle="bold"
+      	android:textSize="16sp"
+      	android:textColor="@color/black"
+      	android:layout_marginTop="10dip"/>
+    
+    <View
+		android:id="@+id/view_separator"  
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_margin="5dip"/>
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dip" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            
+            <TextView
+                android:id="@+id/tv_question_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_create_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:textColor="@color/black"
+                android:layout_below="@id/tv_question_number" />
+            
+            <TextView
+                android:id="@+id/tv_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_below="@id/tv_create_by" />
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="350dip"
+                android:layout_height="200dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_below="@id/tv_question" />
+
+            <TextView
+                android:id="@+id/tv_alternative1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="20dip"
+                android:textColor="@color/black"
+                android:layout_below="@id/iv_image" />
+            
+            <ImageView 
+                android:id="@+id/iv_alternative1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/checkmark"
+                android:visibility="gone"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="20dip"
+                android:layout_toRightOf="@id/tv_alternative1"
+                android:layout_below="@id/iv_image" />
+
+            <TextView
+                android:id="@+id/tv_alternative2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:textColor="@color/black"
+                android:layout_below="@id/tv_alternative1" />
+            
+            <ImageView 
+                android:id="@+id/iv_alternative2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/checkmark"
+                android:visibility="gone"
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@id/tv_alternative2"
+                android:layout_below="@id/tv_alternative1" />
+
+            <TextView
+                android:id="@+id/tv_alternative3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:textColor="@color/black"
+                android:layout_below="@id/tv_alternative2" />
+            
+            <ImageView 
+                android:id="@+id/iv_alternative3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/checkmark"
+                android:visibility="gone"
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@id/tv_alternative3"
+                android:layout_below="@id/tv_alternative2" />
+
+            <TextView
+                android:id="@+id/tv_alternative4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:textColor="@color/black"
+                android:layout_below="@id/tv_alternative3" />
+            
+            <ImageView 
+                android:id="@+id/iv_alternative4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/checkmark"
+                android:visibility="gone"
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@id/tv_alternative4"
+                android:layout_below="@id/tv_alternative3" />
+
+            <TextView
+                android:id="@+id/tv_correct_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="20dip"
+                android:textColor="@color/black"
+                android:layout_below="@id/tv_alternative4" />
+            
+            <TextView
+                android:id="@+id/tv_average_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:textColor="@color/black"
+                android:layout_below="@id/tv_correct_answer" />
+            
+        </RelativeLayout>
+        
+    </ScrollView>
+    
+</LinearLayout>

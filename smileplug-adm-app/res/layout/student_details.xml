@@ -67,16 +67,15 @@
 		  		android:id="@+id/tr_row"
 		  		android:layout_width="wrap_content"
 		   	  	android:layout_height="wrap_content"
-		   	  	android:layout_marginTop="5dip">
-		  	
+		   	  	android:layout_marginTop="5dip"
+		   	  	android:layout_marginLeft="40dip">
+		   	  	
 			  	<TextView  
 			  	  	android:id="@+id/tv_title_number"
 			  	  	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/question_number"
 			      	android:textColor="@color/black"
-			      	android:layout_marginLeft="5dip"
-			      	android:layout_marginRight="5dip"
 			      	android:gravity="center"/>
 			           
 			  	<TextView  
@@ -85,8 +84,6 @@
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/correct_answer"   
 			      	android:textColor="@color/black"
-			      	android:layout_marginLeft="5dip"
-			      	android:layout_marginRight="5dip"
 			      	android:gravity="center"/>
 			           
 			  	<TextView  
@@ -95,8 +92,6 @@
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/chosen_answer"   
 			      	android:textColor="@color/black"
-			      	android:layout_marginLeft="5dip"
-			      	android:layout_marginRight="5dip"
 			      	android:gravity="center"/>
 			           
 			  	<TextView  
@@ -105,9 +100,8 @@
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/give_rating"    
 			      	android:textColor="@color/black"
-			      	android:layout_marginRight="5dip"
 			      	android:gravity="center"
-			      	android:layout_gravity="center"/>
+			      	android:paddingRight="50dip"/>
 		  	
 		  	</TableRow>
 		  	

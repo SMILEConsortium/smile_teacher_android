@@ -26,6 +26,8 @@ import com.razortooth.smile.bu.BoardManager;
 import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
+import com.razortooth.smile.domain.Question;
+import com.razortooth.smile.domain.QuestionList;
 import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.domain.Student;
 import com.razortooth.smile.ui.GeneralActivity;
@@ -35,6 +37,7 @@ import com.razortooth.smile.ui.adapter.StudentListAdapter;
 public class StudentsFragment extends AbstractFragment {
 
     private final List<Student> students = new ArrayList<Student>();
+    private final List<Question> questions = new ArrayList<Question>();
 
     private ArrayAdapter<Student> adapter;
 
@@ -91,8 +94,15 @@ public class StudentsFragment extends AbstractFragment {
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
             Student student = students.get(position);
 
+            QuestionList questionList = new QuestionList();
+            questionList.addAll(questions);
+
+            Bundle b = new Bundle();
+            b.putParcelable(StudentStatusDetailsActivity.PARAM_QUESTIONS, questionList);
+
             Intent intent = new Intent(getActivity(), StudentStatusDetailsActivity.class);
             intent.putExtra(StudentStatusDetailsActivity.PARAM_STUDENT, student);
+            intent.putExtras(b);
             startActivity(intent);
         }
     }
@@ -101,11 +111,17 @@ public class StudentsFragment extends AbstractFragment {
     public void updateFragment(final Board board) {
 
         students.clear();
+        questions.clear();
 
         if (run) {
             Collection<Student> newStudents = board.getStudents();
             if (newStudents != null) {
                 students.addAll(newStudents);
+            }
+
+            Collection<Question> newQuestions = board.getQuestions();
+            if (newQuestions != null) {
+                questions.addAll(newQuestions);
             }
 
             new UpdateResultsTask(getActivity()).execute();
