@@ -53,15 +53,26 @@
 	  		android:layout_centerHorizontal="true"/>	
 	  		
 		<TextView
-	  		android:id="@+id/tv_time"
-	  		android:layout_width="wrap_content"
+	  		android:id="@+id/tv_status"
+	  		android:layout_width="fill_parent"
 	  		android:layout_height="wrap_content"
 	  		android:textColor="@color/black"
 	  		android:textSize="14sp"
-	  		android:layout_marginTop="5dip"
-	  		android:layout_centerHorizontal="true"
+	  		android:gravity="center"
+	  		android:singleLine="false"
 	  		android:layout_alignParentBottom="true"/>
 		
+		<View
+			android:id="@+id/view" 
+			android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:background="@color/white"
+			android:layout_above="@id/tv_status"
+			android:layout_marginLeft="5dip"
+			android:layout_marginRight="5dip"
+			android:layout_marginTop="5dip"
+			android:layout_centerHorizontal="true"/>
+	  	
 		<TextView
 	  		android:id="@+id/tv_remaining_time"
 	  		android:layout_width="wrap_content"
@@ -69,8 +80,19 @@
 	  		android:text="@string/remaining_time"
 	  		android:textColor="@color/black"
 	  		android:textSize="14sp"
-	  		android:layout_above="@id/tv_time"
-	  		android:layout_centerHorizontal="true"/>		  
+	  		android:layout_marginBottom="30dip"
+	  		android:layout_above="@id/tv_status"
+	  		android:layout_centerHorizontal="true"/>
+		
+		<TextView
+	  		android:id="@+id/tv_time"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:textColor="@color/black"
+	  		android:textSize="14sp"
+	  		android:layout_marginBottom="10dip"
+	  		android:layout_centerHorizontal="true"
+	  		android:layout_above="@id/tv_status"/>
 	
 	</RelativeLayout>
 		

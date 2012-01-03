@@ -147,7 +147,7 @@ public class QuestionsManager {
                 return result;
             }
 
-            BufferedReader br = new BufferedReader(fr);
+            BufferedReader br = new BufferedReader(fr, 8 * 1024);
 
             try {
 
@@ -170,26 +170,17 @@ public class QuestionsManager {
 
                 for (int i = 0; i < n; i++) {
 
-                    int number;
-                    String question = "";
-                    String option1 = "";
-                    String option2 = "";
-                    String option3 = "";
-                    String option4 = "";
-                    int answer;
-                    boolean hasImage = false;
-
                     String sNumber = readUntilMarker(br);
-                    number = Integer.valueOf(sNumber);
+                    int number = Integer.valueOf(sNumber);
 
-                    question = readUntilMarker(br);
-                    option1 = readUntilMarker(br);
-                    option2 = readUntilMarker(br);
-                    option3 = readUntilMarker(br);
-                    option4 = readUntilMarker(br);
+                    String question = readUntilMarker(br);
+                    String option1 = readUntilMarker(br);
+                    String option2 = readUntilMarker(br);
+                    String option3 = readUntilMarker(br);
+                    String option4 = readUntilMarker(br);
 
                     String sHasImage = readUntilMarker(br);
-                    hasImage = sHasImage.equals("Y");
+                    boolean hasImage = "Y".equals(sHasImage);
 
                     String image = null;
                     if (hasImage) {
@@ -200,7 +191,10 @@ public class QuestionsManager {
                     }
 
                     String sAnswer = readUntilMarker(br);
-                    answer = Integer.valueOf(sAnswer);
+                    int answer = Integer.valueOf(sAnswer);
+
+                    @SuppressWarnings("unused")
+                    String owner = readUntilMarker(br);
 
                     Question q = new Question(number, TEACHER_NAME, TEACHER_IP, question, option1,
                         option2, option3, option4, answer, image);

@@ -43,6 +43,7 @@
 	  	android:id="@+id/et_server_ip"
 	  	android:layout_width="140dip"
 		android:layout_height="40dip"
+		android:text="@string/server_ip"
 		android:maxLines="1"
 		android:inputType="phone"
         android:digits="0123456789."

@@ -73,20 +73,17 @@
 	<string name="alternative4">(4)</string>
 	
 	<string name="saved">Saved</string>
-	
 	<string name="give_a_name">"Give a name: "</string>
-	
 	<string name="load">Load</string>
 	
 	<string name="checkbox">CheckBox</string>
-	
 	<string name="details">Details</string>
 	
 	<string name="server_connected">Server connected</string>
-	
 	<string name="reset_game">Reset game</string>
-	
 	<string name="exit">Are you sure you want to exit?</string>
-	
 	<string name="restart_game">Are you sure you want to restart game?</string>
+	<string name="game_running">A game is already running!</string>
+	
+	<string name="server_ip">192.168.1.16</string>
 </resources>

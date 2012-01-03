@@ -2,7 +2,9 @@ package com.razortooth.smile.ui;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 public class ChooseActivityFlowDialog extends Activity {
 
     private String ip;
+    private String status;
 
     private Button btStart;
     private Button btUse;
@@ -38,12 +41,15 @@ public class ChooseActivityFlowDialog extends Activity {
 
         btStart = (Button) findViewById(R.id.bt_start);
         btUse = (Button) findViewById(R.id.bt_use_prerared);
+
+        status = this.getIntent().getStringExtra(GeneralActivity.PARAM_STATUS);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString("ip", ip);
-        outState.putSerializable("results", results);
+        outState.putString(GeneralActivity.PARAM_IP, ip);
+        outState.putSerializable(GeneralActivity.PARAM_RESULTS, results);
+        outState.putSerializable(GeneralActivity.PARAM_STATUS, status);
 
         super.onSaveInstanceState(outState);
     }
@@ -51,8 +57,9 @@ public class ChooseActivityFlowDialog extends Activity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        ip = savedInstanceState.getString("ip");
-        results = (Results) savedInstanceState.getSerializable("results");
+        ip = savedInstanceState.getString(GeneralActivity.PARAM_IP);
+        results = (Results) savedInstanceState.getSerializable(GeneralActivity.PARAM_RESULTS);
+        status = savedInstanceState.getString(GeneralActivity.PARAM_STATUS);
     }
 
     @Override
@@ -73,7 +80,25 @@ public class ChooseActivityFlowDialog extends Activity {
 
         @Override
         public void onClick(View v) {
-            new LoadTask(ChooseActivityFlowDialog.this).execute();
+            if (status != null) {
+                if (!status.equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(
+                        ChooseActivityFlowDialog.this);
+                    builder.setMessage(R.string.game_running).setCancelable(false)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                new LoadTask(ChooseActivityFlowDialog.this).execute();
+                            }
+                        });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                } else {
+                    new LoadTask(ChooseActivityFlowDialog.this).execute();
+                }
+            } else {
+                new LoadTask(ChooseActivityFlowDialog.this).execute();
+            }
             ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.starting);
         }
     }
@@ -86,6 +111,7 @@ public class ChooseActivityFlowDialog extends Activity {
                 UsePreparedQuestionsActivity.class);
             intent.putExtra(GeneralActivity.PARAM_IP, ip);
             intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
+            intent.putExtra(GeneralActivity.PARAM_STATUS, status);
             startActivity(intent);
             ChooseActivityFlowDialog.this.finish();
         }
@@ -129,6 +155,7 @@ public class ChooseActivityFlowDialog extends Activity {
         Intent intent = new Intent(this, GeneralActivity.class);
         intent.putExtra(GeneralActivity.PARAM_IP, ip);
         intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
+        intent.putExtra(GeneralActivity.PARAM_STATUS, status);
         startActivity(intent);
 
         this.finish();
@@ -143,7 +170,9 @@ public class ChooseActivityFlowDialog extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
+
                 new SmilePlugServerManager().startMakingQuestions(ip, context);
+
                 return true;
             } catch (NetworkErrorException e) {
                 handleException(e);

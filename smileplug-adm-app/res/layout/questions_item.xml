@@ -30,7 +30,7 @@
         android:layout_width="40dip"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="75dip"
+        android:layout_marginLeft="65dip"
         android:layout_toRightOf="@id/iv_details"
         android:textColor="@color/black" />
 
@@ -39,7 +39,7 @@
         android:layout_width="110dip"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="27dip"
+        android:layout_marginLeft="35dip"
         android:layout_toRightOf="@id/tv_number"
         android:textColor="@color/black" />
 

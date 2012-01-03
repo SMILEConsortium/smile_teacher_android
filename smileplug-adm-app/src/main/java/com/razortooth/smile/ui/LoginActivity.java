@@ -25,6 +25,8 @@ public class LoginActivity extends Activity {
     private TextView tvIp;
     private Button btConnect;
 
+    private String status;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,6 @@ public class LoginActivity extends Activity {
         btConnect.setEnabled(false);
         btConnect.setOnClickListener(new ConnectButtonListener());
 
-        // tvIp.setText("");
         tvIp.addTextChangedListener(new TextChanged());
 
         this.setVisible(true);
@@ -119,17 +120,15 @@ public class LoginActivity extends Activity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             IPAddressValidatorUtil ipUtil = new IPAddressValidatorUtil();
-            if (ipUtil.validate(tvIp.getText().toString())) {
-                btConnect.setEnabled(true);
-            } else {
-                btConnect.setEnabled(false);
-            }
+            boolean ok = ipUtil.validate(tvIp.getText().toString());
+            btConnect.setEnabled(ok);
         }
     }
 
     private void loading() {
         Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
         intent.putExtra(GeneralActivity.PARAM_IP, tvIp.getText().toString());
+        intent.putExtra(GeneralActivity.PARAM_STATUS, status);
         startActivity(intent);
         ActivityUtil.showLongToast(this, R.string.connection_established);
 
@@ -146,6 +145,9 @@ public class LoginActivity extends Activity {
         protected Boolean doInBackground(Void... params) {
             try {
                 new SmilePlugServerManager().connect(tvIp.getText().toString(), context);
+
+                status = new SmilePlugServerManager().currentMessageGame(tvIp.getText().toString(),
+                    context);
 
                 return true;
             } catch (NetworkErrorException e) {
