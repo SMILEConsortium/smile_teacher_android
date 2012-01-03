@@ -57,6 +57,8 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     private ListView lvListQuestions;
     private Results results;
 
+    private int item = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,9 +190,11 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 
     private void loadQuestionsList() {
         clearSelection();
+
         adapter = new FilesQuestionListAdapter(this, fileQuestionsList);
+
         lvListQuestions.setAdapter(adapter);
-        lvListQuestions.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        lvListQuestions.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lvListQuestions.setItemsCanFocus(false);
         lvListQuestions.setOnItemClickListener(new ItemClickListener());
     }
@@ -199,8 +203,21 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-            btOk.setEnabled(true);
-            cbQuestions.setClickable(true);
+            boolean itemChecked = lvListQuestions.isItemChecked(position);
+
+            if (lvListQuestions.getCheckedItemPositions().size() > 1 && item != position) {
+                lvListQuestions.setItemChecked(item, false);
+            }
+            item = position;
+
+            btOk.setEnabled(itemChecked);
+            cbQuestions.setClickable(itemChecked);
+            if (!itemChecked || cbQuestions.isChecked()) {
+                cbQuestions.setChecked(false);
+                spinnerHours.setEnabled(false);
+                spinnerMinutes.setEnabled(false);
+                spinnerSeconds.setEnabled(false);
+            }
             fileQuestion = adapter.getItem(position);
         }
 
