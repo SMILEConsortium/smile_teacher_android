@@ -7,7 +7,6 @@ import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,6 +18,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,6 +37,7 @@ import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.bu.SmilePlugServerManager;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Board;
+import com.razortooth.smile.domain.CurrentMessageStatus;
 import com.razortooth.smile.ui.adapter.PagerAdapter;
 import com.razortooth.smile.ui.fragment.AbstractFragment;
 import com.razortooth.smile.ui.fragment.QuestionsFragment;
@@ -48,7 +49,6 @@ public class GeneralActivity extends FragmentActivity {
 
     private static final int AUTO_UPDATE_TIME = 5000;
     private static final String PARAM_BOARD = "board";
-    private Board board;
 
     private Handler boardHandler;
     private Runnable boardRunnable;
@@ -58,22 +58,27 @@ public class GeneralActivity extends FragmentActivity {
     public static final String PARAM_MINUTES = "minutes";
     public static final String PARAM_SECONDS = "seconds";
     public static final String PARAM_RESULTS = "results";
+    public static final String PARAM_STATUS = "status";
 
     private String ip;
-    private String hours;
-    private String minutes;
-    private String seconds;
+    private String hours, minutes, seconds;
+    private String status;
 
     private Button btSolve, btResults;
 
     private TextView tvTime, tvRemaining;
     private TextView btnStudents, btnQuestions;
+    private TextView tvStatus;
 
     private final List<Fragment> fragments = new Vector<Fragment>();
+
+    private Board board;
 
     private AbstractFragment activeFragment;
 
     private ViewPager viewPagerFragments;
+
+    private boolean solve;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,11 +89,13 @@ public class GeneralActivity extends FragmentActivity {
         hours = this.getIntent().getStringExtra(PARAM_HOURS);
         minutes = this.getIntent().getStringExtra(PARAM_MINUTES);
         seconds = this.getIntent().getStringExtra(PARAM_SECONDS);
+        status = this.getIntent().getStringExtra(PARAM_STATUS);
 
         btSolve = (Button) findViewById(R.id.bt_solve);
         btResults = (Button) findViewById(R.id.bt_results);
         tvTime = (TextView) findViewById(R.id.tv_time);
         tvRemaining = (TextView) findViewById(R.id.tv_remaining_time);
+        tvStatus = (TextView) findViewById(R.id.tv_status);
 
         if (savedInstanceState != null) {
             Board tmp = (Board) savedInstanceState.getSerializable(PARAM_BOARD);
@@ -119,6 +126,63 @@ public class GeneralActivity extends FragmentActivity {
         btnQuestions = (TextView) findViewById(R.id.tv_questions);
         btnQuestions.setOnClickListener(btnFragmentOnClickListener);
 
+        btResults.setEnabled(false);
+        solve = true;
+
+        if (status != null) {
+            if (status.equals("") || !status.equals(CurrentMessageStatus.START_MAKE.name())) {
+                status = CurrentMessageStatus.START_MAKE.name();
+            }
+            tvStatus.setText("Status game:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+        } else {
+            new LoadStatusTask(this).execute();
+        }
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("solve", solve);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        solve = savedInstanceState.getBoolean("solve");
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (event.getKeyCode()) {
+            case KeyEvent.KEYCODE_BACK:
+                AlertDialog.Builder builderBack = new AlertDialog.Builder(GeneralActivity.this);
+                builderBack
+                    .setMessage(
+                        "Are you sure you want to back? This operation will exit and restart the game.")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            GeneralActivity.this.finish();
+                            // TODO: Reset server
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+                AlertDialog alertBack = builderBack.create();
+                alertBack.show();
+
+                break;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     private void updateCurrentFragment(Board newBoard) {
@@ -127,6 +191,14 @@ public class GeneralActivity extends FragmentActivity {
             activeFragment.updateFragment(newBoard);
 
             boardHandler.postDelayed(boardRunnable, AUTO_UPDATE_TIME);
+
+            solve = !newBoard.getQuestions().isEmpty();
+
+            if (!solve || btResults.isEnabled()) {
+                btSolve.setEnabled(false);
+            } else {
+                btSolve.setEnabled(true);
+            }
         }
     }
 
@@ -134,8 +206,13 @@ public class GeneralActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
 
-        btSolve.setOnClickListener(new SolveButtonListener(this));
-        btResults.setOnClickListener(new ResultsButtonListener(this));
+        btSolve.setOnClickListener(new SolveButtonListener());
+        btResults.setOnClickListener(new ResultsButtonListener());
+
+        btSolve.setEnabled(solve);
+        if (btResults.isEnabled()) {
+            btSolve.setEnabled(false);
+        }
     }
 
     Button.OnClickListener btnFragmentOnClickListener = new Button.OnClickListener() {
@@ -197,7 +274,6 @@ public class GeneralActivity extends FragmentActivity {
         @Override
         public void onFinish() {
             tvTime.setText("Done!");
-            btResults.setEnabled(true);
         }
 
         @Override
@@ -219,8 +295,6 @@ public class GeneralActivity extends FragmentActivity {
         super.onStop();
 
         boardHandler.removeCallbacks(boardRunnable);
-
-        this.finish();
     }
 
     @Override
@@ -263,6 +337,9 @@ public class GeneralActivity extends FragmentActivity {
                             intent.addCategory(Intent.CATEGORY_HOME);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
+
+                            GeneralActivity.this.finish();
+                            // TODO: Restart server
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
@@ -295,83 +372,142 @@ public class GeneralActivity extends FragmentActivity {
 
     private class SolveButtonListener implements OnClickListener {
 
-        private Context context;
-
-        public SolveButtonListener(Context context) {
-            this.context = context;
-        }
-
         @Override
         public void onClick(View v) {
-            try {
-                new SmilePlugServerManager().startSolvingQuestions(ip, context);
-
-                ActivityUtil.showLongToast(GeneralActivity.this, R.string.solving);
-
-                btResults.setEnabled(true);
-                btSolve.setEnabled(false);
-            } catch (NetworkErrorException e) {
-                new NetworkErrorException("Connection errror: " + e.getMessage(), e);
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
-            }
+            new LoadToSolvingTask(GeneralActivity.this).execute();
         }
     }
 
     private class ResultsButtonListener implements OnClickListener {
 
-        private Context context;
+        @Override
+        public void onClick(View v) {
+            if (btResults.getText().equals(getString(R.string.show_results))) {
+                btResults.setText(R.string.hide_results);
 
-        public ResultsButtonListener(Context context) {
-            this.context = context;
+                new LoadToResultsTask(GeneralActivity.this).execute();
+            } else {
+                btResults.setText(R.string.show_results);
+
+                TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT, 275);
+
+                ListView lvListStudents = (ListView) GeneralActivity.this
+                    .findViewById(R.id.lv_students);
+                lvListStudents.setLayoutParams(layoutParams);
+                lvListStudents.setPadding(5, 0, 0, 0);
+
+                TextView tvTopTitle = (TextView) GeneralActivity.this
+                    .findViewById(R.id.tv_top_scorers);
+                tvTopTitle.setVisibility(View.GONE);
+
+                LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
+                    .findViewById(R.id.ll_top_scorers);
+                llTopScorersContainer.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void startSolvingQuestion() {
+        ActivityUtil.showLongToast(GeneralActivity.this, R.string.solving);
+
+        btResults.setEnabled(true);
+
+        solve = false;
+        btSolve.setEnabled(solve);
+    }
+
+    private void showResults() {
+        TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
+            LayoutParams.WRAP_CONTENT, 150);
+
+        ListView lvListStudents = (ListView) GeneralActivity.this.findViewById(R.id.lv_students);
+        lvListStudents.setLayoutParams(layoutParams);
+        lvListStudents.setPadding(5, 0, 0, 0);
+
+        TextView tvTopTitle = (TextView) GeneralActivity.this.findViewById(R.id.tv_top_scorers);
+        tvTopTitle.setVisibility(View.VISIBLE);
+
+        LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
+            .findViewById(R.id.ll_top_scorers);
+        llTopScorersContainer.setVisibility(View.VISIBLE);
+    }
+
+    private class LoadStatusTask extends ProgressDialogAsyncTask<Void, String> {
+
+        public LoadStatusTask(Activity context) {
+            super(context);
         }
 
         @Override
-        public void onClick(View v) {
+        protected String doInBackground(Void... params) {
             try {
-                if (btResults.getText().equals(getString(R.string.show_results))) {
-                    btResults.setText(R.string.hide_results);
-
-                    new SmilePlugServerManager().showResults(ip, context);
-
-                    TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
-                        LayoutParams.WRAP_CONTENT, 150);
-
-                    ListView lvListStudents = (ListView) GeneralActivity.this
-                        .findViewById(R.id.lv_students);
-                    lvListStudents.setLayoutParams(layoutParams);
-                    lvListStudents.setPadding(5, 0, 0, 0);
-
-                    TextView tvTopTitle = (TextView) GeneralActivity.this
-                        .findViewById(R.id.tv_top_scorers);
-                    tvTopTitle.setVisibility(View.VISIBLE);
-
-                    LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
-                        .findViewById(R.id.ll_top_scorers);
-                    llTopScorersContainer.setVisibility(View.VISIBLE);
-                } else {
-                    btResults.setText(R.string.show_results);
-
-                    TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
-                        LayoutParams.WRAP_CONTENT, 275);
-
-                    ListView lvListStudents = (ListView) GeneralActivity.this
-                        .findViewById(R.id.lv_students);
-                    lvListStudents.setLayoutParams(layoutParams);
-                    lvListStudents.setPadding(5, 0, 0, 0);
-
-                    TextView tvTopTitle = (TextView) GeneralActivity.this
-                        .findViewById(R.id.tv_top_scorers);
-                    tvTopTitle.setVisibility(View.GONE);
-
-                    LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
-                        .findViewById(R.id.ll_top_scorers);
-                    llTopScorersContainer.setVisibility(View.GONE);
-                }
-
+                return new SmilePlugServerManager().currentMessageGame(ip, context);
             } catch (NetworkErrorException e) {
-                new NetworkErrorException("Connection errror: " + e.getMessage(), e);
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+                handleException(e);
+                return "";
             }
+        }
+
+        @Override
+        protected void onPostExecute(String status) {
+            super.onPostExecute(status);
+
+            tvStatus.setText("Status game:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+        }
+    }
+
+    private class LoadToSolvingTask extends ProgressDialogAsyncTask<Void, String> {
+
+        public LoadToSolvingTask(Activity context) {
+            super(context);
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                new SmilePlugServerManager().startSolvingQuestions(ip, context);
+
+                return new SmilePlugServerManager().currentMessageGame(ip, context);
+            } catch (NetworkErrorException e) {
+                handleException(e);
+                return "";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String status) {
+            super.onPostExecute(status);
+
+            tvStatus.setText("Status game:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            GeneralActivity.this.startSolvingQuestion();
+        }
+    }
+
+    private class LoadToResultsTask extends ProgressDialogAsyncTask<Void, String> {
+
+        public LoadToResultsTask(Activity context) {
+            super(context);
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                new SmilePlugServerManager().showResults(ip, context);
+
+                return new SmilePlugServerManager().currentMessageGame(ip, context);
+            } catch (NetworkErrorException e) {
+                handleException(e);
+                return "";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String status) {
+            super.onPostExecute(status);
+
+            tvStatus.setText("Status game:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            GeneralActivity.this.showResults();
         }
     }
 

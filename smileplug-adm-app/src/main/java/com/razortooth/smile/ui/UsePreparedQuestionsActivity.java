@@ -7,8 +7,10 @@ import java.util.List;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +47,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     private Spinner spinnerSeconds;
 
     private String ip;
+    private String status;
 
     private File[] fileQuestionsList;
     private File fileQuestion;
@@ -62,6 +65,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 
         ip = this.getIntent().getStringExtra(GeneralActivity.PARAM_IP);
         results = (Results) this.getIntent().getSerializableExtra(GeneralActivity.PARAM_RESULTS);
+        status = this.getIntent().getStringExtra(GeneralActivity.PARAM_STATUS);
 
         btOk = (Button) findViewById(R.id.bt_ok);
         cbQuestions = (CheckBox) findViewById(R.id.cb_questions);
@@ -76,7 +80,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     protected void onResume() {
         super.onResume();
 
-        btOk.setOnClickListener(new OkButtonListener());
+        btOk.setOnClickListener(new LoadButtonListener());
         btOk.setEnabled(false);
 
         cbQuestions.setOnClickListener(new CbQuestionsButtonListener());
@@ -118,11 +122,30 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         spinnerSeconds.setAdapter(adapterSeconds);
     }
 
-    private class OkButtonListener implements OnClickListener {
+    private class LoadButtonListener implements OnClickListener {
 
         @Override
         public void onClick(View v) {
-            new LoadTask(UsePreparedQuestionsActivity.this).execute();
+            if (status != null) {
+                if (!status.equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(
+                        UsePreparedQuestionsActivity.this);
+                    builder.setMessage(R.string.game_running).setCancelable(false)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                new LoadTask(UsePreparedQuestionsActivity.this).execute();
+                            }
+                        });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                } else {
+                    new LoadTask(UsePreparedQuestionsActivity.this).execute();
+                }
+            } else {
+                new LoadTask(UsePreparedQuestionsActivity.this).execute();
+            }
+            ActivityUtil.showLongToast(UsePreparedQuestionsActivity.this, R.string.starting);
         }
 
     }
@@ -148,6 +171,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         Intent intent = new Intent(this, GeneralActivity.class);
         intent.putExtra(GeneralActivity.PARAM_IP, ip);
         intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
+        intent.putExtra(GeneralActivity.PARAM_STATUS, status);
         intent.putExtra(GeneralActivity.PARAM_HOURS, spinnerHours.getSelectedItem().toString());
         intent.putExtra(GeneralActivity.PARAM_MINUTES, spinnerMinutes.getSelectedItem().toString());
         intent.putExtra(GeneralActivity.PARAM_SECONDS, spinnerSeconds.getSelectedItem().toString());

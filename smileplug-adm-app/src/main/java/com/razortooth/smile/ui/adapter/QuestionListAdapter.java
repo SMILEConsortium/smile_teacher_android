@@ -67,14 +67,14 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             Log.e(Constants.LOG_CATEGORY, "Error: ", e);
         }
 
-        final int rating = (int) question.getRating();
+        final float rating = (float) question.getRating();
 
         ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
         ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
 
-        final RatingBar ratingBar_Indicator = (RatingBar) convertView
+        final RatingBar rbRatingBar = (RatingBar) convertView
             .findViewById(R.id.rb_ratingbar);
-        ratingBar_Indicator.setRating(rating);
+        rbRatingBar.setRating(rating);
 
         return convertView;
     }
