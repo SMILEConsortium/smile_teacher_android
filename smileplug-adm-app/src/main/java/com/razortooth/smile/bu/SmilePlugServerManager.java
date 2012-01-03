@@ -1,13 +1,19 @@
 package com.razortooth.smile.bu;
 
+import java.io.InputStream;
 import java.util.Collection;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
+import com.razortooth.smile.bu.exception.DataAccessException;
+import com.razortooth.smile.bu.json.CurrentMessageJSONParser;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.QuestionWrapper;
+import com.razortooth.smile.util.HttpUtil;
+import com.razortooth.smile.util.IOUtil;
 import com.razortooth.smile.util.SmilePlugUtil;
 
 public class SmilePlugServerManager extends AbstractBaseManager {
@@ -49,6 +55,24 @@ public class SmilePlugServerManager extends AbstractBaseManager {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESET_URL);
 
         put(ip, context, url, "{}");
+
+    }
+
+    public String currentMessageGame(String ip, Context context) throws NetworkErrorException {
+        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.CURRENT_MESSAGE_URL);
+
+        InputStream is = HttpUtil.executeGet(url);
+
+        try {
+            is = get(ip, context, url);
+            return CurrentMessageJSONParser.getStatus(is);
+        } catch (DataAccessException e) {
+            Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+        } finally {
+            IOUtil.silentClose(is);
+        }
+
+        return null;
 
     }
 
