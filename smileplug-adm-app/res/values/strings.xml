@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">SMILEPlug 0.1.3beta1</string> <!-- Try to get the maven to populate the version -->
+	<string name="app_name">SMILEPlug 0.1.4beta1</string> <!-- Try to get the maven to populate the version -->
 	<string name="server">Server</string>
 	<string name="connect">Connect</string>
 	<string name="loading">Loading...</string>
