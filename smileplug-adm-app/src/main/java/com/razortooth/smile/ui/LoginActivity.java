@@ -1,6 +1,5 @@
 package com.razortooth.smile.ui;
 
-import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -135,32 +134,32 @@ public class LoginActivity extends Activity {
         this.setVisible(false);
     }
 
-    private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {
+    private class LoadTask extends ProgressDialogAsyncTask<Void, String> {
 
         public LoadTask(Activity context) {
             super(context);
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
             try {
                 new SmilePlugServerManager().connect(tvIp.getText().toString(), context);
 
                 status = new SmilePlugServerManager().currentMessageGame(tvIp.getText().toString(),
                     context);
 
-                return true;
-            } catch (NetworkErrorException e) {
+                return "";
+            } catch (Exception e) {
                 handleException(e);
-                return false;
+                return e.getMessage();
             }
         }
 
         @Override
-        protected void onPostExecute(Boolean connected) {
-            super.onPostExecute(connected);
-            if (connected == false) {
-                DialogUtil.checkConnection(LoginActivity.this);
+        protected void onPostExecute(String message) {
+            super.onPostExecute(message);
+            if (!message.equals("")) {
+                DialogUtil.checkConnection(LoginActivity.this, message);
             } else {
                 LoginActivity.this.loading();
             }

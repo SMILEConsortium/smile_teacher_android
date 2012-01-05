@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -256,7 +255,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
             try {
                 return getQuestions();
             } catch (DataAccessException e) {
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e);
+                Log.e(Constants.LOG_CATEGORY, e.getMessage());
             }
             return null;
         }
@@ -279,7 +278,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 
     }
 
-    private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {
+    private class LoadTask extends ProgressDialogAsyncTask<Void, String> {
 
         private Context context;
 
@@ -290,28 +289,25 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
             try {
                 Collection<Question> newQuestions = null;
                 newQuestions = new QuestionsManager().loadQuestions(fileQuestion.getName());
 
                 new SmilePlugServerManager().startUsingPreparedQuestions(ip, context, newQuestions);
 
-                return true;
-            } catch (NetworkErrorException e) {
+                return "";
+            } catch (Exception e) {
                 handleException(e);
-                return false;
-            } catch (DataAccessException e) {
-                handleException(e);
-                return false;
+                return e.getMessage();
             }
         }
 
         @Override
-        protected void onPostExecute(Boolean connected) {
-            super.onPostExecute(connected);
-            if (connected == false) {
-                DialogUtil.checkConnection(UsePreparedQuestionsActivity.this);
+        protected void onPostExecute(String message) {
+            super.onPostExecute(message);
+            if (!message.equals("")) {
+                DialogUtil.checkConnection(UsePreparedQuestionsActivity.this, message);
             } else {
                 UsePreparedQuestionsActivity.this.openGeneralActivity();
             }

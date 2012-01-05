@@ -73,7 +73,7 @@ public abstract class ProgressDialogAsyncTask<Params, Result> extends
             String erro = null;
 
             if (!StringUtils.isEmpty(exMsg)) {
-                erro = " Erro: " + exMsg;
+                erro = exMsg;
             } else {
 
                 Throwable cause = e.getCause();
@@ -83,7 +83,7 @@ public abstract class ProgressDialogAsyncTask<Params, Result> extends
                 }
 
                 if (!StringUtils.isEmpty(exMsg)) {
-                    erro = " Erro: " + exMsg;
+                    erro = exMsg;
                 }
 
             }

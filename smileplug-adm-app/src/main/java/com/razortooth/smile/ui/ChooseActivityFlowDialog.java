@@ -134,9 +134,9 @@ public class ChooseActivityFlowDialog extends Activity {
                 Results retrieveResults = new BoardManager().retrieveResults(ip, context);
                 return retrieveResults;
             } catch (NetworkErrorException e) {
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e);
+                Log.e(Constants.LOG_CATEGORY, e.getMessage());
             } catch (DataAccessException e) {
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e);
+                Log.e(Constants.LOG_CATEGORY, e.getMessage());
             }
 
             return null;
@@ -161,30 +161,30 @@ public class ChooseActivityFlowDialog extends Activity {
         this.finish();
     }
 
-    private class LoadTask extends ProgressDialogAsyncTask<Void, Boolean> {
+    private class LoadTask extends ProgressDialogAsyncTask<Void, String> {
 
         public LoadTask(Activity context) {
             super(context);
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
             try {
 
                 new SmilePlugServerManager().startMakingQuestions(ip, context);
 
-                return true;
-            } catch (NetworkErrorException e) {
+                return "";
+            } catch (Exception e) {
                 handleException(e);
-                return false;
+                return e.getMessage();
             }
         }
 
         @Override
-        protected void onPostExecute(Boolean connected) {
-            super.onPostExecute(connected);
-            if (!connected) {
-                DialogUtil.checkConnection(ChooseActivityFlowDialog.this);
+        protected void onPostExecute(String message) {
+            super.onPostExecute(message);
+            if (!message.equals("")) {
+                DialogUtil.checkConnection(ChooseActivityFlowDialog.this, message);
             } else {
                 ChooseActivityFlowDialog.this.openGeneralActivity();
             }

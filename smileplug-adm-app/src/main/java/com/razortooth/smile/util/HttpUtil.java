@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.ParseException;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -15,7 +16,9 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.accounts.NetworkErrorException;
 
@@ -45,13 +48,20 @@ public class HttpUtil {
         StatusLine statusLine = response.getStatusLine();
         int statusCode = statusLine.getStatusCode();
 
-        if (statusCode != HttpStatus.SC_OK) {
-            throw new NetworkErrorException("Unexpected HTTP Status Code: " + statusCode);
-        }
-
-        // Returning the content
-        HttpEntity entity = response.getEntity();
         try {
+            // Returning the content
+            HttpEntity entity = response.getEntity();
+
+            if (statusCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
+                JSONObject json = new JSONObject(EntityUtils.toString(entity));
+                String message = json.getString("message");
+                throw new NetworkErrorException(message);
+            }
+
+            if (statusCode != HttpStatus.SC_OK) {
+                throw new NetworkErrorException("Unexpected HTTP Status Code: " + statusCode);
+            }
+
             return entity.getContent();
         } catch (IllegalStateException e) {
             throw new NetworkErrorException("Unexpected error returnig the request content: "
@@ -59,8 +69,11 @@ public class HttpUtil {
         } catch (IOException e) {
             throw new NetworkErrorException("Unexpected error returnig the request content: "
                 + e.getMessage(), e);
+        } catch (ParseException e) {
+            throw new NetworkErrorException(e.getMessage());
+        } catch (JSONException e) {
+            throw new NetworkErrorException(e.getMessage());
         }
-
     }
 
     public static final InputStream executePut(String url, String json)

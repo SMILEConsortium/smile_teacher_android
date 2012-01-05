@@ -6,12 +6,12 @@ import android.app.AlertDialog.Builder;
 
 public class DialogUtil {
 
-    public static void checkConnection(final Activity activity) {
+    public static void checkConnection(final Activity activity, String message) {
 
         Builder builder = new AlertDialog.Builder(activity);
 
         builder.setTitle("Connection error!");
-        builder.setMessage("Please verify the IP and try again.");
+        builder.setMessage(message);
         builder.setPositiveButton("Ok", null);
         builder.show();
     }

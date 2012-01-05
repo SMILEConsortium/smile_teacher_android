@@ -582,9 +582,9 @@ public class GeneralActivity extends FragmentActivity {
             try {
                 return loadBoard();
             } catch (NetworkErrorException e) {
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+                Log.e(Constants.LOG_CATEGORY, e.getMessage());
             } catch (DataAccessException e) {
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+                Log.e(Constants.LOG_CATEGORY, e.getMessage());
             }
 
             return null;

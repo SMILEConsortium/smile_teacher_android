@@ -170,9 +170,9 @@ public class StudentsFragment extends AbstractFragment {
                 Results retrieveResults = new BoardManager().retrieveResults(ip, context);
                 return retrieveResults;
             } catch (NetworkErrorException e) {
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+                Log.e(Constants.LOG_CATEGORY, e.getMessage());
             } catch (DataAccessException e) {
-                Log.e(Constants.LOG_CATEGORY, "Erro: " + e.getMessage());
+                Log.e(Constants.LOG_CATEGORY, e.getMessage());
             }
 
             return null;
