@@ -65,6 +65,12 @@
                 android:layout_gravity="center"
                 android:text="@string/students_name"
                 android:textColor="@color/black" />
+            
+            <TextView
+                android:id="@+id/tv_ip"
+                android:layout_gravity="center"
+                android:text="@string/ip"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_question"

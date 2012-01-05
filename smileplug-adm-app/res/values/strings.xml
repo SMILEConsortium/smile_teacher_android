@@ -17,7 +17,7 @@
 	<string name="number">Number</string>
 	<string name="owner">Owner</string>	 
 	<string name="correct">%Correct</string>
-	<string name="rating">Highest Rating</string>	
+	<string name="rating">Highest\n Rating</string>	
 	
 	<string name="save_questions">Save questions</string>
 	<string name="students_status">Student Status</string>
@@ -86,4 +86,5 @@
 	<string name="game_running">A game is already running!</string>
 	
 	<string name="server_ip">192.168.1.16</string>
+	<string name="ip">IP</string>
 </resources>
