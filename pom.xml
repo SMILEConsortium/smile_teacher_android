@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<name>Smileplug Adm</name>
 	<!-- Please bump this version string to match the server version -->
-	<version>0.1.4_beta1-SNAPSHOT</version>
+	<version>0.1.4_beta2-SNAPSHOT</version>
 
 	<properties>
 
