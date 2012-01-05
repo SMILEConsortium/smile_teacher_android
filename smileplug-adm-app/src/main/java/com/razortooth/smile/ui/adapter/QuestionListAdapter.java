@@ -56,6 +56,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         TextView tvOwner = (TextView) convertView.findViewById(R.id.tv_owner);
         tvOwner.setText(question.getOwner());
 
+        TextView tvIp = (TextView) convertView.findViewById(R.id.tv_ip);
+        tvIp.setText(question.getIp());
+
         try {
             TextView tvHitAverage = (TextView) convertView.findViewById(R.id.tv_hit_average);
             String sQuestionsCorrectPercentage = results == null ? "[0]" : results
@@ -72,8 +75,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
         ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
 
-        final RatingBar rbRatingBar = (RatingBar) convertView
-            .findViewById(R.id.rb_ratingbar);
+        final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
         rbRatingBar.setRating(rating);
 
         return convertView;

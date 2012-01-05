@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:button="@drawable/checkbox"
         android:focusable="false" />
 
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="30dip"
+        android:layout_marginLeft="25dip"
         android:layout_toRightOf="@id/cb_item_checkbox"
         android:background="@drawable/details" />
 
@@ -29,6 +29,7 @@
         android:id="@+id/tv_number"
         android:layout_width="40dip"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="65dip"
         android:layout_toRightOf="@id/iv_details"
@@ -36,19 +37,34 @@
 
     <TextView
         android:id="@+id/tv_owner"
-        android:layout_width="110dip"
+        android:layout_width="70dip"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="35dip"
+        android:layout_marginLeft="15dip"
         android:layout_toRightOf="@id/tv_number"
+        android:gravity="center"
+        android:textColor="@color/black" />
+    
+    <TextView
+        android:id="@+id/tv_ip"
+        android:layout_width="70dip"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="25dip"
+        android:layout_toRightOf="@id/tv_owner"
+        android:gravity="center"
         android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tv_hit_average"
         android:layout_width="40dip"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/tv_owner"
+        android:layout_marginLeft="45dip"
+        android:layout_toRightOf="@id/tv_ip"
         android:textColor="@color/black" />
 
     <RatingBar
@@ -57,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="55dip"
+        android:layout_marginLeft="20dip"
         android:layout_toRightOf="@id/tv_hit_average"
         android:numStars="5" />
 

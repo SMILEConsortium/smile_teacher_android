@@ -34,6 +34,9 @@ public class StudentListAdapter extends ArrayAdapter<Student> {
         TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
         tvName.setText(student.getName());
 
+        TextView tvIp = (TextView) convertView.findViewById(R.id.tv_ip);
+        tvIp.setText(student.getIp());
+
         CheckBox cbQuestion = (CheckBox) convertView.findViewById(R.id.tv_question);
         cbQuestion.setChecked(student.isMade());
         cbQuestion.setClickable(false);

@@ -55,32 +55,38 @@
 	  	<TableRow 
 	  		android:id="@+id/tr_row"
 	  		android:layout_width="wrap_content"
-	   	  	android:layout_height="wrap_content"
-	   	  	android:layout_marginTop="5dip">
+	   	  	android:layout_height="wrap_content">
 	   	  	
 	  	    <TextView  
-		  	  	android:id="@+id/tv_name"
+		  	  	android:id="@+id/tv_check"
 		      	android:text="  "  
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"/>
 	   	  	
 	  	    <TextView  
-		  	  	android:id="@+id/tv_name"
+		  	  	android:id="@+id/tv_details"
 		      	android:text="@string/details"  
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"/>
 	  	
 		  	<TextView  
-		  	  	android:id="@+id/tv_name"
+		  	  	android:id="@+id/tv_number"
 		      	android:text="@string/number"  
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"/>
-		           
+		  	       
 		  	<TextView  
 		      	android:id="@+id/tv_question" 
 		      	android:text="@string/owner"    
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"/>
+		  	
+		  	<TextView  
+		  	  	android:id="@+id/tv_ip"
+		      	android:text="@string/ip"  
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center"
+		      	android:layout_marginLeft="20dip"/>
 		           
 		  	<TextView  
 		    	android:id="@+id/tv_answers"  
@@ -92,7 +98,8 @@
 		      	android:id="@+id/tv_score"  
 		      	android:text="@string/rating"    
 		      	android:textColor="@color/black"
-		      	android:layout_gravity="center"/>
+		      	android:layout_gravity="center"
+		      	android:lines="2"/>
 	  	
 	  	</TableRow>
 	  	
@@ -102,7 +109,6 @@
 			android:layout_height="1dip"
 			android:background="@color/white"
 			android:layout_marginLeft="5dip"
-			android:layout_marginTop="5dip"
 			android:layout_below="@id/tv_title"/>
 	  	
 	  	<ListView 
