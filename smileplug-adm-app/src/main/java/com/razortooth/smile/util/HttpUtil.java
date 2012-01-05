@@ -52,7 +52,8 @@ public class HttpUtil {
             // Returning the content
             HttpEntity entity = response.getEntity();
 
-            if (statusCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
+            if (statusCode == HttpStatus.SC_INTERNAL_SERVER_ERROR
+                || statusCode == HttpStatus.SC_NOT_FOUND) {
                 JSONObject json = new JSONObject(EntityUtils.toString(entity));
                 String message = json.getString("message");
                 throw new NetworkErrorException(message);
