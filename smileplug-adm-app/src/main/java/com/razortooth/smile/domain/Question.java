@@ -30,6 +30,7 @@ public class Question implements Serializable {
         super();
         this.number = number;
         this.owner = owner;
+        this.ip = ip;
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;

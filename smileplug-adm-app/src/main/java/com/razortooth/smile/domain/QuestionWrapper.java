@@ -15,7 +15,7 @@ public class QuestionWrapper {
     public QuestionWrapper(Question question) {
         super();
         this.NAME = question.getOwner();
-        this.setIP(question.getIp());
+        this.IP = question.getIp();
         this.Q = question.getQuestion();
         this.O1 = question.getOption1();
         this.O2 = question.getOption2();

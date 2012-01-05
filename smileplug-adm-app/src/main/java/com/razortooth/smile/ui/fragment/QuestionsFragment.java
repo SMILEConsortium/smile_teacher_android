@@ -191,7 +191,7 @@ public class QuestionsFragment extends AbstractFragment {
                     if (name.getText().toString().equals("")) {
                         name.setText("Questions_file");
                     }
-                    new QuestionsManager().saveQuestions(name.getText().toString(),
+                    new QuestionsManager().saveQuestions(getActivity(), name.getText().toString(),
                         listQuestionsSelected);
                     aboutDialog.dismiss();
                 } catch (DataAccessException e) {

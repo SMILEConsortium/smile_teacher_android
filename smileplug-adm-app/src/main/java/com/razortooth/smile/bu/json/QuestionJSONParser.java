@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.razortooth.smile.bu.QuestionsManager;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.Student;
+import com.razortooth.smile.util.IPAddressUtil;
 
 public class QuestionJSONParser {
 
@@ -25,9 +25,11 @@ public class QuestionJSONParser {
 
         String ip = object.optString(IP);
 
-        if (!(ip.equals("") || ip.equals(QuestionsManager.TEACHER_IP))) {
+        if (!(ip.equals("") || ip.equals(IPAddressUtil.getIPAddress()))) {
             Student owner = students.get(ip);
-            owner.setMade(true);
+            if (owner != null) {
+                owner.setMade(true);
+            }
         }
 
         String name = object.optString(OWNER_NAME);

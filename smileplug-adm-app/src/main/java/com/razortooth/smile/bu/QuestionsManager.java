@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import net.iharder.Base64;
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
@@ -18,6 +19,7 @@ import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.util.DeviceUtil;
 import com.razortooth.smile.util.IOUtil;
+import com.razortooth.smile.util.IPAddressUtil;
 
 public class QuestionsManager {
 
@@ -61,7 +63,7 @@ public class QuestionsManager {
 
     }
 
-    public void saveQuestions(String name, Collection<Question> questions)
+    public void saveQuestions(Context context, String name, Collection<Question> questions)
         throws DataAccessException {
 
         if (!DeviceUtil.isExternalStorageWriteable()) {
@@ -104,7 +106,8 @@ public class QuestionsManager {
                 pw.println(MARKER);
                 pw.println(q.getAnswer());
                 pw.println(MARKER);
-                pw.println(q.getOwner());
+                String ip = IPAddressUtil.getIPAddress();
+                pw.println(ip);
 
                 if (q.hasImage()) {
                     File img = new File(dir, q.getNumber() + JPG);
@@ -193,11 +196,10 @@ public class QuestionsManager {
                     String sAnswer = readUntilMarker(br);
                     int answer = Integer.valueOf(sAnswer);
 
-                    @SuppressWarnings("unused")
-                    String owner = readUntilMarker(br);
+                    String ip = readUntilMarker(br);
 
-                    Question q = new Question(number, TEACHER_NAME, TEACHER_IP, question, option1,
-                        option2, option3, option4, answer, image);
+                    Question q = new Question(number, TEACHER_NAME, ip, question, option1, option2,
+                        option3, option4, answer, image);
 
                     result.add(q);
                 }
