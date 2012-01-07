@@ -26,7 +26,7 @@ public class QuestionList extends ArrayList<Question> implements Parcelable {
             Question question = new Question();
             question.setAnswer(in.readInt());
             question.setOwner(in.readString());
-            question.setImage(in.readString());
+            question.setImageUrl(in.readString());
             question.setNumber(in.readInt());
             question.setOption1(in.readString());
             question.setOption2(in.readString());
@@ -70,7 +70,7 @@ public class QuestionList extends ArrayList<Question> implements Parcelable {
 
             dest.writeInt(question.getAnswer());
             dest.writeString(question.getOwner());
-            dest.writeString(question.getImage());
+            dest.writeString(question.getImageUrl());
             dest.writeInt(question.getNumber());
             dest.writeString(question.getOption1());
             dest.writeString(question.getOption2());

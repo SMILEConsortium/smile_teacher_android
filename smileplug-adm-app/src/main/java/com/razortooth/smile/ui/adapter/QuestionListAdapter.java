@@ -1,9 +1,8 @@
 package com.razortooth.smile.ui.adapter;
 
-import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
-
-import net.iharder.Base64;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,7 +10,6 @@ import org.json.JSONException;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,16 +24,19 @@ import com.razortooth.smile.R;
 import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.Results;
+import com.razortooth.smile.util.ImageLoader;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
     private Results results;
     private Context context;
+    private String ip;
 
-    public QuestionListAdapter(Context context, List<Question> items, Results results) {
+    public QuestionListAdapter(Context context, List<Question> items, Results results, String ip) {
         super(context, android.R.layout.simple_list_item_multiple_choice, items);
 
         this.results = results;
         this.context = context;
+        this.ip = ip;
     }
 
     @Override
@@ -64,8 +65,15 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             String sQuestionsCorrectPercentage = results == null ? "[0]" : results
                 .getQuestionsCorrectPercentage();
             JSONArray questionsCorrectPercentage = new JSONArray(sQuestionsCorrectPercentage);
-            tvHitAverage.setText(String.valueOf(questionsCorrectPercentage.length() <= position ? 0
-                : questionsCorrectPercentage.get(position)));
+
+            NumberFormat numberFormat = new DecimalFormat("####0.00");
+            double amount = new Double(
+                String.valueOf(questionsCorrectPercentage.length() <= position ? 0
+                    : questionsCorrectPercentage.get(position)));
+
+            numberFormat.format(amount);
+
+            tvHitAverage.setText(String.valueOf(amount));
         } catch (JSONException e) {
             Log.e(Constants.LOG_CATEGORY, "Error: ", e);
         }
@@ -111,14 +119,11 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
         ImageView tvImage = (ImageView) detailsDialog.findViewById(R.id.iv_image);
         if (questions.hasImage()) {
-            byte[] imgContent;
-            try {
-                imgContent = Base64.decode(questions.getImage());
-                Bitmap bmp = BitmapFactory.decodeByteArray(imgContent, 0, imgContent.length);
+            Bitmap bmp = ImageLoader.loadBitmap(Constants.HTTP + ip + questions.getImageUrl());
+            if (bmp != null) {
                 tvImage.setImageBitmap(bmp);
-            } catch (IOException e) {
-                Log.e(Constants.LOG_CATEGORY, "Error decode image: ", e);
             }
+
         } else {
             tvImage.setVisibility(View.GONE);
         }

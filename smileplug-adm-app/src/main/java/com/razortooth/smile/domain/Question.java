@@ -17,16 +17,16 @@ public class Question implements Serializable {
     private String option3;
     private String option4;
     private int answer;
-    private String image;
+    private String imageUrl;
     private List<Integer> answers = new ArrayList<Integer>();
-    private List<Integer> ratings = new ArrayList<Integer>();
+    private List<Float> ratings = new ArrayList<Float>();
 
     public Question() {
         // Empty
     }
 
     public Question(int number, String owner, String ip, String question, String option1,
-        String option2, String option3, String option4, int answer, String image) {
+        String option2, String option3, String option4, int answer, String imageUrl) {
         super();
         this.number = number;
         this.owner = owner;
@@ -37,7 +37,7 @@ public class Question implements Serializable {
         this.option3 = option3;
         this.option4 = option4;
         this.answer = answer;
-        this.image = image;
+        this.imageUrl = imageUrl;
     }
 
     public int getNumber() {
@@ -84,12 +84,12 @@ public class Question implements Serializable {
         return answer;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public boolean hasImage() {
-        return image != null && image.trim().length() > 0;
+        return imageUrl != null && imageUrl.trim().length() > 0;
     }
 
     public List<Integer> getAnswers() {
@@ -119,27 +119,27 @@ public class Question implements Serializable {
 
     }
 
-    public List<Integer> getRatings() {
+    public List<Float> getRatings() {
         return ratings;
     }
 
-    public void addRating(int rating) {
+    public void addRating(float rating) {
         ratings.add(rating);
     }
 
     public double getRating() {
 
-        int total = 0;
-        int n = 0;
+        float total = 0;
+        float n = 0;
 
-        for (Integer i : ratings) {
+        for (Float i : ratings) {
             if (i > 0) {
                 total += i;
                 n++;
             }
         }
 
-        int value = 0;
+        float value = 0;
         if (total != 0 && n != 0) {
             value = total / n;
         }
@@ -176,15 +176,15 @@ public class Question implements Serializable {
         this.answer = answer;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setAnswers(List<Integer> answers) {
         this.answers = answers;
     }
 
-    public void setRatings(List<Integer> ratings) {
+    public void setRatings(List<Float> ratings) {
         this.ratings = ratings;
     }
 

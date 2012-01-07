@@ -167,7 +167,6 @@ public class GeneralActivity extends FragmentActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             GeneralActivity.this.finish();
-                            // TODO: Reset server
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
@@ -339,7 +338,6 @@ public class GeneralActivity extends FragmentActivity {
                             startActivity(intent);
 
                             GeneralActivity.this.finish();
-                            // TODO: Restart server
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override

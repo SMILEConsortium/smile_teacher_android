@@ -41,6 +41,36 @@ public class IOUtil {
         }
     }
 
+    public static final void silentClose(InputStream in) {
+        try {
+            if (in != null) {
+                in.close();
+            }
+        } catch (IOException e) {}
+    }
+
+    public static final void silentClose(OutputStream out) {
+        try {
+            if (out != null) {
+                out.close();
+            }
+        } catch (IOException e) {}
+    }
+
+    public static void copy(InputStream is, OutputStream os) {
+        final int buffer_size = 1024;
+        try {
+            byte[] bytes = new byte[buffer_size];
+            for (;;) {
+                int count = is.read(bytes, 0, buffer_size);
+                if (count == -1) {
+                    break;
+                }
+                os.write(bytes, 0, count);
+            }
+        } catch (Exception ex) {}
+    }
+
     public static byte[] loadBytesFromResource(String resource) throws IOException {
         InputStream is = IOUtil.class.getResourceAsStream(resource);
         return loadBytes(is);

@@ -17,7 +17,7 @@ public class QuestionJSONParser {
     private static final String OPTION_3 = "O3";
     private static final String OPTION_4 = "O4";
     private static final String ANSWER = "A";
-    private static final String IMAGE = "PIC";
+    private static final String IMAGE = "PICURL";
     private static final String OWNER_NAME = "NAME";
 
     public static final Question process(int number, JSONObject object,

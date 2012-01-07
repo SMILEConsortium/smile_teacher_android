@@ -111,7 +111,7 @@ public class QuestionsManager {
 
                 if (q.hasImage()) {
                     File img = new File(dir, q.getNumber() + JPG);
-                    byte[] imgContent = Base64.decode(q.getImage());
+                    byte[] imgContent = Base64.decode(q.getImageUrl());
                     IOUtil.saveBytes(img, imgContent);
                 }
             }

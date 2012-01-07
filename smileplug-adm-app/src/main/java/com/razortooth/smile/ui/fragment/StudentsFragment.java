@@ -34,11 +34,12 @@ import com.razortooth.smile.domain.Student;
 import com.razortooth.smile.ui.GeneralActivity;
 import com.razortooth.smile.ui.StudentStatusDetailsActivity;
 import com.razortooth.smile.ui.adapter.StudentListAdapter;
+import com.razortooth.smile.util.ActivityUtil;
 
 public class StudentsFragment extends AbstractFragment {
 
     private final List<Student> students = new ArrayList<Student>();
-    private final List<Question> questions = new ArrayList<Question>();
+    private List<Question> questions = new ArrayList<Question>();
 
     private ArrayAdapter<Student> adapter;
 
@@ -47,6 +48,8 @@ public class StudentsFragment extends AbstractFragment {
     private boolean run;
 
     private String ip;
+
+    private int countAnswers;
 
     @Override
     protected int getLayout() {
@@ -95,16 +98,22 @@ public class StudentsFragment extends AbstractFragment {
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
             Student student = students.get(position);
 
-            QuestionList questionList = new QuestionList();
-            questionList.addAll(questions);
+            if (countAnswers > 0) {
+                QuestionList questionList = new QuestionList();
+                questionList.addAll(questions);
 
-            Bundle b = new Bundle();
-            b.putParcelable(StudentStatusDetailsActivity.PARAM_QUESTIONS, questionList);
+                Bundle b = new Bundle();
+                b.putParcelable(StudentStatusDetailsActivity.PARAM_QUESTIONS, questionList);
 
-            Intent intent = new Intent(getActivity(), StudentStatusDetailsActivity.class);
-            intent.putExtra(StudentStatusDetailsActivity.PARAM_STUDENT, student);
-            intent.putExtras(b);
-            startActivity(intent);
+                Intent intent = new Intent(getActivity(), StudentStatusDetailsActivity.class);
+                intent.putExtra(StudentStatusDetailsActivity.PARAM_STUDENT, student);
+                intent.putExtras(b);
+                intent.putExtra(GeneralActivity.PARAM_IP, ip);
+                startActivity(intent);
+            } else {
+                ActivityUtil.showLongToast(getActivity(),
+                    "This student has not answered a question.");
+            }
         }
     }
 
@@ -120,9 +129,11 @@ public class StudentsFragment extends AbstractFragment {
                 students.addAll(newStudents);
             }
 
-            Collection<Question> newQuestions = board.getQuestions();
-            if (newQuestions != null) {
-                questions.addAll(newQuestions);
+            if (countAnswers > 0) {
+                Collection<Question> newQuestions = board.getQuestions();
+                if (newQuestions != null) {
+                    questions.addAll(newQuestions);
+                }
             }
 
             new UpdateResultsTask(getActivity()).execute();
@@ -141,10 +152,11 @@ public class StudentsFragment extends AbstractFragment {
 
                     TextView tvAnswers = (TextView) getActivity().findViewById(
                         R.id.tv_total_answers);
-                    tvAnswers.setText(getString(R.string.answers) + ": " + board.getAnswersNumber());
+                    countAnswers = board.getAnswersNumber();
+                    tvAnswers.setText(getString(R.string.answers) + ": " + countAnswers);
 
                     if (results != null) {
-                        setTopScorersArea(results);
+                        setTopScorersArea(results, board);
                     }
                 }
 
@@ -187,7 +199,7 @@ public class StudentsFragment extends AbstractFragment {
 
     }
 
-    private void setTopScorersArea(Results results) {
+    private void setTopScorersArea(Results results, Board board) {
         try {
             TextView tvTopScorersTop = (TextView) getActivity().findViewById(
                 R.id.tv_top_scorers_top);

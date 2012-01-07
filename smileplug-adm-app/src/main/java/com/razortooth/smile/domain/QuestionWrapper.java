@@ -8,7 +8,7 @@ public class QuestionWrapper {
     private String O3;
     private String O4;
     private int A;
-    private String PIC;
+    private String PICURL;
     private String TYPE;
     private String IP;
 
@@ -23,7 +23,7 @@ public class QuestionWrapper {
         this.O4 = question.getOption4();
         this.A = question.getAnswer();
         if (question.hasImage()) {
-            this.PIC = question.getImage();
+            this.PICURL = question.getImageUrl();
             this.TYPE = "QUESTION_PIC";
         } else {
             this.TYPE = "QUESTION";
@@ -86,12 +86,12 @@ public class QuestionWrapper {
         A = a;
     }
 
-    public String getPIC() {
-        return PIC;
+    public String getPICURL() {
+        return PICURL;
     }
 
-    public void setPIC(String pIC) {
-        PIC = pIC;
+    public void setPICURL(String pIC) {
+        PICURL = pIC;
     }
 
     public String getTYPE() {

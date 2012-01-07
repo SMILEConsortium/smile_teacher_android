@@ -1,15 +1,11 @@
 package com.razortooth.smile.ui;
 
-import java.io.IOException;
 import java.util.List;
 
-import net.iharder.Base64;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -25,6 +21,7 @@ import com.razortooth.smile.domain.QuestionList;
 import com.razortooth.smile.domain.Student;
 import com.razortooth.smile.domain.StudentQuestionDetail;
 import com.razortooth.smile.ui.adapter.StudentQuestionDetailAdapter;
+import com.razortooth.smile.util.ImageLoader;
 
 public class StudentStatusDetailsActivity extends Activity {
 
@@ -33,6 +30,7 @@ public class StudentStatusDetailsActivity extends Activity {
 
     private Student student;
     private QuestionList questions;
+    private String ip;
 
     private ListView lvListQuestionDetails;
 
@@ -44,6 +42,7 @@ public class StudentStatusDetailsActivity extends Activity {
 
         Bundle b = getIntent().getExtras();
         questions = b.getParcelable(PARAM_QUESTIONS);
+        ip = this.getIntent().getStringExtra(GeneralActivity.PARAM_IP);
 
         student = (Student) getIntent().getSerializableExtra(PARAM_STUDENT);
 
@@ -123,14 +122,11 @@ public class StudentStatusDetailsActivity extends Activity {
 
             ImageView tvImage = (ImageView) detailsDialog.findViewById(R.id.iv_image);
             if (question.hasImage()) {
-                byte[] imgContent;
-                try {
-                    imgContent = Base64.decode(question.getImage());
-                    Bitmap bmp = BitmapFactory.decodeByteArray(imgContent, 0, imgContent.length);
+                Bitmap bmp = ImageLoader.loadBitmap(Constants.HTTP + ip + question.getImageUrl());
+                if (bmp != null) {
                     tvImage.setImageBitmap(bmp);
-                } catch (IOException e) {
-                    Log.e(Constants.LOG_CATEGORY, "Error decode image: ", e);
                 }
+
             } else {
                 tvImage.setVisibility(View.GONE);
             }
@@ -183,8 +179,7 @@ public class StudentStatusDetailsActivity extends Activity {
                 .findViewById(R.id.tv_average_rating);
             tvAverageRating.setText("Average rating: " + chosenRating);
 
-            final RatingBar rbRatingBar = (RatingBar) detailsDialog
-                .findViewById(R.id.rb_ratingbar);
+            final RatingBar rbRatingBar = (RatingBar) detailsDialog.findViewById(R.id.rb_ratingbar);
             rbRatingBar.setRating(chosenRating);
         }
     }

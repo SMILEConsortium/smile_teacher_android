@@ -8,4 +8,6 @@ public class Constants {
 
     public static final String LOG_CATEGORY = "SMILEPLUG";
 
+    public static final String HTTP = "http://";
+
 }

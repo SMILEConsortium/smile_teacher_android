@@ -78,7 +78,7 @@ public class QuestionsFragment extends AbstractFragment {
 
         tvServer.setText(ip);
 
-        adapter = new QuestionListAdapter(getActivity(), questions, results);
+        adapter = new QuestionListAdapter(getActivity(), questions, results, ip);
 
         lvListQuestions.setAdapter(adapter);
         lvListQuestions.setOnItemClickListener(new CheckedItemListener());
