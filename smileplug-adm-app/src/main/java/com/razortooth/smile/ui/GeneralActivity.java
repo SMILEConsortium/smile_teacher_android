@@ -342,6 +342,12 @@ public class GeneralActivity extends FragmentActivity {
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
 
+                            try {
+                                new SmilePlugServerManager().resetGame(ip, GeneralActivity.this);
+                            } catch (NetworkErrorException e) {
+                                Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+                            }
+
                             GeneralActivity.this.finish();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -509,8 +515,13 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Game Status:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            tvStatus.setText("Game Status:\n"
+                + CurrentMessageStatus.valueOf(
+                    status.equals("") ? CurrentMessageStatus.START_SHOW.name() : status)
+                    .getStatus());
+
             GeneralActivity.this.showResults();
+
         }
     }
 

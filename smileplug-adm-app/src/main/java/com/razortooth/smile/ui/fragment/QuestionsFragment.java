@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import android.accounts.NetworkErrorException;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -31,6 +32,7 @@ import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.ui.GeneralActivity;
 import com.razortooth.smile.ui.adapter.QuestionListAdapter;
 import com.razortooth.smile.util.ActivityUtil;
+import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class QuestionsFragment extends AbstractFragment {
 
@@ -187,17 +189,15 @@ public class QuestionsFragment extends AbstractFragment {
             @Override
             public void onClick(View v) {
                 TextView name = (TextView) aboutDialog.findViewById(R.id.et_name_file);
-                try {
-                    if (name.getText().toString().equals("")) {
-                        name.setText("Questions_file");
-                    }
-                    new QuestionsManager().saveQuestions(getActivity(), name.getText().toString(),
-                        listQuestionsSelected, ip);
-                    aboutDialog.dismiss();
-                } catch (DataAccessException e) {
-                    Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+
+                if (name.getText().toString().equals("")) {
+                    name.setText("Questions_file");
                 }
-                ActivityUtil.showLongToast(QuestionsFragment.this.getActivity(), R.string.saved);
+
+                new SaveTask(getActivity(), listQuestionsSelected, ip, name.getText().toString())
+                    .execute();
+
+                aboutDialog.dismiss();
             }
         }
     }
@@ -229,6 +229,48 @@ public class QuestionsFragment extends AbstractFragment {
         protected void onPostExecute(Results results) {
             if (results != null) {
                 QuestionsFragment.this.results = results;
+            }
+        }
+
+    }
+
+    private class SaveTask extends ProgressDialogAsyncTask<Void, Boolean> {
+
+        private Context context;
+        private List<Question> listQuestions;
+        private String ip;
+        private String name;
+
+        private SaveTask(Activity context, List<Question> listQuestions, String ip, String name) {
+            super(context);
+
+            this.context = context;
+            this.listQuestions = listQuestions;
+            this.ip = ip;
+            this.name = name;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... arg0) {
+
+            try {
+                new QuestionsManager().saveQuestions(context, name.trim(), listQuestions, ip);
+
+                return true;
+            } catch (DataAccessException e) {
+                Log.e(Constants.LOG_CATEGORY, e.getMessage());
+            }
+
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean ok) {
+            if (ok) {
+                ActivityUtil.showLongToast(QuestionsFragment.this.getActivity(), R.string.saved);
+            } else {
+                ActivityUtil
+                    .showLongToast(QuestionsFragment.this.getActivity(), R.string.not_saved);
             }
         }
 
