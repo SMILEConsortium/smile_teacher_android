@@ -462,7 +462,10 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Game Status:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            tvStatus.setText("Game Status:\n"
+                + CurrentMessageStatus.valueOf(
+                    status.equals("") ? CurrentMessageStatus.START_SHOW.name() : status)
+                    .getStatus());
         }
     }
 
@@ -488,7 +491,10 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Game Status:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            tvStatus.setText("Game Status:\n"
+                + CurrentMessageStatus.valueOf(
+                    status.equals("") ? CurrentMessageStatus.START_SOLVE.name() : status)
+                    .getStatus());
             GeneralActivity.this.startSolvingQuestion();
         }
     }
