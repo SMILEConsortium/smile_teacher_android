@@ -32,7 +32,6 @@ import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.ui.GeneralActivity;
 import com.razortooth.smile.ui.adapter.QuestionListAdapter;
 import com.razortooth.smile.util.ActivityUtil;
-import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class QuestionsFragment extends AbstractFragment {
 
@@ -234,7 +233,7 @@ public class QuestionsFragment extends AbstractFragment {
 
     }
 
-    private class SaveTask extends ProgressDialogAsyncTask<Void, Boolean> {
+    private class SaveTask extends AsyncTask<Void, Void, Boolean> {
 
         private Context context;
         private List<Question> listQuestions;
@@ -242,7 +241,6 @@ public class QuestionsFragment extends AbstractFragment {
         private String name;
 
         private SaveTask(Activity context, List<Question> listQuestions, String ip, String name) {
-            super(context);
 
             this.context = context;
             this.listQuestions = listQuestions;
