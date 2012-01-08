@@ -1,6 +1,7 @@
 package com.razortooth.smile.domain;
 
-public class QuestionWrapper {
+public class ServerQuestionWrapper {
+
     private String NAME;
     private String Q;
     private String O1;
@@ -12,7 +13,7 @@ public class QuestionWrapper {
     private String TYPE;
     private String IP;
 
-    public QuestionWrapper(Question question) {
+    public ServerQuestionWrapper(Question question) {
         super();
         this.NAME = question.getOwner();
         this.IP = question.getIp();

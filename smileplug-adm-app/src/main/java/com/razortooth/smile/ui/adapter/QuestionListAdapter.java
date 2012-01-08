@@ -10,6 +10,7 @@ import org.json.JSONException;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,16 +113,19 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         }
     }
 
-    private void loadDetails(Dialog detailsDialog, Question questions) {
+    private void loadDetails(Dialog detailsDialog, Question question) {
         TextView tvOwner = (TextView) detailsDialog.findViewById(R.id.tv_create_by);
-        tvOwner.setText("( " + context.getString(R.string.create_by) + " " + questions.getOwner()
+        tvOwner.setText("( " + context.getString(R.string.create_by) + " " + question.getOwner()
             + " )");
 
         ImageView tvImage = (ImageView) detailsDialog.findViewById(R.id.iv_image);
-        if (questions.hasImage()) {
-            Bitmap bmp = ImageLoader.loadBitmap(Constants.HTTP + ip + questions.getImageUrl());
-            if (bmp != null) {
-                tvImage.setImageBitmap(bmp);
+        if (question.hasImage()) {
+            byte[] data = ImageLoader.loadBitmap(Constants.HTTP + ip + question.getImageUrl());
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+            if (bitmap != null) {
+                tvImage.setImageBitmap(bitmap);
             }
 
         } else {
@@ -129,46 +133,46 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         }
 
         TextView tvQuestion = (TextView) detailsDialog.findViewById(R.id.tv_question);
-        if (!questions.getQuestion().equals("")) {
-            tvQuestion.setText(questions.getQuestion());
+        if (!question.getQuestion().equals("")) {
+            tvQuestion.setText(question.getQuestion());
         } else {
             tvQuestion.setVisibility(View.GONE);
         }
 
         TextView tvAlternative1 = (TextView) detailsDialog.findViewById(R.id.tv_alternative1);
-        if (!questions.getOption1().equals("")) {
+        if (!question.getOption1().equals("")) {
             tvAlternative1.setText(context.getString(R.string.alternative1) + " "
-                + questions.getOption1());
+                + question.getOption1());
         } else {
             tvAlternative1.setVisibility(View.GONE);
         }
 
         TextView tvAlternative2 = (TextView) detailsDialog.findViewById(R.id.tv_alternative2);
-        if (!questions.getOption1().equals("")) {
+        if (!question.getOption1().equals("")) {
             tvAlternative2.setText(context.getString(R.string.alternative2) + " "
-                + questions.getOption2());
+                + question.getOption2());
         } else {
             tvAlternative2.setVisibility(View.GONE);
         }
 
         TextView tvAlternative3 = (TextView) detailsDialog.findViewById(R.id.tv_alternative3);
-        if (!questions.getOption1().equals("")) {
+        if (!question.getOption1().equals("")) {
             tvAlternative3.setText(context.getString(R.string.alternative3) + " "
-                + questions.getOption3());
+                + question.getOption3());
         } else {
             tvAlternative3.setVisibility(View.GONE);
         }
 
         TextView tvAlternative4 = (TextView) detailsDialog.findViewById(R.id.tv_alternative4);
-        if (!questions.getOption1().equals("")) {
+        if (!question.getOption1().equals("")) {
             tvAlternative4.setText(context.getString(R.string.alternative4) + " "
-                + questions.getOption4());
+                + question.getOption4());
         } else {
             tvAlternative4.setVisibility(View.GONE);
         }
 
         TextView tvCorrectAnswer = (TextView) detailsDialog.findViewById(R.id.tv_correct_answer);
         tvCorrectAnswer.setText(context.getString(R.string.correct_answer) + ": "
-            + questions.getAnswer());
+            + question.getAnswer());
     }
 }

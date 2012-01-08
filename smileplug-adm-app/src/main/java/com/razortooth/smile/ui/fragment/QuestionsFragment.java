@@ -192,7 +192,7 @@ public class QuestionsFragment extends AbstractFragment {
                         name.setText("Questions_file");
                     }
                     new QuestionsManager().saveQuestions(getActivity(), name.getText().toString(),
-                        listQuestionsSelected);
+                        listQuestionsSelected, ip);
                     aboutDialog.dismiss();
                 } catch (DataAccessException e) {
                     Log.e(Constants.LOG_CATEGORY, "Error: ", e);

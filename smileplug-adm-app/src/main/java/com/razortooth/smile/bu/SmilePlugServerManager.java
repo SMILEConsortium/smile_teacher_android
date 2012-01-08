@@ -10,8 +10,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.razortooth.smile.bu.exception.DataAccessException;
 import com.razortooth.smile.bu.json.CurrentMessageJSONParser;
+import com.razortooth.smile.domain.LocalQuestionWrapper;
 import com.razortooth.smile.domain.Question;
-import com.razortooth.smile.domain.QuestionWrapper;
+import com.razortooth.smile.domain.ServerQuestionWrapper;
 import com.razortooth.smile.util.HttpUtil;
 import com.razortooth.smile.util.IOUtil;
 import com.razortooth.smile.util.SmilePlugUtil;
@@ -28,7 +29,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.QUESTION_URL);
         if (questions != null) {
             for (Question question : questions) {
-                QuestionWrapper questionWrapper = new QuestionWrapper(question);
+                LocalQuestionWrapper questionWrapper = new LocalQuestionWrapper(question);
                 Gson gson = new Gson();
                 String json = gson.toJson(questionWrapper);
                 put(ip, context, url, json);
@@ -42,7 +43,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS_URL);
         if (questions != null) {
             for (Question question : questions) {
-                QuestionWrapper questionWrapper = new QuestionWrapper(question);
+                ServerQuestionWrapper questionWrapper = new ServerQuestionWrapper(question);
                 Gson gson = new Gson();
                 String json = gson.toJson(questionWrapper);
                 put(ip, context, url, json);

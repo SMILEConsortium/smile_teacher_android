@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -122,9 +123,13 @@ public class StudentStatusDetailsActivity extends Activity {
 
             ImageView tvImage = (ImageView) detailsDialog.findViewById(R.id.iv_image);
             if (question.hasImage()) {
-                Bitmap bmp = ImageLoader.loadBitmap(Constants.HTTP + ip + question.getImageUrl());
-                if (bmp != null) {
-                    tvImage.setImageBitmap(bmp);
+
+                byte[] data = ImageLoader.loadBitmap(Constants.HTTP + ip + question.getImageUrl());
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+                if (bitmap != null) {
+                    tvImage.setImageBitmap(bitmap);
                 }
 
             } else {

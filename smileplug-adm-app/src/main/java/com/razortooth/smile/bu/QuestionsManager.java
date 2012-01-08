@@ -20,6 +20,7 @@ import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.util.DeviceUtil;
 import com.razortooth.smile.util.IOUtil;
 import com.razortooth.smile.util.IPAddressUtil;
+import com.razortooth.smile.util.ImageLoader;
 
 public class QuestionsManager {
 
@@ -63,8 +64,8 @@ public class QuestionsManager {
 
     }
 
-    public void saveQuestions(Context context, String name, Collection<Question> questions)
-        throws DataAccessException {
+    public void saveQuestions(Context context, String name, Collection<Question> questions,
+        String ipServer) throws DataAccessException {
 
         if (!DeviceUtil.isExternalStorageWriteable()) {
             throw new DataAccessException("External storage unavailable");
@@ -111,8 +112,10 @@ public class QuestionsManager {
 
                 if (q.hasImage()) {
                     File img = new File(dir, q.getNumber() + JPG);
-                    byte[] imgContent = Base64.decode(q.getImageUrl());
-                    IOUtil.saveBytes(img, imgContent);
+
+                    byte[] s = ImageLoader.loadBitmap(Constants.HTTP + ipServer + q.getImageUrl());
+
+                    IOUtil.saveBytes(img, s);
                 }
             }
 
