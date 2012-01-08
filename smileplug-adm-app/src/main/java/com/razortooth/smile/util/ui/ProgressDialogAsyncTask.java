@@ -64,7 +64,7 @@ public abstract class ProgressDialogAsyncTask<Params, Result> extends
             String msg;
 
             if (errorMessageStringId == null) {
-                msg = "Not possible update the data. Please try again.";
+                msg = "Update the IP address and try again.";
             } else {
                 msg = context.getString(errorMessageStringId);
             }

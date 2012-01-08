@@ -133,7 +133,7 @@ public class GeneralActivity extends FragmentActivity {
             if (status.equals("") || !status.equals(CurrentMessageStatus.START_MAKE.name())) {
                 status = CurrentMessageStatus.START_MAKE.name();
             }
-            tvStatus.setText("Status game:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            tvStatus.setText("Game Status:\n" + CurrentMessageStatus.valueOf(status).getStatus());
         } else {
             new LoadStatusTask(this).execute();
         }
@@ -161,11 +161,16 @@ public class GeneralActivity extends FragmentActivity {
                 AlertDialog.Builder builderBack = new AlertDialog.Builder(GeneralActivity.this);
                 builderBack
                     .setMessage(
-                        "Are you sure you want to back? This operation will exit and restart the game.")
+                        "Are you sure you want to exit? This operation will reset the game and exit.")
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                new SmilePlugServerManager().resetGame(ip, GeneralActivity.this);
+                            } catch (NetworkErrorException e) {
+                                Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+                            }
                             GeneralActivity.this.finish();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -451,7 +456,7 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Status game:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            tvStatus.setText("Game Status:\n" + CurrentMessageStatus.valueOf(status).getStatus());
         }
     }
 
@@ -477,7 +482,7 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Status game:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            tvStatus.setText("Game Status:\n" + CurrentMessageStatus.valueOf(status).getStatus());
             GeneralActivity.this.startSolvingQuestion();
         }
     }
@@ -504,7 +509,7 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Status game:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            tvStatus.setText("Game Status:\n" + CurrentMessageStatus.valueOf(status).getStatus());
             GeneralActivity.this.showResults();
         }
     }

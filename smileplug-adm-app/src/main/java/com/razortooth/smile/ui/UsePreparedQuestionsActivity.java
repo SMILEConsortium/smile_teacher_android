@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -129,10 +128,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         @Override
         public void onClick(View v) {
             if (status != null) {
-                try {
-                    new SmilePlugServerManager().resetGame(ip, UsePreparedQuestionsActivity.this);
-                } catch (NetworkErrorException e) {}
-
                 if (!status.equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(
                         UsePreparedQuestionsActivity.this);

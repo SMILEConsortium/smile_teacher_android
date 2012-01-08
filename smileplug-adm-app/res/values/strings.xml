@@ -17,7 +17,7 @@
 	<string name="number">Number</string>
 	<string name="owner">Owner</string>	 
 	<string name="correct">%Correct</string>
-	<string name="rating">Highest\n Rating</string>	
+	<string name="rating">Highest Rating</string>	
 	
 	<string name="save_questions">Save questions</string>
 	<string name="students_status">Student Status</string>
@@ -38,7 +38,7 @@
 	data from a given learning activity for later access.</string>
 	<string name="ok">Ok</string>
 	
-	<string name="choose_a_option">Choose an option below : </string>
+	<string name="choose_a_option">Choose an option below: </string>
 	<string name="remaining_time">Remaining Time</string>	
 	<string name="use_time">Use Time Limit Mode</string>	
 	<string name="select">Select one question: </string>	
@@ -64,7 +64,7 @@
 	
 	<string name="scoreboard_of">Scoreboard of</string>
 	
-	<string name="score_board">Score Board</string>
+	<string name="score_board">Scoreboard</string>
 	
 	<string name="create_by">Question created by</string>
 	<string name="alternative1">(1)</string>
@@ -79,7 +79,7 @@
 	<string name="checkbox">CheckBox</string>
 	<string name="details">Details</string>
 	
-	<string name="server_connected">Server connected</string>
+	<string name="server_connected">Connected to:</string>
 	<string name="reset_game">Reset game</string>
 	<string name="exit">Are you sure you want to exit?</string>
 	<string name="restart_game">Are you sure you want to restart game?</string>
