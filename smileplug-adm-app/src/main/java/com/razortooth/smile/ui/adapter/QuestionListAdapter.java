@@ -122,10 +122,12 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         if (question.hasImage()) {
             byte[] data = ImageLoader.loadBitmap(Constants.HTTP + ip + question.getImageUrl());
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
-            if (bitmap != null) {
-                tvImage.setImageBitmap(bitmap);
+            if (data != null) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+                if (bitmap != null) {
+                    tvImage.setImageBitmap(bitmap);
+                }
             }
 
         } else {

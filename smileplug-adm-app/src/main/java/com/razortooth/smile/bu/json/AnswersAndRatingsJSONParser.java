@@ -20,7 +20,9 @@ public class AnswersAndRatingsJSONParser {
         String ip = object.optString(IP);
 
         Student student = students.get(ip);
-        student.setSolved(true);
+        if (student != null) {
+            student.setSolved(true);
+        }
 
         JSONArray answersArray = object.optJSONArray(ANSWERS);
         JSONArray ratingsArray = object.optJSONArray(RATINGS);

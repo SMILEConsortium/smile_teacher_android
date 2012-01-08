@@ -96,7 +96,7 @@
 		           
 		  	<TextView  
 		      	android:id="@+id/tv_score"  
-		      	android:text="@string/rating"    
+		      	android:text="@string/rating_table"    
 		      	android:textColor="@color/black"
 		      	android:layout_gravity="center"
 		      	android:lines="2"/>
