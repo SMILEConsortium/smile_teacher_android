@@ -6,7 +6,7 @@ Software requirements: Maven 3.0.3 (required by one of the plugins), an avd call
 
 To setup pre-req dependencies from scratch:
 
-mvn install:install-file -Dfile=./smileplug-adm-app/lib/compatibility-v4-r3.jar -Dversion=r3 -DartifactId=compatibility-v4 -DgroupId=android.support -DgeneratePom=true -Dpackaging=jarg
+mvn install:install-file -Dfile=./smileplug-adm-app/lib/compatibility-v4-r3.jar -Dversion=r3 -DartifactId=compatibility-v4 -DgroupId=android.support -DgeneratePom=true -Dpackaging=jar
 (windows paths should be used on windows)
 
 To build

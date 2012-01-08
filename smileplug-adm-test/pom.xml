@@ -8,12 +8,12 @@
     <packaging>apk</packaging>
     <name>Smileplug Adm - Test</name>
     <!-- Can't we get this from the master POM? -->
-    <version>0.1.5_beta1-SNAPSHOT</version>
+    <version>0.1.5_beta2-SNAPSHOT</version>
 
     <parent>
         <groupId>com.razortooth.smile</groupId>
         <artifactId>smileplug-adm</artifactId>
-        <version>0.1.5_beta1-SNAPSHOT</version>
+        <version>0.1.5_beta2-SNAPSHOT</version>
     </parent>
 
     <dependencies>
