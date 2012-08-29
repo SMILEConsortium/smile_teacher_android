@@ -125,7 +125,7 @@
 			android:background="@color/white"
 			android:layout_marginLeft="5dip"
 			android:layout_marginTop="5dip"
-			android:layout_below="@id/lv_questions"/>				  	
+			android:layout_below="@id/lv_questions"/>
 
 	</TableLayout>
 	

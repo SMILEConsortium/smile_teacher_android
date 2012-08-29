@@ -11,7 +11,7 @@
         android:id="@+id/tv_name"
         android:layout_width="120dip"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dip"
+        android:layout_marginLeft="25dip"
         android:layout_marginRight="5dip"
         android:gravity="center"
         android:textColor="@color/black"/>
@@ -21,6 +21,7 @@
         android:layout_width="100dip"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dip"
+		android:layout_marginLeft="30dip"
         android:gravity="center"
         android:textColor="@color/black"/>
 
@@ -28,7 +29,7 @@
         android:id="@+id/tv_question"
         android:layout_width="wrap_content"
         android:layout_height="30dip"
-        android:layout_marginLeft="23dip"
+        android:layout_marginLeft="43dip"
         android:layout_marginRight="75dip"
         android:button="@drawable/checkbox"
         android:gravity="center"
@@ -38,7 +39,7 @@
     <CheckBox
         android:id="@+id/tv_answers"
         android:layout_width="wrap_content"
-        android:layout_height="30dip"
+        android:layout_height="50dip"
         android:layout_marginRight="25dip"
         android:button="@drawable/checkbox"
         android:gravity="center"
