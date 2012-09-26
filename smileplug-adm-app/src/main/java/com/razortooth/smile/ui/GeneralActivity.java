@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -331,6 +332,8 @@ public class GeneralActivity extends FragmentActivity {
             case R.id.bt_about:
                 Dialog aboutDialog = new Dialog(this, R.style.Dialog);
                 aboutDialog.setContentView(R.layout.about);
+                Display displaySize = ActivityUtil.getDisplaySize(getApplicationContext());
+                aboutDialog.getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
                 aboutDialog.show();
                 break;
             case R.id.bt_exit:
