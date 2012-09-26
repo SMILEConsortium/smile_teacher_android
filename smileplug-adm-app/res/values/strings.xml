@@ -22,7 +22,8 @@
 	<string name="rating">Highest Rating</string>
 	<string name="rating_table">Highest\nRating</string>
 
-	<string name="save_questions">SAVE QUESTIONS</string>
+	<string name="save_questions">Save Questions</string>
+	<string name="save_questions_uppercase">SAVE QUESTIONS</string>
 	<string name="students_status">STUDENT STATUS</string>
 	<string name="students_name">Student Name</string>
 	<string name="score">Score</string>
@@ -88,8 +89,8 @@
 	<string name="restart_game">Are you sure you want to restart game?</string>
 	<string name="game_running">A game is already running!</string>
 
-<!-- 	<string name="server_ip">192.168.1.16</string> -->
-	<string name="server_ip">50.17.246.250</string>
+	<string name="server_ip">192.168.1.16</string>
+<!-- 	<string name="server_ip">50.17.246.250</string> -->
 	<string name="ip">IP</string>
 	<string name="not_saved">It was not possible to save the questions</string>
 	<string name="save">Save</string>

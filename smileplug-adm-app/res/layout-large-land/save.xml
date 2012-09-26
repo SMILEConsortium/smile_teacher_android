@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:layout_gravity="center"
+  	android:background="@drawable/rounded_border"
+  	android:layout_margin="50dip">
+
+  	<TextView
+	  	android:id="@+id/tv_title"
+	  	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dip"
+		android:text="@string/save_questions_uppercase"
+		android:textColor="@color/black"
+		android:textSize="12sp"
+		android:layout_centerHorizontal="true"/>
+
+	<View
+		android:id="@+id/view_separator"
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_margin="5dip"
+		android:layout_below="@id/tv_title"/>
+
+	<EditText
+	  	android:id="@+id/et_name_file"
+	  	android:layout_width="200sp"
+		android:layout_height="wrap_content"
+		android:maxLines="1"
+		android:inputType="text"
+        android:singleLine="true"
+        android:textSize="12sp"
+        android:layout_margin="10dip"
+        android:layout_centerInParent="true" />
+
+	<TextView
+	    android:id="@+id/tv_name_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:text="@string/give_a_name"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_above="@+id/et_name_file"
+        android:layout_centerInParent="true" />
+
+	<Button
+	  	android:id="@+id/bt_save_file"
+	  	android:layout_width="100sp"
+		android:layout_height="wrap_content"
+		android:text="@string/ok"
+		android:textSize="12sp"
+		android:layout_marginTop="30dip"
+		android:layout_below="@+id/et_name_file"
+        android:layout_centerInParent="true"/>
+
+	<View
+		android:id="@+id/view_separator2"
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:layout_marginBottom="20dip"
+		android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

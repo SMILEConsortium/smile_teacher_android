@@ -418,6 +418,15 @@ public class GeneralActivity extends FragmentActivity {
                 LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
                     .findViewById(R.id.ll_top_scorers);
                 llTopScorersContainer.setVisibility(View.GONE);
+
+                TableLayout tlTotal = (TableLayout) findViewById(R.id.tl_total);
+                tlTotal.setVisibility(View.VISIBLE);
+
+                TextView tvTotal = (TextView) findViewById(R.id.tv_total);
+                tvTotal.setVisibility(View.VISIBLE);
+
+                View vTotal = findViewById(R.id.view_separator_total);
+                vTotal.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -432,6 +441,15 @@ public class GeneralActivity extends FragmentActivity {
     }
 
     private void showResults() {
+        TableLayout tlTotal = (TableLayout) findViewById(R.id.tl_total);
+        tlTotal.setVisibility(View.GONE);
+
+        TextView tvTotal = (TextView) findViewById(R.id.tv_total);
+        tvTotal.setVisibility(View.GONE);
+
+        View vTotal = findViewById(R.id.view_separator_total);
+        vTotal.setVisibility(View.GONE);
+
         TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
             LayoutParams.WRAP_CONTENT, 150);
 

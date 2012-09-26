@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.razortooth.smile.ui.widget.checkbox.CheckableRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:marvinlabs="http://schemas.android.com/apk/res/fr.marvinlabs.selectablelisttutorial"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+    android:background="@color/gray"
+    android:paddingTop="10dip">
+
+    <TableRow
+        android:id="@+id/tr"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content">
+
+		<com.razortooth.smile.ui.widget.checkbox.InertCheckBox
+		    android:id="@+id/tv_item_checkbox"
+		    android:button="@drawable/checkbox"
+			android:focusable="false"
+			android:layout_marginLeft="20dip"
+			android:layout_gravity="left|center_vertical" />
+
+		<TextView
+		    android:id="@+id/tv_file_name"
+			android:textSize="12sp"
+			android:textColor="@color/black"
+			android:focusable="false"
+			android:layout_gravity="left|center_vertical"/>
+
+    </TableRow>
+
+</com.razortooth.smile.ui.widget.checkbox.CheckableRelativeLayout>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:layout_marginLeft="5dip"
+  	android:layout_marginRight="5dip">
+
+    <View
+  		android:id="@+id/view_separator1"
+		android:layout_width="70dip"
+		android:layout_height="3dip"
+		android:layout_alignParentRight="true"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+		android:background="#FFFF0000"/>
+
+    <View
+  		android:id="@+id/view_separator2"
+		android:layout_width="fill_parent"
+		android:layout_height="2dip"
+		android:background="@color/black"
+		android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+		android:layout_marginTop="3dip"
+		android:layout_below="@id/view_separator1"/>
+
+  	<TextView
+  	  	android:id="@+id/tv_status"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+      	android:text="@string/question_status"
+      	android:textStyle="bold"
+      	android:textSize="14sp"
+      	android:textColor="@color/black"
+      	android:layout_marginTop="10dip"
+      	android:layout_below="@id/view_separator1"
+      	android:layout_centerHorizontal="true"/>
+
+  	<Button
+  		android:id="@+id/bt_save"
+  		android:layout_width="120dip"
+  		android:layout_height="50dip"
+  		android:layout_gravity="center_horizontal"
+  		android:text="@string/save_questions"
+  		android:textSize="12sp"
+  		android:layout_margin="10dip"
+  		android:layout_alignParentBottom="true"
+  		android:layout_alignParentRight="true"/>
+
+	<TableLayout
+	  	android:id="@+id/tl_status"
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	  	android:shrinkColumns="*"
+    	android:stretchColumns="*"
+    	android:layout_below="@id/tv_status"
+    	android:layout_above="@id/bt_save"
+    	android:layout_marginLeft="10dip">
+
+	    <View
+			android:id="@+id/view_separator"
+			android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:background="@color/white"
+			android:layout_marginTop="10dip"
+			android:layout_marginRight="10dip"/>
+
+	  	<TableRow
+	  		android:id="@+id/tr_row"
+	  		android:layout_width="0dip"
+         	android:layout_height="wrap_content">
+
+	  	    <TextView
+		  	  	android:id="@+id/tv_check"
+		      	android:text="@string/save"
+		      	android:textSize="18sp"
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center|center_horizontal"/>
+
+	  	    <TextView
+		  	  	android:id="@+id/tv_details"
+		      	android:text="@string/details"
+		      	android:textSize="18sp"
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center|center_horizontal"/>
+
+	  	    <TextView
+		      	android:id="@+id/tv_space1"
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center|center_horizontal"/>
+
+		  	<TextView
+		      	android:id="@+id/tv_question"
+		      	android:text="@string/number_owner_ip"
+		      	android:textSize="18sp"
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center|center_horizontal"/>
+
+		  	<TextView
+		      	android:id="@+id/tv_space2"
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center|center_horizontal"/>
+
+		  	<TextView
+		    	android:id="@+id/tv_answers"
+		      	android:text="@string/correct"
+		      	android:textSize="18sp"
+		      	android:textColor="@color/black"
+		      	android:layout_gravity="center|center_horizontal"/>
+
+		  	<TextView
+		      	android:id="@+id/tv_score"
+		      	android:text="@string/rating_table"
+		      	android:textSize="18sp"
+		      	android:textColor="@color/black"
+		      	android:lines="2"
+		        android:layout_gravity="center|center_horizontal"
+		        android:gravity="center"/>
+
+	  	</TableRow>
+
+	  	<View
+			android:id="@+id/view_separator_1"
+			android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:background="@color/white"
+			android:layout_marginRight="10dip"/>
+
+	  	<ListView
+			android:id="@+id/lv_questions"
+		    android:layout_width="fill_parent"
+		  	android:layout_height="fill_parent"
+		  	android:layout_marginRight="10dip"/>
+
+	</TableLayout>
+
+	<View
+		android:id="@+id/view_separator_2"
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_marginRight="10dip"
+		android:layout_marginLeft="10dip"
+		android:layout_marginBottom="5dip"
+		android:layout_above="@id/bt_save"/>
+
+</RelativeLayout>
