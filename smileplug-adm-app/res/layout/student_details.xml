@@ -1,126 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  	android:layout_width="650dip"
-  	android:layout_height="355dip"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
   	android:orientation="vertical"
   	android:background="@drawable/rounded_border"
   	android:layout_gravity="center"
-  	android:gravity="center_horizontal">
-  	
-    <TextView  
+  	android:gravity="center_horizontal"
+  	android:layout_margin="50dip">
+
+    <TextView
   	  	android:id="@+id/tv_title"
   	  	android:layout_width="wrap_content"
    		android:layout_height="wrap_content"
    		android:text="@string/score_board"
       	android:textStyle="bold"
-      	android:textSize="16sp"
+      	android:textSize="18sp"
       	android:textColor="@color/black"
       	android:layout_marginTop="10dip"/>
-    
+
     <View
-		android:id="@+id/view_separator"  
+		android:id="@+id/view_separator"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
 		android:background="@color/white"
 		android:layout_margin="5dip"/>
-  	
-    <TextView  
+
+    <TextView
   	  	android:id="@+id/tv_name"
   	  	android:layout_width="wrap_content"
    		android:layout_height="wrap_content"
       	android:textStyle="bold"
-      	android:textSize="14sp"
+      	android:textSize="18sp"
       	android:textColor="@color/black"
       	android:layout_marginTop="15dip"/>
-    
-    <TextView  
+
+    <TextView
   	  	android:id="@+id/tv_score"
   	  	android:layout_width="wrap_content"
    		android:layout_height="wrap_content"
       	android:textStyle="bold"
-      	android:textSize="14sp"
+      	android:textSize="18sp"
       	android:textColor="@color/black"
       	android:layout_marginTop="5dip"/>
-    
-    <LinearLayout 
+
+    <LinearLayout
 	  	android:layout_width="fill_parent"
 	  	android:layout_height="fill_parent"
 	  	android:layout_marginTop="10dip"
 	  	android:orientation="horizontal">
-        
+
         <TableLayout
-		  	android:id="@+id/tl_status" 
+		  	android:id="@+id/tl_status"
 		  	android:layout_width="fill_parent"
 		  	android:layout_height="fill_parent"
-		  	android:shrinkColumns="*"  
+		  	android:shrinkColumns="*"
 	    	android:stretchColumns="*"
 	    	android:layout_margin="5dip">
-	    	
+
 	    	<View
-				android:id="@+id/view_separator"  
+				android:id="@+id/view_separator2"
 				android:layout_width="fill_parent"
 				android:layout_height="1dip"
 				android:background="@color/white"
 				android:layout_marginTop="5dip"/>
-		  	
-		  	<TableRow 
+
+		  	<TableRow
 		  		android:id="@+id/tr_row"
 		  		android:layout_width="wrap_content"
 		   	  	android:layout_height="wrap_content"
 		   	  	android:layout_marginTop="5dip"
 		   	  	android:layout_marginLeft="40dip">
-		   	  	
-			  	<TextView  
+
+			  	<TextView
 			  	  	android:id="@+id/tv_title_number"
 			  	  	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/question_number"
+			      	android:textSize="18sp"
 			      	android:textColor="@color/black"
 			      	android:gravity="center"/>
-			           
-			  	<TextView  
-			      	android:id="@+id/tv_title_correct" 
+
+			  	<TextView
+			      	android:id="@+id/tv_title_correct"
 			      	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
-			      	android:text="@string/correct_answer"   
+			      	android:text="@string/correct_answer"
+			      	android:textSize="18sp"
 			      	android:textColor="@color/black"
 			      	android:gravity="center"/>
-			           
-			  	<TextView  
-			    	android:id="@+id/tv_title_chosen"  
+
+			  	<TextView
+			    	android:id="@+id/tv_title_chosen"
 			    	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
-			      	android:text="@string/chosen_answer"   
+			      	android:text="@string/chosen_answer"
+			      	android:textSize="18sp"
 			      	android:textColor="@color/black"
 			      	android:gravity="center"/>
-			           
-			  	<TextView  
-			      	android:id="@+id/tv_title_rating"  
+
+			  	<TextView
+			      	android:id="@+id/tv_title_rating"
 			      	android:layout_width="10dip"
 		  			android:layout_height="wrap_content"
-			      	android:text="@string/give_rating"    
+			      	android:text="@string/give_rating"
 			      	android:textColor="@color/black"
+			      	android:textSize="18sp"
 			      	android:gravity="center"
 			      	android:paddingRight="50dip"/>
-		  	
+
 		  	</TableRow>
-		  	
+
 		  	<View
-				android:id="@+id/view_separator"  
+				android:id="@+id/view_separator3"
 				android:layout_width="fill_parent"
 				android:layout_height="1dip"
 				android:background="@color/white"
 				android:layout_marginTop="5dip"/>
-		  	
-		  	<ListView 
+
+		  	<ListView
 				android:id="@+id/list"
 			    android:layout_width="wrap_content"
 			  	android:layout_height="fill_parent"
-			  	android:layout_below="@id/tr_row"
 			  	android:layout_marginBottom="10dip"/>
-	
+
 		</TableLayout>
-        
+
     </LinearLayout>
-  	
+
 </LinearLayout>

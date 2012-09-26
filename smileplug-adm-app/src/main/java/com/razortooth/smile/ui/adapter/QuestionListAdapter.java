@@ -12,12 +12,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ import com.razortooth.smile.R;
 import com.razortooth.smile.bu.Constants;
 import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.Results;
+import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.ImageLoader;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
@@ -107,6 +110,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         public void onClick(View v) {
             Dialog detailsDialog = new Dialog(context, R.style.Dialog);
             detailsDialog.setContentView(R.layout.question_details);
+            Display displaySize = ActivityUtil.getDisplaySize(getContext());
+            detailsDialog.getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
             detailsDialog.show();
 
             loadDetails(detailsDialog, questions);
@@ -119,6 +124,16 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             + " )");
 
         ImageView tvImage = (ImageView) detailsDialog.findViewById(R.id.iv_image);
+
+        Display displaySize = ActivityUtil.getDisplaySize(context);
+        float percentWidth = (float) (displaySize.getWidth() * 0.6);
+        float percentHeight = (float) (displaySize.getHeight() * 0.6);
+        int width = (int) (displaySize.getWidth() - percentWidth);
+        int height = (int) (displaySize.getHeight() - percentHeight);
+        LayoutParams lp = new LayoutParams(width, height);
+        lp.setMargins(35, 20, 50, 0);
+        tvImage.setLayoutParams(lp);
+
         if (question.hasImage()) {
             byte[] data = ImageLoader.loadBitmap(Constants.HTTP + ip + question.getImageUrl());
 

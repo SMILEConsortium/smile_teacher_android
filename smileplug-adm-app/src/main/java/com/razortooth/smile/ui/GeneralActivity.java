@@ -47,8 +47,10 @@ import com.razortooth.smile.util.ui.ProgressDialogAsyncTask;
 
 public class GeneralActivity extends FragmentActivity {
 
-    private static final int AUTO_UPDATE_TIME = 5000;
+    private static final String GAME_STATUS = "GAME STATUS\n";
     private static final String PARAM_BOARD = "board";
+
+    private static final int AUTO_UPDATE_TIME = 5000;
 
     private Handler boardHandler;
     private Runnable boardRunnable;
@@ -133,7 +135,7 @@ public class GeneralActivity extends FragmentActivity {
             if (status.equals("") || !status.equals(CurrentMessageStatus.START_MAKE.name())) {
                 status = CurrentMessageStatus.START_MAKE.name();
             }
-            tvStatus.setText("Game Status:\n" + CurrentMessageStatus.valueOf(status).getStatus());
+            tvStatus.setText(GAME_STATUS + CurrentMessageStatus.valueOf(status).getStatus());
         } else {
             new LoadStatusTask(this).execute();
         }
@@ -462,7 +464,7 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Game Status:\n"
+            tvStatus.setText(GAME_STATUS
                 + CurrentMessageStatus.valueOf(
                     status.equals("") ? CurrentMessageStatus.START_SHOW.name() : status)
                     .getStatus());
@@ -491,7 +493,7 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Game Status:\n"
+            tvStatus.setText(GAME_STATUS
                 + CurrentMessageStatus.valueOf(
                     status.equals("") ? CurrentMessageStatus.START_SOLVE.name() : status)
                     .getStatus());
@@ -521,7 +523,7 @@ public class GeneralActivity extends FragmentActivity {
         protected void onPostExecute(String status) {
             super.onPostExecute(status);
 
-            tvStatus.setText("Game Status:\n"
+            tvStatus.setText(GAME_STATUS
                 + CurrentMessageStatus.valueOf(
                     status.equals("") ? CurrentMessageStatus.START_SHOW.name() : status)
                     .getStatus());

@@ -31,22 +31,24 @@ public class StudentListAdapter extends ArrayAdapter<Student> {
             convertView = inflater.inflate(R.layout.students_item, parent, false);
         }
 
-        TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-        tvName.setText(student.getName());
+        if (student != null) {
+            TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
+            tvName.setText(student.getName());
 
-        TextView tvIp = (TextView) convertView.findViewById(R.id.tv_ip);
-        tvIp.setText(student.getIp());
+            TextView tvIp = (TextView) convertView.findViewById(R.id.tv_ip);
+            tvIp.setText(student.getIp());
 
-        CheckBox cbQuestion = (CheckBox) convertView.findViewById(R.id.tv_question);
-        cbQuestion.setChecked(student.isMade());
-        cbQuestion.setClickable(false);
+            CheckBox cbQuestion = (CheckBox) convertView.findViewById(R.id.tv_question);
+            cbQuestion.setChecked(student.isMade());
+            cbQuestion.setClickable(false);
 
-        CheckBox tvAnswers = (CheckBox) convertView.findViewById(R.id.tv_answers);
-        tvAnswers.setChecked(student.isSolved());
-        tvAnswers.setClickable(false);
+            CheckBox tvAnswers = (CheckBox) convertView.findViewById(R.id.tv_answers);
+            tvAnswers.setChecked(student.isSolved());
+            tvAnswers.setClickable(false);
 
-        TextView tvScore = (TextView) convertView.findViewById(R.id.tv_score);
-        tvScore.setText(String.valueOf(student.getScore()));
+            TextView tvScore = (TextView) convertView.findViewById(R.id.tv_score);
+            tvScore.setText(String.valueOf(student.getScore()));
+        }
 
         return convertView;
 

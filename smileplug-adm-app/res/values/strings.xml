@@ -1,92 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">SMILEPlug 0.1.5beta3</string> <!-- Try to get the maven to populate the version -->
-	<string name="server">Server</string>
+	<string name="app_name">SMILEPlug</string>
+	<string name="server">Server IP</string>
 	<string name="connect">Connect</string>
 	<string name="loading">Loading...</string>
-	
-	<string name="start_making">Start Making Questions</string>	    
+
+	<string name="start_making">Start Making Questions</string>
 	<string name="use_prepared">Use Prepared Questions</string>
-	<string name="start_solving">Start Solving Questions</string>
+	<string name="start_solving">Start Solving \n Questions</string>
 	<string name="show_results">Show Results</string>
 	<string name="hide_results">Hide Results</string>
+	<string name="students_uppercase">STUDENTS</string>
+	<string name="questions_uppercase">QUESTIONS</string>
 	<string name="students">Students</string>
 	<string name="questions">Questions</string>
-	
-	<string name="question_status">Question Status</string>
+
+	<string name="question_status">QUESTION STATUS</string>
 	<string name="number">Number</string>
-	<string name="owner">Owner</string>	 
+	<string name="owner">Owner</string>
 	<string name="correct">%Correct</string>
-	<string name="rating">Highest Rating</string>	
+	<string name="rating">Highest Rating</string>
 	<string name="rating_table">Highest\nRating</string>
-	
-	<string name="save_questions">Save questions</string>
-	<string name="students_status">Student Status</string>
-	<string name="students_name">Student Name</string>	    
-	<string name="score">Score</string>	    
-	<string name="total">Total</string>	    
-	<string name="top_scores">Top Scorers</string>	    
-	
+
+	<string name="save_questions">SAVE QUESTIONS</string>
+	<string name="students_status">STUDENT STATUS</string>
+	<string name="students_name">Student Name</string>
+	<string name="score">Score</string>
+	<string name="total">TOTAL</string>
+	<string name="top_scores">TOP SCORERS</string>
+
 	<string name="about">About</string>
 	<string name="about_text">The activity management application for teachers,
 	called the SMILE Junction Server Admin, serves to manage and
 	save data from the activity via an ad-hoc network. It is a
 	Graphic User Interface-based application that can be
 	launched on an Android tablet in conjuction with a the Server
-	running on a PlugComputer. The application 
+	running on a PlugComputer. The application
 	allows the teacher to control and monitor all of the students’
 	activity in real time. It also allows the teacher to save the
 	data from a given learning activity for later access.</string>
 	<string name="ok">Ok</string>
-	
-	<string name="choose_a_option">Choose an option below: </string>
-	<string name="remaining_time">Remaining Time</string>	
-	<string name="use_time">Use Time Limit Mode</string>	
-	<string name="select">Select one question: </string>	
-	<string name="seconds">Seconds</string>	
-	<string name="minutes">Minutes</string>	
-	<string name="hours">Hours</string>	
-	
-	<string name="connection_established">Connection established</string>	
-	
+
+	<string name="choose_a_option">CHOOSE AN OPTION BELOW: </string>
+	<string name="remaining_time">Remaining Time</string>
+	<string name="use_time">Use Time Limit Mode</string>
+	<string name="select">Select one question: </string>
+	<string name="seconds">Seconds</string>
+	<string name="minutes">Minutes</string>
+	<string name="hours">Hours</string>
+
+	<string name="connection_established">Connection established</string>
+
 	<string name="created_by">Question(s) created by</string>
 	<string name="top_scorer">Top Scorer(s)</string>
 	<string name="answers">Answers</string>
 	<string name="question">Question</string>
+	<string name="question_uppercase">QUESTION</string>
 	<string name="student">Students</string>
-	
+
 	<string name="starting">Starting...</string>
 	<string name="solving">Solving...</string>
-	
+
 	<string name="question_number">Question Number</string>
 	<string name="correct_answer">Correct Answer</string>
 	<string name="chosen_answer">Chosen Answer</string>
 	<string name="give_rating">Rating</string>
-	
+
 	<string name="scoreboard_of">Scoreboard of</string>
-	
-	<string name="score_board">Scoreboard</string>
-	
+
+	<string name="score_board">SCOREBOARD</string>
+
 	<string name="create_by">Question created by</string>
 	<string name="alternative1">(1)</string>
 	<string name="alternative2">(2)</string>
 	<string name="alternative3">(3)</string>
 	<string name="alternative4">(4)</string>
-	
+
 	<string name="saved">Saved</string>
 	<string name="give_a_name">"Give a name: "</string>
 	<string name="load">Load</string>
-	
+
 	<string name="checkbox">CheckBox</string>
 	<string name="details">Details</string>
-	
-	<string name="server_connected">Connected to:</string>
+
 	<string name="reset_game">Reset game</string>
 	<string name="exit">Are you sure you want to exit?</string>
 	<string name="restart_game">Are you sure you want to restart game?</string>
 	<string name="game_running">A game is already running!</string>
-	
-	<string name="server_ip">192.168.1.16</string>
+
+<!-- 	<string name="server_ip">192.168.1.16</string> -->
+	<string name="server_ip">50.17.246.250</string>
 	<string name="ip">IP</string>
 	<string name="not_saved">It was not possible to save the questions</string>
+	<string name="save">Save</string>
+	<string name="number_owner_ip">Number / Owner / IP</string>
 </resources>

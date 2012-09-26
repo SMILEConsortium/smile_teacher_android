@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,6 +39,8 @@ public class ChooseActivityFlowDialog extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_flow);
+        Display displaySize = ActivityUtil.getDisplaySize(getApplicationContext());
+        getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
 
         btStart = (Button) findViewById(R.id.bt_start);
         btUse = (Button) findViewById(R.id.bt_use_prerared);

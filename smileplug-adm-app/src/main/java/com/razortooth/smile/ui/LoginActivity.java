@@ -2,17 +2,25 @@ package com.razortooth.smile.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
+import com.razortooth.smile.bu.Constants;
+import com.razortooth.smile.bu.NetworkManager;
 import com.razortooth.smile.bu.SmilePlugServerManager;
 import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.DialogUtil;
@@ -26,13 +34,39 @@ public class LoginActivity extends Activity {
 
     private String status;
 
+    private NetworkManager receiver;
+
+    public LoginActivity() {
+        receiver = new NetworkManager();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.login);
+        Display displaySize = ActivityUtil.getDisplaySize(getApplicationContext());
+        getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
+
+        try {
+            PackageInfo pinfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            TextView title = (TextView) findViewById(R.id.tv_title);
+            title.setText(getText(R.string.app_name) + " " + pinfo.versionName);
+        } catch (NameNotFoundException e) {
+            Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+        }
+
         tvIp = (TextView) findViewById(R.id.et_server_ip);
         btConnect = (Button) findViewById(R.id.bt_connect);
+
+        registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        unregisterReceiver(receiver);
     }
 
     @Override

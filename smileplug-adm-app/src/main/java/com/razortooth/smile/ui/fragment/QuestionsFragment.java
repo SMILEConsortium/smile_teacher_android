@@ -11,7 +11,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -77,7 +79,7 @@ public class QuestionsFragment extends AbstractFragment {
         results = (Results) getActivity().getIntent().getSerializableExtra(
             GeneralActivity.PARAM_RESULTS);
 
-        tvServer.setText(ip);
+        tvServer.setText("CONNECTED TO\n" + ip);
 
         adapter = new QuestionListAdapter(getActivity(), questions, results, ip);
 
@@ -170,8 +172,12 @@ public class QuestionsFragment extends AbstractFragment {
 
         @Override
         public void onClick(View v) {
-            Dialog saveDialog = new Dialog(QuestionsFragment.this.getActivity(), R.style.Dialog);
+            FragmentActivity activity = QuestionsFragment.this.getActivity();
+
+            Dialog saveDialog = new Dialog(activity, R.style.Dialog);
             saveDialog.setContentView(R.layout.save);
+            Display displaySize = ActivityUtil.getDisplaySize(activity);
+            saveDialog.getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
             saveDialog.show();
 
             Button save = (Button) saveDialog.findViewById(R.id.bt_save_file);

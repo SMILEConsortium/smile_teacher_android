@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.razortooth.smile.R;
 import com.razortooth.smile.bu.Constants;
@@ -63,6 +65,11 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.use_prepared_questions_dialog);
+        Display displaySize = ActivityUtil.getDisplaySize(getApplicationContext());
+        getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
+
+        TextView title = (TextView) findViewById(R.id.tv_title);
+        title.setText(getText(R.string.use_prepared).toString().toUpperCase());
 
         ip = this.getIntent().getStringExtra(GeneralActivity.PARAM_IP);
         results = (Results) this.getIntent().getSerializableExtra(GeneralActivity.PARAM_RESULTS);

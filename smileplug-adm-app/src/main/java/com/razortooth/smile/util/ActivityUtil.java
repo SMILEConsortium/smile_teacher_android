@@ -2,6 +2,8 @@ package com.razortooth.smile.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class ActivityUtil {
@@ -23,6 +25,11 @@ public class ActivityUtil {
 
     public static void showLongToast(Context context, String s) {
         Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+    }
+
+    public static Display getDisplaySize(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        return wm.getDefaultDisplay();
     }
 
 }

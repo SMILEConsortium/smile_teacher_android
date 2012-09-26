@@ -2,17 +2,18 @@ package com.razortooth.smile.ui;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.razortooth.smile.R;
@@ -22,9 +23,10 @@ import com.razortooth.smile.domain.QuestionList;
 import com.razortooth.smile.domain.Student;
 import com.razortooth.smile.domain.StudentQuestionDetail;
 import com.razortooth.smile.ui.adapter.StudentQuestionDetailAdapter;
+import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.ImageLoader;
 
-public class StudentStatusDetailsActivity extends Activity {
+public class StudentStatusDetailsActivity extends MainActivity {
 
     public static final String PARAM_QUESTIONS = "questions";
     public static final String PARAM_STUDENT = "student";
@@ -40,6 +42,8 @@ public class StudentStatusDetailsActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.student_details);
+        Display displaySize = ActivityUtil.getDisplaySize(getApplicationContext());
+        getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
 
         Bundle b = getIntent().getExtras();
         questions = b.getParcelable(PARAM_QUESTIONS);
@@ -75,6 +79,8 @@ public class StudentStatusDetailsActivity extends Activity {
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
             Dialog detailsDialog = new Dialog(StudentStatusDetailsActivity.this, R.style.Dialog);
             detailsDialog.setContentView(R.layout.student_question_details);
+            Display displaySize = ActivityUtil.getDisplaySize(getApplicationContext());
+            detailsDialog.getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
             detailsDialog.show();
 
             StudentQuestionDetail studentQuestionDetail = (StudentQuestionDetail) lvListQuestionDetails
@@ -122,6 +128,18 @@ public class StudentStatusDetailsActivity extends Activity {
                 + " " + question.getOwner() + " )");
 
             ImageView tvImage = (ImageView) detailsDialog.findViewById(R.id.iv_image);
+
+            Display displaySize = ActivityUtil.getDisplaySize(getApplicationContext());
+            float percentWidth = (float) (displaySize.getWidth() * 0.6);
+            float percentHeight = (float) (displaySize.getHeight() * 0.6);
+            int width = (int) (displaySize.getWidth() - percentWidth);
+            int height = (int) (displaySize.getHeight() - percentHeight);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width,
+                height);
+            layoutParams.addRule(RelativeLayout.BELOW, R.id.tv_question);
+            layoutParams.setMargins(35, 20, 50, 0);
+            tvImage.setLayoutParams(layoutParams);
+
             if (question.hasImage()) {
 
                 byte[] data = ImageLoader.loadBitmap(Constants.HTTP + ip + question.getImageUrl());

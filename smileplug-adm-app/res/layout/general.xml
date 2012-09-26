@@ -3,144 +3,139 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:background="@color/gray">
-		
-	<RelativeLayout 
+
+	<RelativeLayout
 		android:id="@+id/ll_buttons"
-		android:layout_width="130dip"
-		android:layout_height="fill_parent"
+		android:layout_width="fill_parent"
+		android:layout_height="80dip"
 		android:layout_marginTop="10dip"
 		android:layout_alignParentLeft="true">
-		
-	    <TextView
-	  		android:id="@+id/tv_title_server"
-	  		android:layout_width="wrap_content"
-	  		android:layout_height="wrap_content"
-	  		android:text="@string/server_connected"
-	  		android:textColor="@color/black"
-	  		android:textSize="14sp"
-	  		android:layout_alignParentTop="true"
-	  		android:layout_marginTop="5dip"
-	  		android:layout_centerHorizontal="true"/>
-	    
+
+	    <View
+			android:id="@+id/view_separator_middle"
+			android:layout_width="1dip"
+			android:layout_height="fill_parent"
+			android:background="@color/white"
+			android:layout_marginLeft="20dip"
+			android:layout_marginRight="20dip"
+			android:layout_marginTop="10dip"
+			android:layout_marginBottom="10dip"
+			android:layout_centerInParent="true"/>
+
 	    <TextView
 	  		android:id="@+id/tv_server"
 	  		android:layout_width="wrap_content"
 	  		android:layout_height="wrap_content"
 	  		android:textColor="@color/black"
-	  		android:textSize="14sp"
-	  		android:layout_below="@id/tv_title_server"
-	  		android:layout_centerHorizontal="true"/>
-	  		
-		<Button 
-	  		android:id="@+id/bt_solve"
-	  		android:layout_width="120dip"
-	  		android:layout_height="50dip"
-	  		android:text="@string/start_solving"
-	  		android:textSize="12sp"
-	  		android:layout_marginTop="10dip"
-	  		android:layout_below="@id/tv_server"
-	  		android:layout_centerHorizontal="true"/>
-	  		
-		<Button 
-	  		android:id="@+id/bt_results"
-	  		android:layout_width="120dip"
-	  		android:layout_height="50dip"
-	  		android:text="@string/show_results"
-	  		android:textSize="12sp"
-	  		android:layout_marginTop="10dip"
-	  		android:layout_marginBottom="150dip"
-	  		android:layout_below="@id/bt_solve"
-	  		android:layout_centerHorizontal="true"/>	
-	  		
-		<TextView
-	  		android:id="@+id/tv_status"
-	  		android:layout_width="fill_parent"
-	  		android:layout_height="wrap_content"
-	  		android:textColor="@color/black"
-	  		android:textSize="14sp"
+	  		android:textSize="18sp"
+	  		android:textStyle="bold"
 	  		android:gravity="center"
 	  		android:singleLine="false"
-	  		android:layout_alignParentBottom="true"/>
-		
-		<View
-			android:id="@+id/view" 
-			android:layout_width="fill_parent"
-			android:layout_height="1dip"
-			android:background="@color/white"
-			android:layout_above="@id/tv_status"
-			android:layout_marginLeft="5dip"
-			android:layout_marginRight="5dip"
-			android:layout_marginTop="5dip"
-			android:layout_centerHorizontal="true"/>
-	  	
+	  		android:layout_marginTop="20dip"
+	  		android:layout_toLeftOf="@+id/view_separator_middle"/>
+
+		<Button
+	  		android:id="@+id/bt_solve"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="fill_parent"
+	  		android:text="@string/start_solving"
+	  		android:textSize="18sp"
+	  		android:lines="2"
+	  		android:layout_margin="5dip"
+		    android:layout_gravity="center|center_horizontal"
+	  		android:layout_alignParentLeft="true"/>
+
+		<Button
+	  		android:id="@+id/bt_results"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="fill_parent"
+	  		android:text="@string/show_results"
+	  		android:textSize="18sp"
+	  		android:layout_margin="5dip"
+	  		android:layout_toRightOf="@+id/bt_solve"/>
+
+		<TextView
+	  		android:id="@+id/tv_status"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:textColor="@color/black"
+	  		android:textSize="18sp"
+	  		android:textStyle="bold"
+	  		android:gravity="center"
+	  		android:singleLine="false"
+	  		android:layout_marginTop="20dip"
+	  		android:layout_toRightOf="@+id/view_separator_middle"/>
+
 		<TextView
 	  		android:id="@+id/tv_remaining_time"
 	  		android:layout_width="wrap_content"
 	  		android:layout_height="wrap_content"
 	  		android:text="@string/remaining_time"
 	  		android:textColor="@color/black"
-	  		android:textSize="14sp"
-	  		android:layout_marginBottom="30dip"
-	  		android:layout_above="@id/tv_status"
-	  		android:layout_centerHorizontal="true"/>
-		
+	  		android:textSize="18sp"
+	  		android:layout_marginTop="20dip"
+	  		android:layout_marginRight="10dip"
+	  		android:layout_alignParentRight="true"/>
+
 		<TextView
 	  		android:id="@+id/tv_time"
 	  		android:layout_width="wrap_content"
 	  		android:layout_height="wrap_content"
 	  		android:textColor="@color/black"
-	  		android:textSize="14sp"
-	  		android:layout_marginBottom="10dip"
-	  		android:layout_centerHorizontal="true"
-	  		android:layout_above="@id/tv_status"/>
-	
+	  		android:textSize="18sp"
+	  		android:layout_marginRight="10dip"
+	  		android:layout_alignParentRight="true"
+	  		android:layout_below="@+id/tv_remaining_time"/>
+
 	</RelativeLayout>
-		
+
+	<View
+		android:id="@+id/view_separator2"
+		android:layout_width="fill_parent"
+		android:layout_height="2dip"
+		android:background="@color/black"
+		android:layout_below="@id/ll_buttons"/>
+
 	<TextView
   		android:id="@+id/tv_students"
   		android:layout_width="wrap_content"
   		android:layout_height="wrap_content"
-  		android:text="@string/students"
+  		android:text="@string/students_uppercase"
   		android:textColor="@color/black"
   		android:textSize="20sp"
   		android:textStyle="bold"
-  		android:layout_marginTop="15dip"
-  		android:layout_marginLeft="100dip"
-  		android:layout_toRightOf="@id/ll_buttons"/>
-  		
+  		android:layout_marginLeft="10dip"
+  		android:layout_marginTop="10dip"
+  		android:layout_alignParentLeft="true"
+  		android:layout_below="@id/ll_buttons"/>
+
 	<TextView
   		android:id="@+id/tv_questions"
   		android:layout_width="wrap_content"
   		android:layout_height="wrap_content"
-  		android:text="@string/questions"
+  		android:text="@string/questions_uppercase"
   		android:textColor="@color/black"
   		android:textSize="20sp"
   		android:textStyle="bold"
-  		android:layout_marginTop="15dip"
-  		android:layout_marginLeft="180dip"
-  		android:layout_toRightOf="@id/tv_students"/>
-  	
-	<View
-		android:id="@+id/view_separator2" 
-		android:layout_width="2dip"
-		android:layout_height="fill_parent"
-		android:background="@color/black"
-		android:layout_toRightOf="@id/ll_buttons"/>
-	
+  		android:layout_centerHorizontal="true"
+  		android:layout_marginRight="10dip"
+  		android:layout_marginTop="10dip"
+  		android:layout_alignParentRight="true"
+  		android:layout_below="@id/ll_buttons"/>
+
 	<LinearLayout
 	    android:id="@+id/ll_container_fragment"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:orientation="vertical"
-	    android:layout_toRightOf="@id/ll_buttons"
 	    android:layout_below="@id/tv_students"
 	    android:layout_marginTop="5dip">
-	
+
 		<android.support.v4.view.ViewPager
 		    android:id="@+id/vp_awesomepager"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"/>
-	
-	</LinearLayout>  	
-  
+
+	</LinearLayout>
+
 </RelativeLayout>

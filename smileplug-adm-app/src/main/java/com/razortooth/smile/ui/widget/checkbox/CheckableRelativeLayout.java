@@ -8,15 +8,15 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
-import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 
-public class CheckableRelativeLayout extends RelativeLayout implements Checkable {
+public class CheckableRelativeLayout extends TableLayout implements Checkable {
 
     private boolean isChecked;
     private List<Checkable> checkableViews;
 
     public CheckableRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+        super(context, attrs);
         initialise(attrs);
     }
 
