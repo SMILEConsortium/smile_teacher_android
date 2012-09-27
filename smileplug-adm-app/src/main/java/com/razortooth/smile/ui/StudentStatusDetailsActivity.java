@@ -1,5 +1,6 @@
 package com.razortooth.smile.ui;
 
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.Dialog;
@@ -63,6 +64,14 @@ public class StudentStatusDetailsActivity extends MainActivity {
         List<StudentQuestionDetail> studentQuestionDetails = student.getDetails();
         StudentQuestionDetailAdapter adapter = new StudentQuestionDetailAdapter(this,
             studentQuestionDetails);
+
+        adapter.sort(new Comparator<StudentQuestionDetail>() {
+            @Override
+            public int compare(StudentQuestionDetail arg0, StudentQuestionDetail arg1) {
+                return arg0.getNumber() - arg1.getNumber();
+            }
+        });
+
         lvListQuestionDetails = (ListView) findViewById(R.id.list);
         lvListQuestionDetails.setAdapter(adapter);
         lvListQuestionDetails.setOnItemClickListener(new OpenItemDetailsListener());
