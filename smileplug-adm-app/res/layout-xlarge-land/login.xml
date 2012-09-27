@@ -6,7 +6,7 @@
 	android:layout_height="fill_parent"
 	android:background="@drawable/rounded_border"
 	android:layout_gravity="center"
-	android:layout_margin="150dip">
+	android:layout_margin="200dip">
 
 	<TextView
 	  	android:id="@+id/tv_title"
@@ -27,10 +27,10 @@
 
 	<EditText
 	  	android:id="@+id/et_server_ip"
-	  	android:layout_width="160sp"
+	  	android:layout_width="180sp"
 		android:layout_height="wrap_content"
 		android:text="@string/server_ip"
-		android:textSize="18sp"
+		android:textSize="20sp"
 		android:maxLines="1"
 		android:inputType="phone"
 	    android:digits="0123456789."
@@ -45,7 +45,7 @@
 		android:layout_margin="10dip"
 		android:text="@string/server"
 		android:textColor="@color/black"
-		android:textSize="18sp"
+		android:textSize="20sp"
         android:layout_above="@+id/et_server_ip"
         android:layout_centerInParent="true" />
 
@@ -54,7 +54,7 @@
 	  	android:layout_width="150sp"
 		android:layout_height="wrap_content"
 		android:text="@string/connect"
-		android:textSize="18sp"
+		android:textSize="20sp"
 		android:layout_marginTop="30dip"
 		android:layout_below="@+id/et_server_ip"
         android:layout_centerInParent="true"/>
