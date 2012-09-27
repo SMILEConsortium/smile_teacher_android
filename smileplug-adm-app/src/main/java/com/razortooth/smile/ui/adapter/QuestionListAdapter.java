@@ -1,11 +1,17 @@
 package com.razortooth.smile.ui.adapter;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,23 +64,23 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         TextView tvIp = (TextView) convertView.findViewById(R.id.tv_ip);
         tvIp.setText(question.getIp());
 
-        // try {
-        TextView tvHitAverage = (TextView) convertView.findViewById(R.id.tv_hit_average);
-        // String sQuestionsCorrectPercentage = results == null ? "[0]" : results
-        // .getQuestionsCorrectPercentage();
-        // JSONArray questionsCorrectPercentage = new JSONArray(sQuestionsCorrectPercentage);
-        //
-        // NumberFormat numberFormat = new DecimalFormat("####0.00");
-        // double amount = new Double(
-        // String.valueOf(questionsCorrectPercentage.length() <= position ? 0
-        // : questionsCorrectPercentage.get(position)));
-        //
-        // numberFormat.format(amount);
+        try {
+            TextView tvHitAverage = (TextView) convertView.findViewById(R.id.tv_hit_average);
+            String sQuestionsCorrectPercentage = results == null ? "[0]" : results
+                .getQuestionsCorrectPercentage();
+            JSONArray questionsCorrectPercentage = new JSONArray(sQuestionsCorrectPercentage);
 
-        tvHitAverage.setText(String.valueOf(question.getHitAverage()));
-        // } catch (JSONException e) {
-        // Log.e(Constants.LOG_CATEGORY, "Error: ", e);
-        // }
+            NumberFormat numberFormat = new DecimalFormat("####0.00");
+            double amount = new Double(
+                String.valueOf(questionsCorrectPercentage.length() <= position ? 0
+                    : questionsCorrectPercentage.get(position)));
+
+            numberFormat.format(amount);
+
+            tvHitAverage.setText(String.valueOf(amount));
+        } catch (JSONException e) {
+            Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+        }
 
         final float rating = (float) question.getRating();
 

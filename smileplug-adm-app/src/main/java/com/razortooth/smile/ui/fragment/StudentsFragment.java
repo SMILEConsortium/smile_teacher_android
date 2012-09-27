@@ -177,9 +177,9 @@ public class StudentsFragment extends AbstractFragment {
 
         @Override
         protected Results doInBackground(Void... arg0) {
-
+            Results retrieveResults = null;
             try {
-                Results retrieveResults = new BoardManager().retrieveResults(ip, context);
+                retrieveResults = new BoardManager().retrieveResults(ip, context);
                 return retrieveResults;
             } catch (NetworkErrorException e) {
                 Log.e(Constants.LOG_CATEGORY, e.getMessage());
@@ -187,7 +187,7 @@ public class StudentsFragment extends AbstractFragment {
                 Log.e(Constants.LOG_CATEGORY, e.getMessage());
             }
 
-            return null;
+            return retrieveResults;
         }
 
         @Override
