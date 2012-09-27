@@ -129,7 +129,7 @@ public class StudentsFragment extends AbstractFragment {
                 students.addAll(newStudents);
             }
 
-            if (countAnswers > 0) {
+            if (countAnswers > 0 || board.getAnswersNumber() > 0) {
                 Collection<Question> newQuestions = board.getQuestions();
                 if (newQuestions != null) {
                     questions.addAll(newQuestions);

@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 
 import com.razortooth.smile.util.ActivityUtil;
 
@@ -27,19 +25,8 @@ public class NetworkManager extends BroadcastReceiver {
         NetworkInfo otherNetworkInfo = (NetworkInfo) intent
             .getParcelableExtra(ConnectivityManager.EXTRA_OTHER_NETWORK_INFO);
 
-        ConnectivityManager myConnManager = (ConnectivityManager) context
-            .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo myNetworkInfo = myConnManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        WifiManager myWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
-
         if (currentNetworkInfo.equals(otherNetworkInfo)) {
             ActivityUtil.showLongToast(context, "IP changed! Current is " + currentNetworkInfo);
-        } else if (myNetworkInfo.isConnected()) {
-            int myIp = myWifiInfo.getIpAddress();
-            ActivityUtil.showLongToast(context, "Connected!!! IP " + myIp);
-        } else {
-            ActivityUtil.showLongToast(context, "Not connected!!!");
         }
     }
 }
