@@ -9,44 +9,53 @@
   	android:background="@color/gray">
 
     <TableRow
-        android:id="@+id/tr_item"
-        android:layout_width="0dip"
-        android:layout_height="wrap_content">
+        android:id="@+id/tr_item">
 
         <TextView
 	        android:id="@+id/tv_name"
-	        android:layout_gravity="center|center_horizontal"
+	        android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+	        android:gravity="center"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"
 	        android:paddingLeft="10dip"/>
 
 	  	<TextView
 	        android:id="@+id/tv_ip"
-	        android:layout_gravity="center|center_horizontal"
+	        android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+	        android:gravity="center"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"/>
 
 	    <CheckBox
 	        android:id="@+id/tv_question"
+	        android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal|center_vertical"
 	        android:button="@drawable/checkbox"
-	        android:layout_gravity="center|center_horizontal"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"
-	        android:focusable="false"
-	        android:paddingRight="20dip" />
+	        android:focusable="false" />
 
 	    <CheckBox
 	        android:id="@+id/tv_answers"
+	        android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal|center_vertical"
 	        android:button="@drawable/checkbox"
-	        android:layout_gravity="center|center_horizontal"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"
-	        android:focusable="false"
-	        android:paddingRight="10dip" />
+	        android:focusable="false" />
 
 	    <TextView
 	        android:id="@+id/tv_score"
-	        android:layout_gravity="center|center_horizontal"
+	        android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+	        android:gravity="center"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"/>
 

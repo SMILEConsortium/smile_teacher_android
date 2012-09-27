@@ -7,8 +7,8 @@
 
     <View
   		android:id="@+id/view_separator1"
-		android:layout_width="70dip"
-		android:layout_height="3dip"
+		android:layout_width="100dip"
+		android:layout_height="10dip"
 		android:layout_alignParentRight="true"
         android:layout_marginRight="10dip"
         android:layout_marginTop="10dip"
@@ -66,56 +66,85 @@
 			android:layout_marginRight="10dip"/>
 
 	  	<TableRow
-	  		android:id="@+id/tr_row"
-	  		android:layout_width="0dip"
-         	android:layout_height="wrap_content">
+	  		android:id="@+id/tr_row">
 
 	  	    <TextView
 		  	  	android:id="@+id/tv_check"
+		  	  	android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_gravity="center"
 		      	android:text="@string/save"
 		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+		      	android:textColor="@color/black"/>
 
 	  	    <TextView
 		  	  	android:id="@+id/tv_details"
+		  	  	android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_gravity="center"
 		      	android:text="@string/details"
 		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+		      	android:textColor="@color/black"/>
 
 	  	    <TextView
 		      	android:id="@+id/tv_space1"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+		      	android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_gravity="center"
+		      	android:text="@string/number"
+		      	android:textSize="18sp"
+		      	android:textColor="@color/black"/>
 
 		  	<TextView
 		      	android:id="@+id/tv_question"
-		      	android:text="@string/number_owner_ip"
+		      	android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_gravity="center"
+		      	android:text="@string/owner"
 		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+		      	android:textColor="@color/black"/>
 
 		  	<TextView
 		      	android:id="@+id/tv_space2"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+		      	android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_gravity="center"
+		      	android:text="@string/ip"
+		      	android:textSize="18sp"
+		      	android:textColor="@color/black"/>
 
 		  	<TextView
 		    	android:id="@+id/tv_answers"
+		    	android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_gravity="center"
 		      	android:text="@string/correct"
 		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+		      	android:textColor="@color/black"/>
 
 		  	<TextView
 		      	android:id="@+id/tv_score"
+		      	android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_gravity="center"
 		      	android:text="@string/rating_table"
 		      	android:textSize="18sp"
 		      	android:textColor="@color/black"
-		      	android:lines="2"
-		        android:layout_gravity="center|center_horizontal"
-		        android:gravity="center"/>
+		      	android:lines="2"/>
 
 	  	</TableRow>
 
