@@ -24,7 +24,7 @@ public class ActivityUtil {
     }
 
     public static void showLongToast(Context context, String s) {
-        Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
     }
 
     public static Display getDisplaySize(Context context) {
