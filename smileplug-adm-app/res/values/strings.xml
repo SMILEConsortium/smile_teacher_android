@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">SMILE Teacher 0.2.1</string>
+	<string name="app_name">SMILE Teacher</string>
 	<string name="server">Server IP</string>
 	<string name="connect">Connect</string>
 	<string name="loading">Loading...</string>
@@ -31,7 +31,7 @@
 	<string name="top_scores">TOP SCORERS</string>
 
 	<string name="about">About</string>
-	<string name="about_text">SMILE Teacher 0.2.1:  The activity management application for teachers,
+	<string name="about_text">SMILE Teacher 0.2.1beta3:  The activity management application for teachers,
 	called the SMILE Junction Server Admin, serves to manage and
 	save data from the activity via an ad-hoc network. It is a
 	Graphic User Interface-based application that can be
