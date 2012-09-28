@@ -81,15 +81,19 @@ public class QuestionsFragment extends AbstractFragment {
 
         tvServer.setText("CONNECTED TO\n" + ip);
 
+        listQuestions();
+
+        run = true;
+        loadItems = true;
+    }
+
+    private void listQuestions() {
         adapter = new QuestionListAdapter(getActivity(), questions, results, ip);
 
         lvListQuestions.setAdapter(adapter);
         lvListQuestions.setOnItemClickListener(new CheckedItemListener());
         lvListQuestions.setItemsCanFocus(false);
         lvListQuestions.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        run = true;
-        loadItems = true;
     }
 
     @Override
@@ -162,6 +166,8 @@ public class QuestionsFragment extends AbstractFragment {
                 loadSelections();
                 loadItems = false;
             }
+
+            listQuestions();
         }
 
         adapter.notifyDataSetChanged();
