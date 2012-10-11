@@ -1,23 +1,18 @@
 package com.razortooth.smile.ui.adapter;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RatingBar;
@@ -31,14 +26,12 @@ import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.ImageLoader;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
-    private Results results;
     private Context context;
     private String ip;
 
     public QuestionListAdapter(Context context, List<Question> items, Results results, String ip) {
         super(context, android.R.layout.simple_list_item_multiple_choice, items);
 
-        this.results = results;
         this.context = context;
         this.ip = ip;
     }
@@ -64,27 +57,13 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         TextView tvIp = (TextView) convertView.findViewById(R.id.tv_ip);
         tvIp.setText(question.getIp());
 
-        try {
-            TextView tvHitAverage = (TextView) convertView.findViewById(R.id.tv_hit_average);
-            String sQuestionsCorrectPercentage = results == null ? "[0]" : results
-                .getQuestionsCorrectPercentage();
-            JSONArray questionsCorrectPercentage = new JSONArray(sQuestionsCorrectPercentage);
+        TextView tvHitAverage = (TextView) convertView.findViewById(R.id.tv_hit_average);
 
-            NumberFormat numberFormat = new DecimalFormat("####0.00");
-            double amount = new Double(
-                String.valueOf(questionsCorrectPercentage.length() <= position ? 0
-                    : questionsCorrectPercentage.get(position)));
-
-            numberFormat.format(amount);
-
-            tvHitAverage.setText(String.valueOf(amount));
-        } catch (JSONException e) {
-            Log.e(Constants.LOG_CATEGORY, "Error: ", e);
-        }
+        tvHitAverage.setText(String.valueOf(question.getPerCorrect()));
 
         final float rating = (float) question.getRating();
 
-        ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
+        Button ivDetails = (Button) convertView.findViewById(R.id.iv_details);
         ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
 
         final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
@@ -192,4 +171,5 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         tvCorrectAnswer.setText(context.getString(R.string.correct_answer) + ": "
             + question.getAnswer());
     }
+
 }

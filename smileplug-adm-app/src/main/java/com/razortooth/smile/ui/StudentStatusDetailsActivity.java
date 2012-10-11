@@ -62,13 +62,14 @@ public class StudentStatusDetailsActivity extends MainActivity {
         tvScore.setText(getString(R.string.score) + " " + score + "/" + total);
 
         List<StudentQuestionDetail> studentQuestionDetails = student.getDetails();
+
         StudentQuestionDetailAdapter adapter = new StudentQuestionDetailAdapter(this,
             studentQuestionDetails);
 
         adapter.sort(new Comparator<StudentQuestionDetail>() {
             @Override
             public int compare(StudentQuestionDetail arg0, StudentQuestionDetail arg1) {
-                return arg0.getNumber() - arg1.getNumber();
+                return (arg0.getNumber() - arg1.getNumber());
             }
         });
 

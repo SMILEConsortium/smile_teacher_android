@@ -61,7 +61,7 @@
 			android:id="@+id/view_separator"
 			android:layout_width="fill_parent"
 			android:layout_height="1dip"
-			android:background="@color/white"
+			android:background="@color/gray"
 			android:layout_marginTop="10dip"
 			android:layout_marginRight="10dip"/>
 
@@ -139,7 +139,7 @@
 			android:id="@+id/view_separator_1"
 			android:layout_width="fill_parent"
 			android:layout_height="1dip"
-			android:background="@color/white"
+			android:background="@color/gray"
 			android:layout_marginRight="10dip"/>
 
 	  	<ListView
@@ -154,7 +154,7 @@
 		android:id="@+id/view_separator_2"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
-		android:background="@color/white"
+		android:background="@color/gray"
 		android:layout_marginRight="10dip"
 		android:layout_marginLeft="10dip"
 		android:layout_marginBottom="5dip"

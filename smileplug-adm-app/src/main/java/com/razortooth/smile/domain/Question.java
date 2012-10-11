@@ -21,6 +21,8 @@ public class Question implements Serializable {
     private List<Integer> answers = new ArrayList<Integer>();
     private List<Float> ratings = new ArrayList<Float>();
 
+    private double perCorrect;
+
     public Question() {
         // Empty
     }
@@ -186,6 +188,14 @@ public class Question implements Serializable {
 
     public void setRatings(List<Float> ratings) {
         this.ratings = ratings;
+    }
+
+    public double getPerCorrect() {
+        return perCorrect;
+    }
+
+    public void setPerCorrect(double perCorrect) {
+        this.perCorrect = perCorrect;
     }
 
 }

@@ -54,7 +54,7 @@
             android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dip"
-            android:background="@color/white" />
+            android:background="@color/gray" />
 
         <TableRow
             android:id="@+id/tr_row"
@@ -120,15 +120,15 @@
             android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dip"
-            android:background="@color/white" />
+            android:background="@color/gray" />
 
         <ListView
             android:id="@+id/lv_students"
             android:layout_width="wrap_content"
-            android:layout_height="250dip"
+            android:layout_height="315dip"
             android:layout_above="@id/view_separator_list"
             android:layout_below="@id/tl_status"
-            android:layout_marginLeft="10dip" />
+            android:layout_marginLeft="9dip" />
 
     </TableLayout>
 
@@ -182,7 +182,7 @@
 	        android:layout_marginLeft="10dip"
 	        android:layout_marginRight="10dip"
 	        android:layout_marginBottom="10dip"
-	        android:background="@color/white" />
+	        android:background="@color/gray" />
 
     </TableLayout>
 
@@ -206,7 +206,7 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:layout_marginTop="5dip"
-        android:background="@color/white" />
+        android:background="@color/gray" />
 
     <LinearLayout
         android:id="@+id/ll_top_scorers"
@@ -223,7 +223,7 @@
             android:layout_marginLeft="10dip"
         	android:layout_marginRight="10dip"
             android:layout_marginTop="5dip"
-            android:background="@color/white" />
+            android:background="@color/gray" />
 
         <TextView
             android:id="@+id/tv_top_scorers_top"
@@ -260,9 +260,21 @@
             android:layout_height="1dip"
             android:layout_marginLeft="10dip"
         	android:layout_marginRight="10dip"
-            android:background="@color/white" />
+            android:background="@color/gray" />
 
     </LinearLayout>
+    
+    <View
+        android:id="@+id/view_separator_score"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="10dip"
+    	android:layout_marginRight="10dip"
+        android:layout_marginTop="5dip"
+        android:layout_above="@+id/tv_top_scorers"
+        android:layout_below="@+id/lv_students"
+        android:background="@color/gray" />
+
 
     <TextView
         android:id="@+id/tv_top_scorers"
@@ -275,5 +287,6 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
+
 
 </RelativeLayout>

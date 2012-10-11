@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -408,16 +409,16 @@ public class GeneralActivity extends FragmentActivity {
 
                 ListView lvListStudents = (ListView) GeneralActivity.this
                     .findViewById(R.id.lv_students);
-                lvListStudents.setLayoutParams(layoutParams);
+
                 lvListStudents.setPadding(5, 0, 0, 0);
 
                 TextView tvTopTitle = (TextView) GeneralActivity.this
                     .findViewById(R.id.tv_top_scorers);
-                tvTopTitle.setVisibility(View.GONE);
+                tvTopTitle.setVisibility(View.INVISIBLE);
 
                 LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
                     .findViewById(R.id.ll_top_scorers);
-                llTopScorersContainer.setVisibility(View.GONE);
+                llTopScorersContainer.setVisibility(View.INVISIBLE);
 
                 TableLayout tlTotal = (TableLayout) findViewById(R.id.tl_total);
                 tlTotal.setVisibility(View.VISIBLE);
@@ -451,13 +452,14 @@ public class GeneralActivity extends FragmentActivity {
         vTotal.setVisibility(View.GONE);
 
         TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
-            LayoutParams.WRAP_CONTENT, 150);
+            LayoutParams.WRAP_CONTENT, 315);
 
         ListView lvListStudents = (ListView) GeneralActivity.this.findViewById(R.id.lv_students);
         lvListStudents.setLayoutParams(layoutParams);
         lvListStudents.setPadding(5, 0, 0, 0);
 
         TextView tvTopTitle = (TextView) GeneralActivity.this.findViewById(R.id.tv_top_scorers);
+        tvTopTitle.setTextColor(Color.BLACK);
         tvTopTitle.setVisibility(View.VISIBLE);
 
         LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this

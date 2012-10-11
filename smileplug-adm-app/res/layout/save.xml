@@ -21,7 +21,7 @@
 		android:id="@+id/view_separator"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
-		android:background="@color/white"
+		android:background="@color/gray"
 		android:layout_margin="5dip"
 		android:layout_below="@id/tv_title"/>
 
@@ -61,7 +61,7 @@
 		android:id="@+id/view_separator2"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
-		android:background="@color/white"
+		android:background="@color/gray"
 		android:layout_marginLeft="5dip"
 		android:layout_marginRight="5dip"
 		android:layout_marginBottom="20dip"

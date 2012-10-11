@@ -6,7 +6,7 @@
     android:stretchColumns="*"
   	android:layout_margin="5dip"
   	android:paddingTop="10dip"
-  	android:background="@color/gray">
+  	android:background="@color/white">
 
     <TableRow
         android:id="@+id/tr_item">

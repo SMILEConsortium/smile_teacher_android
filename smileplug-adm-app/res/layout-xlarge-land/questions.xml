@@ -39,10 +39,10 @@
   	<Button
   		android:id="@+id/bt_save"
   		android:layout_width="120dip"
-  		android:layout_height="50dip"
+  		android:layout_height="60dip"
   		android:layout_gravity="center_horizontal"
   		android:text="@string/save_questions"
-  		android:textSize="12sp"
+  		android:textSize="15sp"
   		android:layout_margin="10dip"
   		android:layout_alignParentBottom="true"
   		android:layout_alignParentRight="true"/>
@@ -61,7 +61,7 @@
 			android:id="@+id/view_separator"
 			android:layout_width="fill_parent"
 			android:layout_height="1dip"
-			android:background="@color/white"
+			android:background="@color/gray"
 			android:layout_marginTop="10dip"
 			android:layout_marginRight="10dip"/>
 
@@ -152,7 +152,7 @@
 			android:id="@+id/view_separator_1"
 			android:layout_width="fill_parent"
 			android:layout_height="1dip"
-			android:background="@color/white"
+			android:background="@color/gray"
 			android:layout_marginRight="10dip"/>
 
 	  	<ListView
@@ -167,7 +167,7 @@
 		android:id="@+id/view_separator_2"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
-		android:background="@color/white"
+		android:background="@color/gray"
 		android:layout_marginRight="10dip"
 		android:layout_marginLeft="10dip"
 		android:layout_marginBottom="5dip"

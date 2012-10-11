@@ -6,11 +6,12 @@
     android:layout_height="fill_parent"
     android:shrinkColumns="*"
     android:stretchColumns="*"
-    android:background="@color/gray"
-    android:paddingTop="10dip">
+    android:background="@color/white">
 
     <TableRow
-        android:id="@+id/tr">
+        android:id="@+id/tr"
+	    android:paddingTop="5dip"
+	    android:paddingBottom="5dip">
 
 		<com.razortooth.smile.ui.widget.checkbox.InertCheckBox
 	        android:id="@+id/cb_item_checkbox"
@@ -21,18 +22,21 @@
 	        android:button="@drawable/checkbox"
 	        android:focusable="false"
 	        android:textSize="18sp"
-	        android:src="@color/gray"/>
+	        android:src="@color/white"/>
 
-	    <ImageView
+	    <Button
 	        android:id="@+id/iv_details"
 	        android:layout_width="0dip"
-            android:layout_height="fill_parent"
+            android:layout_height="50dip"
             android:layout_weight="1"
 	        android:gravity="center"
-	        android:layout_gravity="center_horizontal"
-	        android:src="@drawable/details"
-	        android:background="@color/gray"
-	        android:layout_marginTop="5dip"/>
+	        android:layout_gravity="center_vertical"
+	        android:background="@drawable/rounded_border_button"
+	        android:textSize="18sp"
+	        android:textColor="@color/black"
+	        android:text="@string/detail"
+	        android:focusable="false"
+	        android:focusableInTouchMode="false"/>
 
 	    <TextView
 	        android:id="@+id/tv_number"
@@ -43,7 +47,7 @@
 	        android:layout_gravity="center"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"
-	        android:background="@color/gray"/>
+	        android:background="@color/white"/>
 
 	    <TextView
 	        android:id="@+id/tv_owner"
@@ -54,7 +58,7 @@
 	        android:layout_gravity="center"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"
-	        android:background="@color/gray"/>
+	        android:background="@color/white"/>
 
 	    <TextView
 	        android:id="@+id/tv_ip"
@@ -65,7 +69,7 @@
 	        android:layout_gravity="center"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"
-	        android:background="@color/gray"/>
+	        android:background="@color/white"/>
 
 	    <TextView
 	        android:id="@+id/tv_hit_average"
@@ -76,7 +80,7 @@
 	        android:layout_gravity="center"
 	        android:textSize="18sp"
 	        android:textColor="@color/black"
-	        android:background="@color/gray"/>
+	        android:background="@color/white"/>
 
 	    <RatingBar
 	        android:id="@+id/rb_ratingbar"
@@ -86,7 +90,7 @@
 	        android:gravity="center_horizontal"
 	        style="?android:attr/ratingBarStyleSmall"
 	        android:numStars="5"
-	        android:background="@color/gray"/>
+	        android:background="@color/white"/>
 
     </TableRow>
 

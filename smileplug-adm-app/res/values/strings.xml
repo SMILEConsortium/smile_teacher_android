@@ -28,7 +28,7 @@
 	<string name="students_name">Student Name</string>
 	<string name="score">Score</string>
 	<string name="total">TOTAL</string>
-	<string name="top_scores">TOP SCORERS</string>
+	<string name="top_scores">TOP SCORER</string>
 
 	<string name="about">About</string>
 	<string name="about_text">SMILE Teacher 0.2.1beta3:  The activity management application for teachers,
@@ -53,7 +53,7 @@
 	<string name="connection_established">Connection established</string>
 
 	<string name="created_by">Question(s) created by</string>
-	<string name="top_scorer">Top Scorer(s)</string>
+	<string name="top_scorer">Top Scorer</string>
 	<string name="answers">Answers</string>
 	<string name="question">Question</string>
 	<string name="question_uppercase">QUESTION</string>
@@ -64,8 +64,8 @@
 
 	<string name="question_number">Question Number</string>
 	<string name="correct_answer">Correct Answer</string>
-	<string name="chosen_answer">Chosen Answer</string>
-	<string name="give_rating">Rating</string>
+	<string name="chosen_answer">My Answer</string>
+	<string name="give_rating">My Rating</string>
 
 	<string name="scoreboard_of">Scoreboard of</string>
 
@@ -83,6 +83,7 @@
 
 	<string name="checkbox">CheckBox</string>
 	<string name="details">Details</string>
+	<string name="detail">Detail</string>
 
 	<string name="reset_game">Reset game</string>
 	<string name="exit">Are you sure you want to exit?</string>

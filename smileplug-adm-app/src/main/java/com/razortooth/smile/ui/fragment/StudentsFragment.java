@@ -2,6 +2,8 @@ package com.razortooth.smile.ui.fragment;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -10,6 +12,7 @@ import org.json.JSONException;
 import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,11 +65,11 @@ public class StudentsFragment extends AbstractFragment {
         super.onActivityCreated(savedInstanceState);
 
         TextView tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
-        tvTopTitle.setVisibility(View.GONE);
+        tvTopTitle.setTextColor(Color.WHITE);
 
         LinearLayout llTopScorersConatainer = (LinearLayout) getActivity().findViewById(
             R.id.ll_top_scorers);
-        llTopScorersConatainer.setVisibility(View.GONE);
+        llTopScorersConatainer.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -78,7 +81,9 @@ public class StudentsFragment extends AbstractFragment {
             GeneralActivity.PARAM_RESULTS);
 
         adapter = new StudentListAdapter(getActivity(), students);
+
         ListView lvListStudents = (ListView) getActivity().findViewById(R.id.lv_students);
+        lvListStudents.setPadding(5, 0, 0, 0);
         lvListStudents.setAdapter(adapter);
         lvListStudents.setOnItemClickListener(new OpenItemDetailsListener());
 
@@ -162,6 +167,13 @@ public class StudentsFragment extends AbstractFragment {
 
             });
         }
+
+        Collections.sort(students, new Comparator<Student>() {
+            @Override
+            public int compare(Student arg0, Student arg1) {
+                return (arg1.getScore() - arg0.getScore());
+            }
+        });
 
         adapter.notifyDataSetChanged();
 

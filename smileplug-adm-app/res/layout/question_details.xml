@@ -23,7 +23,7 @@
 		android:id="@+id/view_separator"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
-		android:background="@color/white"
+		android:background="@color/gray"
 		android:layout_margin="5dip"/>
 
     <ScrollView

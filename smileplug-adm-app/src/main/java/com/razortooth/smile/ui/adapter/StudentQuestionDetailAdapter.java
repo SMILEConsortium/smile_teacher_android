@@ -2,8 +2,10 @@ package com.razortooth.smile.ui.adapter;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ public class StudentQuestionDetailAdapter extends ArrayAdapter<StudentQuestionDe
         super(context, 0, items);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -30,6 +33,10 @@ public class StudentQuestionDetailAdapter extends ArrayAdapter<StudentQuestionDe
             LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.students_details_item, parent, false);
+
+            if (item.getAnswer() == item.getChosenAnswer()) {
+                convertView.setBackgroundColor(Color.GREEN);
+            }
         }
 
         TextView tvNumber = (TextView) convertView.findViewById(R.id.tv_number);

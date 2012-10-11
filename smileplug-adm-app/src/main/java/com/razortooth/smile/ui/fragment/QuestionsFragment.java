@@ -1,9 +1,16 @@
 package com.razortooth.smile.ui.fragment;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
@@ -87,8 +94,60 @@ public class QuestionsFragment extends AbstractFragment {
         loadItems = true;
     }
 
+    private void setPercCorrect() {
+        int position = 0;
+
+        for (position = 0; position < questions.size(); position++) {
+            try {
+                String sQuestionsCorrectPercentage = results == null ? "[0]" : results
+                    .getQuestionsCorrectPercentage();
+                JSONArray questionsCorrectPercentage;
+                questionsCorrectPercentage = new JSONArray(sQuestionsCorrectPercentage);
+
+                NumberFormat numberFormat = new DecimalFormat("####0.00");
+                double amount = new Double(
+                    String.valueOf(questionsCorrectPercentage.length() <= position ? 0
+                        : questionsCorrectPercentage.get(position)));
+
+                numberFormat.format(amount);
+
+                questions.get(position).setPerCorrect(amount);
+
+            } catch (JSONException e) {
+                Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+            }
+        }
+
+    }
+
+    private boolean checkQuestionChanges(List<Question> questionsOld, List<Question> questionsNew) {
+
+        if (questionsNew.size() != questionsOld.size()) {
+            return true;
+        }
+
+        for (int i = 0; i < questionsOld.size(); i++) {
+            for (int j = 0; j < questionsNew.size(); j++) {
+                if (questionsOld.get(i).getNumber() == questionsNew.get(j).getNumber()) {
+                    if (questionsOld.get(i).getPerCorrect() != questionsNew.get(j).getPerCorrect()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     private void listQuestions() {
         adapter = new QuestionListAdapter(getActivity(), questions, results, ip);
+
+        adapter.sort(new Comparator<Question>() {
+            @Override
+            public int compare(Question arg0, Question arg1) {
+                return (int) (arg1.getPerCorrect() - arg0.getPerCorrect());
+            }
+        });
 
         lvListQuestions.setAdapter(adapter);
         lvListQuestions.setOnItemClickListener(new CheckedItemListener());
@@ -148,6 +207,9 @@ public class QuestionsFragment extends AbstractFragment {
     @Override
     public void updateFragment(final Board board) {
 
+        List<Question> questionsOld = new ArrayList<Question>();
+        questionsOld.addAll(questions);
+
         questions.clear();
 
         if (run) {
@@ -167,11 +229,21 @@ public class QuestionsFragment extends AbstractFragment {
                 loadItems = false;
             }
 
-            listQuestions();
+            setPercCorrect();
+
+            if (checkQuestionChanges(questionsOld, questions)) {
+                listQuestions();
+            }
+
+            Collections.sort(questions, new Comparator<Question>() {
+                @Override
+                public int compare(Question arg0, Question arg1) {
+                    return (int) (arg1.getPerCorrect() - arg0.getPerCorrect());
+                }
+            });
         }
 
         adapter.notifyDataSetChanged();
-
     }
 
     private class SaveButtonListener implements OnClickListener {

@@ -54,7 +54,7 @@
             android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dip"
-            android:background="@color/white" />
+            android:background="@color/gray" />
 
         <TableRow
             android:id="@+id/tr_row"
@@ -120,7 +120,7 @@
             android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dip"
-            android:background="@color/white" />
+            android:background="@color/gray" />
 
         <ListView
             android:id="@+id/lv_students"
@@ -183,7 +183,7 @@
 	        android:layout_marginLeft="10dip"
 	        android:layout_marginRight="10dip"
 	        android:layout_marginTop="5dip"
-	        android:background="@color/white" />
+	        android:background="@color/gray" />
 
     </TableLayout>
 
@@ -208,7 +208,7 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:layout_marginTop="5dip"
-        android:background="@color/white" />
+        android:background="@color/gray" />
 
     <LinearLayout
         android:id="@+id/ll_top_scorers"
@@ -225,7 +225,7 @@
             android:layout_marginLeft="10dip"
         	android:layout_marginRight="10dip"
             android:layout_marginTop="5dip"
-            android:background="@color/white" />
+            android:background="@color/gray" />
 
         <TextView
             android:id="@+id/tv_top_scorers_top"
@@ -262,7 +262,7 @@
             android:layout_height="1dip"
             android:layout_marginLeft="10dip"
         	android:layout_marginRight="10dip"
-            android:background="@color/white" />
+            android:background="@color/gray" />
 
     </LinearLayout>
 
