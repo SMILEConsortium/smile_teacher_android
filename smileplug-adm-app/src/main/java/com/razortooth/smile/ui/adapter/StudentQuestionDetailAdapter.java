@@ -34,9 +34,6 @@ public class StudentQuestionDetailAdapter extends ArrayAdapter<StudentQuestionDe
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.students_details_item, parent, false);
 
-            if (item.getAnswer() == item.getChosenAnswer()) {
-                convertView.setBackgroundColor(Color.GREEN);
-            }
         }
 
         TextView tvNumber = (TextView) convertView.findViewById(R.id.tv_number);
@@ -51,6 +48,19 @@ public class StudentQuestionDetailAdapter extends ArrayAdapter<StudentQuestionDe
         final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
         rbRatingBar.setRating(item.getChosenRating());
 
+        setCorrectAnswer(convertView, item);
+
         return convertView;
+
     }
+
+    private void setCorrectAnswer(View convertView, final StudentQuestionDetail item) {
+        if (item.correct()) {
+            convertView.setBackgroundColor(Color.GREEN);
+        } else {
+            convertView.setBackgroundColor(Color.WHITE);
+        }
+        convertView.refreshDrawableState();
+    }
+
 }

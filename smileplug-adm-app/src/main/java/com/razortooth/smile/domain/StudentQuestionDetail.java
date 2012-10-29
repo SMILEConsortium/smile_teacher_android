@@ -42,4 +42,11 @@ public class StudentQuestionDetail implements Serializable {
         return owner;
     }
 
+    public boolean correct() {
+        if (getAnswer() == getChosenAnswer()) {
+            return true;
+        }
+        return false;
+    }
+
 }
