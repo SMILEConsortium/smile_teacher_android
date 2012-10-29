@@ -150,6 +150,7 @@ public class QuestionsFragment extends AbstractFragment {
         });
 
         lvListQuestions.setAdapter(adapter);
+        listQuestionsSelected.clear();
         lvListQuestions.setOnItemClickListener(new CheckedItemListener());
         lvListQuestions.setItemsCanFocus(false);
         lvListQuestions.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
