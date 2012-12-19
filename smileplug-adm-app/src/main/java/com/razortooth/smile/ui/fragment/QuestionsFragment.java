@@ -29,6 +29,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.text.TextWatcher;
+import android.text.Editable;
 
 import com.razortooth.smile.R;
 import com.razortooth.smile.bu.BoardManager;
@@ -71,6 +73,7 @@ public class QuestionsFragment extends AbstractFragment {
         super.onActivityCreated(savedInstanceState);
 
         btSave = (Button) getActivity().findViewById(R.id.bt_save);
+		btSave.setEnabled(false);
         lvListQuestions = (ListView) getActivity().findViewById(R.id.lv_questions);
         tvServer = (TextView) getActivity().findViewById(R.id.tv_server);
     }
@@ -164,12 +167,13 @@ public class QuestionsFragment extends AbstractFragment {
     }
 
     private void loadSelections() {
-        for (int i = 0; i < questions.size(); i++) {
+		Log.d(Constants.LOG_CATEGORY, "loadSelections()");
+        /* for (int i = 0; i < questions.size(); i++) {
             if (!lvListQuestions.isItemChecked(i)) {
                 lvListQuestions.setItemChecked(i, true);
                 listQuestionsSelected.add(questions.get(i));
             }
-        }
+        } */
 
         if (!questions.isEmpty() && !listQuestionsSelected.isEmpty()) {
             btSave.setEnabled(true);
@@ -182,7 +186,7 @@ public class QuestionsFragment extends AbstractFragment {
 
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-
+			Log.d(Constants.LOG_CATEGORY, "onItemClicked()");
             if (lvListQuestions.isItemChecked(position)) {
                 Question question = adapter.getItem(position);
                 listQuestionsSelected.add(question);
@@ -247,10 +251,35 @@ public class QuestionsFragment extends AbstractFragment {
         adapter.notifyDataSetChanged();
     }
 
-    private class SaveButtonListener implements OnClickListener {
-
+    private class SaveButtonListener implements OnClickListener, TextWatcher {
+	  	TextView _fname = null;
+		Button _saveButton = null;
+		
+		@Override
+		public void onTextChanged (CharSequence s, int start, int before, int count) {
+			Log.d(Constants.LOG_CATEGORY, "SaveButtonListener.onTextChanged");
+			if (count > 0) {
+				if (_saveButton != null) {
+					_saveButton.setEnabled(true);
+				}
+			} else {
+				_saveButton.setEnabled(false);
+			}
+		}
+		
+		@Override
+		public void afterTextChanged(Editable s) {
+			Log.d(Constants.LOG_CATEGORY, "SaveButtonListener.afterTextChanged");
+		}
+		
+		@Override
+		public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+			Log.d(Constants.LOG_CATEGORY, "SaveButtonListener.beforeTextChanged");
+		}
+		
         @Override
         public void onClick(View v) {
+			Log.d(Constants.LOG_CATEGORY, "SaveButtonListener.onClick");
             FragmentActivity activity = QuestionsFragment.this.getActivity();
 
             Dialog saveDialog = new Dialog(activity, R.style.Dialog);
@@ -260,11 +289,16 @@ public class QuestionsFragment extends AbstractFragment {
             saveDialog.show();
 
             Button save = (Button) saveDialog.findViewById(R.id.bt_save_file);
+			
+			TextView fname = (TextView) saveDialog.findViewById(R.id.et_name_file);
+			fname.addTextChangedListener(this);
             save.setOnClickListener(new SaveFileDialogListener(saveDialog));
+			_fname = fname;
+			_saveButton = save;
         }
 
         public class SaveFileDialogListener implements OnClickListener {
-            private Dialog aboutDialog;
+            private Dialog aboutDialog; // XXX Why is this called about???
 
             public SaveFileDialogListener(Dialog aboutDialog) {
                 this.aboutDialog = aboutDialog;
@@ -274,12 +308,18 @@ public class QuestionsFragment extends AbstractFragment {
             public void onClick(View v) {
                 TextView name = (TextView) aboutDialog.findViewById(R.id.et_name_file);
 
+				//
+				// We need to have a name set before we enable the button
+				// 
                 if (name.getText().toString().equals("")) {
                     name.setText("Questions_file");
                 }
 
-                new SaveTask(getActivity(), listQuestionsSelected, ip, name.getText().toString())
-                    .execute();
+				//
+				// Throw up check to see if the name exists, if the file exists, bomb out and
+				// leave up a tost notification
+				//
+                new SaveTask(getActivity(), listQuestionsSelected, ip, name.getText().toString()).execute();
 
                 aboutDialog.dismiss();
             }

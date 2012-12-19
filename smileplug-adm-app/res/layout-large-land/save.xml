@@ -55,6 +55,7 @@
 		android:textSize="12sp"
 		android:layout_marginTop="30dip"
 		android:layout_below="@+id/et_name_file"
+		android:enabled="false"
         android:layout_centerInParent="true"/>
 
 	<View
