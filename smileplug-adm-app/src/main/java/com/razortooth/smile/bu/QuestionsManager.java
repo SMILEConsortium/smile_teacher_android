@@ -78,8 +78,14 @@ public class QuestionsManager {
 
         System.out.println(ok);
 
+		//
+		// Hello please make sure we don't overwrite the same file
+		//
         File file = new File(dir, QUESTIONS_FILE);
-
+		
+		if (file.isDirectory() || file.exists()) {
+			throw new DataAccessException("File = " + name + " already exists in " + questionsDir);
+		}
         PrintWriter pw = null;
 
         try {

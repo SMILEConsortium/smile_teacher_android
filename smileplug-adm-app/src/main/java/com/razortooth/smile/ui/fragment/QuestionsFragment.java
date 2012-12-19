@@ -392,8 +392,7 @@ public class QuestionsFragment extends AbstractFragment {
             if (ok) {
                 ActivityUtil.showLongToast(QuestionsFragment.this.getActivity(), R.string.saved);
             } else {
-                ActivityUtil
-                    .showLongToast(QuestionsFragment.this.getActivity(), R.string.not_saved);
+				ActivityUtil.showLongToast(QuestionsFragment.this.getActivity(), R.string.not_saved_because_file_name);
             }
         }
 
