@@ -45,6 +45,7 @@
   		android:textSize="12sp"
   		android:layout_margin="10dip"
   		android:layout_alignParentBottom="true"
+		android:enabled="false"
   		android:layout_alignParentRight="true"/>
 
 	<TableLayout
