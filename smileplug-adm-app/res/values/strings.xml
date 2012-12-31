@@ -8,7 +8,7 @@
 	<string name="start_making">Start Making Questions</string>
 	<string name="use_prepared">Use Prepared Questions</string>
 	<string name="start_solving">Start Solving \n Questions</string>
-	<string name="show_results">Show Results</string>
+	<string name="show_results">Finished:\nShow Results</string>
 	<string name="hide_results">Hide Results</string>
 	<string name="students_uppercase">STUDENTS</string>
 	<string name="questions_uppercase">QUESTIONS</string>
@@ -31,7 +31,7 @@
 	<string name="top_scores">TOP SCORER</string>
 
 	<string name="about">About</string>
-	<string name="about_text">SMILE Teacher 0.2.1_beta7:  The activity management application for teachers,
+	<string name="about_text">SMILE Teacher 0.2.2:  The activity management application for teachers,
 	called the SMILE Teacher, serves to manage and
 	save data from the activity via an ad-hoc network. It is a
 	Graphic User Interface-based application that can be
@@ -45,7 +45,7 @@
 	<string name="choose_a_option">CHOOSE AN OPTION BELOW: </string>
 	<string name="remaining_time">Remaining Time</string>
 	<string name="use_time">Use Time Limit Mode</string>
-	<string name="select">Select one question: </string>
+	<string name="select">Select Question File: </string>
 	<string name="seconds">Seconds</string>
 	<string name="minutes">Minutes</string>
 	<string name="hours">Hours</string>
@@ -96,4 +96,5 @@
 	<string name="not_saved_because_file_name">It was not possible to save the question(s) because the file already exists.  Please try a new filename</string>
 	<string name="save">Save</string>
 	<string name="number_owner_ip">Number / Owner / IP</string>
+	<string name="session_time_expired">Session Time has Expired</string>
 </resources>

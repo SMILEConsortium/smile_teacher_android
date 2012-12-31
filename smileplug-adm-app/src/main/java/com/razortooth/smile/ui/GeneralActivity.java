@@ -281,7 +281,9 @@ public class GeneralActivity extends FragmentActivity {
 
         @Override
         public void onFinish() {
-            tvTime.setText("Done!");
+            tvTime.setText(R.string.session_time_expired);
+			btResults.setText(R.string.hide_results);
+            new LoadToResultsTask(GeneralActivity.this).execute();
         }
 
         @Override
