@@ -118,7 +118,10 @@ public class GeneralActivity extends FragmentActivity {
         tvTime.setText("00:00:00");
 
         if (hours != null | seconds != null | minutes != null) {
-            countDownTimer();
+			// Log.d(Constants.LOG_CATEGORY, "hours = " + hours + " seconds = " + seconds + " minutes = " + minutes);
+			if ((!hours.equals("0")) || (!minutes.equals("0")) || (!seconds.equals("0"))) {
+            	countDownTimer();
+			}
         } else {
             tvTime.setVisibility(View.GONE);
             tvRemaining.setVisibility(View.GONE);
@@ -265,6 +268,7 @@ public class GeneralActivity extends FragmentActivity {
     }
 
     private void countDownTimer() {
+		Log.d(Constants.LOG_CATEGORY, "Init countDownTimer()");
         long hr = (Integer.parseInt(hours) * 3600) * 1000;
         long min = (Integer.parseInt(minutes) * 60) * 1000;
         long sec = Integer.parseInt(seconds) * 1000;
