@@ -46,7 +46,7 @@ import com.razortooth.smile.util.ActivityUtil;
 
 public class QuestionsFragment extends AbstractFragment {
 
-    private final List<Question> questions = new ArrayList<Question>();
+    private final List<Question> mQuestions = new ArrayList<Question>();
     private List<Question> listQuestionsSelected = new ArrayList<Question>();
 
     private ArrayAdapter<Question> adapter;
@@ -59,9 +59,11 @@ public class QuestionsFragment extends AbstractFragment {
     private String ip;
     private Results results;
 
-    private boolean run;
+    private boolean mRun;
     private boolean loadItems;
 
+	private Object mQuestionsMutex = new Object();
+	
     @Override
     protected int getLayout() {
         return R.layout.questions;
@@ -93,14 +95,14 @@ public class QuestionsFragment extends AbstractFragment {
 
         listQuestions();
 
-        run = true;
+        mRun = true;
         loadItems = true;
     }
 
     private void setPercCorrect() {
         int position = 0;
 
-        for (position = 0; position < questions.size(); position++) {
+        for (position = 0; position < mQuestions.size(); position++) {
             try {
                 String sQuestionsCorrectPercentage = results == null ? "[0]" : results
                     .getQuestionsCorrectPercentage();
@@ -114,7 +116,7 @@ public class QuestionsFragment extends AbstractFragment {
 
                 numberFormat.format(amount);
 
-                questions.get(position).setPerCorrect(amount);
+                mQuestions.get(position).setPerCorrect(amount);
 
             } catch (JSONException e) {
                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
@@ -143,7 +145,7 @@ public class QuestionsFragment extends AbstractFragment {
     }
 
     private void listQuestions() {
-        adapter = new QuestionListAdapter(getActivity(), questions, results, ip);
+        adapter = new QuestionListAdapter(getActivity(), mQuestions, results, ip);
 
         adapter.sort(new Comparator<Question>() {
             @Override
@@ -163,19 +165,13 @@ public class QuestionsFragment extends AbstractFragment {
     public void onStop() {
         super.onStop();
 
-        run = false;
+        mRun = false;
     }
 
     private void loadSelections() {
 		Log.d(Constants.LOG_CATEGORY, "loadSelections()");
-        /* for (int i = 0; i < questions.size(); i++) {
-            if (!lvListQuestions.isItemChecked(i)) {
-                lvListQuestions.setItemChecked(i, true);
-                listQuestionsSelected.add(questions.get(i));
-            }
-        } */
 
-        if (!questions.isEmpty() && !listQuestionsSelected.isEmpty()) {
+        if (!mQuestions.isEmpty() && !listQuestionsSelected.isEmpty()) {
             btSave.setEnabled(true);
         } else {
             btSave.setEnabled(false);
@@ -211,45 +207,45 @@ public class QuestionsFragment extends AbstractFragment {
 
     @Override
     public void updateFragment(final Board board) {
-
         List<Question> questionsOld = new ArrayList<Question>();
-        questionsOld.addAll(questions);
 
-        questions.clear();
+		synchronized(mQuestionsMutex) {
+			questionsOld.addAll(mQuestions);
+			mQuestions.clear();
 
-        if (run) {
-            Collection<Question> newQuestions = null;
-            newQuestions = board.getQuestions();
+			if (mRun) {
+				Collection<Question> newQuestions = null;
+				newQuestions = board.getQuestions();
 
-            if (newQuestions != null) {
-                questions.addAll(newQuestions);
-            }
+				if (newQuestions != null) {
+					mQuestions.addAll(newQuestions);
+				}
 
-            new UpdateResultsTask(getActivity()).execute();
+				new UpdateResultsTask(getActivity()).execute();
 
-            if (loadItems) {
-                listQuestionsSelected.clear();
+				if (loadItems) {
+					listQuestionsSelected.clear();
 
-                loadSelections();
-                loadItems = false;
-            }
+					loadSelections();
+					loadItems = false;
+				}
 
-            setPercCorrect();
+				setPercCorrect();
 
-            if (checkQuestionChanges(questionsOld, questions)) {
-                listQuestions();
-            }
-
-            Collections.sort(questions, new Comparator<Question>() {
-                @Override
-                public int compare(Question arg0, Question arg1) {
-                    return (int) (arg1.getPerCorrect() - arg0.getPerCorrect());
-                }
-            });
-        }
-
-        adapter.notifyDataSetChanged();
-    }
+				if (checkQuestionChanges(questionsOld, mQuestions)) {
+					listQuestions();
+				}
+				
+				Collections.sort(mQuestions, new Comparator<Question>() {
+					@Override
+					public int compare(Question arg0, Question arg1) {
+						return (int) (arg1.getPerCorrect() - arg0.getPerCorrect());
+					}
+				});
+			}
+		}
+		adapter.notifyDataSetChanged();
+	}
 
     private class SaveButtonListener implements OnClickListener, TextWatcher {
 	  	TextView _fname = null;

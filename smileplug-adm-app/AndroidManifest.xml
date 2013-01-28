@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.razortooth.smile"
 	android:versionCode="1"
-	android:versionName="0.2.4">
+	android:versionName="0.2.5">
 
 	<uses-sdk android:minSdkVersion="7" />
 
