@@ -294,7 +294,7 @@ public class QuestionsFragment extends AbstractFragment {
         }
 
         public class SaveFileDialogListener implements OnClickListener {
-            private Dialog aboutDialog; // XXX Why is this called about???
+            private Dialog aboutDialog; // XXX Why is this called aboutDialog???
 
             public SaveFileDialogListener(Dialog aboutDialog) {
                 this.aboutDialog = aboutDialog;

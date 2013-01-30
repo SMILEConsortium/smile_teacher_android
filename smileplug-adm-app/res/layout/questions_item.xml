@@ -19,7 +19,8 @@
 	        android:button="@drawable/checkbox"
 	        android:focusable="false"
 	        android:layout_gravity="center|center_horizontal"
-	        android:src="@color/gray"/>
+	        android:src="@color/gray"
+			android:checked="true" />
 
 	    <ImageView
 	        android:id="@+id/iv_details"
