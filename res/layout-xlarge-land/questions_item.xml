@@ -22,7 +22,8 @@
 	        android:button="@drawable/checkbox"
 	        android:focusable="false"
 	        android:textSize="18sp"
-	        android:src="@color/white"/>
+	        android:src="@color/white"
+			android:checked="true" />
 
 	    <Button
 	        android:id="@+id/iv_details"

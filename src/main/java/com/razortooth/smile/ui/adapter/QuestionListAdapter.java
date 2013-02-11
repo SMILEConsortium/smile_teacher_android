@@ -24,6 +24,7 @@ import com.razortooth.smile.domain.Question;
 import com.razortooth.smile.domain.Results;
 import com.razortooth.smile.util.ActivityUtil;
 import com.razortooth.smile.util.ImageLoader;
+import com.razortooth.smile.ui.widget.checkbox.InertCheckBox;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
     private Context context;
@@ -48,6 +49,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             convertView = inflater.inflate(R.layout.questions_item, parent, false);
         }
 
+		InertCheckBox cbox = (com.razortooth.smile.ui.widget.checkbox.InertCheckBox) convertView.findViewById(R.id.cb_item_checkbox);
+		cbox.setChecked(true);
+		
         TextView tvNumber = (TextView) convertView.findViewById(R.id.tv_number);
         tvNumber.setText(String.valueOf(question.getNumber()));
 

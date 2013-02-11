@@ -209,6 +209,9 @@ public class QuestionsFragment extends AbstractFragment {
     public void updateFragment(final Board board) {
         List<Question> questionsOld = new ArrayList<Question>();
 
+		//
+		// XXX TODO: Debug this code, there is a bug lurking here
+		//
 		synchronized(mQuestionsMutex) {
 			questionsOld.addAll(mQuestions);
 			mQuestions.clear();
