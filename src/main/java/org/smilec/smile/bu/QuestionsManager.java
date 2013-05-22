@@ -86,6 +86,10 @@ public class QuestionsManager {
 			throw new DataAccessException("External storage unavailable");
 		}
 
+        if (name.endsWith(".json") == false) {
+            name = name + ".json";
+        }
+
 		Log.d("QuestionsManager", "Exporting Questions: " + name);
 
 		File dir = new File(questionsDir, name);
@@ -95,7 +99,7 @@ public class QuestionsManager {
 		// Hello please make sure we don't overwrite the same file
 		//
 		File file = new File(dir, QUESTIONS_FILE);
-		
+
 		if (file.isDirectory() || file.exists()) {
 			throw new DataAccessException("File = " + name + " already exists in " + questionsDir);
 		}
@@ -222,16 +226,16 @@ public class QuestionsManager {
 					String ip = readUntilMarker(br);
 
 					String owner = null;
-					
+
 					// XXX We can't really use owner yet
-					/* 
+					/*
 					owner = readUntilMarker(br);
-					
+
 					*/
 					if (owner == null) {
 						owner = TEACHER_NAME;
 					}
-					
+
 					Question q = new Question(number, owner, ip, question, option1, option2,
 						option3, option4, answer, image);
 
