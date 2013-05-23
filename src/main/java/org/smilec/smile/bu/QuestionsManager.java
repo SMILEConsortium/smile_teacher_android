@@ -189,6 +189,7 @@ public class QuestionsManager {
           //
           try {
             CsvReader csvQuestions = new CsvReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            // CsvReader csvQuestions = new CsvReader(new InputStreamReader(new FileInputStream(file), "Shift_JIS"));
             csvQuestions.readHeaders();
 
             while (csvQuestions.readRecord())
@@ -202,6 +203,7 @@ public class QuestionsManager {
                 String option4 = csvQuestions.get("choice4");
                 String hasImage = csvQuestions.get("has_image");
 				String image = null;
+				Log.d("QuestionsManager", "Loading question: " + question + "(a) " + option1 + "(b)" + option2 + "(c)" + option3 + "(d)" + option4);
 				if (hasImage != null && hasImage.length() > 0) {
 					File img = new File(dir, number + JPG);
 					byte[] originalArray = IOUtil.loadBytes(img);
@@ -225,6 +227,7 @@ public class QuestionsManager {
 				  Log.e(Constants.LOG_CATEGORY, "CSV Load Error: ", ioe);
               }
             }
+		    Log.d("QuestionsManager", "Total Number of Questions: " + (number - 1));
           } catch(FileNotFoundException fnfe) {
                   // XXX Log the error or do something
 				  Log.e(Constants.LOG_CATEGORY, "CSV Load Error, cannot find file: ", fnfe);
@@ -318,7 +321,6 @@ public class QuestionsManager {
 			}
 
 		  } while (false);
-		  Log.d("QuestionsManager", "Number of Questions: " + n);
         }
 
 		return result;

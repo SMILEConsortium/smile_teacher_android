@@ -47,6 +47,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
                 LocalQuestionWrapper questionWrapper = new LocalQuestionWrapper(question);
                 Gson gson = new Gson();
                 String json = gson.toJson(questionWrapper);
+                Log.d("SmilePlugServerManager", "serialized question as JSON, use prepared: " + json);
                 put(ip, context, url, json);
             }
         }
@@ -61,6 +62,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
                 ServerQuestionWrapper questionWrapper = new ServerQuestionWrapper(question);
                 Gson gson = new Gson();
                 String json = gson.toJson(questionWrapper);
+                Log.d("SmilePlugServerManager", "serialized question as JSON: " + json);
                 put(ip, context, url, json);
             }
         }
