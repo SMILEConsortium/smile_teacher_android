@@ -85,10 +85,10 @@
 	<string name="details">Details</string>
 	<string name="detail">Detail</string>
 
-	<string name="reset_game">Reset game</string>
+	<string name="reset_game">Restart Session</string>
 	<string name="exit">Are you sure you want to exit?</string>
-	<string name="restart_game">Are you sure you want to restart game?</string>
-	<string name="game_running">A game is already running!</string>
+	<string name="restart_game">Are you sure you want to restart session?</string>
+	<string name="game_running">A Session is already running!</string>
 
 	<string name="server_ip">10.1.0.1</string>
 	<string name="ip">IP</string>
