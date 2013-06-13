@@ -13,10 +13,20 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui;
+package org.smilec.smile.ui;
 
 import java.util.Comparator;
 import java.util.List;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.QuestionList;
+import org.smilec.smile.domain.Student;
+import org.smilec.smile.domain.StudentQuestionDetail;
+import org.smilec.smile.ui.adapter.StudentQuestionDetailAdapter;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.ImageLoader;
 
 import android.app.Dialog;
 import android.graphics.Bitmap;
@@ -31,16 +41,6 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.QuestionList;
-import org.smile.smilec.domain.Student;
-import org.smile.smilec.domain.StudentQuestionDetail;
-import org.smile.smilec.ui.adapter.StudentQuestionDetailAdapter;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.ImageLoader;
 
 public class StudentStatusDetailsActivity extends MainActivity {
 

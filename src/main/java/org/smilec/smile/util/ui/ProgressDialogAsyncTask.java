@@ -13,17 +13,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.util.ui;
+package org.smilec.smile.util.ui;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.StringUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.StringUtils;
 
 public abstract class ProgressDialogAsyncTask<Params, Result> extends
     AsyncTask<Params, Void, Result> {

@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.bu;
+package org.smilec.smile.bu;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,22 +25,21 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.bu.json.AnswersAndRatingsJSONParser;
+import org.smilec.smile.bu.json.QuestionJSONParser;
+import org.smilec.smile.bu.json.ResultsJSONParser;
+import org.smilec.smile.bu.json.StudentJSONParser;
+import org.smilec.smile.domain.Board;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.Results;
+import org.smilec.smile.domain.Student;
+import org.smilec.smile.util.HttpUtil;
+import org.smilec.smile.util.IOUtil;
+import org.smilec.smile.util.SmilePlugUtil;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
-
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.bu.json.AnswersAndRatingsJSONParser;
-import org.smile.smilec.bu.json.QuestionJSONParser;
-import org.smile.smilec.bu.json.ResultsJSONParser;
-import org.smile.smilec.bu.json.StudentJSONParser;
-import org.smile.smilec.domain.Board;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.Results;
-import org.smile.smilec.domain.Student;
-import org.smile.smilec.util.HttpUtil;
-import org.smile.smilec.util.IOUtil;
-import org.smile.smilec.util.SmilePlugUtil;
 
 public class BoardManager extends AbstractBaseManager {
 

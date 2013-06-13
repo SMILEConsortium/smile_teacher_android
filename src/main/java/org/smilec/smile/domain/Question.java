@@ -12,8 +12,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-**/                                                                                                                                                
-package org.smile.smilec.domain;
+**/
+package org.smilec.smile.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -211,6 +211,16 @@ public class Question implements Serializable {
 
     public void setPerCorrect(double perCorrect) {
         this.perCorrect = perCorrect;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+    	return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+    	return super.hashCode();
     }
 
 }

@@ -13,15 +13,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.bu.json;
+package org.smilec.smile.bu.json;
 
 import java.util.Map;
 
 import org.json.JSONObject;
-
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.Student;
-import org.smile.smilec.util.IPAddressUtil;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.Student;
+import org.smilec.smile.util.IPAddressUtil;
 
 public class QuestionJSONParser {
 

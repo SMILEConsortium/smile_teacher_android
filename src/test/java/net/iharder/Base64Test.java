@@ -17,8 +17,7 @@ package net.iharder;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import org.smile.smilec.util.IOUtil;
+import org.smilec.smile.util.IOUtil;
 
 public class Base64Test {
 

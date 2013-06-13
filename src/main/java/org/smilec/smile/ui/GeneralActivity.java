@@ -13,10 +13,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui;
+package org.smilec.smile.ui;
 
 import java.util.List;
 import java.util.Vector;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.BoardManager;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.SmilePlugServerManager;
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.domain.Board;
+import org.smilec.smile.domain.CurrentMessageStatus;
+import org.smilec.smile.ui.adapter.PagerAdapter;
+import org.smilec.smile.ui.fragment.AbstractFragment;
+import org.smilec.smile.ui.fragment.QuestionsFragment;
+import org.smilec.smile.ui.fragment.StudentsFragment;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
@@ -47,20 +61,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TextView;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.BoardManager;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.bu.SmilePlugServerManager;
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.domain.Board;
-import org.smile.smilec.domain.CurrentMessageStatus;
-import org.smile.smilec.ui.adapter.PagerAdapter;
-import org.smile.smilec.ui.fragment.AbstractFragment;
-import org.smile.smilec.ui.fragment.QuestionsFragment;
-import org.smile.smilec.ui.fragment.StudentsFragment;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.ui.ProgressDialogAsyncTask;
 
 public class GeneralActivity extends FragmentActivity {
 

@@ -13,12 +13,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui;
+package org.smilec.smile.ui;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.QuestionsManager;
+import org.smilec.smile.bu.SmilePlugServerManager;
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.Results;
+import org.smilec.smile.ui.adapter.FilesQuestionListAdapter;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.DialogUtil;
+import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,18 +51,6 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.bu.QuestionsManager;
-import org.smile.smilec.bu.SmilePlugServerManager;
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.Results;
-import org.smile.smilec.ui.adapter.FilesQuestionListAdapter;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.DialogUtil;
-import org.smile.smilec.util.ui.ProgressDialogAsyncTask;
 
 public class UsePreparedQuestionsActivity extends ListActivity {
 

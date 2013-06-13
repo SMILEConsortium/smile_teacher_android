@@ -13,9 +13,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui.adapter;
+package org.smilec.smile.ui.adapter;
 
 import java.util.List;
+
+import org.smilec.smile.R;
+import org.smilec.smile.domain.StudentQuestionDetail;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -27,9 +30,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import org.smile.smilec.R;
-import org.smile.smilec.domain.StudentQuestionDetail;
 
 public class StudentQuestionDetailAdapter extends ArrayAdapter<StudentQuestionDetail> {
 

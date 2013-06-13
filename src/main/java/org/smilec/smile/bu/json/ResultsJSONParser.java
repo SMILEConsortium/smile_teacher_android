@@ -13,12 +13,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.bu.json;
+package org.smilec.smile.bu.json;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import org.smile.smilec.domain.Results;
+import org.smilec.smile.domain.Results;
 
 public class ResultsJSONParser {
 

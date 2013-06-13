@@ -13,15 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.bu;
+package org.smilec.smile.bu;
+
+import org.smilec.smile.util.ActivityUtil;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
-import org.smile.smilec.util.ActivityUtil;
 
 public class NetworkManager extends BroadcastReceiver {
 

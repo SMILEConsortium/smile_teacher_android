@@ -13,7 +13,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui;
+package org.smilec.smile.ui;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.BoardManager;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.SmilePlugServerManager;
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.domain.Results;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.DialogUtil;
+import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
@@ -28,16 +38,6 @@ import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.BoardManager;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.bu.SmilePlugServerManager;
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.domain.Results;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.DialogUtil;
-import org.smile.smilec.util.ui.ProgressDialogAsyncTask;
 
 public class ChooseActivityFlowDialog extends Activity {
 

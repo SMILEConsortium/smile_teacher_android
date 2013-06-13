@@ -13,15 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui.fragment;
+package org.smilec.smile.ui.fragment;
+
+import org.smilec.smile.domain.Board;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import org.smile.smilec.domain.Board;
 
 public abstract class AbstractFragment extends Fragment {
 

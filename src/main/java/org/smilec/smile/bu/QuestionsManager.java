@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.bu;
+package org.smilec.smile.bu;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,16 +26,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import net.iharder.Base64;
+
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.util.DeviceUtil;
+import org.smilec.smile.util.IOUtil;
+import org.smilec.smile.util.IPAddressUtil;
+import org.smilec.smile.util.ImageLoader;
+
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
-
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.util.DeviceUtil;
-import org.smile.smilec.util.IOUtil;
-import org.smile.smilec.util.IPAddressUtil;
-import org.smile.smilec.util.ImageLoader;
 
 public class QuestionsManager {
 
@@ -95,7 +96,7 @@ public class QuestionsManager {
 		// Hello please make sure we don't overwrite the same file
 		//
 		File file = new File(dir, QUESTIONS_FILE);
-		
+
 		if (file.isDirectory() || file.exists()) {
 			throw new DataAccessException("File = " + name + " already exists in " + questionsDir);
 		}
@@ -222,16 +223,16 @@ public class QuestionsManager {
 					String ip = readUntilMarker(br);
 
 					String owner = null;
-					
+
 					// XXX We can't really use owner yet
-					/* 
+					/*
 					owner = readUntilMarker(br);
-					
+
 					*/
 					if (owner == null) {
 						owner = TEACHER_NAME;
 					}
-					
+
 					Question q = new Question(number, owner, ip, question, option1, option2,
 						option3, option4, answer, image);
 

@@ -13,20 +13,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.bu;
+package org.smilec.smile.bu;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import org.json.JSONException;
+import org.smilec.smile.util.DeviceUtil;
+import org.smilec.smile.util.HttpUtil;
+import org.smilec.smile.util.IOUtil;
+import org.smilec.smile.util.SmilePlugUtil;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
-
-import org.smile.smilec.util.DeviceUtil;
-import org.smile.smilec.util.HttpUtil;
-import org.smile.smilec.util.IOUtil;
-import org.smile.smilec.util.SmilePlugUtil;
 
 public abstract class AbstractBaseManager {
 
