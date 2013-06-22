@@ -97,4 +97,5 @@
 	<string name="save">Save</string>
 	<string name="number_owner_ip">Number / Owner / IP</string>
 	<string name="session_time_expired">Session Time has Expired</string>
+	<string name="close_dialog">Close dialog</string>
 </resources>

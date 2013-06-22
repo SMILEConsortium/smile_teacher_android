@@ -29,6 +29,7 @@ import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
 import org.smilec.smile.ui.adapter.FilesQuestionListAdapter;
 import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.DialogUtil;
 import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
@@ -48,13 +49,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class UsePreparedQuestionsActivity extends ListActivity {
 
-    private Button btOk;
+	private Button btOk;
+
+	private ImageButton btClose;
 
     private CheckBox cbQuestions;
 
@@ -95,6 +99,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         spinnerHours = (Spinner) findViewById(R.id.sp_hours);
         spinnerMinutes = (Spinner) findViewById(R.id.sp_minutes);
         spinnerSeconds = (Spinner) findViewById(R.id.sp_seconds);
+        btClose = (ImageButton) findViewById(R.id.bt_close);
 
         lvListQuestions = getListView();
     }
@@ -112,12 +117,14 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         spinnerHours.setEnabled(false);
         spinnerMinutes.setEnabled(false);
         spinnerSeconds.setEnabled(false);
+        
+        btClose.setOnClickListener(new CloseClickListenerUtil(this));
 
         loadValuesTime();
 
         new LoadBoardTask(this).execute();
     }
-
+    
     private void loadValuesTime() {
         List<String> listHours = new ArrayList<String>();
         for (int i = 0; i <= 24; i++) {

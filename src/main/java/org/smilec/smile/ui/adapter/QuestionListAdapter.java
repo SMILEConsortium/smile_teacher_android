@@ -23,6 +23,7 @@ import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
 import org.smilec.smile.ui.widget.checkbox.InertCheckBox;
 import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.ImageLoader;
 
 import android.app.Dialog;
@@ -36,6 +37,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RatingBar;
@@ -117,6 +119,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
     }
 
     private void loadDetails(Dialog detailsDialog, Question question) {
+    	ImageButton btClose = (ImageButton) detailsDialog.findViewById(R.id.bt_close);
+        btClose.setOnClickListener(new CloseClickListenerUtil(detailsDialog));
+        
         TextView tvOwner = (TextView) detailsDialog.findViewById(R.id.tv_create_by);
         tvOwner.setText("( " + context.getString(R.string.create_by) + " " + question.getOwner()
             + " )");
