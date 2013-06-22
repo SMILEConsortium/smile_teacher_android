@@ -44,6 +44,9 @@ public class AnswersAndRatingsJSONParser {
         for (int i = 0; i < answersArray.length(); i++) {
 
             Question question = questions.get(i + 1);
+            if (question == null) {
+            	continue;
+            }
 
             String sRating = ratingsArray.optString(i);
             String sAnswer = answersArray.optString(i);

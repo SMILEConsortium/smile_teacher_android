@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -177,8 +178,17 @@ public class BoardManager extends AbstractBaseManager {
 
         int number = 0;
         for (JSONObject object : array) {
+        	boolean duplicated = false;
             Question q = QuestionJSONParser.process(++number, object, students);
-            map.put(number, q);
+            for (Entry<Integer, Question> entry : map.entrySet()) {
+            	Question value = entry.getValue();
+            	if (value.equals(q)) {
+            		duplicated = true;
+            	}
+            }
+            if (!duplicated) {
+            	map.put(number, q);            		
+            }
         }
 
         return map;
