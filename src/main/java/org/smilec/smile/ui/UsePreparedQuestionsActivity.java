@@ -13,12 +13,25 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui;
+package org.smilec.smile.ui;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.QuestionsManager;
+import org.smilec.smile.bu.SmilePlugServerManager;
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.Results;
+import org.smilec.smile.ui.adapter.FilesQuestionListAdapter;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.CloseClickListenerUtil;
+import org.smilec.smile.util.DialogUtil;
+import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,25 +49,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.smile.smilec.R;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.bu.QuestionsManager;
-import org.smile.smilec.bu.SmilePlugServerManager;
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.Results;
-import org.smile.smilec.ui.adapter.FilesQuestionListAdapter;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.DialogUtil;
-import org.smile.smilec.util.ui.ProgressDialogAsyncTask;
-
 public class UsePreparedQuestionsActivity extends ListActivity {
 
-    private Button btOk;
+	private Button btOk;
+
+	private ImageButton btClose;
 
     private CheckBox cbQuestions;
 
@@ -95,6 +99,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         spinnerHours = (Spinner) findViewById(R.id.sp_hours);
         spinnerMinutes = (Spinner) findViewById(R.id.sp_minutes);
         spinnerSeconds = (Spinner) findViewById(R.id.sp_seconds);
+        btClose = (ImageButton) findViewById(R.id.bt_close);
 
         lvListQuestions = getListView();
     }
@@ -112,12 +117,14 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         spinnerHours.setEnabled(false);
         spinnerMinutes.setEnabled(false);
         spinnerSeconds.setEnabled(false);
+        
+        btClose.setOnClickListener(new CloseClickListenerUtil(this));
 
         loadValuesTime();
 
         new LoadBoardTask(this).execute();
     }
-
+    
     private void loadValuesTime() {
         List<String> listHours = new ArrayList<String>();
         for (int i = 0; i <= 24; i++) {

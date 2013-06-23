@@ -14,8 +14,18 @@
 		android:textColor="@color/black"
 		android:textSize="12sp"
 		android:textStyle="bold"
-		android:layout_marginTop="10dip"
+		android:layout_marginTop="30dip"
 		android:layout_centerHorizontal="true"/>
+  	
+  	<ImageButton 
+        android:id="@+id/bt_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_close"
+        android:contentDescription="@string/close_dialog"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp" />
 
 	<View
 		android:id="@+id/view_separator"
@@ -23,7 +33,7 @@
 		android:layout_height="1dip"
 		android:background="@color/gray"
 		android:layout_margin="5dip"
-		android:layout_below="@+id/tv_title"/>
+		android:layout_below="@+id/bt_close"/>
 
 	<TextView
 	  	android:id="@+id/tv_select_item"

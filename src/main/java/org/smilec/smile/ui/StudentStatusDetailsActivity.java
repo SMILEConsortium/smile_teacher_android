@@ -13,10 +13,21 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui;
+package org.smilec.smile.ui;
 
 import java.util.Comparator;
 import java.util.List;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.QuestionList;
+import org.smilec.smile.domain.Student;
+import org.smilec.smile.domain.StudentQuestionDetail;
+import org.smilec.smile.ui.adapter.StudentQuestionDetailAdapter;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.CloseClickListenerUtil;
+import org.smilec.smile.util.ImageLoader;
 
 import android.app.Dialog;
 import android.graphics.Bitmap;
@@ -26,21 +37,12 @@ import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.QuestionList;
-import org.smile.smilec.domain.Student;
-import org.smile.smilec.domain.StudentQuestionDetail;
-import org.smile.smilec.ui.adapter.StudentQuestionDetailAdapter;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.ImageLoader;
 
 public class StudentStatusDetailsActivity extends MainActivity {
 
@@ -52,6 +54,7 @@ public class StudentStatusDetailsActivity extends MainActivity {
     private String ip;
 
     private ListView lvListQuestionDetails;
+	private ImageButton btClose;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,8 @@ public class StudentStatusDetailsActivity extends MainActivity {
 
         TextView tvScore = (TextView) findViewById(R.id.tv_score);
         tvScore.setText(getString(R.string.score) + " " + score + "/" + total);
+        
+        btClose = (ImageButton) findViewById(R.id.bt_close);
 
         List<StudentQuestionDetail> studentQuestionDetails = student.getDetails();
 
@@ -91,6 +96,13 @@ public class StudentStatusDetailsActivity extends MainActivity {
         lvListQuestionDetails = (ListView) findViewById(R.id.list);
         lvListQuestionDetails.setAdapter(adapter);
         lvListQuestionDetails.setOnItemClickListener(new OpenItemDetailsListener());
+    }
+    
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	
+    	btClose.setOnClickListener(new CloseClickListenerUtil(this));
     }
 
     private class OpenItemDetailsListener implements OnItemClickListener {
@@ -143,6 +155,9 @@ public class StudentStatusDetailsActivity extends MainActivity {
                     ivAlt4.setVisibility(View.VISIBLE);
                     break;
             }
+            
+            ImageButton btClose = (ImageButton) detailsDialog.findViewById(R.id.bt_close);
+            btClose.setOnClickListener(new CloseClickListenerUtil(detailsDialog));
 
             TextView tvQuestionNumber = (TextView) detailsDialog
                 .findViewById(R.id.tv_question_number);

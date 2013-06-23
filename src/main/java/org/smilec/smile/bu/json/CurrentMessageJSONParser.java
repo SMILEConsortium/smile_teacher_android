@@ -13,16 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.bu.json;
+package org.smilec.smile.bu.json;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.util.IOUtil;
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.util.IOUtil;
 
 public class CurrentMessageJSONParser {
 

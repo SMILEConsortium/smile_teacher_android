@@ -13,14 +13,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui;
+package org.smilec.smile.ui;
+
+import org.smilec.smile.bu.NetworkManager;
 
 import android.app.Activity;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-
-import org.smile.smilec.bu.NetworkManager;
 
 public class MainActivity extends Activity {
 

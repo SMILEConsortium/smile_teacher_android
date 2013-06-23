@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui.fragment;
+package org.smilec.smile.ui.fragment;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -26,6 +26,17 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.smilec.smile.R;
+import org.smilec.smile.bu.BoardManager;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.QuestionsManager;
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.domain.Board;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.Results;
+import org.smilec.smile.ui.GeneralActivity;
+import org.smilec.smile.ui.adapter.QuestionListAdapter;
+import org.smilec.smile.util.ActivityUtil;
 
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
@@ -34,6 +45,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -44,20 +57,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.text.TextWatcher;
-import android.text.Editable;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.BoardManager;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.bu.QuestionsManager;
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.domain.Board;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.Results;
-import org.smile.smilec.ui.GeneralActivity;
-import org.smile.smilec.ui.adapter.QuestionListAdapter;
-import org.smile.smilec.util.ActivityUtil;
 
 public class QuestionsFragment extends AbstractFragment {
 
@@ -78,7 +77,7 @@ public class QuestionsFragment extends AbstractFragment {
     private boolean loadItems;
 
 	private Object mQuestionsMutex = new Object();
-	
+
     @Override
     protected int getLayout() {
         return R.layout.questions;
@@ -253,7 +252,7 @@ public class QuestionsFragment extends AbstractFragment {
 				if (checkQuestionChanges(questionsOld, mQuestions)) {
 					listQuestions();
 				}
-				
+
 				Collections.sort(mQuestions, new Comparator<Question>() {
 					@Override
 					public int compare(Question arg0, Question arg1) {
@@ -268,7 +267,7 @@ public class QuestionsFragment extends AbstractFragment {
     private class SaveButtonListener implements OnClickListener, TextWatcher {
 	  	TextView _fname = null;
 		Button _saveButton = null;
-		
+
 		@Override
 		public void onTextChanged (CharSequence s, int start, int before, int count) {
 			Log.d(Constants.LOG_CATEGORY, "SaveButtonListener.onTextChanged");
@@ -280,17 +279,17 @@ public class QuestionsFragment extends AbstractFragment {
 				_saveButton.setEnabled(false);
 			}
 		}
-		
+
 		@Override
 		public void afterTextChanged(Editable s) {
 			Log.d(Constants.LOG_CATEGORY, "SaveButtonListener.afterTextChanged");
 		}
-		
+
 		@Override
 		public void beforeTextChanged (CharSequence s, int start, int count, int after) {
 			Log.d(Constants.LOG_CATEGORY, "SaveButtonListener.beforeTextChanged");
 		}
-		
+
         @Override
         public void onClick(View v) {
 			Log.d(Constants.LOG_CATEGORY, "SaveButtonListener.onClick");
@@ -303,7 +302,7 @@ public class QuestionsFragment extends AbstractFragment {
             saveDialog.show();
 
             Button save = (Button) saveDialog.findViewById(R.id.bt_save_file);
-			
+
 			TextView fname = (TextView) saveDialog.findViewById(R.id.et_name_file);
 			fname.addTextChangedListener(this);
             save.setOnClickListener(new SaveFileDialogListener(saveDialog));
@@ -324,7 +323,7 @@ public class QuestionsFragment extends AbstractFragment {
 
 				//
 				// We need to have a name set before we enable the button
-				// 
+				//
                 if (name.getText().toString().equals("")) {
                     name.setText("Questions_file");
                 }

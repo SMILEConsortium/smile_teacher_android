@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui.fragment;
+package org.smilec.smile.ui.fragment;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +23,19 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.smilec.smile.R;
+import org.smilec.smile.bu.BoardManager;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.domain.Board;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.QuestionList;
+import org.smilec.smile.domain.Results;
+import org.smilec.smile.domain.Student;
+import org.smilec.smile.ui.GeneralActivity;
+import org.smilec.smile.ui.StudentStatusDetailsActivity;
+import org.smilec.smile.ui.adapter.StudentListAdapter;
+import org.smilec.smile.util.ActivityUtil;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
@@ -39,20 +52,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.BoardManager;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.domain.Board;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.QuestionList;
-import org.smile.smilec.domain.Results;
-import org.smile.smilec.domain.Student;
-import org.smile.smilec.ui.GeneralActivity;
-import org.smile.smilec.ui.StudentStatusDetailsActivity;
-import org.smile.smilec.ui.adapter.StudentListAdapter;
-import org.smile.smilec.util.ActivityUtil;
 
 public class StudentsFragment extends AbstractFragment {
 

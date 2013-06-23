@@ -13,7 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui;
+package org.smilec.smile.ui;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.NetworkManager;
+import org.smilec.smile.bu.SmilePlugServerManager;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.DialogUtil;
+import org.smilec.smile.util.IPAddressValidatorUtil;
+import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,14 +37,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.NetworkManager;
-import org.smile.smilec.bu.SmilePlugServerManager;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.DialogUtil;
-import org.smile.smilec.util.IPAddressValidatorUtil;
-import org.smile.smilec.util.ui.ProgressDialogAsyncTask;
 
 public class LoginActivity extends Activity {
 

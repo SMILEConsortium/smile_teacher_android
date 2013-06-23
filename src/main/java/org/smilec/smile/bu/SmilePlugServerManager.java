@@ -13,24 +13,25 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.bu;
+package org.smilec.smile.bu;
 
 import java.io.InputStream;
 import java.util.Collection;
+
+import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.bu.json.CurrentMessageJSONParser;
+import org.smilec.smile.domain.LocalQuestionWrapper;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.ServerQuestionWrapper;
+import org.smilec.smile.util.HttpUtil;
+import org.smilec.smile.util.IOUtil;
+import org.smilec.smile.util.SmilePlugUtil;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import org.smile.smilec.bu.exception.DataAccessException;
-import org.smile.smilec.bu.json.CurrentMessageJSONParser;
-import org.smile.smilec.domain.LocalQuestionWrapper;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.ServerQuestionWrapper;
-import org.smile.smilec.util.HttpUtil;
-import org.smile.smilec.util.IOUtil;
-import org.smile.smilec.util.SmilePlugUtil;
 
 public class SmilePlugServerManager extends AbstractBaseManager {
 

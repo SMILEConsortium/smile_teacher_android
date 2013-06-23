@@ -13,9 +13,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **/
-package org.smile.smilec.ui.adapter;
+package org.smilec.smile.ui.adapter;
 
 import java.util.List;
+
+import org.smilec.smile.R;
+import org.smilec.smile.bu.Constants;
+import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.Results;
+import org.smilec.smile.ui.widget.checkbox.InertCheckBox;
+import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.CloseClickListenerUtil;
+import org.smilec.smile.util.ImageLoader;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -28,18 +37,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import org.smile.smilec.R;
-import org.smile.smilec.bu.Constants;
-import org.smile.smilec.domain.Question;
-import org.smile.smilec.domain.Results;
-import org.smile.smilec.util.ActivityUtil;
-import org.smile.smilec.util.ImageLoader;
-import org.smile.smilec.ui.widget.checkbox.InertCheckBox;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
     private Context context;
@@ -64,9 +66,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             convertView = inflater.inflate(R.layout.questions_item, parent, false);
         }
 
-		InertCheckBox cbox = (org.smile.smilec.ui.widget.checkbox.InertCheckBox) convertView.findViewById(R.id.cb_item_checkbox);
+		InertCheckBox cbox = (org.smilec.smile.ui.widget.checkbox.InertCheckBox) convertView.findViewById(R.id.cb_item_checkbox);
 		cbox.setChecked(true);
-		
+
         TextView tvNumber = (TextView) convertView.findViewById(R.id.tv_number);
         tvNumber.setText(String.valueOf(question.getNumber()));
 
@@ -117,6 +119,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
     }
 
     private void loadDetails(Dialog detailsDialog, Question question) {
+    	ImageButton btClose = (ImageButton) detailsDialog.findViewById(R.id.bt_close);
+        btClose.setOnClickListener(new CloseClickListenerUtil(detailsDialog));
+        
         TextView tvOwner = (TextView) detailsDialog.findViewById(R.id.tv_create_by);
         tvOwner.setText("( " + context.getString(R.string.create_by) + " " + question.getOwner()
             + " )");
