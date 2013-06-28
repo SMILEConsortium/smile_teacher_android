@@ -30,6 +30,7 @@ import org.smilec.smile.ui.fragment.AbstractFragment;
 import org.smilec.smile.ui.fragment.QuestionsFragment;
 import org.smilec.smile.ui.fragment.StudentsFragment;
 import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.SendEmailResultsUtil;
 import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
 import android.accounts.NetworkErrorException;
@@ -57,8 +58,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -326,7 +327,8 @@ public class GeneralActivity extends FragmentActivity {
         boardHandler.removeCallbacks(boardRunnable);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bt_restart:
@@ -425,9 +427,6 @@ public class GeneralActivity extends FragmentActivity {
             } else {
                 btResults.setText(R.string.show_results);
 
-                TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, 275);
-
                 ListView lvListStudents = (ListView) GeneralActivity.this
                     .findViewById(R.id.lv_students);
 
@@ -437,9 +436,13 @@ public class GeneralActivity extends FragmentActivity {
                     .findViewById(R.id.tv_top_scorers);
                 tvTopTitle.setVisibility(View.INVISIBLE);
 
-                LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
-                    .findViewById(R.id.ll_top_scorers);
-                llTopScorersContainer.setVisibility(View.INVISIBLE);
+                RelativeLayout rlTopScorersContainer = (RelativeLayout) GeneralActivity.this
+                    .findViewById(R.id.rl_top_scorers);
+                rlTopScorersContainer.setVisibility(View.INVISIBLE);
+                
+				Button btSendResults = (Button) GeneralActivity.this
+						.findViewById(R.id.bt_send_results);
+				btSendResults.setVisibility(View.INVISIBLE);
 
                 TableLayout tlTotal = (TableLayout) findViewById(R.id.tl_total);
                 tlTotal.setVisibility(View.VISIBLE);
@@ -483,11 +486,23 @@ public class GeneralActivity extends FragmentActivity {
         tvTopTitle.setTextColor(Color.BLACK);
         tvTopTitle.setVisibility(View.VISIBLE);
 
-        LinearLayout llTopScorersContainer = (LinearLayout) GeneralActivity.this
-            .findViewById(R.id.ll_top_scorers);
-        llTopScorersContainer.setVisibility(View.VISIBLE);
+        RelativeLayout rlTopScorersContainer = (RelativeLayout) GeneralActivity.this
+            .findViewById(R.id.rl_top_scorers);
+        rlTopScorersContainer.setVisibility(View.VISIBLE);
+        
+        Button btSendResults = (Button) GeneralActivity.this
+				.findViewById(R.id.bt_send_results);
+		btSendResults.setVisibility(View.VISIBLE);
+		btSendResults.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SendEmailResultsUtil.send(board, ip, GeneralActivity.this);
+			}
+			
+		});
     }
-
+    
     private class LoadStatusTask extends ProgressDialogAsyncTask<Void, String> {
 
         public LoadStatusTask(Activity context) {
