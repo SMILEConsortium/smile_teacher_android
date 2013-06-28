@@ -48,9 +48,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class StudentsFragment extends AbstractFragment {
@@ -81,9 +82,12 @@ public class StudentsFragment extends AbstractFragment {
         TextView tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
         tvTopTitle.setTextColor(Color.WHITE);
 
-        LinearLayout llTopScorersConatainer = (LinearLayout) getActivity().findViewById(
-            R.id.ll_top_scorers);
-        llTopScorersConatainer.setVisibility(View.INVISIBLE);
+        RelativeLayout rlTopScorersConatainer = (RelativeLayout) getActivity().findViewById(
+            R.id.rl_top_scorers);
+        rlTopScorersConatainer.setVisibility(View.INVISIBLE);
+        
+        Button btSendResults = (Button) getActivity().findViewById(R.id.bt_send_results);
+		btSendResults.setVisibility(View.VISIBLE);
     }
 
     @Override

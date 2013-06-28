@@ -98,4 +98,10 @@
 	<string name="number_owner_ip">Number / Owner / IP</string>
 	<string name="session_time_expired">Session Time has Expired</string>
 	<string name="close_dialog">Close dialog</string>
+	<string name="send_results">Send Results</string>
+	<string name="preview_send_email">Preview Send Email</string>
+	<string name="enter_e_mails_bellow_">Enter e-mails bellow:</string>
+	<string name="email_informative">( For more than one, separate by commas(,) )</string>
+	<string name="enter_subject_bellow">Enter subject bellow:</string>
+	<string name="send">Send</string>
 </resources>
