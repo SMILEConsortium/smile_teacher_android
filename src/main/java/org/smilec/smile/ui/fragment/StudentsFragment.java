@@ -40,7 +40,6 @@ import org.smilec.smile.util.ActivityUtil;
 import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -80,12 +79,15 @@ public class StudentsFragment extends AbstractFragment {
         super.onActivityCreated(savedInstanceState);
 
         TextView tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
-        tvTopTitle.setTextColor(Color.WHITE);
+        tvTopTitle.setVisibility(View.INVISIBLE);
+
+        View vSeparatorScore = getActivity().findViewById(R.id.view_separator_score);
+        vSeparatorScore.setVisibility(View.VISIBLE);
 
         RelativeLayout rlTopScorersConatainer = (RelativeLayout) getActivity().findViewById(
             R.id.rl_top_scorers);
         rlTopScorersConatainer.setVisibility(View.INVISIBLE);
-        
+
         Button btSendResults = (Button) getActivity().findViewById(R.id.bt_send_results);
 		btSendResults.setVisibility(View.VISIBLE);
     }

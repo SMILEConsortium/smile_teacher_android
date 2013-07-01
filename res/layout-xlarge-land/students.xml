@@ -266,7 +266,7 @@
             android:background="@color/gray"
             android:layout_below="@+id/rb_ratingbar" />
 
-	    <Button 
+	    <Button
 	        android:id="@+id/bt_send_results"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -276,7 +276,7 @@
 	        android:layout_alignParentRight="true" />
 
     </RelativeLayout>
-    
+
     <View
         android:id="@+id/view_separator_score"
         android:layout_width="fill_parent"
@@ -293,7 +293,7 @@
         android:id="@+id/tv_top_scorers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ll_top_scorers"
+        android:layout_above="@+id/rl_top_scorers"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dip"
         android:text="@string/top_scores"

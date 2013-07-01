@@ -436,10 +436,13 @@ public class GeneralActivity extends FragmentActivity {
                     .findViewById(R.id.tv_top_scorers);
                 tvTopTitle.setVisibility(View.INVISIBLE);
 
+                View vSeparatorScore = findViewById(R.id.view_separator_score);
+                vSeparatorScore.setVisibility(View.INVISIBLE);
+
                 RelativeLayout rlTopScorersContainer = (RelativeLayout) GeneralActivity.this
                     .findViewById(R.id.rl_top_scorers);
                 rlTopScorersContainer.setVisibility(View.INVISIBLE);
-                
+
 				Button btSendResults = (Button) GeneralActivity.this
 						.findViewById(R.id.bt_send_results);
 				btSendResults.setVisibility(View.INVISIBLE);
@@ -483,26 +486,28 @@ public class GeneralActivity extends FragmentActivity {
         lvListStudents.setPadding(5, 0, 0, 0);
 
         TextView tvTopTitle = (TextView) GeneralActivity.this.findViewById(R.id.tv_top_scorers);
-        tvTopTitle.setTextColor(Color.BLACK);
         tvTopTitle.setVisibility(View.VISIBLE);
+
+        View vSeparatorScore = findViewById(R.id.view_separator_score);
+        vSeparatorScore.setVisibility(View.VISIBLE);
 
         RelativeLayout rlTopScorersContainer = (RelativeLayout) GeneralActivity.this
             .findViewById(R.id.rl_top_scorers);
         rlTopScorersContainer.setVisibility(View.VISIBLE);
-        
+
         Button btSendResults = (Button) GeneralActivity.this
 				.findViewById(R.id.bt_send_results);
 		btSendResults.setVisibility(View.VISIBLE);
 		btSendResults.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				SendEmailResultsUtil.send(board, ip, GeneralActivity.this);
 			}
-			
+
 		});
     }
-    
+
     private class LoadStatusTask extends ProgressDialogAsyncTask<Void, String> {
 
         public LoadStatusTask(Activity context) {
