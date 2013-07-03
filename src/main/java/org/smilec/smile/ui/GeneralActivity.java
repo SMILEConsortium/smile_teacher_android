@@ -456,6 +456,8 @@ public class GeneralActivity extends FragmentActivity {
                 View vTotal = findViewById(R.id.view_separator_total);
                 vTotal.setVisibility(View.VISIBLE);
             }
+
+            ActivityUtil.showLongToast(GeneralActivity.this, "Sorting...");
         }
     }
 

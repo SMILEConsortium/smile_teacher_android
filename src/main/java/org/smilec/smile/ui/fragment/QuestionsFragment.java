@@ -77,6 +77,7 @@ public class QuestionsFragment extends AbstractFragment {
     private boolean loadItems;
 
 	private Object mQuestionsMutex = new Object();
+	private TextView tvTopTitle;
 
     @Override
     protected int getLayout() {
@@ -92,6 +93,7 @@ public class QuestionsFragment extends AbstractFragment {
 		btSave.setEnabled(false);
         lvListQuestions = (ListView) getActivity().findViewById(R.id.lv_questions);
         tvServer = (TextView) getActivity().findViewById(R.id.tv_server);
+        tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
     }
 
     @Override
@@ -253,15 +255,22 @@ public class QuestionsFragment extends AbstractFragment {
 					listQuestions();
 				}
 
-				Collections.sort(mQuestions, new Comparator<Question>() {
-					@Override
-					public int compare(Question arg0, Question arg1) {
-						return (int) (arg1.getPerCorrect() - arg0.getPerCorrect());
-					}
-				});
+				SortQuestionList();
 			}
 		}
 		adapter.notifyDataSetChanged();
+	}
+
+	private void SortQuestionList() {
+		Collections.sort(mQuestions, new Comparator<Question>() {
+			@Override
+			public int compare(Question arg0, Question arg1) {
+				if (tvTopTitle.getVisibility() == View.VISIBLE) {
+					return Double.compare(arg1.getRating(), arg0.getRating());
+				}
+				return (int) (arg1.getPerCorrect() - arg0.getPerCorrect());
+			}
+		});
 	}
 
     private class SaveButtonListener implements OnClickListener, TextWatcher {
@@ -311,15 +320,15 @@ public class QuestionsFragment extends AbstractFragment {
         }
 
         public class SaveFileDialogListener implements OnClickListener {
-            private Dialog aboutDialog; // XXX Why is this called aboutDialog???
+            private Dialog saveFileDialog;
 
             public SaveFileDialogListener(Dialog aboutDialog) {
-                this.aboutDialog = aboutDialog;
+                this.saveFileDialog = aboutDialog;
             }
 
             @Override
             public void onClick(View v) {
-                TextView name = (TextView) aboutDialog.findViewById(R.id.et_name_file);
+                TextView name = (TextView) saveFileDialog.findViewById(R.id.et_name_file);
 
 				//
 				// We need to have a name set before we enable the button
@@ -334,7 +343,7 @@ public class QuestionsFragment extends AbstractFragment {
 				//
                 new SaveTask(getActivity(), listQuestionsSelected, ip, name.getText().toString()).execute();
 
-                aboutDialog.dismiss();
+                saveFileDialog.dismiss();
             }
         }
     }

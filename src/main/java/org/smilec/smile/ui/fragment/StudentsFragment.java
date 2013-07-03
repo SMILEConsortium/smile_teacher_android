@@ -67,6 +67,7 @@ public class StudentsFragment extends AbstractFragment {
     private String ip;
 
     private int countAnswers;
+	private TextView tvTopTitle;
 
     @Override
     protected int getLayout() {
@@ -78,7 +79,7 @@ public class StudentsFragment extends AbstractFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        TextView tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
+        tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
         tvTopTitle.setVisibility(View.INVISIBLE);
 
         View vSeparatorScore = getActivity().findViewById(R.id.view_separator_score);
@@ -90,6 +91,7 @@ public class StudentsFragment extends AbstractFragment {
 
         Button btSendResults = (Button) getActivity().findViewById(R.id.bt_send_results);
 		btSendResults.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -188,16 +190,23 @@ public class StudentsFragment extends AbstractFragment {
             });
         }
 
-        Collections.sort(students, new Comparator<Student>() {
-            @Override
-            public int compare(Student arg0, Student arg1) {
-                return (arg1.getScore() - arg0.getScore());
-            }
-        });
+		sortStudentsList();
 
         adapter.notifyDataSetChanged();
 
     }
+
+	private void sortStudentsList() {
+		Collections.sort(students, new Comparator<Student>() {
+			@Override
+			public int compare(Student arg0, Student arg1) {
+				if (tvTopTitle.getVisibility() == View.VISIBLE) {
+					return (arg1.getScore() - arg0.getScore());
+				}
+				return (arg0.getName().compareToIgnoreCase(arg1.getName()));
+			}
+		});
+	}
 
     private class UpdateResultsTask extends AsyncTask<Void, Void, Results> {
 
