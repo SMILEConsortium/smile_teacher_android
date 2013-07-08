@@ -5,7 +5,7 @@
   	android:layout_height="fill_parent"
   	android:background="@drawable/rounded_border"
   	android:layout_gravity="center"
-  	android:layout_margin="150dip">
+  	android:layout_margin="30dip">
 
   	<TextView
 	  	android:id="@+id/tv_title"
@@ -31,7 +31,7 @@
   		android:layout_height="100sp"
   		android:text="@string/start_making"
   		android:textSize="18sp"
-  		android:layout_marginLeft="100sp"
+  		android:layout_marginLeft="50sp"
   		android:layout_centerVertical="true"
   		android:layout_alignParentLeft="true"/>
 
@@ -41,7 +41,7 @@
   		android:layout_height="100sp"
   		android:text="@string/use_prepared"
   		android:textSize="18sp"
-  		android:layout_marginRight="100sp"
+  		android:layout_marginRight="50sp"
 		android:layout_centerVertical="true"
 		android:layout_alignParentRight="true"/>
 
