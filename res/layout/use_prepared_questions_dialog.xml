@@ -5,7 +5,7 @@
   	android:layout_height="fill_parent"
   	android:background="@drawable/rounded_border"
   	android:layout_gravity="center"
-  	android:layout_margin="150dip">
+  	android:layout_margin="30dip">
 
   	<TextView
 	  	android:id="@+id/tv_title"
@@ -35,18 +35,6 @@
 		android:layout_margin="5dip"
 		android:layout_below="@+id/bt_close"/>
 
-	<TextView
-	  	android:id="@+id/tv_select_item"
-	  	android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="@string/select"
-		android:textColor="@color/black"
-		android:textSize="18sp"
-		android:layout_marginTop="10dip"
-		android:layout_marginLeft="20dip"
-		android:layout_alignParentLeft="true"
-		android:layout_below="@+id/view_separator"/>
-
 	<View
 		android:id="@+id/view_separator2"
 		android:layout_width="fill_parent"
@@ -57,41 +45,19 @@
 		android:layout_marginBottom="20dip"
 		android:layout_alignParentBottom="true"/>
 
-	<Button
-  		android:id="@+id/bt_ok"
-  		android:layout_width="200dip"
-  		android:layout_height="wrap_content"
-  		android:text="@string/load"
-  		android:textSize="18sp"
-  		android:layout_marginBottom="10dip"
-	    android:layout_centerHorizontal="true"
-	    android:layout_above="@+id/view_separator2"/>
-
-	<View
-		android:id="@+id/view_separator_middle"
-		android:layout_width="1dip"
-		android:layout_height="fill_parent"
-		android:background="@color/gray"
-		android:layout_margin="20dip"
-		android:layout_centerInParent="true"
-		android:layout_below="@+id/view_separator"
-		android:layout_above="@+id/bt_ok"/>
-
 	<ListView
 	    android:id="@+id/android:list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:choiceMode="singleChoice"
-	    android:layout_marginTop="10dip"
-	    android:layout_marginLeft="10dip"
-	    android:layout_marginRight="10dip"
-	    android:layout_marginBottom="20dip"
+	    android:layout_above="@+id/view_separator2"
 	    android:layout_alignParentLeft="true"
 	    android:layout_below="@+id/tv_select_item"
-	    android:layout_above="@+id/bt_ok"
-	    android:layout_toLeftOf="@+id/view_separator_middle"
+	    android:layout_marginLeft="10dip"
+	    android:layout_marginTop="10dip"
+	    android:layout_toLeftOf="@+id/bt_ok"
+	    android:choiceMode="singleChoice"
 	    android:divider="@android:color/transparent"
-  		android:dividerHeight="10.0sp"/>
+	    android:dividerHeight="0dp" />
 
 	<CheckBox
 	    android:id="@+id/cb_questions"
@@ -105,73 +71,92 @@
 	    android:layout_toRightOf="@+id/view_separator_middle"
 	    android:layout_below="@+id/view_separator"/>
 
-	<TextView
-        android:id="@+id/tv_hours_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hours"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="35dip"
-        android:layout_marginLeft="20dip"
-	    android:layout_toRightOf="@+id/view_separator_middle"
-    	android:layout_below="@+id/cb_questions"/>
-
 	<Spinner
 	    android:id="@+id/sp_hours"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:prompt="@string/hours"
-	    android:layout_marginTop="25dip"
-	    android:layout_marginLeft="68dip"
-	    android:layout_marginRight="50dip"
-    	android:layout_toRightOf="@+id/tv_hours_spinner"
-    	android:layout_below="@+id/cb_questions"/>
-
-	<TextView
-	    android:id="@+id/tv_minutes_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/minutes"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="30dip"
-        android:layout_marginLeft="20dip"
-	    android:layout_toRightOf="@+id/view_separator_middle"
-    	android:layout_below="@+id/tv_hours_spinner"/>
-
+	    android:layout_alignLeft="@+id/sp_minutes"
+	    android:layout_below="@+id/cb_questions"
+	    android:layout_marginTop="20dp"
+	    android:prompt="@string/hours" />
+	
 	<Spinner
 	    android:id="@+id/sp_minutes"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:prompt="@string/minutes"
-	    android:layout_marginTop="15dip"
-	    android:layout_marginLeft="50dip"
-	    android:layout_marginRight="50dip"
-    	android:layout_toRightOf="@+id/tv_minutes_spinner"
-    	android:layout_below="@+id/tv_hours_spinner"/>
-
-	<TextView
-	    android:id="@+id/tv_seconds_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/seconds"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="25dip"
-        android:layout_marginLeft="20dip"
-	    android:layout_toRightOf="@+id/view_separator_middle"
-    	android:layout_below="@+id/tv_minutes_spinner"/>
+	    android:layout_width="wrap_content"
+	    android:layout_height="3dp"
+	    android:layout_above="@+id/tv_minutes_spinner"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/cb_questions"
+	    android:layout_toRightOf="@+id/bt_ok"
+	    android:prompt="@string/minutes" />
 
 	<Spinner
 	    android:id="@+id/sp_seconds"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:prompt="@string/seconds"
-	    android:layout_marginTop="10dip"
-	    android:layout_marginLeft="50dip"
-	    android:layout_marginRight="50dip"
-    	android:layout_toRightOf="@+id/tv_seconds_spinner"
-    	android:layout_below="@+id/tv_minutes_spinner"/>
+	    android:layout_alignBottom="@+id/android:list"
+	    android:layout_alignLeft="@+id/sp_hours"
+	    android:layout_alignRight="@+id/view_separator2"
+	    android:layout_below="@+id/tv_minutes_spinner"
+	    android:layout_marginTop="20dp"
+	    android:prompt="@string/seconds" />
+
+	<TextView
+	    android:id="@+id/tv_select_item"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/view_separator"
+	    android:layout_alignLeft="@+id/android:list"
+	    android:text="@string/select"
+	    android:textColor="@color/black"
+	    android:textSize="18sp" />
+
+	<Button
+	    android:id="@+id/bt_ok"
+	    android:layout_width="200dip"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/tv_seconds_spinner"
+	    android:layout_centerHorizontal="true"
+	    android:text="@string/load"
+	    android:textSize="18sp" />
+
+	<TextView
+	    android:id="@+id/tv_minutes_spinner"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/tv_hours_spinner"
+	    android:layout_below="@+id/tv_hours_spinner"
+	    android:text="@string/minutes"
+	    android:textColor="@color/black"
+	    android:textSize="18sp" />
+
+	<TextView
+	    android:id="@+id/tv_seconds_spinner"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/tv_minutes_spinner"
+	    android:layout_below="@+id/tv_minutes_spinner"
+	    android:text="@string/seconds"
+	    android:textColor="@color/black"
+	    android:textSize="18sp" />
+
+	<View
+	    android:id="@+id/view_separator_middle"
+	    android:layout_width="1dip"
+	    android:layout_height="fill_parent"
+	    android:layout_alignBottom="@+id/view_separator2"
+	    android:layout_alignLeft="@+id/bt_ok"
+	    android:layout_margin="10dp"
+	    android:background="@color/gray" />
+
+	<TextView
+	    android:id="@+id/tv_hours_spinner"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerVertical="true"
+	    android:layout_toRightOf="@+id/view_separator_middle"
+	    android:text="@string/hours"
+	    android:textColor="@color/black"
+	    android:textSize="18sp" />
 
 </RelativeLayout>

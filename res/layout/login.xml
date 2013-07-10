@@ -9,12 +9,12 @@
 	android:layout_margin="50dip">
 
 	<TextView
-	  	android:id="@+id/tv_title"
-	  	android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="10dip"
-		android:textColor="@color/black"
-		android:textSize="18sp"
+	    android:id="@+id/tv_title"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dip"
+	    android:textColor="@color/black"
+	    android:textSize="18sp"
 		android:layout_centerHorizontal="true"/>
 
 	<View
