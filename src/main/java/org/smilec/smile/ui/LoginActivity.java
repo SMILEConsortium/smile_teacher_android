@@ -24,19 +24,24 @@ import org.smilec.smile.util.IPAddressValidatorUtil;
 import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
@@ -47,6 +52,9 @@ public class LoginActivity extends Activity {
 
     private NetworkManager receiver;
 
+    private static final int MSG_OK = 1;
+    private Context contextLoginActivity;
+    
     public LoginActivity() {
         receiver = new NetworkManager();
     }
@@ -59,6 +67,7 @@ public class LoginActivity extends Activity {
         Display displaySize = ActivityUtil.getDisplaySize(getApplicationContext());
         getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
 
+        contextLoginActivity= this;
         // try {
         // PackageInfo pinfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
         TextView title = (TextView) findViewById(R.id.tv_title);
@@ -174,11 +183,36 @@ public class LoginActivity extends Activity {
         Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
         intent.putExtra(GeneralActivity.PARAM_IP, tvIp.getText().toString());
         intent.putExtra(GeneralActivity.PARAM_STATUS, status);
+        //ActivityUtil.showLongToast(this, R.string.connection_established);
+        //this.setVisible(false);
+        
+        // Display toast through the handler
+    	Message msg = null;
+		msg = mHandler.obtainMessage(MSG_OK, getResources().getString(R.string.connection_established));
+		mHandler.sendMessage(msg);
+		
+		//Starting ChooseActivityFlowDialog
         startActivity(intent);
-        ActivityUtil.showLongToast(this, R.string.connection_established);
-
-        this.setVisible(false);
+        
+        //Closing LoginActivity
+        this.finish();
     }
+    
+	// To manage messages outside onCreate() method
+    Handler mHandler = new Handler() { 
+    	@Override        
+        public void handleMessage(Message msg) {
+    		String text2display = null;
+  			switch (msg.what) {
+  			case MSG_OK:
+  				text2display = (String) msg.obj;
+  				Toast.makeText(contextLoginActivity, text2display, Toast.LENGTH_LONG).show();
+  				break;
+  			default: // should never happen
+  				break;
+  			}
+        } 
+     }; 
 
     private class LoadTask extends ProgressDialogAsyncTask<Void, String> {
 

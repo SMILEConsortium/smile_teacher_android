@@ -125,8 +125,7 @@ public class ChooseActivityFlowDialog extends Activity {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(ChooseActivityFlowDialog.this,
-                UsePreparedQuestionsActivity.class);
+            Intent intent = new Intent(ChooseActivityFlowDialog.this, UsePreparedQuestionsActivity.class);
             intent.putExtra(GeneralActivity.PARAM_IP, ip);
             intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
             intent.putExtra(GeneralActivity.PARAM_STATUS, status);
@@ -175,7 +174,6 @@ public class ChooseActivityFlowDialog extends Activity {
         intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
         intent.putExtra(GeneralActivity.PARAM_STATUS, status);
         startActivity(intent);
-
         this.finish();
     }
 
