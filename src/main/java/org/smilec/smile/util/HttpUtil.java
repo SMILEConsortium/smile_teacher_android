@@ -27,6 +27,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
@@ -39,7 +40,7 @@ import android.accounts.NetworkErrorException;
 
 public class HttpUtil {
 
-    private HttpUtil() {
+	private HttpUtil() {
         // Empty
     }
 
@@ -95,7 +96,7 @@ public class HttpUtil {
     public static final InputStream executePut(String url, String json)
         throws NetworkErrorException, UnsupportedEncodingException, JSONException {
         HttpPut put = new HttpPut(url);
-        put.setHeader("Content-Type", "application/json");
+        put.setHeader("Content-Type", SmilePlugUtil.JSON);
         put.setEntity(new StringEntity(json));
         return executeMethod(put);
     }
@@ -103,6 +104,24 @@ public class HttpUtil {
     public static final InputStream executeGet(String url) throws NetworkErrorException {
         HttpGet get = new HttpGet(url);
         return executeMethod(get);
+    }
+
+    public static final HttpResponse executePost(String url, String json) throws NetworkErrorException {
+
+		try {
+			HttpPost httpPost = new HttpPost(url);
+			httpPost.setEntity(new StringEntity(json));
+			httpPost.setHeader("Accept", SmilePlugUtil.FORM);
+			httpPost.setHeader("Content-type", SmilePlugUtil.FORM);
+			return new DefaultHttpClient().execute(httpPost);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
     }
 
 }

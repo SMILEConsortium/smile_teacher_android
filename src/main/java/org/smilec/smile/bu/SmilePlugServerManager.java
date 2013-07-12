@@ -16,10 +16,17 @@ limitations under the License.
 package org.smilec.smile.bu;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.bu.json.CurrentMessageJSONParser;
+import org.smilec.smile.domain.Board;
 import org.smilec.smile.domain.LocalQuestionWrapper;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.ServerQuestionWrapper;
@@ -98,6 +105,32 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     public void startSolvingQuestions(String ip, Context context) throws NetworkErrorException {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_SOLVING_QUESTIONS_URL);
         put(ip, context, url, "{}");
+    }
+
+    public void startRetakeQuestions(String ip, Context context, Board board) throws NetworkErrorException {
+        String url = "http://" + ip + "/" + SmilePlugUtil.RETAKE_QUESTIONS_URL;
+
+        try {
+	        JSONObject retakeJson = new JSONObject();
+			int questionsNumber = board.getQuestionsNumber();
+			Collection<Question> questions = board.getQuestions();
+			List<Integer> answersList = new ArrayList<Integer>();
+			for (Iterator<Question> iterator = questions.iterator(); iterator.hasNext();) {
+				Question question = (Question) iterator.next();
+				answersList.add(question.getAnswer());
+			}
+			JSONArray answers = new JSONArray(answersList);
+
+		    retakeJson.put("TIME_LIMIT", 10);
+			retakeJson.put("NUMQ", questionsNumber);
+			retakeJson.put("RANSWER", answers);
+
+			post(ip, context, url, retakeJson.toString());
+
+        } catch (JSONException e) {
+	    	e.printStackTrace();
+	    }
+
     }
 
     public void showResults(String ip, Context context) throws NetworkErrorException {

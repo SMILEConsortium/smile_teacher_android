@@ -39,7 +39,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -327,6 +326,21 @@ public class GeneralActivity extends FragmentActivity {
         boardHandler.removeCallbacks(boardRunnable);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+    	if (btResults.isEnabled()) {
+    		MenuItem item = menu.findItem(R.id.bt_retake);
+    		if (item == null) {
+    			menu.add(0, R.id.bt_retake, Menu.NONE, R.string.retake).setIcon(R.drawable.retake);
+    		}
+    	} else {
+    		menu.removeItem(R.id.bt_retake);
+    	}
+
+    	return super.onPrepareOptionsMenu(menu);
+    }
+
     @SuppressWarnings("deprecation")
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -352,6 +366,28 @@ public class GeneralActivity extends FragmentActivity {
                     });
                 AlertDialog alertRestart = builderRestart.create();
                 alertRestart.show();
+                break;
+            case R.id.bt_retake:
+                AlertDialog.Builder builderRetake = new AlertDialog.Builder(this);
+                builderRetake.setMessage(R.string.retake_game).setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                new SmilePlugServerManager().startRetakeQuestions(ip, GeneralActivity.this, board);
+                                ActivityUtil.showLongToast(GeneralActivity.this, "Retaking...");
+                            } catch (NetworkErrorException e) {
+                                Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+                            }
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+                AlertDialog alertRetake = builderRetake.create();
+                alertRetake.show();
                 break;
             case R.id.bt_about:
                 Dialog aboutDialog = new Dialog(this, R.style.Dialog);

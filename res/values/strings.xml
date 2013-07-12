@@ -86,6 +86,8 @@
 	<string name="detail">Detail</string>
 
 	<string name="reset_game">Restart Session</string>
+	<string name="retake_game">Re-take Session</string>
+	<string name="retake">Re-take</string>
 	<string name="exit">Are you sure you want to exit?</string>
 	<string name="restart_game">Are you sure you want to restart session?</string>
 	<string name="game_running">A Session is already running!</string>

@@ -70,6 +70,14 @@ public abstract class AbstractBaseManager {
 
     }
 
+    protected void post(String ip, Context context, String url, String json)
+            throws NetworkErrorException {
+            connect(ip, context);
+
+          	HttpUtil.executePost(url, json);
+
+        }
+
     protected void put(String ip, Context context, String url, String json)
         throws NetworkErrorException {
         connect(ip, context);
