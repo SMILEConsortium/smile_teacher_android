@@ -5,7 +5,7 @@
   	android:layout_height="fill_parent"
   	android:layout_gravity="center"
   	android:background="@drawable/rounded_border"
-  	android:layout_margin="150dip">
+  	android:layout_margin="50dip">
 
   	<TextView
 	  	android:id="@+id/tv_title"
@@ -53,7 +53,6 @@
 		android:layout_height="wrap_content"
 		android:text="@string/ok"
 		android:textSize="18sp"
-		android:layout_marginTop="30dip"
 		android:layout_below="@+id/et_name_file"
 		android:enabled="false"
         android:layout_centerInParent="true"/>
