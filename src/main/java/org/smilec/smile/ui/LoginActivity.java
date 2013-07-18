@@ -195,7 +195,7 @@ public class LoginActivity extends Activity {
         startActivity(intent);
         
         //Closing LoginActivity
-        this.finish();
+        this.setVisible(false); 
     }
     
 	// To manage messages outside onCreate() method
