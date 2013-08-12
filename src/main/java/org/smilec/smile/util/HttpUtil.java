@@ -33,6 +33,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -97,7 +98,7 @@ public class HttpUtil {
         throws NetworkErrorException, UnsupportedEncodingException, JSONException {
         HttpPut put = new HttpPut(url);
         put.setHeader("Content-Type", SmilePlugUtil.JSON);
-        put.setEntity(new StringEntity(json));
+        put.setEntity(new StringEntity(json, HTTP.UTF_8));
         return executeMethod(put);
     }
 
@@ -110,7 +111,7 @@ public class HttpUtil {
 
 		try {
 			HttpPost httpPost = new HttpPost(url);
-			httpPost.setEntity(new StringEntity(json));
+			httpPost.setEntity(new StringEntity(json, HTTP.UTF_8));
 			httpPost.setHeader("Accept", SmilePlugUtil.FORM);
 			httpPost.setHeader("Content-type", SmilePlugUtil.FORM);
 			return new DefaultHttpClient().execute(httpPost);
