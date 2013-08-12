@@ -18,6 +18,7 @@ package org.smilec.smile.ui;
 import org.smilec.smile.R;
 import org.smilec.smile.bu.NetworkManager;
 import org.smilec.smile.bu.SmilePlugServerManager;
+import org.smilec.smile.bu.Constants;
 import org.smilec.smile.util.ActivityUtil;
 import org.smilec.smile.util.DialogUtil;
 import org.smilec.smile.util.IPAddressValidatorUtil;
@@ -42,6 +43,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 public class LoginActivity extends Activity {
 
@@ -68,14 +71,14 @@ public class LoginActivity extends Activity {
         getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
 
         contextLoginActivity= this;
-        // try {
-        // PackageInfo pinfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
-        TextView title = (TextView) findViewById(R.id.tv_title);
-        title.setText(getText(R.string.app_name));
-        // title.setText(getText(R.string.app_name) + " " + pinfo.versionName);
-        // } catch (NameNotFoundException e) {
-        // Log.e(Constants.LOG_CATEGORY, "Error: ", e);
-        // }
+        try {
+            PackageInfo pinfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            TextView title = (TextView) findViewById(R.id.tv_title);
+            // title.setText(getText(R.string.app_name));
+            title.setText(getText(R.string.app_name) + " " + pinfo.versionName);
+        } catch (NameNotFoundException e) {
+            Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+        }
 
         tvIp = (TextView) findViewById(R.id.et_server_ip);
         btConnect = (Button) findViewById(R.id.bt_connect);
