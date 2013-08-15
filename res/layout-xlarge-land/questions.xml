@@ -47,6 +47,18 @@
   		android:layout_alignParentBottom="true"
 		android:enabled="false"
   		android:layout_alignParentRight="true"/>
+  	
+  	<Button
+  	    android:id="@+id/bt_write_report"
+  	    android:layout_width="120dip"
+  	    android:layout_height="60dip"
+  	    android:layout_alignBaseline="@+id/bt_save"
+  	    android:layout_alignBottom="@+id/bt_save"
+  	    android:layout_margin="10dip"
+  	    android:layout_toLeftOf="@+id/bt_save"
+  	    android:enabled="false"
+  	    android:text="@string/send_report"
+  	    android:textSize="15sp" />
 
 	<TableLayout
 	  	android:id="@+id/tl_status"
@@ -173,5 +185,7 @@
 		android:layout_marginLeft="10dip"
 		android:layout_marginBottom="5dip"
 		android:layout_above="@id/bt_save"/>
+
+	
 
 </RelativeLayout>

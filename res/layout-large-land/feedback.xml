@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:layout_gravity="center"
+  	android:background="@drawable/rounded_border"
+  	android:layout_margin="50dip">
+
+  	<TextView
+  	    android:id="@+id/tv_title"
+  	    android:layout_width="wrap_content"
+  	    android:layout_height="wrap_content"
+  	    android:layout_centerHorizontal="true"
+  	    android:layout_marginTop="10dip"
+  	    android:paddingBottom="35dp"
+  	    android:text="@string/send_report"
+  	    android:textColor="@color/black"
+  	    android:textSize="12sp" />
+
+	<View
+		android:id="@+id/view_separator"
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_margin="5dip"
+		android:layout_below="@id/tv_title"/>
+
+	<EditText
+	    android:id="@+id/et_message"
+	    android:layout_width="450sp"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@+id/tv_name_file"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="20dip"
+	    android:layout_marginBottom="100dip"
+	    android:height="150dp"
+	    android:inputType="text"
+	    android:maxLines="6"
+	    android:singleLine="true"
+	    android:textSize="12sp"
+	    android:gravity="top" />
+
+	<View
+		android:id="@+id/view_separator2"
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/white"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:layout_marginBottom="20dip"
+		android:layout_alignParentBottom="true"/>
+
+	<TextView
+	    android:id="@+id/tv_name_file"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/tv_title"
+	    android:layout_centerHorizontal="true"
+	    android:layout_margin="10dip"
+	    android:layout_marginTop="41dp"
+	    android:text="@string/send_report_body"
+	    android:textColor="@color/black"
+	    
+	    android:textSize="12sp" />
+
+	<ImageButton
+	    android:id="@+id/bt_close"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/tv_title"
+	    android:layout_marginRight="35dp"
+	    android:background="@drawable/btn_close"
+	    android:contentDescription="@string/close_dialog" />
+
+	<Button
+	    android:id="@+id/bt_send_report"
+	    android:layout_width="100sp"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginBottom="26dp"
+	    android:enabled="false"
+	    android:text="@string/send_report_btn"
+	    android:textSize="12sp" />
+
+</RelativeLayout>

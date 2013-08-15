@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -170,7 +171,7 @@ public class SendEmailResultsUtil {
 		previewDialog.show();
 
 	}
-
+	
 	private static Uri getImageUrl(String urlPath, Integer integer) {
 		try {
 			File rootSdDirectory = Environment.getExternalStorageDirectory();
@@ -191,5 +192,4 @@ public class SendEmailResultsUtil {
 		}
 		return null;
 	}
-
 }
