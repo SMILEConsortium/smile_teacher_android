@@ -425,10 +425,16 @@ public class QuestionsFragment extends AbstractFragment {
             @Override
             public void onClick(View v) {
                 TextView message = (TextView) messageDialog.findViewById(R.id.et_message);
-
+    			
+    			// Getting all the values from node server
+    			String data = GeneralActivity.getContents("http://"+ip+"/smile/all");
+    			data = data.replace("{", "\n{");
+                
                 body.append("Dear Administrator,\n\n\n");
-    			body.append(message.getText().toString()+"\n\n\n");
-    			body.append("   A SMILE teacher\n");
+    			body.append(message.getText().toString()+"\n\n");
+    			body.append("   A SMILE teacher\n\n\n\n\n");
+    			body.append("----- JSON data -----\n\n");
+    			body.append(data+"\n");
                 
 				// We need to have a feedback set before sending it
                 if (message.getText().toString().equals("")) {
