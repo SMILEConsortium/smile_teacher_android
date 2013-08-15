@@ -437,7 +437,7 @@ public class QuestionsFragment extends AbstractFragment {
 
                 // We redirect to mail app with these settings
                 emailIntent.setType("plain/text");
-				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "chrqls@gmail.com" });
+				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "reply+i-17909211-432eb6ae1acca189ce0ff1dc90b206bf0a62ae4d-64202@reply.github.com" });
 				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Re: [smile_teacher_android] Add ability for Teacher App to send a stacktrace on fatal exception via email (#25)");
 				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body.toString());
 				
