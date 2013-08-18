@@ -22,7 +22,7 @@
 	<string name="rating">Highest Rating</string>
 	<string name="rating_table">Highest\nRating</string>
 
-	<string name="send_report">Send a report to admin</string>
+	<string name="send_report">Send a report</string>
 	<string name="send_report_body">Please leave your report:</string>
 	<string name="send_report_btn">Send</string>
 	
