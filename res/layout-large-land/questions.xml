@@ -161,4 +161,17 @@
 		android:layout_marginBottom="5dip"
 		android:layout_above="@id/bt_save"/>
 
+	<Button
+  	    android:id="@+id/bt_write_report"
+	    android:layout_width="100dip"
+	    android:layout_height="50dip"
+	    android:layout_alignBaseline="@+id/bt_save"
+	    android:layout_alignBottom="@+id/bt_save"
+	    android:layout_margin="10dip"
+	    android:layout_toLeftOf="@+id/bt_save"
+	    android:enabled="false"
+  	    android:text="@string/send_report"
+	    android:textSize="12sp" />
+	
+
 </RelativeLayout>
