@@ -49,90 +49,89 @@
   		android:layout_alignParentRight="true"/>
 
 	<TableLayout
-	  	android:id="@+id/tl_status"
-	  	android:layout_width="fill_parent"
-	  	android:layout_height="wrap_content"
-	  	android:shrinkColumns="*"
-    	android:stretchColumns="*"
-    	android:layout_below="@id/tv_status"
-    	android:layout_above="@id/bt_save"
-    	android:layout_marginLeft="10dip">
+	    android:id="@+id/tl_status"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@id/bt_save"
+	    android:layout_below="@id/tv_status"
+	    android:layout_marginLeft="10dip"
+	    android:shrinkColumns="*"
+	    android:stretchColumns="*" >
 
 	    <View
-			android:id="@+id/view_separator"
-			android:layout_width="fill_parent"
-			android:layout_height="1dip"
-			android:background="@color/gray"
-			android:layout_marginTop="10dip"
-			android:layout_marginRight="10dip"/>
+	        android:id="@+id/view_separator"
+	        android:layout_width="fill_parent"
+	        android:layout_height="1dip"
+	        android:layout_marginRight="10dip"
+	        android:layout_marginTop="10dip"
+	        android:background="@color/gray" />
 
-	  	<TableRow
-	  		android:id="@+id/tr_row"
-	  		android:layout_width="0dip"
-         	android:layout_height="wrap_content">
+	    <TableRow
+	        android:id="@+id/tr_row"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content" >
 
-	  	    <TextView
-		  	  	android:id="@+id/tv_check"
-		      	android:text="@string/save"
-		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+	        <TextView
+	            android:id="@+id/tv_check"
+	            android:layout_gravity="center|center_horizontal"
+	            android:text="@string/save"
+	            android:textColor="@color/black"
+	            android:textSize="18sp" />
 
-	  	    <TextView
-		  	  	android:id="@+id/tv_details"
-		      	android:text="@string/details"
-		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+	        <TextView
+	            android:id="@+id/tv_details"
+	            android:layout_gravity="center|center_horizontal"
+	            android:text="@string/details"
+	            android:textColor="@color/black"
+	            android:textSize="18sp" />
 
-	  	    <TextView
-		      	android:id="@+id/tv_space1"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+	        <TextView
+	            android:id="@+id/tv_space1"
+	            android:layout_gravity="center|center_horizontal"
+	            android:textColor="@color/black" />
 
-		  	<TextView
-		      	android:id="@+id/tv_question"
-		      	android:text="@string/number_owner_ip"
-		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+	        <TextView
+	            android:id="@+id/tv_question"
+	            android:layout_gravity="center|center_horizontal"
+	            android:text="@string/number_owner_ip"
+	            android:textColor="@color/black"
+	            android:textSize="18sp" />
 
-		  	<TextView
-		      	android:id="@+id/tv_space2"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+	        <TextView
+	            android:id="@+id/tv_space2"
+	            android:layout_gravity="center|center_horizontal"
+	            android:textColor="@color/black" />
 
-		  	<TextView
-		    	android:id="@+id/tv_answers"
-		      	android:text="@string/correct"
-		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:layout_gravity="center|center_horizontal"/>
+	        <TextView
+	            android:id="@+id/tv_answers"
+	            android:layout_gravity="center|center_horizontal"
+	            android:text="@string/correct"
+	            android:textColor="@color/black"
+	            android:textSize="18sp" />
 
-		  	<TextView
-		      	android:id="@+id/tv_score"
-		      	android:text="@string/rating_table"
-		      	android:textSize="18sp"
-		      	android:textColor="@color/black"
-		      	android:lines="2"
-		        android:layout_gravity="center|center_horizontal"
-		        android:gravity="center"/>
+	        <TextView
+	            android:id="@+id/tv_score"
+	            android:layout_gravity="center|center_horizontal"
+	            android:gravity="center"
+	            android:lines="2"
+	            android:text="@string/rating_table"
+	            android:textColor="@color/black"
+	            android:textSize="18sp" />
+	    </TableRow>
 
-	  	</TableRow>
+	    <View
+	        android:id="@+id/view_separator_1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="1dip"
+	        android:layout_marginRight="10dip"
+	        android:background="@color/gray" />
 
-	  	<View
-			android:id="@+id/view_separator_1"
-			android:layout_width="fill_parent"
-			android:layout_height="1dip"
-			android:background="@color/gray"
-			android:layout_marginRight="10dip"/>
-
-	  	<ListView
-			android:id="@+id/lv_questions"
-		    android:layout_width="fill_parent"
-		  	android:layout_height="fill_parent"
-		  	android:layout_marginRight="10dip"/>
-
+	    <ListView
+	        android:id="@+id/lv_questions"
+	        android:layout_width="fill_parent"
+	        android:layout_height="137dp"
+	        android:layout_marginRight="10dip"
+	        android:layout_weight="0.03" />
 	</TableLayout>
 
 	<View
@@ -144,5 +143,19 @@
 		android:layout_marginLeft="10dip"
 		android:layout_marginBottom="5dip"
 		android:layout_above="@id/bt_save"/>
+
+	<Button
+	    android:id="@+id/bt_write_report"
+	    android:layout_width="120dip"
+	    android:layout_height="50dip"
+	    android:layout_alignBaseline="@+id/bt_save"
+	    android:layout_alignBottom="@+id/bt_save"
+	    android:layout_alignLeft="@+id/tv_status"
+	    android:layout_margin="10dip"
+	    android:layout_marginLeft="17dp"
+	    android:layout_toLeftOf="@+id/bt_save"
+	    android:enabled="false"
+	    android:text="@string/send_report"
+	    android:textSize="12sp" />
 
 </RelativeLayout>
