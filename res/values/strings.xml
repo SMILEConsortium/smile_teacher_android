@@ -108,6 +108,7 @@
 	<string name="preview_send_email">Preview Send Email</string>
 	<string name="enter_e_mails_bellow_">Enter e-mails bellow:</string>
 	<string name="email_informative">( For more than one, separate by commas(,) )</string>
+	<string name="email_informative_small">separate emails by commas \',\'</string>
 	<string name="enter_subject_bellow">Enter subject bellow:</string>
 	<string name="send">Send</string>
 </resources>
