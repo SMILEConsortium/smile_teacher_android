@@ -6,14 +6,13 @@
   	android:layout_marginRight="5dip">
 
     <View
-  		android:id="@+id/view_separator1"
-		android:layout_width="70dip"
-		android:layout_height="3dip"
-		android:layout_alignParentRight="true"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="10dip"
-		android:background="#FFFF0000"/>
-
+	    android:id="@+id/view_separator1"
+	    android:layout_width="70dip"
+	    android:layout_height="3dip"
+	    android:layout_alignParentTop="true"
+	    android:layout_alignRight="@+id/view_separator2"
+	    android:background="#FFFF0000" />
+    
     <View
   		android:id="@+id/view_separator2"
 		android:layout_width="fill_parent"
@@ -32,7 +31,7 @@
       	android:textStyle="bold"
       	android:textSize="14sp"
       	android:textColor="@color/black"
-      	android:layout_marginTop="10dip"
+      	android:layout_marginTop="5dip"
       	android:layout_below="@id/view_separator1"
       	android:layout_centerHorizontal="true"/>
 
@@ -43,7 +42,7 @@
   		android:layout_gravity="center_horizontal"
   		android:text="@string/save_questions"
   		android:textSize="12sp"
-  		android:layout_margin="10dip"
+  		android:layout_margin="3dip"
   		android:layout_alignParentBottom="true"
 		android:enabled="false"
   		android:layout_alignParentRight="true"/>
@@ -58,14 +57,6 @@
 	    android:shrinkColumns="*"
 	    android:stretchColumns="*" >
 
-	    <View
-	        android:id="@+id/view_separator"
-	        android:layout_width="fill_parent"
-	        android:layout_height="1dip"
-	        android:layout_marginRight="10dip"
-	        android:layout_marginTop="10dip"
-	        android:background="@color/gray" />
-
 	    <TableRow
 	        android:id="@+id/tr_row"
 	        android:layout_width="0dip"
@@ -76,14 +67,14 @@
 	            android:layout_gravity="center|center_horizontal"
 	            android:text="@string/save"
 	            android:textColor="@color/black"
-	            android:textSize="18sp" />
+	            android:textSize="14sp" />
 
 	        <TextView
 	            android:id="@+id/tv_details"
 	            android:layout_gravity="center|center_horizontal"
 	            android:text="@string/details"
 	            android:textColor="@color/black"
-	            android:textSize="18sp" />
+	            android:textSize="14sp" />
 
 	        <TextView
 	            android:id="@+id/tv_space1"
@@ -95,7 +86,7 @@
 	            android:layout_gravity="center|center_horizontal"
 	            android:text="@string/number_owner_ip"
 	            android:textColor="@color/black"
-	            android:textSize="18sp" />
+	            android:textSize="14sp" />
 
 	        <TextView
 	            android:id="@+id/tv_space2"
@@ -107,7 +98,7 @@
 	            android:layout_gravity="center|center_horizontal"
 	            android:text="@string/correct"
 	            android:textColor="@color/black"
-	            android:textSize="18sp" />
+	            android:textSize="14sp" />
 
 	        <TextView
 	            android:id="@+id/tv_score"
@@ -116,7 +107,7 @@
 	            android:lines="2"
 	            android:text="@string/rating_table"
 	            android:textColor="@color/black"
-	            android:textSize="18sp" />
+	            android:textSize="14sp" />
 	    </TableRow>
 
 	    <View
@@ -134,28 +125,32 @@
 	        android:layout_weight="0.03" />
 	</TableLayout>
 
-	<View
-		android:id="@+id/view_separator_2"
-		android:layout_width="fill_parent"
-		android:layout_height="1dip"
-		android:background="@color/gray"
-		android:layout_marginRight="10dip"
-		android:layout_marginLeft="10dip"
-		android:layout_marginBottom="5dip"
-		android:layout_above="@id/bt_save"/>
-
 	<Button
 	    android:id="@+id/bt_write_report"
 	    android:layout_width="120dip"
 	    android:layout_height="50dip"
 	    android:layout_alignBaseline="@+id/bt_save"
 	    android:layout_alignBottom="@+id/bt_save"
-	    android:layout_alignLeft="@+id/tv_status"
-	    android:layout_margin="10dip"
-	    android:layout_marginLeft="17dp"
+	    android:layout_margin="3dip"
 	    android:layout_toLeftOf="@+id/bt_save"
 	    android:enabled="false"
 	    android:text="@string/send_report"
 	    android:textSize="12sp" />
+
+	<View
+	    android:id="@+id/view_separator"
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dip"
+	    android:layout_alignBottom="@+id/tv_status"
+	    android:layout_alignLeft="@+id/tl_status"
+	    android:background="@color/gray" />
+
+	<View
+	    android:id="@+id/view_separator_2"
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dip"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/tl_status"
+	    android:background="@color/gray" />
 
 </RelativeLayout>
