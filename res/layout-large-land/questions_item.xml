@@ -6,8 +6,7 @@
     android:layout_height="fill_parent"
     android:shrinkColumns="*"
     android:stretchColumns="*"
-    android:background="@color/gray"
-    android:paddingTop="10dip">
+    android:background="@color/gray">
 
     <TableRow
         android:id="@+id/tr"
@@ -30,7 +29,8 @@
 	        android:src="@drawable/details"
 	        android:gravity="center|center_horizontal"
 	        android:background="@color/gray"
-	        android:layout_marginTop="5dip"/>
+	        android:layout_marginBottom="3dip"
+	        android:layout_marginTop="3dip"/>
 
 	    <TextView
 	        android:id="@+id/tv_number"

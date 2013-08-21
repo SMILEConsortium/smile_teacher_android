@@ -84,7 +84,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
         final float rating = (float) question.getRating();
 
-        Button ivDetails = (Button) convertView.findViewById(R.id.iv_details);
+        ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
         ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
 
         final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
