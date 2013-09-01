@@ -84,8 +84,15 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
         final float rating = (float) question.getRating();
 
-        ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
-        ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
+        if(convertView.findViewById(R.id.iv_details) instanceof ImageView) {
+        	System.out.println("---------> We are on the Nexus 7 or mobile because it's an ImageView");
+        	ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
+        	ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
+        } else {
+        	System.out.println("---------> We are on the VisioTab1001 because it's a Button");
+        	Button ivDetails = (Button) convertView.findViewById(R.id.iv_details);
+        	ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
+        }
 
         final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
         rbRatingBar.setRating(rating);
