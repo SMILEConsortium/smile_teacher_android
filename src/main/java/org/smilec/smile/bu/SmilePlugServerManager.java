@@ -129,7 +129,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 			post(ip, context, url, retakeJson.toString());
 
         } catch (JSONException e) {
-        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+SmilePlugServerManager.class.getName()).execute();
+        	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),SmilePlugServerManager.class.getName()).execute();
 	    	e.printStackTrace();
 	    }
 

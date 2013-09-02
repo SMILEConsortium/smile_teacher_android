@@ -261,7 +261,7 @@ public class StudentsFragment extends AbstractFragment {
             final RatingBar rbRatingBar = (RatingBar) getActivity().findViewById(R.id.rb_ratingbar);
             rbRatingBar.setRating(results.getWinnerRating());
         } catch (JSONException e) {
-        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+StudentsFragment.class.getName()).execute();
+        	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),StudentsFragment.class.getName()).execute();
             Log.e("StudentsFragment", "Error: " + e);
         }
     }

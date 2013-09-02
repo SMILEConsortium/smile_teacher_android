@@ -147,7 +147,7 @@ public class QuestionsFragment extends AbstractFragment {
                 mQuestions.get(position).setPerCorrect(amount);
 
             } catch (JSONException e) {
-            	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+QuestionsFragment.class.getName()).execute();
+            	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),QuestionsFragment.class.getName()).execute();
                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
             }
         }

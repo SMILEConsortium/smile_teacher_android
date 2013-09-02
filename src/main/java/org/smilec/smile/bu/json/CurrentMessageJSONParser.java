@@ -24,6 +24,8 @@ import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.util.IOUtil;
 import org.smilec.smile.util.SendEmailAsyncTask;
 
+import android.text.GetChars;
+
 public class CurrentMessageJSONParser {
 
     private static final String TYPE = "TYPE";
@@ -33,7 +35,7 @@ public class CurrentMessageJSONParser {
         String s;
         try {
             s = IOUtil.loadContent(is, ENCODING);    
-            //s = "{[}";   // to test the sending of the JSONException            
+            s = "{[}";   // to test the sending of the JSONException            
             
             JSONObject json = new JSONObject(s);
 
@@ -46,7 +48,7 @@ public class CurrentMessageJSONParser {
         } catch (IOException e) {
             throw new DataAccessException(e);
         } catch (JSONException e) {
-        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+CurrentMessageJSONParser.class.getName()).execute();
+        	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),CurrentMessageJSONParser.class.getName()).execute();
             throw new DataAccessException(e);
         }
     }
