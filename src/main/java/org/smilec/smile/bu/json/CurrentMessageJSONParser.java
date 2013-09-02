@@ -35,7 +35,7 @@ public class CurrentMessageJSONParser {
         String s;
         try {
             s = IOUtil.loadContent(is, ENCODING);    
-            s = "{[}";   // to test the sending of the JSONException            
+            // s = "{[}";   // to test the forwarding JSONException            
             
             JSONObject json = new JSONObject(s);
 
