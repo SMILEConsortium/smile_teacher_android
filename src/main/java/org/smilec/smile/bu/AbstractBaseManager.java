@@ -19,9 +19,11 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import org.json.JSONException;
+import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 import org.smilec.smile.util.DeviceUtil;
 import org.smilec.smile.util.HttpUtil;
 import org.smilec.smile.util.IOUtil;
+import org.smilec.smile.util.SendEmailAsyncTask;
 import org.smilec.smile.util.SmilePlugUtil;
 
 import android.accounts.NetworkErrorException;
@@ -91,6 +93,7 @@ public abstract class AbstractBaseManager {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } catch (JSONException e) {
+        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+AbstractBaseManager.class.getName()).execute();
             throw new RuntimeException(e);
         } finally {
             IOUtil.silentClose(is);

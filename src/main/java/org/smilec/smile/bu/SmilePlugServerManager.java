@@ -32,6 +32,7 @@ import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.ServerQuestionWrapper;
 import org.smilec.smile.util.HttpUtil;
 import org.smilec.smile.util.IOUtil;
+import org.smilec.smile.util.SendEmailAsyncTask;
 import org.smilec.smile.util.SmilePlugUtil;
 
 import android.accounts.NetworkErrorException;
@@ -128,6 +129,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 			post(ip, context, url, retakeJson.toString());
 
         } catch (JSONException e) {
+        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+SmilePlugServerManager.class.getName()).execute();
 	    	e.printStackTrace();
 	    }
 

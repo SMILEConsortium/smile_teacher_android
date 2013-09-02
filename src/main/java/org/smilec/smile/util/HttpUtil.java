@@ -36,6 +36,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 
 import android.accounts.NetworkErrorException;
 
@@ -90,6 +91,7 @@ public class HttpUtil {
         } catch (ParseException e) {
             throw new NetworkErrorException(e.getMessage());
         } catch (JSONException e) {
+        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+HttpUtil.class.getName()).execute();
             throw new NetworkErrorException(e.getMessage());
         }
     }

@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.bu.json.AnswersAndRatingsJSONParser;
+import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 import org.smilec.smile.bu.json.QuestionJSONParser;
 import org.smilec.smile.bu.json.ResultsJSONParser;
 import org.smilec.smile.bu.json.StudentJSONParser;
@@ -37,6 +38,7 @@ import org.smilec.smile.domain.Results;
 import org.smilec.smile.domain.Student;
 import org.smilec.smile.util.HttpUtil;
 import org.smilec.smile.util.IOUtil;
+import org.smilec.smile.util.SendEmailAsyncTask;
 import org.smilec.smile.util.SmilePlugUtil;
 
 import android.accounts.NetworkErrorException;
@@ -92,6 +94,7 @@ public class BoardManager extends AbstractBaseManager {
         } catch (IOException e) {
             throw new DataAccessException(e);
         } catch (JSONException e) {
+        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+BoardManager.class.getName()).execute();
             throw new DataAccessException(e);
         }
 
@@ -115,6 +118,7 @@ public class BoardManager extends AbstractBaseManager {
                 array = new JSONArray();
             }
         } catch (JSONException e) {
+        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+BoardManager.class.getName()).execute();
             throw new DataAccessException(e);
         }
 
