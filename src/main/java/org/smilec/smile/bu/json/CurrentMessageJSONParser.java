@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.util.IOUtil;
+import org.smilec.smile.util.SendEmailAsyncTask;
 
 public class CurrentMessageJSONParser {
 
@@ -31,8 +32,9 @@ public class CurrentMessageJSONParser {
     public static final String getStatus(InputStream is) throws DataAccessException {
         String s;
         try {
-            s = IOUtil.loadContent(is, ENCODING);
-
+            s = IOUtil.loadContent(is, ENCODING);    
+            //s = "{[}";   // to test the sending of the JSONException            
+            
             JSONObject json = new JSONObject(s);
 
             String type = "";
@@ -44,6 +46,7 @@ public class CurrentMessageJSONParser {
         } catch (IOException e) {
             throw new DataAccessException(e);
         } catch (JSONException e) {
+        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+CurrentMessageJSONParser.class.getName()).execute();
             throw new DataAccessException(e);
         }
     }

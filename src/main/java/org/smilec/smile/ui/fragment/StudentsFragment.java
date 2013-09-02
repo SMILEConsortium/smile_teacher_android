@@ -27,6 +27,7 @@ import org.smilec.smile.R;
 import org.smilec.smile.bu.BoardManager;
 import org.smilec.smile.bu.Constants;
 import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 import org.smilec.smile.domain.Board;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.QuestionList;
@@ -36,6 +37,7 @@ import org.smilec.smile.ui.GeneralActivity;
 import org.smilec.smile.ui.StudentStatusDetailsActivity;
 import org.smilec.smile.ui.adapter.StudentListAdapter;
 import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.SendEmailAsyncTask;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
@@ -259,6 +261,7 @@ public class StudentsFragment extends AbstractFragment {
             final RatingBar rbRatingBar = (RatingBar) getActivity().findViewById(R.id.rb_ratingbar);
             rbRatingBar.setRating(results.getWinnerRating());
         } catch (JSONException e) {
+        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+StudentsFragment.class.getName()).execute();
             Log.e("StudentsFragment", "Error: " + e);
         }
     }

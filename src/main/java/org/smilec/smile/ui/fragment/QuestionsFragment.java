@@ -32,6 +32,7 @@ import org.smilec.smile.bu.BoardManager;
 import org.smilec.smile.bu.Constants;
 import org.smilec.smile.bu.QuestionsManager;
 import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 import org.smilec.smile.domain.Board;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
@@ -39,6 +40,7 @@ import org.smilec.smile.ui.GeneralActivity;
 import org.smilec.smile.ui.adapter.QuestionListAdapter;
 import org.smilec.smile.util.ActivityUtil;
 import org.smilec.smile.util.CloseClickListenerUtil;
+import org.smilec.smile.util.SendEmailAsyncTask;
 
 import android.R.bool;
 import android.accounts.NetworkErrorException;
@@ -145,6 +147,7 @@ public class QuestionsFragment extends AbstractFragment {
                 mQuestions.get(position).setPerCorrect(amount);
 
             } catch (JSONException e) {
+            	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+QuestionsFragment.class.getName()).execute();
                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
             }
         }
