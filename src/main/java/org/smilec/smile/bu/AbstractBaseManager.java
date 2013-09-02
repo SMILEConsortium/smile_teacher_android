@@ -93,7 +93,7 @@ public abstract class AbstractBaseManager {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } catch (JSONException e) {
-        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+AbstractBaseManager.class.getName()).execute();
+        	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),AbstractBaseManager.class.getName()).execute();
             throw new RuntimeException(e);
         } finally {
             IOUtil.silentClose(is);

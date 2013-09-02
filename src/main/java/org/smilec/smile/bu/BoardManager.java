@@ -94,7 +94,7 @@ public class BoardManager extends AbstractBaseManager {
         } catch (IOException e) {
             throw new DataAccessException(e);
         } catch (JSONException e) {
-        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+BoardManager.class.getName()).execute();
+        	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),BoardManager.class.getName()).execute();
             throw new DataAccessException(e);
         }
 
@@ -118,7 +118,7 @@ public class BoardManager extends AbstractBaseManager {
                 array = new JSONArray();
             }
         } catch (JSONException e) {
-        	new SendEmailAsyncTask(e.getMessage(),"New "+JSONException.class.getName()+" in "+BoardManager.class.getName()).execute();
+        	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),BoardManager.class.getName()).execute();
             throw new DataAccessException(e);
         }
 

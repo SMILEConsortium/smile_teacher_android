@@ -19,19 +19,21 @@ public class SendEmailAsyncTask extends AsyncTask <Void, Void, Boolean> {
 	
 	Mail m = new Mail(FROM, PASSWORD);
 
-    public SendEmailAsyncTask(String message, String subject) {
+    public SendEmailAsyncTask(String message, String exception, String currentClass) {
         
         String[] toArr = {TO};
+        String body = new String();
         
         m.setTo(toArr);
         m.setFrom(FROM);
         
-        if(subject != null) 
-        	m.setSubject(TAG_SUBJECT+subject);
+        if(exception != null) 
+        	m.setSubject(TAG_SUBJECT+exception);
         else
-        	m.setSubject(TAG_SUBJECT+"Exception or something else");
+        	m.setSubject(TAG_SUBJECT+"New message");
         
-        m.setBody("Error: "+message);
+        body = currentClass+".java\n\n.\t\t"+exception+"\n\n\t\t\t\t"+message;
+        m.setBody("> "+body);
     }
 
     @Override
