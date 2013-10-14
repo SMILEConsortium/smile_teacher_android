@@ -43,6 +43,7 @@ import com.google.gson.Gson;
 
 public class SmilePlugServerManager extends AbstractBaseManager {
 
+    // XXX TODO: Add arguments to take Teacher Name, Session Name, and Group Name
     public void startMakingQuestions(String ip, Context context) throws NetworkErrorException {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_MAKING_QUESTIONS_URL);
         put(ip, context, url, "{}");
@@ -138,6 +139,9 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     public void showResults(String ip, Context context) throws NetworkErrorException {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.SHOW_RESULTS_URL);
         put(ip, context, url, "{}");
+
+        // Always store the results
+        
     }
 
 }
