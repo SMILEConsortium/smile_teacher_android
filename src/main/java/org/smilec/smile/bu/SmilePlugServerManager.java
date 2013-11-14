@@ -92,9 +92,9 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     	JSONObject jsonSessionValues = new JSONObject();
     	
     	try {
-    		jsonSessionValues.put("TEACHER", teacherName);
-    		jsonSessionValues.put("SESSION", sessionTitle);
-    		jsonSessionValues.put("GROUP", groupName);
+    		jsonSessionValues.put("teacherName", teacherName);
+    		jsonSessionValues.put("sessionName", sessionTitle);
+    		jsonSessionValues.put("groupName", groupName);
 	    	
     	} catch (Exception e) {
 			Log.e("SMILE_TEACHER:SmilePlugServerManager", "ERROR, reason: " + e.getMessage());
