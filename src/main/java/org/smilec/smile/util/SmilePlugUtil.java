@@ -33,6 +33,7 @@ public class SmilePlugUtil {
     public static final String RESULTS_URL = "results";
     public static final String RESET_URL = "reset";
     public static final String CURRENT_MESSAGE_URL = "currentmessage";
+    public static final String CREATE_SESSION = "createsession";
 
     public static final String JSON = "application/json";
     public static final String FORM = "application/x-www-form-urlencoded";

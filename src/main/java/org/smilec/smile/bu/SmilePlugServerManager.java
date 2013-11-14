@@ -86,6 +86,24 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 
     }
 
+    public void createSession(String ip, String teacherName, String sessionTitle, String groupName, Context context) throws NetworkErrorException {
+    	
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.CREATE_SESSION);
+    	JSONObject jsonSessionValues = new JSONObject();
+    	
+    	try {
+    		jsonSessionValues.put("TEACHER", teacherName);
+    		jsonSessionValues.put("SESSION", sessionTitle);
+    		jsonSessionValues.put("GROUP", groupName);
+	    	
+    	} catch (Exception e) {
+			Log.e("SMILE_TEACHER:SmilePlugServerManager", "ERROR, reason: " + e.getMessage());
+			e.printStackTrace();
+		}
+    	
+    	put(ip,context,url,jsonSessionValues.toString());
+    }
+    
     public String currentMessageGame(String ip, Context context) throws NetworkErrorException {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.CURRENT_MESSAGE_URL);
 

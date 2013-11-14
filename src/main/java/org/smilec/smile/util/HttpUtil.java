@@ -110,6 +110,7 @@ public class HttpUtil {
         return executeMethod(get);
     }
 
+    // This method seems to be never used in smile_teacher_android
     public static final HttpResponse executePost(String url, String json) throws NetworkErrorException {
 
 		try {

@@ -85,7 +85,7 @@ public class ChooseActivityFlowDialog extends Activity {
         super.onResume();
 
         ip = this.getIntent().getStringExtra(GeneralActivity.PARAM_IP);
-
+        
         btStart.setOnClickListener(new StartButtonListener());
         btUse.setOnClickListener(new UsePreparedQuestionsButtonListener());
 

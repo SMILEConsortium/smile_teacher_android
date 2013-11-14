@@ -183,7 +183,7 @@ public class LoginActivity extends Activity {
     }
 
     private void loading() {
-        Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
+        Intent intent = new Intent(this, SessionValuesActivity.class);
         intent.putExtra(GeneralActivity.PARAM_IP, tvIp.getText().toString());
         intent.putExtra(GeneralActivity.PARAM_STATUS, status);
         //ActivityUtil.showLongToast(this, R.string.connection_established);
@@ -194,7 +194,7 @@ public class LoginActivity extends Activity {
 		msg = mHandler.obtainMessage(MSG_OK, getResources().getString(R.string.connection_established));
 		mHandler.sendMessage(msg);
 		
-		//Starting ChooseActivityFlowDialog
+		//Starting SessionValuesActivity
         startActivity(intent);
         
         //Closing LoginActivity

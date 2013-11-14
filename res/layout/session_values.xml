@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_dialog"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/rounded_border"
+	android:layout_gravity="center"
+	android:layout_margin="50dip">
+
+	<TextView
+	    android:id="@+id/tv_title"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dip"
+	    android:textColor="@color/black"
+	    android:textSize="18sp"
+		android:layout_centerHorizontal="true"/>
+
+	<View
+		android:id="@+id/view_separator2"
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:background="@color/gray"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:layout_marginBottom="20dip"
+		android:layout_alignParentBottom="true"/>
+
+	<EditText
+	    android:id="@+id/group_name"
+	    android:layout_width="200dp"
+	    android:layout_height="50dp"
+	    android:layout_above="@+id/view_separator2"
+	    android:layout_alignLeft="@+id/session_title"
+	    android:ems="10"
+	    android:hint="@string/group_name_hint"
+	    android:inputType="textAutoCorrect|textCapSentences"
+	    android:singleLine="true" >
+
+	    <requestFocus />
+	</EditText>
+
+	<EditText
+	    android:id="@+id/teacher_name"
+	    android:layout_width="200dp"
+	    android:layout_height="50dp"
+	    android:layout_above="@+id/session_title"
+	    android:layout_alignLeft="@+id/session_title"
+	    android:ems="10"
+	    android:hint="@string/teacher_name_hint"
+	    android:inputType="textAutoCorrect|textCapSentences"
+	    android:singleLine="true" />
+
+	<EditText
+	    android:id="@+id/session_title"
+	    android:layout_width="200dp"
+	    android:layout_height="50dp"
+	    android:layout_above="@+id/group_name"
+	    android:layout_alignLeft="@+id/view_separator2"
+	    android:ems="10"
+	    android:hint="@string/session_title_hint"
+	    android:inputType="textAutoCorrect|textCapSentences"
+	    android:singleLine="true" />
+
+	<TextView
+	    android:id="@+id/tv_session_values"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignTop="@+id/tv_title"
+	    android:layout_centerHorizontal="true"
+	    android:text="@string/session_values"
+	    android:textColor="@color/black"
+	    android:textSize="18sp" />
+
+	<View
+	    android:id="@+id/view_separator"
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dip"
+	    android:layout_alignRight="@+id/view_separator2"
+	    android:layout_below="@+id/tv_session_values"
+	    android:layout_margin="5dip"
+	    android:background="@color/gray" />
+
+	<Button
+	    android:id="@+id/btn_create_session"
+	    android:layout_width="150sp"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/session_title"
+	    android:layout_alignBottom="@+id/session_title"
+	    android:layout_alignRight="@+id/view_separator"
+	    android:layout_marginRight="14dp"
+	    android:text="@string/btn_create_session"
+	    android:textSize="18sp" />
+
+</RelativeLayout>
