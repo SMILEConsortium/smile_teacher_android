@@ -99,11 +99,7 @@ public class ChooseActivityFlowDialog extends Activity {
         @Override
         public void onClick(View v) {
         	
-        	System.out.println("READY ???");
-        	System.out.println(">>>>>>>>>>>> status="+status);
-        	System.out.println("JOB IS DONE ("+status.equals("")+")");
-        	
-            if (status != null && !status.equals("")) {
+            if (status != null && !status.equals("") && !status.equals("RESET")) {
                 
 //                AlertDialog.Builder builder = new AlertDialog.Builder(ChooseActivityFlowDialog.this);
 //                builder.setMessage(R.string.game_running).setCancelable(false).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -117,7 +113,6 @@ public class ChooseActivityFlowDialog extends Activity {
                 ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.recovering);
 //                AlertDialog alert = builder.create();
 //                alert.show();
-
             } else {
                 new LoadTask(ChooseActivityFlowDialog.this).execute();
                 ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.starting);
