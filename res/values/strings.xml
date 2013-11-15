@@ -72,6 +72,7 @@
 
 	<string name="starting">Starting...</string>
 	<string name="solving">Solving...</string>
+	<string name="recovering">Recovering...</string>
 
 	<string name="question_number">Question Number</string>
 	<string name="correct_answer">Correct Answer</string>
