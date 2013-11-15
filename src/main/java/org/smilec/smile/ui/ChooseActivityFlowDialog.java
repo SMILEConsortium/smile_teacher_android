@@ -98,26 +98,30 @@ public class ChooseActivityFlowDialog extends Activity {
 
         @Override
         public void onClick(View v) {
-            if (status != null) {
-                if (!status.equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                        ChooseActivityFlowDialog.this);
-                    builder.setMessage(R.string.game_running).setCancelable(false)
-                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                new LoadTask(ChooseActivityFlowDialog.this).execute();
-                            }
-                        });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                } else {
-                    new LoadTask(ChooseActivityFlowDialog.this).execute();
-                }
+        	
+        	System.out.println("READY ???");
+        	System.out.println(">>>>>>>>>>>> status="+status);
+        	System.out.println("JOB IS DONE ("+status.equals("")+")");
+        	
+            if (status != null && !status.equals("")) {
+                
+//                AlertDialog.Builder builder = new AlertDialog.Builder(ChooseActivityFlowDialog.this);
+//                builder.setMessage(R.string.game_running).setCancelable(false).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+//                	
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            new LoadTask(ChooseActivityFlowDialog.this).execute();
+//                        }
+//                    });
+                new LoadTask(ChooseActivityFlowDialog.this).execute();
+                ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.recovering);
+//                AlertDialog alert = builder.create();
+//                alert.show();
+
             } else {
                 new LoadTask(ChooseActivityFlowDialog.this).execute();
+                ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.starting);
             }
-            ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.starting);
         }
     }
 
