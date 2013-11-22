@@ -15,6 +15,7 @@ limitations under the License.
 **/
 package org.smilec.smile.bu;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,9 +27,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.bu.json.CurrentMessageJSONParser;
+import org.smilec.smile.bu.json.IQSetJSONParser;
+import org.smilec.smile.bu.json.ResultsJSONParser;
 import org.smilec.smile.domain.Board;
+import org.smilec.smile.domain.IQSet;
 import org.smilec.smile.domain.LocalQuestionWrapper;
 import org.smilec.smile.domain.Question;
+import org.smilec.smile.domain.Results;
 import org.smilec.smile.domain.ServerQuestionWrapper;
 import org.smilec.smile.util.HttpUtil;
 import org.smilec.smile.util.IOUtil;
@@ -85,10 +90,12 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 
     }
 
-    // XXX TODO: Add arguments to take Teacher Name, Session Name, and Group Name
+    /**
+     * Send the session ids (teacher name, session name, and group name) to smileplug server
+     */
     public void createSession(String ip, String teacherName, String sessionTitle, String groupName, Context context) throws NetworkErrorException {
     	
-    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.CREATE_SESSION);
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.CREATE_SESSION_URL);
     	JSONObject jsonSessionValues = new JSONObject();
     	
     	try {
@@ -102,6 +109,83 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 		}
     	
     	put(ip,context,url,jsonSessionValues.toString());
+    }
+    
+    /**
+     * @return a list of all iqsets available on smileplug server 
+     */
+    public List<IQSet> getIQSets(String ip, Context context) throws NetworkErrorException {
+    	
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.IQSETS_URL);
+    	
+    	List<IQSet> iqsets = new ArrayList<IQSet>();
+    	
+    	InputStream is = get(ip, context, url);
+
+        try {
+        	String s = IOUtil.loadContent(is, "UTF-8");
+            iqsets = IQSetJSONParser.parseListOfIQSet(new JSONObject(s));
+            
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+            IOUtil.silentClose(is);
+        }
+    	
+    	return iqsets;
+    }
+    
+    /**
+     * This method is similar to <b>this.getIQSets()</b> 
+     * but it just returns a String instead of a List of IQSet
+     * @param position position of the row in the list of IQSets  
+     * @return the id of the iqset
+     */
+    public String getIdIQSetByPosition(String ip, Context context, int position) throws NetworkErrorException {
+    	
+    	String id = new String();
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.IQSETS_URL);
+    	InputStream is = get(ip, context, url);
+    	
+    	try {
+        	String s = IOUtil.loadContent(is, "UTF-8");
+            id = IQSetJSONParser.getIdIQSetByPosition(new JSONObject(s), position);
+            
+		} catch (JSONException e) { e.printStackTrace();
+		} catch (IOException e) { e.printStackTrace();
+		} finally { IOUtil.silentClose(is);
+        }
+    	return id;
+    }
+    
+    /**
+     * @return all the questions from a IQSet  
+     */
+    public Collection<Question> getListOfQuestions(String ip, Context context, String idIQSet) throws NetworkErrorException {
+    	
+    	Collection<Question> questions = new ArrayList<Question>();
+    	
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.IQSET_URL+"/"+idIQSet);
+    	InputStream is = get(ip, context, url);
+    	
+    	try {
+        	String s = IOUtil.loadContent(is, "UTF-8");
+        	questions = IQSetJSONParser.parseIQSet(new JSONObject(s));
+            
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+            IOUtil.silentClose(is);
+        }
+    	return questions;
     }
     
     public String currentMessageGame(String ip, Context context) throws NetworkErrorException {

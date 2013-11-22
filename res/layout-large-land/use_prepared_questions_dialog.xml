@@ -29,10 +29,11 @@
 
 	<View
 		android:id="@+id/view_separator"
-		android:layout_width="fill_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="1dip"
 		android:background="@color/gray"
-		android:layout_margin="5dip"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
 		android:layout_below="@+id/bt_close"/>
 
 	<TextView
@@ -49,7 +50,7 @@
 
 	<View
 		android:id="@+id/view_separator2"
-		android:layout_width="fill_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="1dip"
 		android:background="@color/gray"
 		android:layout_marginLeft="5dip"
@@ -57,53 +58,20 @@
 		android:layout_marginBottom="20dip"
 		android:layout_alignParentBottom="true"/>
 
-	<Button
-  		android:id="@+id/bt_ok"
-  		android:layout_width="100dip"
-  		android:layout_height="wrap_content"
-  		android:text="@string/load"
-  		android:textSize="12sp"
-  		android:layout_marginBottom="10dip"
-	    android:layout_centerHorizontal="true"
-	    android:layout_above="@+id/view_separator2"/>
-
-	<View
-		android:id="@+id/view_separator_middle"
-		android:layout_width="1dip"
-		android:layout_height="fill_parent"
-		android:background="@color/gray"
-		android:layout_margin="20dip"
-		android:layout_centerInParent="true"
-		android:layout_below="@+id/view_separator"
-		android:layout_above="@+id/bt_ok"/>
-
 	<ListView
 	    android:id="@+id/android:list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:choiceMode="singleChoice"
-	    android:layout_marginTop="10dip"
-	    android:layout_marginLeft="10dip"
-	    android:layout_marginRight="10dip"
-	    android:layout_marginBottom="20dip"
+	    android:layout_above="@+id/bt_ok"
 	    android:layout_alignParentLeft="true"
 	    android:layout_below="@+id/tv_select_item"
-	    android:layout_above="@+id/bt_ok"
+	    android:layout_marginBottom="10dip"
+	    android:layout_marginLeft="10dip"
+	    android:layout_marginTop="10dip"
 	    android:layout_toLeftOf="@+id/view_separator_middle"
+	    android:choiceMode="singleChoice"
 	    android:divider="@android:color/transparent"
-  		android:dividerHeight="10.0sp"/>
-
-	<CheckBox
-	    android:id="@+id/cb_questions"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/use_time"
-	    android:textColor="@color/black"
-	    android:textSize="12sp"
-	    android:layout_marginTop="5dip"
-	    android:layout_marginRight="10dip"
-	    android:layout_toRightOf="@+id/view_separator_middle"
-	    android:layout_below="@+id/view_separator"/>
+	    android:dividerHeight="10.0sp" />
 
 	<TextView
         android:id="@+id/tv_hours_spinner"
@@ -113,7 +81,6 @@
         android:textSize="12sp"
         android:textColor="@color/black"
         android:layout_marginTop="10dip"
-        android:layout_marginLeft="20dip"
 	    android:layout_toRightOf="@+id/view_separator_middle"
     	android:layout_below="@+id/cb_questions"/>
 
@@ -121,11 +88,10 @@
 	    android:id="@+id/sp_hours"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:prompt="@string/hours"
-	    android:layout_marginLeft="65dip"
-	    android:layout_marginRight="50dip"
-    	android:layout_toRightOf="@+id/tv_hours_spinner"
-    	android:layout_below="@+id/cb_questions"/>
+	    android:layout_alignLeft="@+id/sp_seconds"
+	    android:layout_below="@+id/cb_questions"
+	    android:layout_marginRight="20dip"
+	    android:prompt="@string/hours" />
 
 	<TextView
 	    android:id="@+id/tv_minutes_spinner"
@@ -135,7 +101,6 @@
         android:textSize="12sp"
         android:textColor="@color/black"
         android:layout_marginTop="30dip"
-        android:layout_marginLeft="20dip"
 	    android:layout_toRightOf="@+id/view_separator_middle"
     	android:layout_below="@+id/tv_hours_spinner"/>
 
@@ -145,9 +110,9 @@
 	    android:layout_height="wrap_content"
 	    android:prompt="@string/minutes"
 	    android:layout_marginTop="15dip"
-	    android:layout_marginLeft="55dip"
-	    android:layout_marginRight="50dip"
-    	android:layout_toRightOf="@+id/tv_minutes_spinner"
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginRight="20dip"
+    	android:layout_toRightOf="@+id/tv_seconds_spinner"
     	android:layout_below="@+id/tv_hours_spinner"/>
 
 	<TextView
@@ -158,7 +123,6 @@
         android:textSize="12sp"
         android:textColor="@color/black"
         android:layout_marginTop="25dip"
-        android:layout_marginLeft="20dip"
 	    android:layout_toRightOf="@+id/view_separator_middle"
     	android:layout_below="@+id/tv_minutes_spinner"/>
 
@@ -168,9 +132,40 @@
 	    android:layout_height="wrap_content"
 	    android:prompt="@string/seconds"
 	    android:layout_marginTop="11dip"
-	    android:layout_marginLeft="50dip"
-	    android:layout_marginRight="50dip"
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginRight="20dip"
     	android:layout_toRightOf="@+id/tv_seconds_spinner"
     	android:layout_below="@+id/tv_minutes_spinner"/>
+
+	<View
+	    android:id="@+id/view_separator_middle"
+	    android:layout_width="1dip"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/view_separator2"
+	    android:layout_below="@+id/bt_close"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    android:layout_toLeftOf="@+id/cb_questions"
+	    android:background="@color/gray" />
+
+	<CheckBox
+	    android:id="@+id/cb_questions"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginRight="25dp"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/view_separator"
+	    android:text="@string/use_time"
+	    android:textColor="@color/black"
+	    android:textSize="12sp" />
+
+<Button
+	    android:id="@+id/bt_ok"
+	    android:layout_width="100dip"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/view_separator2"
+	    android:layout_centerHorizontal="true"
+	    android:text="@string/load"
+	    android:textSize="12sp" />
 
 </RelativeLayout>
