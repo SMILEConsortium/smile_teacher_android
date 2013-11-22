@@ -25,14 +25,16 @@ import org.smilec.smile.bu.Constants;
 import org.smilec.smile.bu.QuestionsManager;
 import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.bu.exception.DataAccessException;
+import org.smilec.smile.domain.IQSet;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
-import org.smilec.smile.ui.adapter.FilesQuestionListAdapter;
+import org.smilec.smile.ui.adapter.IQSetListAdapter;
 import org.smilec.smile.util.ActivityUtil;
 import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.DialogUtil;
 import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
+import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -69,15 +71,18 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     private String ip;
     private String status;
 
-    private File[] fileQuestionsList;
-    private File fileQuestion;
-
-    private ArrayAdapter<File> adapter;
+    //private File[] fileQuestionsList;
+    //private File fileQuestion;
+    //private ArrayAdapter<File> adapter;
+    
+    private List<IQSet> iqsets;
+    private IQSet iqset;
+    private IQSetListAdapter iqsetListAdapter;
 
     private ListView lvListQuestions;
     private Results results;
 
-    private int item = 0;
+    private int currentPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +124,8 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         spinnerSeconds.setEnabled(false);
         
         btClose.setOnClickListener(new CloseClickListenerUtil(this));
+        
+        
 
         loadValuesTime();
 
@@ -219,9 +226,19 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     private void loadQuestionsList() {
         clearSelection();
 
-        adapter = new FilesQuestionListAdapter(this, fileQuestionsList);
-
-        lvListQuestions.setAdapter(adapter);
+		List<IQSet> iqsets = new ArrayList<IQSet>();
+		try {
+			iqsets = new SmilePlugServerManager().getIQSets(ip, UsePreparedQuestionsActivity.this);
+		} catch (NetworkErrorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        //adapter = new FilesQuestionListAdapter(this, fileQuestionsList);
+        //lvListQuestions.setAdapter(adapter);
+		iqsetListAdapter = new IQSetListAdapter(UsePreparedQuestionsActivity.this, iqsets);
+		lvListQuestions.setAdapter(iqsetListAdapter);
+		
         lvListQuestions.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lvListQuestions.setItemsCanFocus(false);
         lvListQuestions.setOnItemClickListener(new ItemClickListener());
@@ -233,10 +250,10 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
             boolean itemChecked = lvListQuestions.isItemChecked(position);
 
-            if (lvListQuestions.getCheckedItemPositions().size() > 1 && item != position) {
-                lvListQuestions.setItemChecked(item, false);
+            if (lvListQuestions.getCheckedItemPositions().size() > 1 && currentPosition != position) {
+                lvListQuestions.setItemChecked(currentPosition, false);
             }
-            item = position;
+            currentPosition = position;
 
             btOk.setEnabled(itemChecked);
             cbQuestions.setClickable(itemChecked);
@@ -246,7 +263,8 @@ public class UsePreparedQuestionsActivity extends ListActivity {
                 spinnerMinutes.setEnabled(false);
                 spinnerSeconds.setEnabled(false);
             }
-            fileQuestion = adapter.getItem(position);
+            //fileQuestion = adapter.getItem(position);
+            iqset = iqsetListAdapter.getItem(position);
         }
 
     }
@@ -262,7 +280,8 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        if (fileQuestionsList.length == 0) {
+        //if (fileQuestionsList.length == 0) {
+        if (iqsets.size() == 0) {
             Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
             intent.putExtra(GeneralActivity.PARAM_IP, ip);
             intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
@@ -273,9 +292,13 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     }
 
     private class LoadBoardTask extends ProgressDialogAsyncTask<Void, File[]> {
+    	
+    	private Context context;
 
         public LoadBoardTask(Activity context) {
             super(context);
+            
+            this.context = context;
         }
 
         @Override
@@ -292,7 +315,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         @Override
         protected void onPostExecute(File[] fileQuestions) {
             if (fileQuestions != null) {
-                UsePreparedQuestionsActivity.this.fileQuestionsList = fileQuestions;
+                //UsePreparedQuestionsActivity.this.fileQuestionsList = fileQuestions;
                 UsePreparedQuestionsActivity.this.loadQuestionsList();
                 if (fileQuestions.length == 0) {
                     btOk.setEnabled(false);
@@ -316,13 +339,17 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 
             this.context = context;
         }
-
+        
         @Override
         protected String doInBackground(Void... params) {
             try {
                 Collection<Question> newQuestions = null;
-                newQuestions = new QuestionsManager().loadQuestions(fileQuestion.getName());
-
+                //newQuestions = new QuestionsManager().loadQuestions(fileQuestion.getName());
+                
+                String idCheckedIQSet = new SmilePlugServerManager().getIdIQSetByPosition(ip, context, currentPosition);
+                
+                newQuestions = new SmilePlugServerManager().getListOfQuestions(ip, context, idCheckedIQSet);
+                
                 new SmilePlugServerManager().startUsingPreparedQuestions(ip, context, newQuestions);
 
                 return "";

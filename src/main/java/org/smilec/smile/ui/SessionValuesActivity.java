@@ -187,8 +187,5 @@ public class SessionValuesActivity extends Activity {
             }
         }
     }
-	
-	private void checkingSessionValues() {
-    }
 
 }
