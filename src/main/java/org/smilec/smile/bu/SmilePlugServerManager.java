@@ -111,6 +111,23 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     	put(ip,context,url,jsonSessionValues.toString());
     }
     
+    public boolean iqsetsExist(String ip, Context context) throws NetworkErrorException {
+    	
+    	boolean bool = false;
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.IQSETS_URL);
+    	InputStream is = get(ip, context, url);
+    	
+    	try {
+        	String s = IOUtil.loadContent(is, "UTF-8");
+        	bool = IQSetJSONParser.rowsExist(new JSONObject(s));
+            
+		} catch (JSONException e) { e.printStackTrace();
+		} catch (IOException e) { e.printStackTrace();
+		} finally { IOUtil.silentClose(is);
+        }
+    	return bool;
+    }
+    
     /**
      * @return a list of all iqsets available on smileplug server 
      */
