@@ -18,6 +18,12 @@ public class IQSetJSONParser {
     private static final String KEY_OF_IQSET = "key";
     private static final String VALUE_OF_IQSET = "value";
     
+    
+    public static final boolean rowsExist(JSONObject object) {
+    	
+    	return object.optInt(NUMBER_OF_IQSETS) != 0? true : false;
+    }
+    
     /**
      * Used to parse the JSON request when we need to fill the ListView of all IQSet  #UsingPreparedQuestions
      * 
@@ -27,9 +33,8 @@ public class IQSetJSONParser {
     	List<IQSet> iqsets = new ArrayList<IQSet>();
     	
     	JSONArray rows = object.optJSONArray(ALL_THE_IQSETS);
-    	int totalRows = object.optInt(NUMBER_OF_IQSETS);
     	
-    	for(int i=0; i<totalRows;) {
+    	for(int i=0; i<rows.length();) {
     		
     		try {
 				JSONObject row = rows.getJSONObject(i++);

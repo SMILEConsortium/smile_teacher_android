@@ -312,18 +312,31 @@ public class UsePreparedQuestionsActivity extends ListActivity {
             return null;
         }
 
+        
+        /* 
+         * File[] fileQuestions contains the 4 preloaded local files, but this is not used anymore
+         * and it is replaced by the iqsets
+         */
         @Override
         protected void onPostExecute(File[] fileQuestions) {
-            if (fileQuestions != null) {
+        	
+        	boolean iqsetsExist = false;
+        	
+        	try {
+				iqsetsExist = new SmilePlugServerManager().iqsetsExist(ip, context);
+			} catch (NetworkErrorException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
+            if (iqsetsExist) {
                 //UsePreparedQuestionsActivity.this.fileQuestionsList = fileQuestions;
                 UsePreparedQuestionsActivity.this.loadQuestionsList();
-                if (fileQuestions.length == 0) {
-                    btOk.setEnabled(false);
-                    cbQuestions.setClickable(false);
 
-                    ActivityUtil.showLongToast(UsePreparedQuestionsActivity.this,
-                        "No Results Found");
-                }
+            } else {
+            	btOk.setEnabled(false);
+                cbQuestions.setClickable(false);
+                ActivityUtil.showLongToast(UsePreparedQuestionsActivity.this, "No Results Found");
             }
             super.onPostExecute(fileQuestions);
         }

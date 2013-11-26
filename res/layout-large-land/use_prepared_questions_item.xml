@@ -22,29 +22,42 @@
 		<TextView
 		    android:id="@+id/tv_file_name"
 			android:textSize="12sp"
+			android:textStyle="bold"
 			android:textColor="@color/black"
 			android:focusable="false"
 			android:layout_gravity="left|center_vertical"/>
 		
 		<TextView
-	        android:id="@+id/tv_teacher_name"
 	        android:textSize="12sp"
-	        android:layout_width="100dip"
-            android:layout_height="match_parent"
-	        android:text="@string/teacher_name_hint"
-	        android:layout_gravity="left|center_vertical"
-	        android:textColor="@color/black"
-	        android:background="@color/gray" />
+	        android:text="@string/separator"
+	        android:textStyle="bold"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="10dip"
+	        android:layout_marginRight="10dip"
+	        android:textColor="@color/red" />
+		
+		<TextView
+		    android:id="@+id/tv_teacher_name"
+		    android:layout_gravity="center_vertical"
+		    android:text="@string/teacher_name_hint"
+		    android:textColor="@color/black"
+		    android:textSize="12sp" />
+		
+		<TextView
+	        android:textSize="12sp"
+	        android:text="@string/separator"
+	        android:textStyle="bold"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="10dip"
+	        android:layout_marginRight="10dip"
+	        android:textColor="@color/red" />
 
 	    <TextView
 	        android:id="@+id/tv_group_name"
 	        android:textSize="12sp"
-	        android:layout_width="100dip"
-            android:layout_height="match_parent"
 	        android:text="@string/group_name_hint"
-	        android:layout_gravity="left|center_vertical"
-	        android:textColor="@color/black"
-	        android:background="@color/gray" />
+	        android:layout_gravity="center_vertical"
+	        android:textColor="@color/black" />
 
     </TableRow>
 
