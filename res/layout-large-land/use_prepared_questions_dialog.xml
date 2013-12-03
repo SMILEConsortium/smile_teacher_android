@@ -123,7 +123,7 @@
         android:textSize="12sp"
         android:textColor="@color/black"
         android:layout_marginTop="25dip"
-	    
+	    android:layout_toRightOf="@+id/view_separator_middle"
     	android:layout_below="@+id/tv_minutes_spinner"/>
 
 	<Spinner

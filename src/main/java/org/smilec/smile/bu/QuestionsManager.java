@@ -88,80 +88,81 @@ public class QuestionsManager {
 
 	}
 
-	public void saveQuestions(Context context, String name, Collection<Question> questions,
-		String ipServer) throws DataAccessException {
-
-		if (!DeviceUtil.isExternalStorageWriteable()) {
-			throw new DataAccessException("External storage unavailable");
-		}
-
-        if (name.endsWith(".json") == false) {
-            name = name + ".json";
-        }
-
-		Log.d("QuestionsManager", "Exporting Questions: " + name);
-
-		File dir = new File(questionsDir, name);
-		boolean ok = dir.mkdirs();
-
-		//
-		// Hello please make sure we don't overwrite the same file
-		//
-		File file = new File(dir, QUESTIONS_FILE);
-
-		if (file.isDirectory() || file.exists()) {
-			throw new DataAccessException("File = " + name + " already exists in " + questionsDir);
-		}
-		PrintWriter pw = null;
-
-		try {
-			FileWriter fw = new FileWriter(file);
-			pw = new PrintWriter(fw);
-
-			pw.println(MARKER);
-			pw.println(String.valueOf(questions.size()));
-
-			for (Question q : questions) {
-				pw.println(MARKER);
-				pw.println(String.valueOf(q.getNumber()));
-				pw.println(MARKER);
-				pw.println(q.getQuestion());
-				pw.println(MARKER);
-				pw.println(q.getOption1());
-				pw.println(MARKER);
-				pw.println(q.getOption2());
-				pw.println(MARKER);
-				pw.println(q.getOption3());
-				pw.println(MARKER);
-				pw.println(q.getOption4());
-				pw.println(MARKER);
-				pw.println(q.hasImage() ? "Y" : "N");
-				pw.println(MARKER);
-				pw.println(q.getAnswer());
-				pw.println(MARKER);
-				String ip = IPAddressUtil.getIPAddress();
-				pw.println(ip);
-				pw.println(MARKER);
-				pw.println(q.getOwner());
-				if (q.hasImage()) {
-					File img = new File(dir, q.getNumber() + JPG);
-
-					byte[] s = ImageLoader.loadBitmap(Constants.HTTP + ipServer + q.getImageUrl());
-
-					IOUtil.saveBytes(img, s);
-				}
-			}
-
-			pw.println(MARKER);
-			pw.close();
-
-		} catch (Exception e) {
-			Log.e(Constants.LOG_CATEGORY, "Error: ", e);
-		} finally {
-			IOUtil.silentClose(pw);
-		}
-
-	}
+//	public void saveQuestions(Context context, String name, Collection<Question> questions,
+//		String ipServer) throws DataAccessException {
+//
+//		if (!DeviceUtil.isExternalStorageWriteable()) {
+//			throw new DataAccessException("External storage unavailable");
+//		}
+//
+//        if (name.endsWith(".json") == false) {
+//            name = name + ".json";
+//        }
+//
+//		Log.d("QuestionsManager", "Exporting Questions: " + name);
+//
+//		File dir = new File(questionsDir, name);
+//		boolean ok = dir.mkdirs();
+//
+//		//
+//		// Hello please make sure we don't overwrite the same file
+//		//
+//		File file = new File(dir, QUESTIONS_FILE);
+//
+//		if (file.isDirectory() || file.exists()) {
+//			throw new DataAccessException("File = " + name + " already exists in " + questionsDir);
+//		}
+//		PrintWriter pw = null;
+//
+//		try {
+//			FileWriter fw = new FileWriter(file);
+//			pw = new PrintWriter(fw);
+//
+//			pw.println(MARKER);
+//			pw.println(String.valueOf(questions.size()));
+//
+//			for (Question q : questions) {
+//				pw.println(MARKER);
+//				pw.println(String.valueOf(q.getNumber()));
+//				pw.println(MARKER);
+//				pw.println(q.getQuestion());
+//				pw.println(MARKER);
+//				pw.println(q.getOption1());
+//				pw.println(MARKER);
+//				pw.println(q.getOption2());
+//				pw.println(MARKER);
+//				pw.println(q.getOption3());
+//				pw.println(MARKER);
+//				pw.println(q.getOption4());
+//				pw.println(MARKER);
+//				pw.println(q.hasImage() ? "Y" : "N");
+//				pw.println(MARKER);
+//				pw.println(q.getAnswer());
+//				pw.println(MARKER);
+//				String ip = IPAddressUtil.getIPAddress();
+//				pw.println(ip);
+//				pw.println(MARKER);
+//				pw.println(q.getOwner());
+//				if (q.hasImage()) {
+//					File img = new File(dir, q.getNumber() + JPG);
+//
+//					byte[] s = ImageLoader.loadBitmap(Constants.HTTP + ipServer + q.getImageUrl());
+//
+//					IOUtil.saveBytes(img, s);
+//				}
+//			}
+//
+//			pw.println(MARKER);
+//			pw.close();
+//
+//		} catch (Exception e) {
+//			Log.e(Constants.LOG_CATEGORY, "Error: ", e);
+//		} finally {
+//			IOUtil.silentClose(pw);
+//		}
+//
+//	}
+	
 // USELESS: Previously used when the prepared questions came from local files 
 	
 //	public Collection<Question> loadQuestions(String name) {

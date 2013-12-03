@@ -25,7 +25,7 @@ public class SmilePlugUtil {
     public static final String START_MAKING_QUESTIONS_URL = "startmakequestion";
     public static final String START_SOLVING_QUESTIONS_URL = "startsolvequestion";
     public static final String RETAKE_QUESTIONS_URL = "junctionserverexecution/pushmsg.php";
-//    public static final String RETAKE_QUESTIONS_URL = "junctionserverexecution/current/MSG/smsg.txt";
+ // public static final String RETAKE_QUESTIONS_URL = "junctionserverexecution/current/MSG/smsg.txt";
 
     public static final String SHOW_RESULTS_URL = "sendshowresults";
     public static final String ALL_DATA_URL = "all";
@@ -36,6 +36,7 @@ public class SmilePlugUtil {
     public static final String CREATE_SESSION_URL = "createsession";
     public static final String IQSETS_URL = "iqsets";
     public static final String IQSET_URL = "iqset";
+    public static final String SAVE_IQSET_URL = "saveiqset";
 
     public static final String JSON = "application/json";
     public static final String FORM = "application/x-www-form-urlencoded";
