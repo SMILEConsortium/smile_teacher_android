@@ -17,6 +17,21 @@ public class IQSetJSONParser {
     private static final String ID_OF_IQSET = "id";
     private static final String KEY_OF_IQSET = "key";
     private static final String VALUE_OF_IQSET = "value";
+    private static final String IQDATA_OF_IQSET = "iqdata";
+    
+    private static final String NAME = "NAME";
+    private static final String IP = "IP";
+    private static final String QUESTION = "Q";
+    private static final String OPTION_1 = "O1";
+    private static final String OPTION_2 = "O2";
+    private static final String OPTION_3 = "O3";
+    private static final String OPTION_4 = "O4";
+    private static final String TYPE = "TYPE";
+    private static final String ANSWER = "A";
+    
+    private static final String TITLE_SESSION = "title";
+    private static final String TEACHER_NAME = "teachername";
+    private static final String GROUP_NAME = "groupname";
     
     
     public static final boolean rowsExist(JSONObject object) {
@@ -58,6 +73,37 @@ public class IQSetJSONParser {
     }
     
     /**
+     * Used for saving questions during a session
+     */
+    public static final JSONObject wrapQuestionsIntoIQSet(String nameOfIQSet, Collection<Question> questions) throws JSONException {
+    	
+    	JSONObject iqset = new JSONObject();
+    	JSONArray iqdata = new JSONArray();
+    	
+    	for(int i = 0; i<questions.size();i++) {
+    		
+    		Question question = ((List<Question>)questions).get(i);
+    		
+    		iqdata.put(new JSONObject()
+				.put(NAME, "NAME_TEMP")
+				.put(IP, "127.0.0.1")
+				.put(QUESTION, question.getQuestion())
+				.put(OPTION_1, question.getOption1())
+				.put(OPTION_2, question.getOption2())
+				.put(OPTION_3, question.getOption3())
+				.put(OPTION_4, question.getOption4())
+				.put(TYPE, "QUESTION")
+				.put(ANSWER, question.getAnswer())
+    		);
+    		
+    		iqset.put(TITLE_SESSION, nameOfIQSet);
+    		iqset.put(IQDATA_OF_IQSET, iqdata);
+    	}
+    	
+    	return iqset;
+    }
+    
+    /**
      * Used to return the iqset ID when the teacher select a pool of questions  #UsingPreparedQuestions
      * 
      */
@@ -81,7 +127,7 @@ public class IQSetJSONParser {
     public static final Collection<Question> parseIQSet(JSONObject object) {
     	
     	Collection<Question> questions = new ArrayList<Question>();
-    	JSONArray rows = object.optJSONArray("iqdata");
+    	JSONArray rows = object.optJSONArray(IQDATA_OF_IQSET);
     	
     	for(int i=0; i<rows.length();i++) {
     		
@@ -90,14 +136,14 @@ public class IQSetJSONParser {
 				
 				// TODO: Careful! imageUrl field is always empty when using prepared questions!
 				Question q = new Question(i,
-						row.getString("NAME"),
-						row.getString("IP"),
-						row.getString("Q"),
-						row.getString("O1"),
-						row.getString("O2"),
-						row.getString("O3"),
-						row.getString("O4"),
-						row.getInt("A"),
+						row.getString(NAME),
+						row.getString(IP),
+						row.getString(QUESTION),
+						row.getString(OPTION_1),
+						row.getString(OPTION_2),
+						row.getString(OPTION_3),
+						row.getString(OPTION_4),
+						row.getInt(ANSWER),
 						"");
 				questions.add(q);
 				

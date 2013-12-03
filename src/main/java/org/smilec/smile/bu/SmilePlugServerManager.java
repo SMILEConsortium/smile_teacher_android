@@ -90,6 +90,23 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 
     }
 
+    	
+    /**
+     * Save the questions into an iqset and send this iqset to smileplug
+     */
+    public void saveQuestionsAsAnIQSet(String ipServer, String nameOfIQSet, Context context, Collection<Question> questions) throws NetworkErrorException {
+    	String url = SmilePlugUtil.createUrl(ipServer, SmilePlugUtil.SAVE_IQSET_URL);
+    	JSONObject iqsetToSave = new JSONObject();
+    	
+    	try {
+			iqsetToSave = IQSetJSONParser.wrapQuestionsIntoIQSet(nameOfIQSet, questions);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+    	
+    	put(ipServer,context,url,iqsetToSave.toString());
+    }
+    
     /**
      * Send the session ids (teacher name, session name, and group name) to smileplug server
      */
@@ -99,9 +116,9 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     	JSONObject jsonSessionValues = new JSONObject();
     	
     	try {
-    		jsonSessionValues.put("teacherName", teacherName);
-    		jsonSessionValues.put("sessionName", sessionTitle);
-    		jsonSessionValues.put("groupName", groupName);
+    		jsonSessionValues.put("teachername", teacherName);
+    		jsonSessionValues.put("title", sessionTitle);
+    		jsonSessionValues.put("groupname", groupName);
 	    	
     	} catch (Exception e) {
 			Log.e("SMILE_TEACHER:SmilePlugServerManager", "ERROR, reason: " + e.getMessage());

@@ -160,7 +160,7 @@ public class SessionValuesActivity extends Activity {
         	String groupName = tv_groupName.getText().toString();
         	
         	if(teacherName.equals("")) 	teacherName = "Default Teacher";
-        	if(sessionTitle.equals("")) sessionTitle = "Session-";
+        	if(sessionTitle.equals("")) sessionTitle = "Default Session";
         	if(groupName.equals("")) 	groupName = "Default Group";
             
         	try {

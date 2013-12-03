@@ -31,6 +31,7 @@ import org.smilec.smile.R;
 import org.smilec.smile.bu.BoardManager;
 import org.smilec.smile.bu.Constants;
 import org.smilec.smile.bu.QuestionsManager;
+import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 import org.smilec.smile.domain.Board;
@@ -507,12 +508,13 @@ public class QuestionsFragment extends AbstractFragment {
         protected Boolean doInBackground(Void... arg0) {
 
             try {
-                new QuestionsManager().saveQuestions(context, name.trim(), listQuestions, ip);
+            	// We wrap the set of questions in an IQSet
+                new SmilePlugServerManager().saveQuestionsAsAnIQSet(ip, name.trim(), context, listQuestions);
 
                 return true;
-            } catch (DataAccessException e) {
-                Log.e(Constants.LOG_CATEGORY, e.getMessage());
-            }
+            } catch (NetworkErrorException e) {
+				e.printStackTrace();
+			}
 
             return false;
         }
