@@ -38,7 +38,7 @@ public class SmilePlugUtil {
     public static final String IQSET_URL = "iqset";
     //public static final String SAVE_IQSET_URL = "saveiqset";
 
-    public static final String JSON = "application/json";
+    public static final String JSON = "application/json; charset=UTF-8";
     public static final String FORM = "application/x-www-form-urlencoded";
 
     private SmilePlugUtil() {
