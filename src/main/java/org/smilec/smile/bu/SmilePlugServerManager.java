@@ -17,6 +17,7 @@ package org.smilec.smile.bu;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -95,7 +96,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
      * Save the questions into an iqset and send this iqset to smileplug
      */
     public void saveQuestionsAsAnIQSet(String ipServer, String nameOfIQSet, Context context, Collection<Question> questions) throws NetworkErrorException {
-    	String url = SmilePlugUtil.createUrl(ipServer, SmilePlugUtil.SAVE_IQSET_URL);
+    	String url = SmilePlugUtil.createUrl(ipServer, SmilePlugUtil.IQSET_URL);
     	JSONObject iqsetToSave = new JSONObject();
     	
     	try {
@@ -104,7 +105,15 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 			e.printStackTrace();
 		}
     	
-    	put(ipServer,context,url,iqsetToSave.toString());
+    	try {
+			HttpUtil.executePut(url,iqsetToSave.toString());
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+    	
+    	//put(ipServer,context,url,iqsetToSave.toString());
     }
     
     /**
