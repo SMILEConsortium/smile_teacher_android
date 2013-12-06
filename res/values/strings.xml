@@ -10,6 +10,7 @@
 	<string name="teacher_name_hint">Teacher name</string>
 	<string name="session_title_hint">Session title</string>
 	<string name="group_name_hint">Group name</string>
+	<string name="date_hint">Date</string>
 	<string name="btn_create_session">Create</string>
 	<string name="creating_session">Creating session...</string>
 	<string name="separator"> - </string>

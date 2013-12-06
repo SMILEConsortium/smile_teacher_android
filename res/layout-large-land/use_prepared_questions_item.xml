@@ -58,6 +58,22 @@
 	        android:text="@string/group_name_hint"
 	        android:layout_gravity="center_vertical"
 	        android:textColor="@color/black" />
+	    
+	    <TextView
+	        android:textSize="12sp"
+	        android:text="@string/separator"
+	        android:textStyle="bold"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="10dip"
+	        android:layout_marginRight="10dip"
+	        android:textColor="@color/red" />
+
+	    <TextView
+	        android:id="@+id/tv_date"
+	        android:textSize="12sp"
+	        android:text="@string/date_hint"
+	        android:layout_gravity="center_vertical"
+	        android:textColor="@color/green" />
 
     </TableRow>
 
