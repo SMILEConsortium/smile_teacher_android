@@ -1,5 +1,8 @@
 package org.smilec.smile.ui.adapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.smilec.smile.R;
@@ -46,6 +49,9 @@ public class IQSetListAdapter extends ArrayAdapter<IQSet> {
 
             TextView tvGroupName = (TextView) convertView.findViewById(R.id.tv_group_name);
             tvGroupName.setText(String.valueOf(iqset.getGroupName()));
+            
+            TextView tvDate = (TextView) convertView.findViewById(R.id.tv_date);
+            tvDate.setText(String.valueOf(iqset.getKey()));
         }
 
         return convertView;
