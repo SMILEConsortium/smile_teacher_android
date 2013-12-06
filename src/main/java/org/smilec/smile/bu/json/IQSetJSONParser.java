@@ -27,6 +27,7 @@ public class IQSetJSONParser {
     private static final String OPTION_3 = "O3";
     private static final String OPTION_4 = "O4";
     private static final String TYPE = "TYPE";
+    private static final String IMAGE_URL = "PICURL";
     private static final String ANSWER = "A";
     
     private static final String TITLE_SESSION = "title";
@@ -84,15 +85,20 @@ public class IQSetJSONParser {
     		
     		Question question = ((List<Question>)questions).get(i);
     		
+    		// We define the type of the current question
+    		String typeOfQuestion = new String();
+    		typeOfQuestion = question.getImageUrl().equals("") ? "QUESTION" : "QUESTION_PIC";
+    		
     		iqdata.put(new JSONObject()
-				.put(NAME, "NAME_TEMP")
-				.put(IP, "127.0.0.1")
+				.put(NAME, question.getOwner())
+				.put(IP, question.getIp())
 				.put(QUESTION, question.getQuestion())
 				.put(OPTION_1, question.getOption1())
 				.put(OPTION_2, question.getOption2())
 				.put(OPTION_3, question.getOption3())
 				.put(OPTION_4, question.getOption4())
-				.put(TYPE, "QUESTION")
+				.put(TYPE, typeOfQuestion)
+				.put(IMAGE_URL, question.getImageUrl())
 				.put(ANSWER, question.getAnswer())
     		);
     		
