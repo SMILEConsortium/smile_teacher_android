@@ -118,7 +118,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     
     public void deleteQuestionInSessionByNumber(String ipServer, Context context, int position) throws NetworkErrorException {
     	
-    	String url = SmilePlugUtil.createUrl(ipServer, SmilePlugUtil.QUESTION_VIEW_URL+"/"+position);
+    	String url = SmilePlugUtil.createUrl(ipServer, SmilePlugUtil.QUESTION_VIEW_URL+"/"+position+".json");
 //    	JSONObject json = new JSONObject();
     	
 //    	try {

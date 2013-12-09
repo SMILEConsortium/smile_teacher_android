@@ -87,22 +87,29 @@ public abstract class AbstractBaseManager {
         
     	connect(ip, context);
 
-    	URL urlurl = null;
-    	try { urlurl = new URL(url); } 
-    	catch (MalformedURLException e) { e.printStackTrace(); }
-    	
-    	HttpURLConnection httpCon = null;
-    	try { httpCon = (HttpURLConnection) urlurl.openConnection(); } 
-    	catch (IOException e) { e.printStackTrace(); }
-    	
-    	httpCon.setDoOutput(true);
-    	httpCon.setRequestProperty("Content-Type", "application/json; charset=UTF-8" );
-    	
-    	try { httpCon.setRequestMethod("DELETE"); } 
-    	catch (ProtocolException e) { e.printStackTrace(); }
-    	
-    	try { httpCon.connect(); } 
-    	catch (IOException e) { e.printStackTrace(); }
+    	URL urlObject = null;
+		try { urlObject  = new URL(url); } 
+		catch (MalformedURLException exception) {
+    	    exception.printStackTrace();
+    	}
+    	HttpURLConnection httpURLConnection = null;
+    	try {
+    	    httpURLConnection = (HttpURLConnection) urlObject.openConnection();
+    	    httpURLConnection.setRequestProperty("Content-Type","application/json; charset=UTF-8");
+    	    httpURLConnection.setRequestMethod("DELETE");
+    	    // httpURLConnection.setDoOutput(true);
+    	    
+    	    int result = httpURLConnection.getResponseCode();
+    	    
+    	    System.out.println(">> int returned: "+result);
+    	    
+    	} catch (IOException exception) {
+    	    exception.printStackTrace();
+    	} finally {         
+    	    if (httpURLConnection != null) {
+    	        httpURLConnection.disconnect();
+    	    }
+    	} 
     	
     	System.out.println("FIN DELETE METHOD");
     }
