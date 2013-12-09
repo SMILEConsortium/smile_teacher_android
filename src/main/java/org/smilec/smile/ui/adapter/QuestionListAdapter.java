@@ -185,10 +185,14 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                 	
                 	public void onClick(View v) {
                 		
+                		try {
+							new SmilePlugServerManager().deleteQuestionInSessionByNumber(ip, context, currentQuestion);
+						} catch (NetworkErrorException e) {
+							e.printStackTrace();
+						}
+                		
             			Toast.makeText(
-            					context, 
-            					"The teacher wants to delete question #"+currentQuestion,
-            					Toast.LENGTH_LONG
+            					context, "Trying to delete question #"+currentQuestion, Toast.LENGTH_LONG
     					).show();
                 	};
                 });

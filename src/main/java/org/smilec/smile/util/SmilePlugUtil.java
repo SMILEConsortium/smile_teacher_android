@@ -30,14 +30,15 @@ public class SmilePlugUtil {
     public static final String SHOW_RESULTS_URL = "sendshowresults";
     public static final String ALL_DATA_URL = "all";
     public static final String QUESTION_URL = "question";
+    public static final String QUESTION_VIEW_URL = "questionview";
     public static final String RESULTS_URL = "results";
     public static final String RESET_URL = "reset";
     public static final String CURRENT_MESSAGE_URL = "currentmessage";
     public static final String CREATE_SESSION_URL = "createsession";
     public static final String IQSETS_URL = "iqsets";
     public static final String IQSET_URL = "iqset";
-    //public static final String SAVE_IQSET_URL = "saveiqset";
 
+    
     public static final String JSON = "application/json; charset=UTF-8";
     public static final String FORM = "application/x-www-form-urlencoded";
 

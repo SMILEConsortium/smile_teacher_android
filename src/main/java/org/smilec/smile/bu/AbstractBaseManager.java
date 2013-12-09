@@ -15,8 +15,13 @@ limitations under the License.
 **/
 package org.smilec.smile.bu;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 
 import org.json.JSONException;
 import org.smilec.smile.bu.json.CurrentMessageJSONParser;
@@ -72,13 +77,35 @@ public abstract class AbstractBaseManager {
 
     }
 
-    protected void post(String ip, Context context, String url, String json)
-            throws NetworkErrorException {
-            connect(ip, context);
+    protected void post(String ip, Context context, String url, String json) throws NetworkErrorException {
+            
+    	connect(ip, context);
+      	HttpUtil.executePost(url, json);
+    }
+    
+    protected void delete(String ip, Context context, String url) throws NetworkErrorException {
+        
+    	connect(ip, context);
 
-          	HttpUtil.executePost(url, json);
-
-        }
+    	URL urlurl = null;
+    	try { urlurl = new URL(url); } 
+    	catch (MalformedURLException e) { e.printStackTrace(); }
+    	
+    	HttpURLConnection httpCon = null;
+    	try { httpCon = (HttpURLConnection) urlurl.openConnection(); } 
+    	catch (IOException e) { e.printStackTrace(); }
+    	
+    	httpCon.setDoOutput(true);
+    	httpCon.setRequestProperty("Content-Type", "application/json; charset=UTF-8" );
+    	
+    	try { httpCon.setRequestMethod("DELETE"); } 
+    	catch (ProtocolException e) { e.printStackTrace(); }
+    	
+    	try { httpCon.connect(); } 
+    	catch (IOException e) { e.printStackTrace(); }
+    	
+    	System.out.println("FIN DELETE METHOD");
+    }
 
     protected void put(String ip, Context context, String url, String json)
         throws NetworkErrorException {
