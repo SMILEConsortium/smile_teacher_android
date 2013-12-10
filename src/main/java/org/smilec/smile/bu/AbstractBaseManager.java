@@ -101,7 +101,7 @@ public abstract class AbstractBaseManager {
     	    
     	    int result = httpURLConnection.getResponseCode();
     	    
-    	    System.out.println(">> int returned: "+result);
+    	    System.out.println(">> Answer of Smileplug => Code:"+result);
     	    
     	} catch (IOException exception) {
     	    exception.printStackTrace();
@@ -110,8 +110,6 @@ public abstract class AbstractBaseManager {
     	        httpURLConnection.disconnect();
     	    }
     	} 
-    	
-    	System.out.println("FIN DELETE METHOD");
     }
 
     protected void put(String ip, Context context, String url, String json)

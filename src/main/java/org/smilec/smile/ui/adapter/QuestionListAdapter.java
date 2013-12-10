@@ -104,15 +104,14 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         	
         	ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
         	ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
-        	
-        	System.out.println("---------> We are on the Nexus 7 or mobile because it's an ImageView");
+        	System.out.println("----> Nexus 7 | ImageView");
         	
         } else {
         	
         	Button ivDetails = (Button) convertView.findViewById(R.id.iv_details);
         	ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
         	
-        	System.out.println("---------> We are on the VisioTab1001 because it's a Button");
+        	System.out.println("----> VisioTab1001 | Button");
         }
 
         final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
@@ -131,10 +130,10 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
      */
     private class OpenItemDetailsListener implements OnClickListener {
 
-        private Question questions;
+        private Question question;
 
         public OpenItemDetailsListener(Question question) {
-            this.questions = question;
+            this.question = question;
         }
 
         @Override
@@ -148,7 +147,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             detailsDialog.show();
 
             // Preparing the values in the "Details" view
-            loadDetails(detailsDialog, questions);
+            loadDetails(detailsDialog, question);
         }
     }
     
@@ -170,7 +169,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
              public void onClick(View v) {
                  
         		// Preparing the "Confirm?" view
-				Dialog confirmDialog = new Dialog(context, R.style.Dialog);
+				final Dialog confirmDialog = new Dialog(context, R.style.Dialog);
 				confirmDialog.setContentView(R.layout.question_delete);
 				Display displaySize = ActivityUtil.getDisplaySize(getContext());
 				confirmDialog.getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
@@ -194,6 +193,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             			Toast.makeText(
             					context, "Trying to delete question #"+currentQuestion, Toast.LENGTH_LONG
     					).show();
+            			
+            			confirmDialog.dismiss();
                 	};
                 });
         	 }
