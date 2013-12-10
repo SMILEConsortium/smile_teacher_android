@@ -5,6 +5,7 @@
 	<string name="server">Smileplug IP</string>
 	<string name="connect">Connect</string>
 	<string name="loading">Loading...</string>
+	<string name="confirm">Confirm?</string>
 	
 	<string name="session_values">Information about teacher\'s session</string>
 	<string name="teacher_name_hint">Teacher name</string>

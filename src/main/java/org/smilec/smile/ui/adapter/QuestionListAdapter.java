@@ -19,17 +19,23 @@ import java.util.List;
 
 import org.smilec.smile.R;
 import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
+import org.smilec.smile.ui.GeneralActivity;
 import org.smilec.smile.ui.widget.checkbox.InertCheckBox;
 import org.smilec.smile.util.ActivityUtil;
 import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.ImageLoader;
 
+import android.accounts.NetworkErrorException;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +45,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
-    private Context context;
+    
+	private Context context;
     private String ip;
+    private int currentQuestion;
 
     public QuestionListAdapter(Context context, List<Question> items, Results results, String ip) {
         super(context, android.R.layout.simple_list_item_multiple_choice, items);
@@ -54,6 +63,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         this.ip = ip;
     }
 
+    // For each position (<=> question in the session), we prepare the row
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -84,14 +94,24 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
         final float rating = (float) question.getRating();
 
+        /**
+         * Here we display the detail page of a question
+         * 
+         * If the "details" button is an ImageView >> adapting to mobile and large format
+         * Else, we are in x-large format >> the "details" button is an instance of Button
+         */
         if(convertView.findViewById(R.id.iv_details) instanceof ImageView) {
-        	System.out.println("---------> We are on the Nexus 7 or mobile because it's an ImageView");
+        	
         	ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
         	ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
+        	System.out.println("----> Nexus 7 | ImageView");
+        	
         } else {
-        	System.out.println("---------> We are on the VisioTab1001 because it's a Button");
+        	
         	Button ivDetails = (Button) convertView.findViewById(R.id.iv_details);
         	ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
+        	
+        	System.out.println("----> VisioTab1001 | Button");
         }
 
         final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
@@ -105,29 +125,80 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         return super.getItem(position);
     }
 
+    /**
+     * Class called to display the detail of a question 
+     */
     private class OpenItemDetailsListener implements OnClickListener {
 
-        private Question questions;
+        private Question question;
 
         public OpenItemDetailsListener(Question question) {
-            this.questions = question;
+            this.question = question;
         }
 
         @Override
         public void onClick(View v) {
-            Dialog detailsDialog = new Dialog(context, R.style.Dialog);
+            
+        	// Preparing "Details" view
+        	Dialog detailsDialog = new Dialog(context, R.style.Dialog);
             detailsDialog.setContentView(R.layout.question_details);
             Display displaySize = ActivityUtil.getDisplaySize(getContext());
             detailsDialog.getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
             detailsDialog.show();
 
-            loadDetails(detailsDialog, questions);
+            // Preparing the values in the "Details" view
+            loadDetails(detailsDialog, question);
         }
     }
-
+    
     private void loadDetails(Dialog detailsDialog, Question question) {
+    	
     	ImageButton btClose = (ImageButton) detailsDialog.findViewById(R.id.bt_close);
+    	ImageButton btBack = (ImageButton) detailsDialog.findViewById(R.id.bt_back);
+    	ImageButton btTrash = (ImageButton) detailsDialog.findViewById(R.id.bt_trash);
+    	
+    	currentQuestion = question.getNumber();
+    	
         btClose.setOnClickListener(new CloseClickListenerUtil(detailsDialog));
+        btBack.setOnClickListener(new CloseClickListenerUtil(detailsDialog));
+        
+        // If the user click on the trash icon
+        btTrash.setOnClickListener(new Button.OnClickListener() {  
+        	
+        	 @Override
+             public void onClick(View v) {
+                 
+        		// Preparing the "Confirm?" view
+				final Dialog confirmDialog = new Dialog(context, R.style.Dialog);
+				confirmDialog.setContentView(R.layout.question_delete);
+				Display displaySize = ActivityUtil.getDisplaySize(getContext());
+				confirmDialog.getWindow().setLayout(displaySize.getWidth(), displaySize.getHeight());
+				confirmDialog.show();
+				
+				// Adding listeners on each button
+				ImageButton btCancel = (ImageButton) confirmDialog.findViewById(R.id.bt_cancel);
+				ImageButton btConfirm = (ImageButton) confirmDialog.findViewById(R.id.bt_confirm);
+             	
+                btCancel.setOnClickListener(new CloseClickListenerUtil(confirmDialog));
+                btConfirm.setOnClickListener(new Button.OnClickListener() {
+                	
+                	public void onClick(View v) {
+                		
+                		try {
+							new SmilePlugServerManager().deleteQuestionInSessionByNumber(ip, context, currentQuestion);
+						} catch (NetworkErrorException e) {
+							e.printStackTrace();
+						}
+                		
+            			Toast.makeText(
+            					context, "Trying to delete question #"+currentQuestion, Toast.LENGTH_LONG
+    					).show();
+            			
+            			confirmDialog.dismiss();
+                	};
+                });
+        	 }
+		});
         
         TextView tvOwner = (TextView) detailsDialog.findViewById(R.id.tv_create_by);
         tvOwner.setText("( " + context.getString(R.string.create_by) + " " + question.getOwner()

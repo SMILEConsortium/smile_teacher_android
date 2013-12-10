@@ -116,6 +116,19 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     	//put(ipServer,context,url,iqsetToSave.toString());
     }
     
+    public void deleteQuestionInSessionByNumber(String ipServer, Context context, int position) throws NetworkErrorException {
+    	
+    	String url = SmilePlugUtil.createUrl(ipServer, SmilePlugUtil.QUESTION_VIEW_URL+"/"+position+".json");
+//    	JSONObject json = new JSONObject();
+    	
+//    	try {
+//    		json.put("questionNumber", position);
+//		} catch (JSONException e) { e.printStackTrace();
+//		}
+    	
+    	delete(ipServer,context,url);
+    }
+    
     /**
      * Send the session ids (teacher name, session name, and group name) to smileplug server
      */
