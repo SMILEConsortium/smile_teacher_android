@@ -279,15 +279,15 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        //if (fileQuestionsList.length == 0) {
-        if (iqsets.size() == 0) {
-            Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
-            intent.putExtra(GeneralActivity.PARAM_IP, ip);
-            intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
-            startActivity(intent);
-        }
-
+        
+        // TODO Why does this condition exist?? (12/11/13)
+//        if (fileQuestionsList.length == 0) {
+//        if (iqsets.size() == 0) {
+//        Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
+//        intent.putExtra(GeneralActivity.PARAM_IP, ip);
+//        intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
+//        startActivity(intent);
+//        }
         this.finish();
     }
 
