@@ -27,23 +27,23 @@
 
 	<Button
   		android:id="@+id/bt_start"
-  		android:layout_width="100dip"
-  		android:layout_height="80sp"
+  		android:layout_width="200dip"
+  		android:layout_height="160sp"
   		android:text="@string/start_making"
-  		android:textSize="12sp"
-  		android:layout_marginLeft="100sp"
+  		android:textSize="20sp"
+  		android:layout_marginRight="90sp"
   		android:layout_centerVertical="true"
-  		android:layout_alignParentLeft="true"/>
+  		android:layout_toLeftOf="@+id/view_separator_middle"/>
 
 	<Button
   		android:id="@+id/bt_use_prerared"
-  		android:layout_width="100sp"
-  		android:layout_height="80sp"
+  		android:layout_width="200sp"
+  		android:layout_height="160sp"
   		android:text="@string/use_prepared"
-  		android:textSize="12sp"
-  		android:layout_marginRight="100sp"
-		android:layout_centerVertical="true"
-		android:layout_alignParentRight="true"/>
+  		android:textSize="20sp"
+  		android:layout_marginLeft="90sp"
+  		android:layout_centerVertical="true"
+  		android:layout_toRightOf="@+id/view_separator_middle"/>
 
 	<View
 		android:id="@+id/view_separator2"
@@ -54,6 +54,16 @@
 		android:layout_marginRight="5dip"
 		android:layout_marginBottom="20dip"
 		android:layout_alignParentBottom="true"/>
+	
+	<Button
+	  	android:id="@+id/bt_exit"
+	  	android:layout_width="100sp"
+		android:layout_height="wrap_content"
+		android:text="@string/btn_exit"
+		android:textSize="18sp" 
+		android:layout_marginBottom="10dip"
+		android:layout_above="@+id/view_separator2"
+		android:layout_centerHorizontal="true"/>
 
 	<View
 		android:id="@+id/view_separator_middle"
@@ -63,6 +73,6 @@
 		android:layout_margin="20dip"
 		android:layout_centerInParent="true"
 		android:layout_below="@+id/view_separator"
-		android:layout_above="@+id/view_separator2"/>
+		android:layout_above="@+id/bt_exit"/>
 
 </RelativeLayout>
