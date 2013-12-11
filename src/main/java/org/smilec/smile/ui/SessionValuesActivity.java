@@ -5,6 +5,7 @@ import org.smilec.smile.bu.Constants;
 import org.smilec.smile.bu.NetworkManager;
 import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.DialogUtil;
 import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
@@ -23,6 +24,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ public class SessionValuesActivity extends Activity {
 	private TextView tv_sessionTitle;
 	private TextView tv_groupName;
 	private Button btnCreateSession;
+	private ImageButton btnBack;
 	
 	private Context context;
 	private static final int MSG_OK = 1;
@@ -69,6 +72,7 @@ public class SessionValuesActivity extends Activity {
         tv_sessionTitle = (TextView) findViewById(R.id.session_title);
         tv_groupName = (TextView) findViewById(R.id.group_name);
         btnCreateSession = (Button) findViewById(R.id.btn_create_session);
+        btnBack = (ImageButton) findViewById(R.id.bt_back);
 
         registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
@@ -87,6 +91,7 @@ public class SessionValuesActivity extends Activity {
 
         btnCreateSession.setEnabled(false);
         btnCreateSession.setOnClickListener(new CreateSessionButtonListener());
+        btnBack.setOnClickListener(new CloseClickListenerUtil(context));
 
 //        tv_teacherName.addTextChangedListener(new TextChanged());
 //        tv_sessionTitle.addTextChangedListener(new TextChanged());

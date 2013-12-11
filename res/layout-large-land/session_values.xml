@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_dialog"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:background="@drawable/rounded_border"
-	android:gravity="top|center"
-	android:orientation="vertical"
-	android:layout_margin="50dip">
+    <RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/container"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:background="@drawable/rounded_border"
+  	android:layout_gravity="center"
+  	android:layout_margin="50dip">
 
-	<TextView
+        <TextView
+	  	android:id="@+id/separator"
+	  	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="15dip"
+		android:layout_marginLeft="15dip"
+		android:layout_marginRight="15dip"
+		android:textColor="@color/black"
+		android:text="@string/separator"
+		android:textSize="14sp"
+		android:layout_centerHorizontal="true" />
+        
+    <TextView
 	  	android:id="@+id/tv_title"
 	  	android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="10dip"
 		android:textColor="@color/black"
-		android:textSize="12sp"
-	/>
-
+		android:textSize="14sp"
+		android:layout_toLeftOf="@id/separator"
+		android:layout_alignTop="@id/separator" />
+    
 	<TextView
 	  	android:id="@+id/tv_session_values"
 	  	android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_margin="10dip"
 		android:text="@string/session_values"
 		android:textColor="@color/black"
-		android:textSize="12sp"
-    />	
+		android:textSize="14sp"
+		android:layout_toRightOf="@id/separator"
+		android:layout_alignTop="@id/separator" />	
 	
 	<EditText
 		android:id="@+id/teacher_name"
@@ -35,8 +46,9 @@
 		android:hint="@string/teacher_name_hint"
 		android:singleLine="true"
 		android:inputType="textAutoCorrect|textCapSentences"
-		android:layout_centerHorizontal="true"
-		android:layout_marginTop="15dp">
+		android:layout_below="@+id/separator"
+		android:layout_marginTop="10dp"
+		android:layout_centerHorizontal="true" >
 	</EditText>
 	
 	<EditText
@@ -46,8 +58,9 @@
 		android:hint="@string/session_title_hint"
 		android:singleLine="true"
 		android:inputType="textAutoCorrect|textCapSentences"
-		android:layout_centerHorizontal="true"
-		android:layout_marginTop="15dp">
+		android:layout_marginTop="3dp"
+		android:layout_below="@+id/teacher_name"
+		android:layout_centerHorizontal="true" >
 	</EditText>
 	
 	<EditText
@@ -57,8 +70,9 @@
 		android:hint="@string/group_name_hint"
 		android:singleLine="true"
 		android:inputType="textAutoCorrect|textCapSentences"
-		android:layout_centerHorizontal="true"
-		android:layout_marginTop="15dp">
+		android:layout_marginTop="3dp"
+		android:layout_below="@+id/session_title"
+		android:layout_centerHorizontal="true" >
 	</EditText>
 
 	<Button
@@ -66,8 +80,20 @@
 	  	android:layout_width="100sp"
 		android:layout_height="wrap_content"
 		android:text="@string/btn_create_session"
-		android:textSize="12sp"
-		android:layout_marginTop="30dip"
-        android:layout_centerInParent="true"/>
+		android:textSize="18sp" 
+		android:layout_marginLeft="120dip"
+		android:layout_toRightOf="@+id/session_title"
+		android:layout_alignBottom="@+id/session_title"/>
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/bt_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_back"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toLeftOf="@+id/session_title"
+		android:layout_alignBottom="@+id/session_title"
+        android:contentDescription="@string/delete_btn" />
+        
+    </RelativeLayout>
