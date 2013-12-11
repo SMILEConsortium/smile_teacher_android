@@ -55,6 +55,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.util.Log;
 
 public class UsePreparedQuestionsActivity extends ListActivity {
 
@@ -164,7 +165,8 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         @Override
         public void onClick(View v) {
             if (status != null) {
-                if (!status.equals("")) {
+                Log.d("SMILE Teacher", "Status = " + status);
+                if (!status.equals("") && !status.equals("START_MAKE")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(
                         UsePreparedQuestionsActivity.this);
                     builder.setMessage(R.string.game_running).setCancelable(false)
