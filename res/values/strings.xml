@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="logo">Logo</string>
+    <string name="separator">-</string>
 	<string name="app_name">SMILE Teacher</string>
 	<string name="server">Smileplug IP</string>
 	<string name="connect">Connect</string>
@@ -14,7 +15,6 @@
 	<string name="date_hint">Date</string>
 	<string name="btn_create_session">Create</string>
 	<string name="creating_session">Creating session...</string>
-	<string name="separator">-</string>
 	<string name="no_picture">No picture</string>
 	<string name="delete_btn">Del btn</string>
 
@@ -110,7 +110,7 @@
 	<string name="restart_game">Are you sure you want to restart session?</string>
 	<string name="game_running">A Session is already running!</string>
 
-	<string name="server_ip">10.0.0.12</string> <!--  10.1.0.1 -->
+	<string name="server_ip">10.0.0.9</string> <!--  10.1.0.1 -->
 	<string name="ip">IP</string>
 	<string name="not_saved">It was not possible to save the questions</string>
 	<string name="not_saved_because_file_name">It was not possible to save the question(s) because the file already exists.  Please try a new filename</string>
