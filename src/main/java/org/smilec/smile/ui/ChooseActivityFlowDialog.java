@@ -22,6 +22,7 @@ import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.domain.Results;
 import org.smilec.smile.util.ActivityUtil;
+import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.DialogUtil;
 import org.smilec.smile.util.ui.ProgressDialogAsyncTask;
 
@@ -46,6 +47,7 @@ public class ChooseActivityFlowDialog extends Activity {
 
     private Button btStart;
     private Button btUse;
+    private Button btExit;
 
     private Results results;
 
@@ -59,6 +61,7 @@ public class ChooseActivityFlowDialog extends Activity {
 
         btStart = (Button) findViewById(R.id.bt_start);
         btUse = (Button) findViewById(R.id.bt_use_prerared);
+        btExit = (Button) findViewById(R.id.bt_exit);
 
         status = this.getIntent().getStringExtra(GeneralActivity.PARAM_STATUS);
     }
@@ -88,6 +91,9 @@ public class ChooseActivityFlowDialog extends Activity {
         
         btStart.setOnClickListener(new StartButtonListener());
         btUse.setOnClickListener(new UsePreparedQuestionsButtonListener());
+        
+        // Close activity if "exit" button
+        btExit.setOnClickListener(new CloseClickListenerUtil(this));
 
         if (results == null) {
             new UpdateResultsTask(ip, this).execute();
