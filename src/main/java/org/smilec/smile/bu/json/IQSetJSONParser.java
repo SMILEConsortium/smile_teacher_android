@@ -91,7 +91,7 @@ public class IQSetJSONParser {
     		
     		iqdata.put(new JSONObject()
 				.put(NAME, question.getOwner())
-				.put(IP, question.getIp())
+				.put(IP,"127.0.0.1")
 				.put(QUESTION, question.getQuestion())
 				.put(OPTION_1, question.getOption1())
 				.put(OPTION_2, question.getOption2())
