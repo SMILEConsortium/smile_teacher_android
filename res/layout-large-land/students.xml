@@ -125,9 +125,7 @@
         <ListView
             android:id="@+id/lv_students"
             android:layout_width="wrap_content"
-            android:layout_height="80dip"
-            android:layout_above="@id/view_separator_list"
-            android:layout_below="@id/tl_status"
+            android:layout_height="280dp"
             android:layout_marginLeft="10dip" />
 
     </TableLayout>
@@ -287,7 +285,6 @@
     	android:layout_marginRight="10dip"
         android:layout_marginTop="5dip"
         android:layout_above="@+id/tv_top_scorers"
-        android:layout_below="@+id/lv_students"
         android:background="@color/gray" />
 
     <TextView
