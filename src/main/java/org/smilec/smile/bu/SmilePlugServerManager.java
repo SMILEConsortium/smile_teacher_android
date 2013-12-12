@@ -233,7 +233,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     	
     	try {
         	String s = IOUtil.loadContent(is, "UTF-8");
-            Log.e("SmilePlugServerManager", "Loaded IQSet data: " + s);
+            // Log.e("SmilePlugServerManager", "Loaded IQSet data: " + s);
         	questions = IQSetJSONParser.parseIQSet(new JSONObject(s));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

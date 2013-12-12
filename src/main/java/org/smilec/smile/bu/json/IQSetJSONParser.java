@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import org.smilec.smile.domain.IQSet;
 import org.smilec.smile.domain.Question;
 
+import android.util.Log;
+
 public class IQSetJSONParser {
 	
     // XXX Define an interface for all of these keys, these may be useful elsewhere
@@ -37,6 +39,8 @@ public class IQSetJSONParser {
     private static final String TEACHER_NAME = "teachername";
     private static final String GROUP_NAME = "groupname";
     
+    private static final String TAG = "SMILE IQSetJSONParser";
+
     public static final boolean rowsExist(JSONObject object) {
     	
     	return object.optInt(NUMBER_OF_IQSETS) != 0? true : false;
@@ -142,11 +146,13 @@ public class IQSetJSONParser {
     		try {
 				JSONObject row = rows.getJSONObject(i);
 
-				String base64sencdata = null;
+				String base64encdata = null;
 
                 try {
-                    row.getString(PIC);
+                    base64encdata = row.getString(PIC);
+                    Log.d(TAG, "Found PIC of size" + base64encdata.length());
                 } catch(JSONException jse) {
+                    Log.d(TAG, "Failed parsing JSON, reason: " + jse.getMessage());
                     // Must not have a PIC set, ignore silently
                 }
 				// XXX This is a dangerous way to go ... we should check all values and validity of JSON fields before we 
@@ -160,12 +166,13 @@ public class IQSetJSONParser {
 						row.getString(OPTION_3),
 						row.getString(OPTION_4),
 						row.getInt(ANSWER),
-						base64sencdata);
+						base64encdata);
 				questions.add(q);
 				
 			} catch (JSONException e) {
                 // XXX We should be tallying up the exceptions.
                 // and log these as well, otherwise they are missed.
+                Log.d(TAG, "Failed parsing JSON, reason: " + e.getMessage());
 				e.printStackTrace();
 			}
     	}
