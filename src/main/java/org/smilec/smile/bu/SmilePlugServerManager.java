@@ -233,13 +233,15 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     	
     	try {
         	String s = IOUtil.loadContent(is, "UTF-8");
+            Log.e("SmilePlugServerManager", "Loaded IQSet data: " + s);
         	questions = IQSetJSONParser.parseIQSet(new JSONObject(s));
-            
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
+            Log.e("SmilePlugServerManager", "Unable to load IQSet, reason: " + e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+            Log.e("SmilePlugServerManager", "Unable to load IQSet, reason: " + e.getMessage());
 			e.printStackTrace();
 		} finally {
             IOUtil.silentClose(is);
