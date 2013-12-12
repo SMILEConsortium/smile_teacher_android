@@ -12,6 +12,7 @@ import org.smilec.smile.domain.Question;
 
 public class IQSetJSONParser {
 	
+    // XXX Define an interface for all of these keys, these may be useful elsewhere
 	private static final String ALL_THE_IQSETS = "rows";
     private static final String NUMBER_OF_IQSETS = "total_rows";
     private static final String ID_OF_IQSET = "id";
@@ -28,12 +29,13 @@ public class IQSetJSONParser {
     private static final String OPTION_4 = "O4";
     private static final String TYPE = "TYPE";
     private static final String IMAGE_URL = "PICURL";
+    private static final String PIC = "PIC";
     private static final String ANSWER = "A";
-    
+    private static final String QTYPE_QUESTION = "QUESTION"; // XXX We don't need this here 
+    private static final String QTYPE_QUESTION_PIC = "QUESTION_PIC"; // XXX We don't need this here
     private static final String TITLE_SESSION = "title";
     private static final String TEACHER_NAME = "teachername";
     private static final String GROUP_NAME = "groupname";
-    
     
     public static final boolean rowsExist(JSONObject object) {
     	
@@ -139,8 +141,16 @@ public class IQSetJSONParser {
     		
     		try {
 				JSONObject row = rows.getJSONObject(i);
-				
-				// TODO: Careful! imageUrl field is always empty when using prepared questions!
+
+				String base64sencdata = null;
+
+                try {
+                    row.getString(PIC);
+                } catch(JSONException jse) {
+                    // Must not have a PIC set, ignore silently
+                }
+				// XXX This is a dangerous way to go ... we should check all values and validity of JSON fields before we 
+                // load up the Question object, otherwise, we may crash
 				Question q = new Question(i,
 						row.getString(NAME),
 						row.getString(IP),
@@ -150,10 +160,12 @@ public class IQSetJSONParser {
 						row.getString(OPTION_3),
 						row.getString(OPTION_4),
 						row.getInt(ANSWER),
-						"");
+						base64sencdata);
 				questions.add(q);
 				
 			} catch (JSONException e) {
+                // XXX We should be tallying up the exceptions.
+                // and log these as well, otherwise they are missed.
 				e.printStackTrace();
 			}
     	}

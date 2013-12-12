@@ -200,7 +200,7 @@ public class Question implements Serializable {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-
+	
 	public void setAnswers(List<Integer> answers) {
 		this.answers = answers;
 	}
