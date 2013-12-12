@@ -27,6 +27,7 @@ public class LocalQuestionWrapper {
     private String PIC;
     private String TYPE;
     private String IP;
+    private String mSessionID = "";
 
     public LocalQuestionWrapper(Question question) {
         super();
@@ -124,5 +125,13 @@ public class LocalQuestionWrapper {
 
     public void setIP(String iP) {
         IP = iP;
+    }
+
+    public void setSessionID(String sessionID) {
+        mSessionID = sessionID;
+    }
+
+    public String getSessionID() {
+        return mSessionID;
     }
 }

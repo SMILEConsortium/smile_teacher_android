@@ -60,6 +60,9 @@ public class SmilePlugServerManager extends AbstractBaseManager {
         if (questions != null) {
             for (Question question : questions) {
                 LocalQuestionWrapper questionWrapper = new LocalQuestionWrapper(question);
+
+                // Add in a sessionID to inform the server thisz is coming from a teacher
+                questionWrapper.setSessionID(Long.toString(System.currentTimeMillis())); // XXX This really should be the sessionID from the server (via couchDB _ID)
                 Gson gson = new Gson();
                 String json = gson.toJson(questionWrapper);
                 Log.d("SmilePlugServerManager", "serialized question as JSON, use prepared: " + json);
@@ -130,7 +133,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     }
     
     /**
-     * Send the session ids (teacher name, session name, and group name) to smileplug server
+     * Send the session metadata (teacher name, session name, and group name) to smileplug server
      */
     public void createSession(String ip, String teacherName, String sessionTitle, String groupName, Context context) throws NetworkErrorException {
     	
@@ -147,7 +150,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 			e.printStackTrace();
 		}
     	
-    	put(ip,context,url,jsonSessionValues.toString());
+    	put(ip,context,url,jsonSessionValues.toString()); // XXX Shouldn't we get back something like a session ID from the server?
     }
     
     public boolean iqsetsExist(String ip, Context context) throws NetworkErrorException {
