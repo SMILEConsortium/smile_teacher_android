@@ -381,16 +381,24 @@ public class GeneralActivity extends FragmentActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+    	
+    	/**
+    	 * TODO Until we implement retake button, we don't display it.
+    	 * Here is the code to implement it.
+    	 * To replace with 'menu.removeItem(R.id.bt_retake);' just below
+    	 * */
+//    	if (btResults.isEnabled()) {
+//    		MenuItem item = menu.findItem(R.id.bt_retake);
+//    		if (item == null) {
+//    			menu.add(0, R.id.bt_retake, Menu.NONE, R.string.retake).setIcon(R.drawable.retake);
+//    		}
+//    	} else {
+//    		menu.removeItem(R.id.bt_retake);
+//    	}
 
-    	if (btResults.isEnabled()) {
-    		MenuItem item = menu.findItem(R.id.bt_retake);
-    		if (item == null) {
-    			menu.add(0, R.id.bt_retake, Menu.NONE, R.string.retake).setIcon(R.drawable.retake);
-    		}
-    	} else {
-    		menu.removeItem(R.id.bt_retake);
-    	}
-
+    	// Temporary
+    	menu.removeItem(R.id.bt_retake);
+    	
     	return super.onPrepareOptionsMenu(menu);
     }
 
@@ -586,8 +594,7 @@ public class GeneralActivity extends FragmentActivity {
             .findViewById(R.id.rl_top_scorers);
         rlTopScorersContainer.setVisibility(View.VISIBLE);
 
-        Button btSendResults = (Button) GeneralActivity.this
-				.findViewById(R.id.bt_send_results);
+        Button btSendResults = (Button) GeneralActivity.this.findViewById(R.id.bt_send_results);
 		btSendResults.setVisibility(View.VISIBLE);
 		btSendResults.setOnClickListener(new OnClickListener() {
 
