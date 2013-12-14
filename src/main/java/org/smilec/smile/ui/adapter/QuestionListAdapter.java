@@ -23,6 +23,7 @@ import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
 import org.smilec.smile.ui.GeneralActivity;
+import org.smilec.smile.ui.fragment.QuestionsFragment;
 import org.smilec.smile.ui.widget.checkbox.InertCheckBox;
 import org.smilec.smile.util.ActivityUtil;
 import org.smilec.smile.util.CloseClickListenerUtil;
@@ -197,6 +198,10 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             			
             			confirmDialog.dismiss();
             			detailsDialog.dismiss();
+            			
+            			// TEMP CODE
+            			QuestionsFragment.idQuestionsDeleted.add(currentQuestion-1);
+            			// END TEMP CODE
                 	};
                 });
         	 }

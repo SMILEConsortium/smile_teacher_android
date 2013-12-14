@@ -88,6 +88,11 @@ public class QuestionsFragment extends AbstractFragment {
 
 	private Object mQuestionsMutex = new Object();
 	private TextView tvTopTitle;
+	
+	// TEMP fix #60
+	public static List<Integer> idQuestionsDeleted = new ArrayList<Integer>();
+	private static List<Question> questionsDeleted = new ArrayList<Question>(); 
+	// END TEMP CODE
 
     @Override
     protected int getLayout() {
@@ -244,15 +249,44 @@ public class QuestionsFragment extends AbstractFragment {
 		//
 		synchronized(mQuestionsMutex) {
 			questionsOld.addAll(mQuestions);
+			
+			
+			
 			mQuestions.clear();
 
 			if (mRun) {
 				Collection<Question> newQuestions = null;
 				newQuestions = board.getQuestions();
 
+				// TEMP code #60
+				
+				if(!idQuestionsDeleted.isEmpty()) {
+					
+					for(int i=0; i<idQuestionsDeleted.size(); i++) {
+						
+						if(!questionsOld.isEmpty()) {
+							
+						
+						questionsDeleted.add(questionsOld.get(idQuestionsDeleted.get(i)));
+						idQuestionsDeleted.remove(i);
+						}
+					}
+				}
+				
+				for(int i=0; i<questionsDeleted.size(); i++) {
+					
+					if(newQuestions.contains(questionsDeleted.get(i))) {
+						
+						newQuestions.remove(questionsDeleted.get(i));
+					}
+				}
+				// TEMP END
+				
 				if (newQuestions != null) {
 					mQuestions.addAll(newQuestions);
 				}
+				
+				
 
 				new UpdateResultsTask(getActivity()).execute();
 
