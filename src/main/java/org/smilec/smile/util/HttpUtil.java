@@ -93,7 +93,7 @@ public class HttpUtil {
         } catch (ParseException e) {
             throw new NetworkErrorException(e.getMessage());
         } catch (JSONException e) {
-        	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),HttpUtil.class.getName()).execute();
+//        	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),HttpUtil.class.getName()).execute();
             throw new NetworkErrorException(e.getMessage());
         }
     }
