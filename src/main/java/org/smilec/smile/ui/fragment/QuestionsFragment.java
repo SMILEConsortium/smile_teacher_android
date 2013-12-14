@@ -269,7 +269,7 @@ public class QuestionsFragment extends AbstractFragment {
 					listQuestions();
 				}
 
-				SortQuestionList();
+				// SortQuestionList();
 			}
 		}
 		adapter.notifyDataSetChanged();
