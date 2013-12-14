@@ -168,7 +168,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         	 @Override
              public void onClick(View v) {
                  
-        		// Preparing the "Confirm?" view
+        		// Preparing the "Confirmation" view
 				final Dialog confirmDialog = new Dialog(context, R.style.Dialog);
 				confirmDialog.setContentView(R.layout.question_delete);
 				Display displaySize = ActivityUtil.getDisplaySize(getContext());

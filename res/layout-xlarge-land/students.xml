@@ -285,7 +285,6 @@
     	android:layout_marginRight="10dip"
         android:layout_marginTop="5dip"
         android:layout_above="@+id/tv_top_scorers"
-        android:layout_below="@+id/lv_students"
         android:background="@color/gray" />
 
 

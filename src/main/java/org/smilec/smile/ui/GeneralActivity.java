@@ -33,6 +33,7 @@ import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.domain.Board;
 import org.smilec.smile.domain.CurrentMessageStatus;
+import org.smilec.smile.domain.Student;
 import org.smilec.smile.ui.adapter.PagerAdapter;
 import org.smilec.smile.ui.fragment.AbstractFragment;
 import org.smilec.smile.ui.fragment.QuestionsFragment;
@@ -386,6 +387,7 @@ public class GeneralActivity extends FragmentActivity {
     	 * TODO Until we implement retake button, we don't display it.
     	 * Here is the code to implement it.
     	 * To replace with 'menu.removeItem(R.id.bt_retake);' just below
+    	 * (cf. issue #55)
     	 * */
 //    	if (btResults.isEnabled()) {
 //    		MenuItem item = menu.findItem(R.id.bt_retake);
