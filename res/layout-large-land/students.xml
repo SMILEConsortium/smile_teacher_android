@@ -54,7 +54,7 @@
             android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dip"
-            android:background="@color/gray" />
+            android:background="@color/blue" />
 
         <TableRow
             android:id="@+id/tr_row"
@@ -125,7 +125,7 @@
         <ListView
             android:id="@+id/lv_students"
             android:layout_width="wrap_content"
-            android:layout_height="280dp"
+            android:layout_height="240dp"
             android:layout_marginLeft="10dip" />
 
     </TableLayout>
@@ -237,7 +237,7 @@
             android:layout_marginLeft="10dip"
         	android:layout_marginRight="10dip"
             android:layout_marginTop="2dip"
-            android:background="@color/gray" />
+            android:background="@color/green" />
 
         <TextView
             android:id="@+id/tv_top_scorers_top"
@@ -299,7 +299,7 @@
             android:layout_height="1dip"
             android:layout_marginLeft="10dip"
         	android:layout_marginRight="10dip"
-            android:background="@color/gray"
+            android:background="@color/red"
             android:layout_below="@+id/bt_send_results" />
 
 	    <Button
