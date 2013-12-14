@@ -148,8 +148,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
             // Preparing the values in the "Details" view
             loadDetails(detailsDialog, question);
-            
-            System.out.println("blablabla");
         }
     }
     

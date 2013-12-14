@@ -88,7 +88,9 @@ public abstract class AbstractBaseManager {
     	connect(ip, context);
     	
         try { 
-        	return HttpUtil.executeDelete(url); 
+        	InputStream is = HttpUtil.executeDelete(url);
+        	return is;
+        			 
     	}
         catch (UnsupportedEncodingException e) { e.printStackTrace(); }
         catch (JSONException e) { e.printStackTrace(); }
