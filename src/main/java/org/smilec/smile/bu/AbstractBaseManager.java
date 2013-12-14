@@ -83,33 +83,43 @@ public abstract class AbstractBaseManager {
       	HttpUtil.executePost(url, json);
     }
     
-    protected void delete(String ip, Context context, String url) throws NetworkErrorException {
+    protected InputStream delete(String ip, Context context, String url) throws NetworkErrorException {
         
     	connect(ip, context);
-
-    	URL urlObject = null;
-		try { urlObject  = new URL(url); } 
-		catch (MalformedURLException exception) {
-    	    exception.printStackTrace();
+    	
+        try { 
+        	InputStream is = HttpUtil.executeDelete(url);
+        	return is;
+        			 
     	}
-    	HttpURLConnection httpURLConnection = null;
-    	try {
-    	    httpURLConnection = (HttpURLConnection) urlObject.openConnection();
-    	    httpURLConnection.setRequestProperty("Content-Type","application/json; charset=UTF-8");
-    	    httpURLConnection.setRequestMethod("DELETE");
-    	    // httpURLConnection.setDoOutput(true);
-    	    
-    	    int result = httpURLConnection.getResponseCode();
-    	    
-    	    System.out.println(">> Answer of Smileplug => Code:"+result);
-    	    
-    	} catch (IOException exception) {
-    	    exception.printStackTrace();
-    	} finally {         
-    	    if (httpURLConnection != null) {
-    	        httpURLConnection.disconnect();
-    	    }
-    	} 
+        catch (UnsupportedEncodingException e) { e.printStackTrace(); }
+        catch (JSONException e) { e.printStackTrace(); }
+        
+		return null;
+
+//    	URL urlObject = null;
+//		try { urlObject  = new URL(url); } 
+//		catch (MalformedURLException exception) {
+//    	    exception.printStackTrace();
+//    	}
+//    	HttpURLConnection httpURLConnection = null;
+//    	try {
+//    	    httpURLConnection = (HttpURLConnection) urlObject.openConnection();
+//    	    httpURLConnection.setRequestProperty("Content-Type","application/json");
+//    	    httpURLConnection.setRequestMethod("DELETE");
+//    	    // httpURLConnection.setDoOutput(true);
+//    	    
+//    	    int result = httpURLConnection.getResponseCode();
+//    	    
+//    	    System.out.println(">> Answer of Smileplug => Code:"+result);
+//    	    
+//    	} catch (IOException exception) {
+//    		exception.printStackTrace();
+//    	} finally {         
+//    	    if (httpURLConnection != null) {
+//    	        httpURLConnection.disconnect();
+//    	    }
+//    	} 
     }
 
     protected void put(String ip, Context context, String url, String json)

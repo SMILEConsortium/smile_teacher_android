@@ -26,6 +26,7 @@ import org.apache.http.ParseException;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -104,6 +105,14 @@ public class HttpUtil {
         put.setEntity(new StringEntity(json, HTTP.UTF_8));
         return executeMethod(put);
     }
+    
+    public static final InputStream executeDelete(String url)
+            throws NetworkErrorException, UnsupportedEncodingException, JSONException {
+            
+    		HttpDelete delete = new HttpDelete(url);
+            delete.setHeader("Content-Type", SmilePlugUtil.JSON);
+            return executeMethod(delete);
+        }
 
     public static final InputStream executeGet(String url) throws NetworkErrorException {
         HttpGet get = new HttpGet(url);

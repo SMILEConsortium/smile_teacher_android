@@ -39,24 +39,25 @@ public class SendEmailAsyncTask extends AsyncTask <Void, Void, Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
         
-    	if (BuildConfig.DEBUG) Log.v(SendEmailAsyncTask.class.getName(), "Trying to send the email...");
-
-        try {
-            m.send();
-            Log.v(SendEmailAsyncTask.class.getName(), "JSONException sent to administrator!");
-            
-            return true;
-        } catch (AuthenticationFailedException e) {
-            Log.e(SendEmailAsyncTask.class.getName(), "Bad account details (wrong password?)");
-            e.printStackTrace();
-            return false;
-        } catch (MessagingException e) {
-            Log.e(SendEmailAsyncTask.class.getName(), m.getBody() + "failed");
-            e.printStackTrace();
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    	return true;
+//    	if (BuildConfig.DEBUG) Log.v(SendEmailAsyncTask.class.getName(), "Trying to send the email...");
+//
+//        try {
+//            m.send();
+//            Log.v(SendEmailAsyncTask.class.getName(), "JSONException sent to administrator!");
+//            
+//            return true;
+//        } catch (AuthenticationFailedException e) {
+//            Log.e(SendEmailAsyncTask.class.getName(), "Bad account details (wrong password?)");
+//            e.printStackTrace();
+//            return false;
+//        } catch (MessagingException e) {
+//            Log.e(SendEmailAsyncTask.class.getName(), m.getBody() + "failed");
+//            e.printStackTrace();
+//            return false;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
     }
 }

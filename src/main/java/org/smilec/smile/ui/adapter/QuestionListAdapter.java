@@ -151,7 +151,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         }
     }
     
-    private void loadDetails(Dialog detailsDialog, Question question) {
+    private void loadDetails(final Dialog detailsDialog, Question question) {
     	
     	ImageButton btClose = (ImageButton) detailsDialog.findViewById(R.id.bt_close);
     	ImageButton btBack = (ImageButton) detailsDialog.findViewById(R.id.bt_back);
@@ -185,7 +185,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                 	public void onClick(View v) {
                 		
                 		try {
-							new SmilePlugServerManager().deleteQuestionInSessionByNumber(ip, context, currentQuestion);
+                			// note: first question equal to '1'
+							new SmilePlugServerManager().deleteQuestionInSessionByNumber(ip, context, currentQuestion-1);
 						} catch (NetworkErrorException e) {
 							e.printStackTrace();
 						}
@@ -195,6 +196,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
     					).show();
             			
             			confirmDialog.dismiss();
+            			detailsDialog.dismiss();
                 	};
                 });
         	 }
