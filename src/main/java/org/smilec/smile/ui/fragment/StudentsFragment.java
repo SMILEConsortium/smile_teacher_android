@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,6 +75,10 @@ public class StudentsFragment extends AbstractFragment {
     @Override
     protected int getLayout() {
         return R.layout.students;
+    }
+    
+    public List<Student> getStudents() {
+    	return this.students;
     }
 
     @Override
@@ -241,6 +246,67 @@ public class StudentsFragment extends AbstractFragment {
         }
 
     }
+    
+    private String getPercentCompleted() {
+
+    	float n = 0;
+    	
+    	System.out.println("*****students.size()="+students.size());
+    	
+    	for(int i=0; i<students.size();i++) {
+    		
+    		System.out.println("=====students.get(i).isSolved()="+students.get(i).isSolved());
+    		
+    		n += students.get(i).isSolved() ? 1:0;
+    	}
+    	
+    	float percent = 0;
+    	
+    	if(!students.isEmpty()) percent = (float) (n/students.size())*100;
+    	
+    	String s = String.format("%.0f", percent)+"% "+
+    				getString(R.string.students_completed)+
+    				" ("+ String.format("%.0f", n)+"/"+students.size() +")";
+    	return s;
+    }
+    
+    /**
+     * @return an entire String (and not only the percent)
+     */
+    private String getPercentCorrect() {
+
+    	float nbStudentOver70 = 0;
+    	
+    	// for each students
+    	for(int i=0; i<students.size();i++) {
+    		
+    		float nbQuestionsCorrect = 0;
+    	
+    		// for each questions of this student
+    		for(int j=0; j<questions.size();j++) {
+    		
+	    		// we get his answers and the current question
+	    		Map<Question, Integer> answersOfStudent = students.get(i).getAnswers();
+	    		Question q = questions.get(j);
+	    			
+	    		// if the student answered to the question, we check if his answer is correct or not
+	    		if(answersOfStudent.containsKey(q)) {
+    			
+	    			nbQuestionsCorrect += answersOfStudent.get(q).equals(q.getAnswer()) ? 1:0;
+	    		} 
+	    		
+	    		// if the student has 70+% of correct answers, we count it 
+	    		nbStudentOver70 += nbQuestionsCorrect*100/questions.size() >= 70 ? 1:0;
+	    	}
+    	}
+		
+    	float percent = !students.isEmpty()? (float) (nbStudentOver70/students.size())*100 : 0;
+    	
+    	String s = String.format("%.0f", percent)+"% "+
+    							getString(R.string.students_correct)+
+    							" ("+ String.format("%.0f", nbStudentOver70)+"/"+students.size() +")";
+    	return s;
+    }
 
     private void setTopScorersArea(Results results, Board board) {
         try {
@@ -253,13 +319,21 @@ public class StudentsFragment extends AbstractFragment {
             tvTopScorersTop.setText(getString(R.string.top_scorer) + ": "
                 + bestScoredStudentNames.join(", ").replaceAll("\"", ""));
 
-            TextView tvTopScorersRating = (TextView) getActivity().findViewById(
-                R.id.tv_top_scorers_rating);
-            tvTopScorersRating.setText(getString(R.string.rating) + ": "
-                + results.getWinnerRating());
+            TextView tvTopScorersRating = (TextView) getActivity().findViewById(R.id.tv_top_scorers_rating);
+            tvTopScorersRating.setText(getString(R.string.rating) + ": " + results.getWinnerRating());
+            
+            TextView tvPercentCompleted = (TextView) getActivity().findViewById(R.id.tv_percent_completed);
+            tvPercentCompleted.setText(this.getPercentCompleted());
+            tvPercentCompleted.setVisibility(View.VISIBLE);
+            
+            TextView tvPercentCorrect = (TextView) getActivity().findViewById(R.id.tv_percent_correct);
+            tvPercentCorrect.setText(this.getPercentCorrect());
+            tvPercentCorrect.setVisibility(View.VISIBLE);
 
-            final RatingBar rbRatingBar = (RatingBar) getActivity().findViewById(R.id.rb_ratingbar);
-            rbRatingBar.setRating(results.getWinnerRating());
+            // Seems useless >> issues 14 
+            //final RatingBar rbRatingBar = (RatingBar) getActivity().findViewById(R.id.rb_ratingbar);
+            //rbRatingBar.setRating(results.getWinnerRating());
+            
         } catch (JSONException e) {
         	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),StudentsFragment.class.getName()).execute();
             Log.e("StudentsFragment", "Error: " + e);

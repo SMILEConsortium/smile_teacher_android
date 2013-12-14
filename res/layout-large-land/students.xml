@@ -54,7 +54,7 @@
             android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dip"
-            android:background="@color/blue" />
+            android:background="@color/gray" />
 
         <TableRow
             android:id="@+id/tr_row"
@@ -125,11 +125,24 @@
         <ListView
             android:id="@+id/lv_students"
             android:layout_width="wrap_content"
-            android:layout_height="240dp"
+            android:layout_height="280dp"
             android:layout_marginLeft="10dip" />
 
     </TableLayout>
+    
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tl_total"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dip"
+        android:text="@string/total"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
+<!--     This table layout is used before showing results -->
     <TableLayout
         android:id="@+id/tl_total"
         android:layout_width="fill_parent"
@@ -139,6 +152,7 @@
         android:shrinkColumns="*"
         android:stretchColumns="*" >
 
+        
         <TableRow
             android:id="@+id/tr_row"
             android:layout_width="wrap_content"
@@ -184,20 +198,19 @@
 	        android:background="@color/gray" />
 
     </TableLayout>
-
-
+    
     <TextView
-        android:id="@+id/tv_total"
+        android:id="@+id/tv_top_scorers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tl_total"
+        android:layout_above="@+id/rl_top_scorers"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dip"
-        android:text="@string/total"
+        android:layout_marginTop="4dip"
+        android:text="@string/top_scores"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold" />
-
+    
     <View
         android:id="@+id/view_separator_total"
         android:layout_width="fill_parent"
@@ -205,9 +218,10 @@
         android:layout_below="@id/tv_total"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:layout_marginTop="5dip"
+        android:layout_marginTop="2dip"
         android:background="@color/gray" />
 
+<!--     This relative layout will be displayed when the teacher click on "see results" -->
     <RelativeLayout
         android:id="@+id/rl_top_scorers"
         android:layout_width="fill_parent"
@@ -222,15 +236,15 @@
             android:layout_height="1dip"
             android:layout_marginLeft="10dip"
         	android:layout_marginRight="10dip"
-            android:layout_marginTop="5dip"
-            android:background="@color/green" />
+            android:layout_marginTop="2dip"
+            android:background="@color/gray" />
 
         <TextView
             android:id="@+id/tv_top_scorers_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/top_scorer"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="5dip"
@@ -240,22 +254,44 @@
             android:id="@+id/tv_top_scorers_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rating"
+            android:text="@string/score"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_marginLeft="10dip"
-            android:layout_marginBottom="5dip"
+            android:layout_marginTop="10dip"
             android:layout_below="@+id/tv_top_scorers_top" />
 
-        <RatingBar
-            android:id="@+id/rb_ratingbar"
-            style="?android:attr/ratingBarStyleSmall"
+<!--         <RatingBar -->
+<!--             android:id="@+id/rb_ratingbar" -->
+<!--             style="?android:attr/ratingBarStyleSmall" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_marginLeft="10dip" -->
+<!--             android:layout_marginBottom="5dip" -->
+<!--             android:numStars="5" -->
+<!--             android:layout_below="@+id/tv_top_scorers_rating" /> -->
+        
+        <TextView
+            android:id="@+id/tv_percent_completed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginBottom="5dip"
-            android:numStars="5"
-            android:layout_below="@+id/tv_top_scorers_rating" />
+            android:text="@string/score"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="90dip"
+            android:layout_alignTop="@+id/tv_top_scorers_top"
+            android:layout_toRightOf="@+id/tv_top_scorers_top" />
+        
+        <TextView
+            android:id="@+id/tv_percent_correct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/score"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dip"
+            android:layout_below="@+id/tv_percent_completed"
+            android:layout_alignLeft="@+id/tv_percent_completed" />
 
         <View
             android:id="@+id/view_separator_below"
@@ -264,7 +300,7 @@
             android:layout_marginLeft="10dip"
         	android:layout_marginRight="10dip"
             android:background="@color/gray"
-            android:layout_below="@+id/rb_ratingbar" />
+            android:layout_below="@+id/bt_send_results" />
 
 	    <Button
 	        android:id="@+id/bt_send_results"
@@ -285,18 +321,6 @@
     	android:layout_marginRight="10dip"
         android:layout_marginTop="5dip"
         android:layout_above="@+id/tv_top_scorers"
-        android:background="@color/red" />
-
-    <TextView
-        android:id="@+id/tv_top_scorers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/rl_top_scorers"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dip"
-        android:text="@string/top_scores"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:background="@color/gray" />
 
 </RelativeLayout>
