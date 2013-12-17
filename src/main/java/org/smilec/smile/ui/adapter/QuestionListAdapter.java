@@ -25,6 +25,7 @@ import java.util.List;
 import org.smilec.smile.R;
 import org.smilec.smile.bu.Constants;
 import org.smilec.smile.bu.SmilePlugServerManager;
+import org.smilec.smile.domain.CurrentMessageStatus;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
 import org.smilec.smile.ui.GeneralActivity;
@@ -166,6 +167,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         btBack.setOnClickListener(new CloseClickListenerUtil(detailsDialog));
         
         // If the user click on the trash icon 
+        if(!GeneralActivity.getStatus().equals(CurrentMessageStatus.START_MAKE.name())) {
+        	btTrash.setVisibility(View.INVISIBLE);
+        }
         btTrash.setOnClickListener(new Button.OnClickListener() {  
         	
         	 @Override
@@ -194,9 +198,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 							e.printStackTrace();
 						}
                 		
-            			Toast.makeText(
-            					context, "Trying to delete question #"+currentQuestion, Toast.LENGTH_LONG
-    					).show();
+            			Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
             			
             			confirmDialog.dismiss();
             			detailsDialog.dismiss();

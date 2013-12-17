@@ -90,7 +90,9 @@ public class GeneralActivity extends FragmentActivity {
 
     private String ip;
     private String hours, minutes, seconds;
-    private String status;
+    
+    private static String status;
+    public static String getStatus() { return status; }
 
     private Button btSolve, btResults;
 
@@ -563,6 +565,8 @@ public class GeneralActivity extends FragmentActivity {
     private void startSolvingQuestion() {
         ActivityUtil.showLongToast(GeneralActivity.this, R.string.solving);
 
+        status = CurrentMessageStatus.START_SOLVE.name();
+        
         btResults.setEnabled(true);
 
         solve = false;
