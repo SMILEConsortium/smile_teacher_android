@@ -250,33 +250,25 @@ public class QuestionsFragment extends AbstractFragment {
 		synchronized(mQuestionsMutex) {
 			questionsOld.addAll(mQuestions);
 			
-			
-			
 			mQuestions.clear();
 
 			if (mRun) {
-				Collection<Question> newQuestions = null;
-				newQuestions = board.getQuestions();
+				List<Question> newQuestions = null;
+				newQuestions = (List<Question>) board.getQuestions();
 
-				// TEMP code #60
-				
+				// TEMP #60
 				if(!idQuestionsDeleted.isEmpty()) {
 					
 					for(int i=0; i<idQuestionsDeleted.size(); i++) {
-						
-						if(!questionsOld.isEmpty()) {
-							
-						
-						questionsDeleted.add(questionsOld.get(idQuestionsDeleted.get(i)));
-						idQuestionsDeleted.remove(i);
+						if(!newQuestions.isEmpty()) {
+							questionsDeleted.add(newQuestions.get(idQuestionsDeleted.get(i)));
+							idQuestionsDeleted.remove(i);
 						}
 					}
 				}
 				
 				for(int i=0; i<questionsDeleted.size(); i++) {
-					
 					if(newQuestions.contains(questionsDeleted.get(i))) {
-						
 						newQuestions.remove(questionsDeleted.get(i));
 					}
 				}

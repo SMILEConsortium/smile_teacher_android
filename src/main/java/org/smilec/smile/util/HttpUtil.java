@@ -106,8 +106,7 @@ public class HttpUtil {
         return executeMethod(put);
     }
     
-    public static final InputStream executeDelete(String url)
-            throws NetworkErrorException, UnsupportedEncodingException, JSONException {
+    public static final InputStream executeDelete(String url) throws NetworkErrorException, UnsupportedEncodingException, JSONException {
             
     		HttpDelete delete = new HttpDelete(url);
             delete.setHeader("Content-Type", SmilePlugUtil.JSON);

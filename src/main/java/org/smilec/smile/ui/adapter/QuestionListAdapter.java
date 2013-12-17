@@ -15,11 +15,17 @@ limitations under the License.
 **/
 package org.smilec.smile.ui.adapter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.List;
 
 import org.smilec.smile.R;
 import org.smilec.smile.bu.Constants;
 import org.smilec.smile.bu.SmilePlugServerManager;
+import org.smilec.smile.domain.CurrentMessageStatus;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
 import org.smilec.smile.ui.GeneralActivity;
@@ -30,6 +36,7 @@ import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.ImageLoader;
 
 import android.accounts.NetworkErrorException;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -105,14 +112,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         	
         	ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
         	ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
-        	System.out.println("----> Nexus 7 | ImageView");
-        	
         } else {
-        	
         	Button ivDetails = (Button) convertView.findViewById(R.id.iv_details);
         	ivDetails.setOnClickListener(new OpenItemDetailsListener(question));
-        	
-        	System.out.println("----> VisioTab1001 | Button");
         }
 
         final RatingBar rbRatingBar = (RatingBar) convertView.findViewById(R.id.rb_ratingbar);
@@ -158,12 +160,16 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
     	ImageButton btBack = (ImageButton) detailsDialog.findViewById(R.id.bt_back);
     	ImageButton btTrash = (ImageButton) detailsDialog.findViewById(R.id.bt_trash);
     	
-    	currentQuestion = question.getNumber();
+    	// note: first question equal to '1'
+    	currentQuestion = question.getNumber()-1;
     	
         btClose.setOnClickListener(new CloseClickListenerUtil(detailsDialog));
         btBack.setOnClickListener(new CloseClickListenerUtil(detailsDialog));
         
-        // If the user click on the trash icon
+        // If the user click on the trash icon 
+        if(!GeneralActivity.getStatus().equals(CurrentMessageStatus.START_MAKE.name())) {
+        	btTrash.setVisibility(View.INVISIBLE);
+        }
         btTrash.setOnClickListener(new Button.OnClickListener() {  
         	
         	 @Override
@@ -186,23 +192,37 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                 	public void onClick(View v) {
                 		
                 		try {
-                			// note: first question equal to '1'
-							new SmilePlugServerManager().deleteQuestionInSessionByNumber(ip, context, currentQuestion-1);
+                			
+							new SmilePlugServerManager().deleteQuestionInSessionByNumber(ip, context, currentQuestion);
 						} catch (NetworkErrorException e) {
 							e.printStackTrace();
 						}
                 		
-            			Toast.makeText(
-            					context, "Trying to delete question #"+currentQuestion, Toast.LENGTH_LONG
-    					).show();
+            			Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
             			
             			confirmDialog.dismiss();
             			detailsDialog.dismiss();
             			
-            			// TEMP CODE
-            			QuestionsFragment.idQuestionsDeleted.add(currentQuestion-1);
-            			// END TEMP CODE
-                	};
+            			// TODO #60: Adding a question to filter the questions
+            			QuestionsFragment.idQuestionsDeleted.add(currentQuestion);
+            			
+//     			       final String filter = new String(currentQuestion+";");
+//     			       FileOutputStream fOut = null;
+//     			       
+//     			       try {
+// 							fOut = context.openFileOutput("filter_delete", Context.MODE_PRIVATE);
+// 							OutputStreamWriter osw = new OutputStreamWriter(fOut); 
+// 						
+// 							// Write the string to the file and ensure that everything is really written out and close
+// 							osw.write(filter);
+// 							osw.close();
+// 						} catch (FileNotFoundException e) {
+// 							e.printStackTrace();
+// 						} catch (IOException e) {
+// 							e.printStackTrace();
+// 						}
+						// END
+					};
                 });
         	 }
 		});
