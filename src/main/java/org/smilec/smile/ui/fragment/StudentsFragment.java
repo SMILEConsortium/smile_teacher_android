@@ -251,11 +251,11 @@ public class StudentsFragment extends AbstractFragment {
 
     	float n = 0;
     	
-    	System.out.println("*****students.size()="+students.size());
+    	System.out.println("**Number of students in session ="+students.size());
     	
     	for(int i=0; i<students.size();i++) {
     		
-    		System.out.println("=====students.get(i).isSolved()="+students.get(i).isSolved());
+    		System.out.println("**The student 'i' already solved the questions ="+students.get(i).isSolved());
     		
     		n += students.get(i).isSolved() ? 1:0;
     	}
@@ -294,10 +294,9 @@ public class StudentsFragment extends AbstractFragment {
     			
 	    			nbQuestionsCorrect += answersOfStudent.get(q).equals(q.getAnswer()) ? 1:0;
 	    		} 
-	    		
-	    		// if the student has 70+% of correct answers, we count it 
-	    		nbStudentOver70 += nbQuestionsCorrect*100/questions.size() >= 70 ? 1:0;
 	    	}
+    		// if the student has 70+% of correct answers, we count it 
+    		nbStudentOver70 += nbQuestionsCorrect*100/questions.size() >= 70 ? 1:0;
     	}
 		
     	float percent = !students.isEmpty()? (float) (nbStudentOver70/students.size())*100 : 0;
@@ -314,13 +313,8 @@ public class StudentsFragment extends AbstractFragment {
                 R.id.tv_top_scorers_top);
 
             String sBestScoredStudentNames = results.getBestScoredStudentNames();
-            JSONArray bestScoredStudentNames = new JSONArray(sBestScoredStudentNames == null ? ""
-                : sBestScoredStudentNames);
-            tvTopScorersTop.setText(getString(R.string.top_scorer) + ": "
-                + bestScoredStudentNames.join(", ").replaceAll("\"", ""));
-
-            TextView tvTopScorersRating = (TextView) getActivity().findViewById(R.id.tv_top_scorers_rating);
-            tvTopScorersRating.setText(getString(R.string.rating) + ": " + results.getWinnerRating());
+            JSONArray bestScoredStudentNames = new JSONArray(sBestScoredStudentNames == null ? "" : sBestScoredStudentNames);
+            tvTopScorersTop.setText(getString(R.string.top_scorer) + ": " + bestScoredStudentNames.join(", ").replaceAll("\"", ""));
             
             TextView tvPercentCompleted = (TextView) getActivity().findViewById(R.id.tv_percent_completed);
             tvPercentCompleted.setText(this.getPercentCompleted());
@@ -329,6 +323,9 @@ public class StudentsFragment extends AbstractFragment {
             TextView tvPercentCorrect = (TextView) getActivity().findViewById(R.id.tv_percent_correct);
             tvPercentCorrect.setText(this.getPercentCorrect());
             tvPercentCorrect.setVisibility(View.VISIBLE);
+            
+            //TextView tvTopScorersRating = (TextView) getActivity().findViewById(R.id.tv_top_scorers_rating);
+            //tvTopScorersRating.setText(getString(R.string.rating) + ": " + results.getWinnerRating());
 
             // Seems useless >> issues 14 
             //final RatingBar rbRatingBar = (RatingBar) getActivity().findViewById(R.id.rb_ratingbar);
