@@ -127,11 +127,11 @@ public class SessionValuesActivity extends Activity {
 		msg = mHandler.obtainMessage(MSG_OK, getResources().getString(R.string.creating_session));
 		mHandler.sendMessage(msg);
 		
-		//Starting ChooseActivityFlowDialog
+		// Starting ChooseActivityFlowDialog
         startActivity(intent);
-        this.finish();
+//        this.finish();
         
-        //Closing LoginActivity
+        // Closing SessionValuesActivity
         this.setVisible(false); 
     }
     
