@@ -140,7 +140,7 @@ public class ChooseActivityFlowDialog extends Activity {
             intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
             intent.putExtra(GeneralActivity.PARAM_STATUS, status);
             startActivity(intent);
-            //ChooseActivityFlowDialog.this.finish();
+            ChooseActivityFlowDialog.this.finish();
         }
     }
 
