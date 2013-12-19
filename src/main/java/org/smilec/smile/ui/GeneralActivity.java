@@ -29,6 +29,7 @@ import java.util.Vector;
 import org.smilec.smile.R;
 import org.smilec.smile.bu.BoardManager;
 import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.QuestionsManager;
 import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.domain.Board;
@@ -204,6 +205,8 @@ public class GeneralActivity extends FragmentActivity {
                             } catch (NetworkErrorException e) {
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
                             }
+                            
+                            QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
                             GeneralActivity.this.finish();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -418,6 +421,7 @@ public class GeneralActivity extends FragmentActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             try {
                                 new SmilePlugServerManager().resetGame(ip, GeneralActivity.this);
+                                QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
                                 GeneralActivity.this.finish();
                             } catch (NetworkErrorException e) {
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
@@ -478,6 +482,7 @@ public class GeneralActivity extends FragmentActivity {
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
                             }
 
+                            QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
                             GeneralActivity.this.finish();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {

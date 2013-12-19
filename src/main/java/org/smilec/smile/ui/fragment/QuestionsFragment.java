@@ -93,10 +93,7 @@ public class QuestionsFragment extends AbstractFragment {
 	private Object mQuestionsMutex = new Object();
 	private TextView tvTopTitle;
 	
-	// TEMP fix #60
-	public static List<Integer> idQuestionsDeleted = new ArrayList<Integer>();
 	private static List<Question> questionsDeleted = new ArrayList<Question>(); 
-	// END TEMP CODE
 
     @Override
     protected int getLayout() {
@@ -248,9 +245,6 @@ public class QuestionsFragment extends AbstractFragment {
     public void updateFragment(final Board board) {
         List<Question> questionsOld = new ArrayList<Question>();
 
-		//
-		// XXX TODO: Debug this code, there is a bug lurking here
-		//
 		synchronized(mQuestionsMutex) {
 			questionsOld.addAll(mQuestions);
 			
@@ -260,47 +254,23 @@ public class QuestionsFragment extends AbstractFragment {
 				List<Question> newQuestions = null;
 				newQuestions = (List<Question>) board.getQuestions();
 
-				// TEMP #60
-				
-//				/* We have to use the openFileInput()-method
-//			        * the ActivityContext provides.
-//			        * Again for security reasons with
-//			        * openFileInput(...) */
-//
-//			        FileInputStream fIn =  openFileInput("samplefile.txt");
-//			        InputStreamReader isr = new InputStreamReader(fIn);
-//
-//			        /* Prepare a char-Array that will
-//			         * hold the chars we read back in. */
-//			        char[] inputBuffer = new char[TESTSTRING.length()];
-//
-//			        // Fill the Buffer with data from the file
-//			        isr.read(inputBuffer);
-//
-//			        // Transform the chars to a String
-//			        String readString = new String(inputBuffer);
-//
-//			        // Check if we read back the same chars that we had written out
-//			        boolean isTheSame = TESTSTRING.equals(readString);
-//
-//			        Log.i("File Reading stuff", "success = " + isTheSame);
-
-
+				// We get the numbers of all questions considered as 'deleted' in the local file 'filter_delete'
 				String[] idsQuestionsDeleted = QuestionsManager.getDeletedQuestionsInLocalFile(getActivity());
 				
-				//if(!idQuestionsDeleted.isEmpty()) {
+				String filter_delete = new String();
+				for(int i = 0;i<idsQuestionsDeleted.length;i++) { filter_delete += idsQuestionsDeleted[i] + "-"; }
+				System.out.println("QuestionFragment>filter_delete>"+filter_delete);
+				
+				// If there is deleted questions, we fill a List<Question>
 				if(idsQuestionsDeleted.length != 0) {
-					
-//					for(int i=0; i<idQuestionsDeleted.size(); i++) {
 					for(int i=0; i<idsQuestionsDeleted.length; i++) {
 						if(!newQuestions.isEmpty() && !idsQuestionsDeleted[i].equals("\n")) {
-//							questionsDeleted.add(newQuestions.get(idQuestionsDeleted.get(i)));
 							questionsDeleted.add(newQuestions.get(Integer.parseInt(idsQuestionsDeleted[i])));
-//							idQuestionsDeleted.remove(i);
 						}
 					}
 				}
 				
+				// We remove all questions deleted
 				for(int i=0; i<questionsDeleted.size(); i++) {
 					if(newQuestions.contains(questionsDeleted.get(i))) {
 						newQuestions.remove(questionsDeleted.get(i));

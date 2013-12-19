@@ -74,6 +74,24 @@ public class QuestionsManager {
 		return questionsDir.listFiles();
 	}
 	
+	public static void resetListOfDeletedQuestions(Context context) {
+		
+		OutputStreamWriter osw;
+		try {
+			osw = new OutputStreamWriter(
+					context.openFileOutput("filter_delete", Context.MODE_PRIVATE)
+				);
+			osw.write("");
+			osw.close();
+		} 
+		catch (FileNotFoundException e) { e.printStackTrace(); }
+		catch (IOException e) { e.printStackTrace(); }
+	}
+	
+	/**
+	 * This method get from internal file named 'filter_delete' the numbers of all questions deleted
+	 * @return something which has this aspect: '3;4;1;2;0;'
+	 */
 	private static String getDeletedQuestionInLocalFile(Context context) {
 		
 		String inputString;
@@ -86,7 +104,7 @@ public class QuestionsManager {
 		    
 			while ((inputString = inputReader.readLine()) != null) {
 				stringBuffer.append(inputString);
-				System.out.println(">?>"+inputString);
+				System.out.println(">"+inputString); // TEMP: to remove
 		    }
 		} catch (IOException e) {
 		    e.printStackTrace();
@@ -95,15 +113,20 @@ public class QuestionsManager {
 		return stringBuffer.toString();
 	}
 	
+	/**
+	 * Add the number of the question to consider as 'deleted' in the internal file 'filter_delete' 
+	 * @param context the context, the activity
+	 * @param currentQuestion the number of the question to consider as 'deleted'
+	 */
 	public static void addDeletedQuestionInLocalFile(Context context, int currentQuestion) {
 		
 		// final
 		String filter =  getDeletedQuestionInLocalFile(context) + currentQuestion+";";
 		FileOutputStream fOut = null;
 		   
-		   try {
-				fOut = context.openFileOutput("filter_delete", Context.MODE_PRIVATE);
-		OutputStreamWriter osw = new OutputStreamWriter(fOut); 
+	   try {
+			fOut = context.openFileOutput("filter_delete", Context.MODE_PRIVATE);
+			OutputStreamWriter osw = new OutputStreamWriter(fOut); 
 		
 		// Write the string to the file and ensure that everything is really written out and close
 			osw.write(filter);
@@ -115,13 +138,14 @@ public class QuestionsManager {
 		}
 	}
 	
+	/**
+	 * Get all the numbers of questions considered as 'deleted'
+	 * @param context the context, the activity
+	 * @return an array of all numbers 
+	 */
 	public static String[] getDeletedQuestionsInLocalFile(Context context) {
 		
-		String x = getDeletedQuestionInLocalFile(context); 
-		return x.split(";");
-//		L Arrays.asList(array);
-//		
-//		for()
+		return getDeletedQuestionInLocalFile(context).split(";");
 	}
 
 	private File createDir() throws DataAccessException {

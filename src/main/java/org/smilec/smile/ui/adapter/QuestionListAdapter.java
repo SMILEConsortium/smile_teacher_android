@@ -207,7 +207,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             			detailsDialog.dismiss();
             			
             			// TODO #60: Adding a question to filter the questions
-            			QuestionsFragment.idQuestionsDeleted.add(currentQuestion);
             			
             			QuestionsManager.addDeletedQuestionInLocalFile(context, currentQuestion);
 						// END #60
