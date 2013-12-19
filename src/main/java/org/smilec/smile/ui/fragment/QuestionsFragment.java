@@ -15,6 +15,10 @@ limitations under the License.
 **/
 package org.smilec.smile.ui.fragment;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream.GetField;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -257,12 +261,42 @@ public class QuestionsFragment extends AbstractFragment {
 				newQuestions = (List<Question>) board.getQuestions();
 
 				// TEMP #60
-				if(!idQuestionsDeleted.isEmpty()) {
+				
+//				/* We have to use the openFileInput()-method
+//			        * the ActivityContext provides.
+//			        * Again for security reasons with
+//			        * openFileInput(...) */
+//
+//			        FileInputStream fIn =  openFileInput("samplefile.txt");
+//			        InputStreamReader isr = new InputStreamReader(fIn);
+//
+//			        /* Prepare a char-Array that will
+//			         * hold the chars we read back in. */
+//			        char[] inputBuffer = new char[TESTSTRING.length()];
+//
+//			        // Fill the Buffer with data from the file
+//			        isr.read(inputBuffer);
+//
+//			        // Transform the chars to a String
+//			        String readString = new String(inputBuffer);
+//
+//			        // Check if we read back the same chars that we had written out
+//			        boolean isTheSame = TESTSTRING.equals(readString);
+//
+//			        Log.i("File Reading stuff", "success = " + isTheSame);
+
+
+				String[] idsQuestionsDeleted = QuestionsManager.getDeletedQuestionsInLocalFile(getActivity());
+				
+				//if(!idQuestionsDeleted.isEmpty()) {
+				if(idsQuestionsDeleted.length != 0) {
 					
-					for(int i=0; i<idQuestionsDeleted.size(); i++) {
-						if(!newQuestions.isEmpty()) {
-							questionsDeleted.add(newQuestions.get(idQuestionsDeleted.get(i)));
-							idQuestionsDeleted.remove(i);
+//					for(int i=0; i<idQuestionsDeleted.size(); i++) {
+					for(int i=0; i<idsQuestionsDeleted.length; i++) {
+						if(!newQuestions.isEmpty() && !idsQuestionsDeleted[i].equals("\n")) {
+//							questionsDeleted.add(newQuestions.get(idQuestionsDeleted.get(i)));
+							questionsDeleted.add(newQuestions.get(Integer.parseInt(idsQuestionsDeleted[i])));
+//							idQuestionsDeleted.remove(i);
 						}
 					}
 				}
