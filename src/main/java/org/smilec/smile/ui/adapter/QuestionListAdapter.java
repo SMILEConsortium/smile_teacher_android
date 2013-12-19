@@ -15,15 +15,18 @@ limitations under the License.
 **/
 package org.smilec.smile.ui.adapter;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
 import org.smilec.smile.R;
 import org.smilec.smile.bu.Constants;
+import org.smilec.smile.bu.QuestionsManager;
 import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.domain.CurrentMessageStatus;
 import org.smilec.smile.domain.Question;
@@ -204,24 +207,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             			detailsDialog.dismiss();
             			
             			// TODO #60: Adding a question to filter the questions
-            			QuestionsFragment.idQuestionsDeleted.add(currentQuestion);
             			
-//     			       final String filter = new String(currentQuestion+";");
-//     			       FileOutputStream fOut = null;
-//     			       
-//     			       try {
-// 							fOut = context.openFileOutput("filter_delete", Context.MODE_PRIVATE);
-// 							OutputStreamWriter osw = new OutputStreamWriter(fOut); 
-// 						
-// 							// Write the string to the file and ensure that everything is really written out and close
-// 							osw.write(filter);
-// 							osw.close();
-// 						} catch (FileNotFoundException e) {
-// 							e.printStackTrace();
-// 						} catch (IOException e) {
-// 							e.printStackTrace();
-// 						}
-						// END
+            			QuestionsManager.addDeletedQuestionInLocalFile(context, currentQuestion);
+						// END #60
 					};
                 });
         	 }

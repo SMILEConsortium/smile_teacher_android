@@ -15,6 +15,10 @@ limitations under the License.
 **/
 package org.smilec.smile.ui.fragment;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream.GetField;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -89,10 +93,7 @@ public class QuestionsFragment extends AbstractFragment {
 	private Object mQuestionsMutex = new Object();
 	private TextView tvTopTitle;
 	
-	// TEMP fix #60
-	public static List<Integer> idQuestionsDeleted = new ArrayList<Integer>();
 	private static List<Question> questionsDeleted = new ArrayList<Question>(); 
-	// END TEMP CODE
 
     @Override
     protected int getLayout() {
@@ -244,9 +245,6 @@ public class QuestionsFragment extends AbstractFragment {
     public void updateFragment(final Board board) {
         List<Question> questionsOld = new ArrayList<Question>();
 
-		//
-		// XXX TODO: Debug this code, there is a bug lurking here
-		//
 		synchronized(mQuestionsMutex) {
 			questionsOld.addAll(mQuestions);
 			
@@ -256,17 +254,23 @@ public class QuestionsFragment extends AbstractFragment {
 				List<Question> newQuestions = null;
 				newQuestions = (List<Question>) board.getQuestions();
 
-				// TEMP #60
-				if(!idQuestionsDeleted.isEmpty()) {
-					
-					for(int i=0; i<idQuestionsDeleted.size(); i++) {
-						if(!newQuestions.isEmpty()) {
-							questionsDeleted.add(newQuestions.get(idQuestionsDeleted.get(i)));
-							idQuestionsDeleted.remove(i);
+				// We get the numbers of all questions considered as 'deleted' in the local file 'filter_delete'
+				String[] idsQuestionsDeleted = QuestionsManager.getDeletedQuestionsInLocalFile(getActivity());
+				
+				String filter_delete = new String();
+				for(int i = 0;i<idsQuestionsDeleted.length;i++) { filter_delete += idsQuestionsDeleted[i] + "-"; }
+				System.out.println("QuestionFragment>filter_delete>"+filter_delete);
+				
+				// If there is deleted questions, we fill a List<Question>
+				if(idsQuestionsDeleted.length != 0) {
+					for(int i=0; i<idsQuestionsDeleted.length; i++) {
+						if(!newQuestions.isEmpty() && !idsQuestionsDeleted[i].equals("")) {
+							questionsDeleted.add(newQuestions.get(Integer.parseInt(idsQuestionsDeleted[i])));
 						}
 					}
 				}
 				
+				// We remove all questions deleted
 				for(int i=0; i<questionsDeleted.size(); i++) {
 					if(newQuestions.contains(questionsDeleted.get(i))) {
 						newQuestions.remove(questionsDeleted.get(i));

@@ -18,15 +18,19 @@ package org.smilec.smile.bu;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import net.iharder.Base64;
 
@@ -43,6 +47,7 @@ import com.csvreader.CsvWriter;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 public class QuestionsManager {
 
@@ -66,9 +71,81 @@ public class QuestionsManager {
 		if (!DeviceUtil.isExternalStorageAvailable()) {
 			throw new DataAccessException("External storage unavailable");
 		}
-
 		return questionsDir.listFiles();
-
+	}
+	
+	public static void resetListOfDeletedQuestions(Context context) {
+		
+		OutputStreamWriter osw;
+		try {
+			osw = new OutputStreamWriter(
+					context.openFileOutput("filter_delete", Context.MODE_PRIVATE)
+				);
+			osw.write("");
+			osw.close();
+		} 
+		catch (FileNotFoundException e) { e.printStackTrace(); }
+		catch (IOException e) { e.printStackTrace(); }
+	}
+	
+	/**
+	 * This method get from internal file named 'filter_delete' the numbers of all questions deleted
+	 * @return something which has this aspect: '3;4;1;2;0;'
+	 */
+	private static String getDeletedQuestionInLocalFile(Context context) {
+		
+		String inputString;
+		StringBuffer stringBuffer = new StringBuffer();
+		
+		try {
+		    BufferedReader inputReader = new BufferedReader(
+		    		new InputStreamReader(context.openFileInput("filter_delete"))
+		    );
+		    
+			while ((inputString = inputReader.readLine()) != null) {
+				stringBuffer.append(inputString);
+				System.out.println(">"+inputString); // TEMP: to remove
+		    }
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		return stringBuffer.toString();
+	}
+	
+	/**
+	 * Add the number of the question to consider as 'deleted' in the internal file 'filter_delete' 
+	 * @param context the context, the activity
+	 * @param currentQuestion the number of the question to consider as 'deleted'
+	 */
+	public static void addDeletedQuestionInLocalFile(Context context, int currentQuestion) {
+		
+		// final
+		String filter =  getDeletedQuestionInLocalFile(context) + currentQuestion+";";
+		FileOutputStream fOut = null;
+		   
+	   try {
+			fOut = context.openFileOutput("filter_delete", Context.MODE_PRIVATE);
+			OutputStreamWriter osw = new OutputStreamWriter(fOut); 
+		
+		// Write the string to the file and ensure that everything is really written out and close
+			osw.write(filter);
+			osw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Get all the numbers of questions considered as 'deleted'
+	 * @param context the context, the activity
+	 * @return an array of all numbers 
+	 */
+	public static String[] getDeletedQuestionsInLocalFile(Context context) {
+		
+		return getDeletedQuestionInLocalFile(context).split(";");
 	}
 
 	private File createDir() throws DataAccessException {
