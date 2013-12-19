@@ -264,7 +264,7 @@ public class QuestionsFragment extends AbstractFragment {
 				// If there is deleted questions, we fill a List<Question>
 				if(idsQuestionsDeleted.length != 0) {
 					for(int i=0; i<idsQuestionsDeleted.length; i++) {
-						if(!newQuestions.isEmpty() && !idsQuestionsDeleted[i].equals("\n")) {
+						if(!newQuestions.isEmpty() && !idsQuestionsDeleted[i].equals("")) {
 							questionsDeleted.add(newQuestions.get(Integer.parseInt(idsQuestionsDeleted[i])));
 						}
 					}
