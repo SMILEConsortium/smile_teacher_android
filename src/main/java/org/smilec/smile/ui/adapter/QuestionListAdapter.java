@@ -197,13 +197,15 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                         // #91 XXX TODO: Add some error handling to check whether we really need to delete or not before we
                         // incorrectly assume our REST call to the server worked.
                 		try {
-                			
-							new SmilePlugServerManager().deleteQuestionInSessionByNumber(ip, context, currentQuestion);
+							SmilePlugServerManager spsm = new SmilePlugServerManager();
+                            String status = spsm.deleteQuestionInSessionByNumber(ip, context, currentQuestion);
+                            Toast.makeText(context, status, Toast.LENGTH_LONG).show();
 						} catch (NetworkErrorException e) {
 							e.printStackTrace();
+                            Toast.makeText(context, "Error deleting question, reason: " + e.getMessage(), Toast.LENGTH_LONG).show();
 						}
                 		
-            			Toast.makeText(context, "Deleting...", Toast.LENGTH_LONG).show();
+            			
             			
             			confirmDialog.dismiss();
             			detailsDialog.dismiss();

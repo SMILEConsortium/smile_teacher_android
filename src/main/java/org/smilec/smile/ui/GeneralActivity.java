@@ -206,7 +206,7 @@ public class GeneralActivity extends FragmentActivity {
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
                             }
                             
-                            QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
+                            // QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
                             GeneralActivity.this.finish();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -421,7 +421,7 @@ public class GeneralActivity extends FragmentActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             try {
                                 new SmilePlugServerManager().resetGame(ip, GeneralActivity.this);
-                                QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
+                                // QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
                                 GeneralActivity.this.finish();
                             } catch (NetworkErrorException e) {
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
@@ -482,7 +482,7 @@ public class GeneralActivity extends FragmentActivity {
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
                             }
 
-                            QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
+                            // QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
                             GeneralActivity.this.finish();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {

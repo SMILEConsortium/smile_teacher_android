@@ -93,9 +93,7 @@ public class QuestionsFragment extends AbstractFragment {
 	private Object mQuestionsMutex = new Object();
 	private TextView tvTopTitle;
 	
-	private static List<Question> questionsDeleted = new ArrayList<Question>(); 
-
-    @Override
+	@Override
     protected int getLayout() {
         return R.layout.questions;
     }
@@ -254,15 +252,7 @@ public class QuestionsFragment extends AbstractFragment {
 				List<Question> newQuestions = null;
 				newQuestions = (List<Question>) board.getQuestions();
 				
-				// We remove all questions deleted
-				/* for(int i=0; i<questionsDeleted.size(); i++) {
-					if(newQuestions.contains(questionsDeleted.get(i))) {
-						newQuestions.remove(questionsDeleted.get(i));
-					}
-				} */
-                Log.d(Constants.LOG_CATEGORY, "newQuestions size = " + newQuestions.size());
-
-				// TEMP END
+                // Log.d(Constants.LOG_CATEGORY, "newQuestions size = " + newQuestions.size());
 				
 				if (newQuestions != null) {
 					mQuestions.addAll(newQuestions);

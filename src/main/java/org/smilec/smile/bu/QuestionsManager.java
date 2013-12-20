@@ -74,7 +74,7 @@ public class QuestionsManager {
 		return questionsDir.listFiles();
 	}
 	
-	public static void resetListOfDeletedQuestions(Context context) {
+	public static void resetListOfDeletedQuestions(Context context) { // XXX REMOVE
 		
 		OutputStreamWriter osw;
 		try {
@@ -89,7 +89,7 @@ public class QuestionsManager {
 	}
 	
 	/** 
-	 * XXX: Why do we need to store anything to disk?
+	 * XXX: Why do we need to store anything to disk?  REMOVE
 	 * This method get from internal file named 'filter_delete' the numbers of all questions deleted
 	 * @return something which has this aspect: '3;4;1;2;0;'
 	 */
@@ -115,6 +115,7 @@ public class QuestionsManager {
 	}
 	
 	/**
+	   XXX REMOVE
 	 * Add the number of the question to consider as 'deleted' in the internal file 'filter_delete' 
 	 * @param context the context, the activity
 	 * @param currentQuestion the number of the question to consider as 'deleted'
@@ -139,7 +140,7 @@ public class QuestionsManager {
 		}
 	}
 	
-	/**
+	/** XXX REMOVE
 	 * Get all the numbers of questions considered as 'deleted'
 	 * @param context the context, the activity
 	 * @return an array of all numbers 

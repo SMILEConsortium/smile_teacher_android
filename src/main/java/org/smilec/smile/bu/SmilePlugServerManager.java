@@ -48,6 +48,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 public class SmilePlugServerManager extends AbstractBaseManager {
+    private static final String ENCODING = "UTF-8";
 
     public void startMakingQuestions(String ip, Context context) throws NetworkErrorException {
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_MAKING_QUESTIONS_URL);
@@ -119,17 +120,49 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     	//put(ipServer,context,url,iqsetToSave.toString());
     }
     
-    public void deleteQuestionInSessionByNumber(String ipServer, Context context, int position) throws NetworkErrorException {
-    	
+    // XXX Can we make this static ??? 
+    public String deleteQuestionInSessionByNumber(String ipServer, Context context, int position) throws NetworkErrorException {
+    	String status = "Deleting, status unknown";
     	String url = SmilePlugUtil.createUrl(ipServer, SmilePlugUtil.QUESTION_VIEW_URL+"/"+position+".json");
-//    	JSONObject json = new JSONObject();
-    	
-//    	try {
-//    		json.put("questionNumber", position);
-//		} catch (JSONException e) { e.printStackTrace();
-//		}
-    	
-    	delete(ipServer,context,url);
+
+    	InputStream is = delete(ipServer,context,url);
+        String jsonstring = "";
+        try {
+            jsonstring = IOUtil.loadContent(is, ENCODING);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("SMILE_TEACHER:SmilePlugServerManager", "ERROR deleting question, reason: " + e.getMessage());
+            status = e.getMessage();
+        }
+
+        if (!jsonstring.equals("")) {
+            Log.d("SMILE_TEACHER:SmilePlugServerManager", "Received response from server on delete: " + jsonstring);
+            if (jsonstring.indexOf("error") >= 0) {
+                status = "Error deleting question, there may be a problem in the server.  Please contact support"; // XXX Localize string
+            } else {
+                status = "Success deleting question"; // XXX Localize string
+            }
+        }
+
+        // XXX Would be nice if this worked below but it bombs with an exception because PIC data is empty or something
+        /* try {
+            if (!s.equals(""))  {
+                JSONObject jsonObj = new JSONObject(s);
+                if (!jsonObj.isNull("error")) {
+                    //
+                    status = "Error deleting question, there may be a problem in the server.  Please contact support";
+                } else {
+                    status = "Success deleting question.";
+                }
+            }
+        } catch(JSONException jse) {
+            jse.printStackTrace();
+            Log.e("SMILE_TEACHER:SmilePlugServerManager", "ERROR deleting question parsing JSON, reason: " + jse.getMessage());
+            // new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),BoardManager.class.getName()).execute();
+            // throw new DataAccessException(e);
+        } */
+
+        return status;
     }
     
     /**
