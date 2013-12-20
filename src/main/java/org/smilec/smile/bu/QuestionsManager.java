@@ -88,7 +88,8 @@ public class QuestionsManager {
 		catch (IOException e) { e.printStackTrace(); }
 	}
 	
-	/**
+	/** 
+	 * XXX: Why do we need to store anything to disk?
 	 * This method get from internal file named 'filter_delete' the numbers of all questions deleted
 	 * @return something which has this aspect: '3;4;1;2;0;'
 	 */

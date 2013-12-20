@@ -193,7 +193,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                 btConfirm.setOnClickListener(new Button.OnClickListener() {
                 	
                 	public void onClick(View v) {
-                		
+                		//
+                        // #91 XXX TODO: Add some error handling to check whether we really need to delete or not before we
+                        // incorrectly assume our REST call to the server worked.
                 		try {
                 			
 							new SmilePlugServerManager().deleteQuestionInSessionByNumber(ip, context, currentQuestion);
@@ -206,10 +208,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
             			confirmDialog.dismiss();
             			detailsDialog.dismiss();
             			
-            			// TODO #60: Adding a question to filter the questions
-            			
-            			QuestionsManager.addDeletedQuestionInLocalFile(context, currentQuestion);
-						// END #60
+            			// QuestionsManager.addDeletedQuestionInLocalFile(context, currentQuestion);
 					};
                 });
         	 }

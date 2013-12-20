@@ -253,29 +253,15 @@ public class QuestionsFragment extends AbstractFragment {
 			if (mRun) {
 				List<Question> newQuestions = null;
 				newQuestions = (List<Question>) board.getQuestions();
-
-				// We get the numbers of all questions considered as 'deleted' in the local file 'filter_delete'
-				String[] idsQuestionsDeleted = QuestionsManager.getDeletedQuestionsInLocalFile(getActivity());
-				
-				String filter_delete = new String();
-				for(int i = 0;i<idsQuestionsDeleted.length;i++) { filter_delete += idsQuestionsDeleted[i] + "-"; }
-				System.out.println("QuestionFragment>filter_delete>"+filter_delete);
-				
-				// If there is deleted questions, we fill a List<Question>
-				if(idsQuestionsDeleted.length != 0) {
-					for(int i=0; i<idsQuestionsDeleted.length; i++) {
-						if(!newQuestions.isEmpty() && !idsQuestionsDeleted[i].equals("")) {
-							questionsDeleted.add(newQuestions.get(Integer.parseInt(idsQuestionsDeleted[i])));
-						}
-					}
-				}
 				
 				// We remove all questions deleted
-				for(int i=0; i<questionsDeleted.size(); i++) {
+				/* for(int i=0; i<questionsDeleted.size(); i++) {
 					if(newQuestions.contains(questionsDeleted.get(i))) {
 						newQuestions.remove(questionsDeleted.get(i));
 					}
-				}
+				} */
+                Log.d(Constants.LOG_CATEGORY, "newQuestions size = " + newQuestions.size());
+
 				// TEMP END
 				
 				if (newQuestions != null) {
@@ -287,6 +273,7 @@ public class QuestionsFragment extends AbstractFragment {
 				new UpdateResultsTask(getActivity()).execute();
 
 				if (loadItems) {
+                    Log.d(Constants.LOG_CATEGORY, "loadItems is true");
 					listQuestionsSelected.clear();
 
 					loadSelections();
