@@ -31,5 +31,4 @@ public enum CurrentMessageStatus {
     public String getStatus() {
         return status;
     }
-
 }

@@ -24,9 +24,7 @@ public class QuestionList extends ArrayList<Question> implements Parcelable {
 
     private static final long serialVersionUID = 1L;
 
-    public QuestionList() {
-        // Empty
-    }
+    public QuestionList() { }
 
     public QuestionList(Parcel in) {
         readFromParcel(in);
@@ -51,7 +49,6 @@ public class QuestionList extends ArrayList<Question> implements Parcelable {
 
             this.add(question);
         }
-
     }
 
     @SuppressWarnings("rawtypes")
@@ -66,7 +63,6 @@ public class QuestionList extends ArrayList<Question> implements Parcelable {
         public Object[] newArray(int size) {
             return null;
         }
-
     };
 
     @Override

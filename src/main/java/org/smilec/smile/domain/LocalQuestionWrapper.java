@@ -27,18 +27,19 @@ public class LocalQuestionWrapper {
     private String PIC;
     private String TYPE;
     private String IP;
-    private String mSessionID = "";
+    private String SessionID = "";
 
     public LocalQuestionWrapper(Question question) {
         super();
-        this.NAME = question.getOwner();
-        this.IP = question.getIp();
-        this.Q = question.getQuestion();
-        this.O1 = question.getOption1();
-        this.O2 = question.getOption2();
-        this.O3 = question.getOption3();
-        this.O4 = question.getOption4();
-        this.A = question.getAnswer();
+        NAME = question.getOwner();
+        IP = question.getIp();
+        Q = question.getQuestion();
+        O1 = question.getOption1();
+        O2 = question.getOption2();
+        O3 = question.getOption3();
+        O4 = question.getOption4();
+        A = question.getAnswer();
+        
         if (question.hasImage()) {
             this.PIC = question.getImageUrl();
             this.TYPE = "QUESTION_PIC";
@@ -47,91 +48,36 @@ public class LocalQuestionWrapper {
         }
     }
 
-    public String getNAME() {
-        return NAME;
-    }
+    public String getNAME() { return NAME; }
+    public void setNAME(String name) { NAME = name; }
 
-    public void setNAME(String nAME) {
-        NAME = nAME;
-    }
+    public String getQ() { return Q; }
+    public void setQ(String q) { Q = q; }
 
-    public String getQ() {
-        return Q;
-    }
+    public String getO1() { return O1; }
+    public void setO1(String o1) { O1 = o1; }
+    
+    public String getO2() { return O2; }
+    public void setO2(String o2) { O2 = o2; }
+    
+    public String getO3() { return O3; }
+    public void setO3(String o3) { O3 = o3; }
+    
+    public String getO4() { return O4; }
+    public void setO4(String o4) { O4 = o4; }
 
-    public void setQ(String q) {
-        Q = q;
-    }
+    public int getA() { return A; }
+    public void setA(int a) { A = a; }
 
-    public String getO1() {
-        return O1;
-    }
+    public String getPICURL() { return PIC; }
+    public void setPICURL(String pic) { PIC = pic; }
 
-    public void setO1(String o1) {
-        O1 = o1;
-    }
+    public String getTYPE() { return TYPE; }
+    public void setTYPE(String type) { TYPE = type; }
 
-    public String getO2() {
-        return O2;
-    }
+    public String getIP() { return IP; }
+    public void setIP(String ip) { IP = ip; }
 
-    public void setO2(String o2) {
-        O2 = o2;
-    }
-
-    public String getO3() {
-        return O3;
-    }
-
-    public void setO3(String o3) {
-        O3 = o3;
-    }
-
-    public String getO4() {
-        return O4;
-    }
-
-    public void setO4(String o4) {
-        O4 = o4;
-    }
-
-    public int getA() {
-        return A;
-    }
-
-    public void setA(int a) {
-        A = a;
-    }
-
-    public String getPICURL() {
-        return PIC;
-    }
-
-    public void setPICURL(String pIC) {
-        PIC = pIC;
-    }
-
-    public String getTYPE() {
-        return TYPE;
-    }
-
-    public void setTYPE(String tYPE) {
-        TYPE = tYPE;
-    }
-
-    public String getIP() {
-        return IP;
-    }
-
-    public void setIP(String iP) {
-        IP = iP;
-    }
-
-    public void setSessionID(String sessionID) {
-        mSessionID = sessionID;
-    }
-
-    public String getSessionID() {
-        return mSessionID;
-    }
+    public void setSessionID(String sessionID) { SessionID = sessionID; }
+    public String getSessionID() { return SessionID; }
 }

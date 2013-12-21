@@ -106,20 +106,6 @@ public class ChooseActivityFlowDialog extends Activity {
         public void onClick(View v) {
         	
             if (status != null && !status.equals("") && !status.equals("RESET")) {
-                
-            	/**
-            	 * This is the old popup: "A session is already running".
-            	 * */
-//                AlertDialog.Builder builder = new AlertDialog.Builder(ChooseActivityFlowDialog.this);
-//                builder.setMessage(R.string.game_running).setCancelable(false).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-//                	
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            new LoadTask(ChooseActivityFlowDialog.this).execute();
-//                        }
-//                    });
-//              AlertDialog alert = builder.create();
-//              alert.show();
             	
                 new LoadTask(ChooseActivityFlowDialog.this).execute();
                 ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.recovering);

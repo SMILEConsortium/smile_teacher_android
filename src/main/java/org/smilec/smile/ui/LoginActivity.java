@@ -196,7 +196,7 @@ public class LoginActivity extends Activity {
 		
 		//Starting SessionValuesActivity
         startActivity(intent);
-        
+
         //Closing LoginActivity
 //        this.setVisible(false); 
     }

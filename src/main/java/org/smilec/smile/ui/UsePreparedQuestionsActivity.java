@@ -72,10 +72,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     private String ip;
     private String status;
 
-    //private File[] fileQuestionsList;
-    //private File fileQuestion;
-    //private ArrayAdapter<File> adapter;
-    
     private List<IQSet> iqsets;
     private IQSet iqset;
     private IQSetListAdapter iqsetListAdapter;
@@ -125,8 +121,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         spinnerSeconds.setEnabled(false);
         
         btClose.setOnClickListener(new CloseClickListenerUtil(this));
-        
-        
 
         loadValuesTime();
 
@@ -203,7 +197,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
                 spinnerSeconds.setEnabled(false);
             }
         }
-
     }
 
     private void openGeneralActivity() {
@@ -232,12 +225,9 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 		try {
 			iqsets = new SmilePlugServerManager().getIQSets(ip, UsePreparedQuestionsActivity.this);
 		} catch (NetworkErrorException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
-        //adapter = new FilesQuestionListAdapter(this, fileQuestionsList);
-        //lvListQuestions.setAdapter(adapter);
 		iqsetListAdapter = new IQSetListAdapter(UsePreparedQuestionsActivity.this, iqsets);
 		lvListQuestions.setAdapter(iqsetListAdapter);
 		
@@ -265,7 +255,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
                 spinnerMinutes.setEnabled(false);
                 spinnerSeconds.setEnabled(false);
             }
-            //fileQuestion = adapter.getItem(position);
             iqset = iqsetListAdapter.getItem(position);
         }
 
@@ -281,15 +270,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        
-        // TODO Why does this condition exist?? (12/11/13)
-//        if (fileQuestionsList.length == 0) {
-//        if (iqsets.size() == 0) {
-//        Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
-//        intent.putExtra(GeneralActivity.PARAM_IP, ip);
-//        intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
-//        startActivity(intent);
-//        }
+
         this.finish();
     }
 
@@ -314,7 +295,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
             return null;
         }
 
-        
         /* 
          * File[] fileQuestions contains the 4 preloaded local files, but this is not used anymore
          * and it is replaced by the iqsets
@@ -332,7 +312,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 			}
         	
             if (iqsetsExist) {
-                //UsePreparedQuestionsActivity.this.fileQuestionsList = fileQuestions;
                 UsePreparedQuestionsActivity.this.loadQuestionsList();
 
             } else {
@@ -359,7 +338,6 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         protected String doInBackground(Void... params) {
             try {
                 Collection<Question> newQuestions = null;
-                //newQuestions = new QuestionsManager().loadQuestions(fileQuestion.getName());
                 
                 String idCheckedIQSet = new SmilePlugServerManager().getIdIQSetByPosition(ip, context, currentPosition);
                 

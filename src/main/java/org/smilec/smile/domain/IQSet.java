@@ -8,9 +8,7 @@ public class IQSet {
 	private String teacherName;
 	private String groupName;
 	
-	public IQSet() {
-		// TODO Auto-generated constructor stub
-	}
+	public IQSet() { }
 	
 	public IQSet(String id, String key, String sessionTitle, String teacherName, String groupName) {
 		
@@ -21,28 +19,28 @@ public class IQSet {
 		this.groupName = groupName;
 	}
 
-	public String getId() {
+	public String getId() { 
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(String id) { 
 		this.id = id;
 	}
 
 	public String getKey() {
 		return key;
 	}
-	public void setKey(String key) {
+	public void setKey(String key) { 
 		this.key = key;
 	}
 
-	public String getSessionTitle() {
+	public String getSessionTitle() { 
 		return sessionTitle;
 	}
-	public void setSessionTitle(String sessionTitle) {
+	public void setSessionTitle(String sessionTitle) { 
 		this.sessionTitle = sessionTitle;
 	}
 
-	public String getTeacherName() {
+	public String getTeacherName() { 
 		return teacherName;
 	}
 	public void setTeacherName(String teacherName) {
@@ -52,7 +50,7 @@ public class IQSet {
 	public String getGroupName() {
 		return groupName;
 	}
-	public void setGroupName(String groupName) {
+	public void setGroupName(String groupName) { 
 		this.groupName = groupName;
 	}
 }
