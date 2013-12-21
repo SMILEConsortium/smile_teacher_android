@@ -19,19 +19,19 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.smilec.smile.bu.Constants;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Student;
 
 public class AnswersAndRatingsJSONParser {
 
-    private static final String IP = "IP";
     private static final String ANSWERS = "MYANSWER";
     private static final String RATINGS = "MYRATING";
 
     public static final void process(JSONObject object, Map<String, Student> students,
         Map<Integer, Question> questions) {
 
-        String ip = object.optString(IP);
+        String ip = object.optString(Constants.IP);
 
         Student student = students.get(ip);
         if (student != null) {
@@ -67,7 +67,6 @@ public class AnswersAndRatingsJSONParser {
                 student.addAnswer(question, answer);
 
             }
-
         }
 
     }

@@ -17,40 +17,33 @@ package org.smilec.smile.bu.json;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.smilec.smile.bu.Constants;
 import org.smilec.smile.domain.Results;
 
-public class ResultsJSONParser {
+public class ResultsJSONParser { 
 
-    private static final String QUESTIONS_CORRECT_PERCENTAGE = "questionsCorrectPercentage";
-    private static final String AVERAGE_RATINGS = "averageRatings";
-    private static final String NUMBER_OF_QUESTIONS = "numberOfQuestions";
-    private static final String RIGHT_ANSWERS = "rightAnswers";
-    private static final String BEST_RATED_QUESTION_STUDENT_NAMES = "bestRatedQuestionStudentNames";
-    private static final String BEST_SCORED_STUDENT_NAMES = "bestScoredStudentNames";
-    private static final String WINNER_RATING = "winnerRating";
-    private static final String WINNER_SCORE = "winnerScore";
+    
 
     public static final Results process(JSONObject object) {
 
-        int winnerScore = object.optInt(WINNER_SCORE);
-        float winnerRating = object.optLong(WINNER_RATING);
+        int winnerScore = object.optInt(Constants.WINNER_SCORE);
+        float winnerRating = object.optLong(Constants.WINNER_RATING);
 
-        JSONArray optJSONArray = object.optJSONArray(BEST_SCORED_STUDENT_NAMES);
+        JSONArray optJSONArray = object.optJSONArray(Constants.BEST_SCORED_STUDENT_NAMES);
         JSONArray bestScoredStudentNames = optJSONArray == null ? new JSONArray() : optJSONArray;
 
-        JSONArray optJSONArray2 = object.optJSONArray(BEST_RATED_QUESTION_STUDENT_NAMES);
-        JSONArray bestRatedQuestionStudentNames = optJSONArray2 == null ? new JSONArray()
-            : optJSONArray2;
+        JSONArray optJSONArray2 = object.optJSONArray(Constants.BEST_RATED_QUESTION_STUDENT_NAMES);
+        JSONArray bestRatedQuestionStudentNames = optJSONArray2 == null ? new JSONArray() : optJSONArray2;
 
-        JSONArray optJSONArray3 = object.optJSONArray(RIGHT_ANSWERS);
+        JSONArray optJSONArray3 = object.optJSONArray(Constants.RIGHT_ANSWERS);
         JSONArray rightAnswers = optJSONArray3 == null ? new JSONArray() : optJSONArray3;
 
-        int numberOfQuestions = object.optInt(NUMBER_OF_QUESTIONS);
+        int numberOfQuestions = object.optInt(Constants.NUMBER_OF_QUESTIONS);
 
-        JSONArray optJSONArray4 = object.optJSONArray(AVERAGE_RATINGS);
+        JSONArray optJSONArray4 = object.optJSONArray(Constants.AVERAGE_RATINGS);
         JSONArray averageRatings = optJSONArray4 == null ? new JSONArray() : optJSONArray4;
 
-        JSONArray optJSONArray5 = object.optJSONArray(QUESTIONS_CORRECT_PERCENTAGE);
+        JSONArray optJSONArray5 = object.optJSONArray(Constants.QUESTIONS_CORRECT_PERCENTAGE);
         JSONArray questionsCorrectPercentage = optJSONArray5 == null ? new JSONArray()
             : optJSONArray5;
 
@@ -59,6 +52,5 @@ public class ResultsJSONParser {
             questionsCorrectPercentage);
 
         return results;
-
     }
 }

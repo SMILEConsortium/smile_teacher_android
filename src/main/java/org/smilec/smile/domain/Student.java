@@ -91,11 +91,9 @@ public class Student implements Serializable, Comparable<Student> {
             int giveAnswer = answers.get(q);
 
             score += (answer == giveAnswer) ? 1 : 0;
-
         }
 
         return score;
-
     }
 
     public List<StudentQuestionDetail> getDetails() {
@@ -115,7 +113,6 @@ public class Student implements Serializable, Comparable<Student> {
         }
 
         return result;
-
     }
 
     @Override

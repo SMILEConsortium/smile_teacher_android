@@ -15,16 +15,10 @@ limitations under the License.
 **/
 package org.smilec.smile.bu;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 
 import org.json.JSONException;
-import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 import org.smilec.smile.util.DeviceUtil;
 import org.smilec.smile.util.HttpUtil;
 import org.smilec.smile.util.IOUtil;
@@ -96,30 +90,6 @@ public abstract class AbstractBaseManager {
         catch (JSONException e) { e.printStackTrace(); }
         
 		return null;
-
-//    	URL urlObject = null;
-//		try { urlObject  = new URL(url); } 
-//		catch (MalformedURLException exception) {
-//    	    exception.printStackTrace();
-//    	}
-//    	HttpURLConnection httpURLConnection = null;
-//    	try {
-//    	    httpURLConnection = (HttpURLConnection) urlObject.openConnection();
-//    	    httpURLConnection.setRequestProperty("Content-Type","application/json");
-//    	    httpURLConnection.setRequestMethod("DELETE");
-//    	    // httpURLConnection.setDoOutput(true);
-//    	    
-//    	    int result = httpURLConnection.getResponseCode();
-//    	    
-//    	    System.out.println(">> Answer of Smileplug => Code:"+result);
-//    	    
-//    	} catch (IOException exception) {
-//    		exception.printStackTrace();
-//    	} finally {         
-//    	    if (httpURLConnection != null) {
-//    	        httpURLConnection.disconnect();
-//    	    }
-//    	} 
     }
 
     protected void put(String ip, Context context, String url, String json)

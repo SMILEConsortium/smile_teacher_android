@@ -46,14 +46,11 @@ import android.content.Context;
 
 public class BoardManager extends AbstractBaseManager {
 
-    private static final String ENCODING = "UTF-8";
-
     private static enum Type {
         HAIL, QUESTION, QUESTION_PIC, ANSWER
     }
 
-    public Board getBoard(String ip, Context context) throws DataAccessException,
-        NetworkErrorException {
+    public Board getBoard(String ip, Context context) throws DataAccessException, NetworkErrorException {
 
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.ALL_DATA_URL);
         InputStream is = HttpUtil.executeGet(url);
@@ -64,11 +61,9 @@ public class BoardManager extends AbstractBaseManager {
         } finally {
             IOUtil.silentClose(is);
         }
-
     }
 
-    public Results retrieveResults(String ip, Context context) throws DataAccessException,
-        NetworkErrorException {
+    public Results retrieveResults(String ip, Context context) throws DataAccessException, NetworkErrorException {
 
         String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS_URL);
         InputStream is = HttpUtil.executeGet(url);
@@ -79,14 +74,13 @@ public class BoardManager extends AbstractBaseManager {
         } finally {
             IOUtil.silentClose(is);
         }
-
     }
 
     private static Results loadResults(InputStream is) throws DataAccessException {
         String s;
         Results results = null;
         try {
-            s = IOUtil.loadContent(is, ENCODING);
+            s = IOUtil.loadContent(is, Constants.ENCODING);
 
             JSONObject json = new JSONObject(s);
 
@@ -97,7 +91,7 @@ public class BoardManager extends AbstractBaseManager {
         	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),BoardManager.class.getName()).execute();
             throw new DataAccessException(e);
         }
-
+        
         return results;
     }
 
@@ -105,7 +99,7 @@ public class BoardManager extends AbstractBaseManager {
 
         String s;
         try {
-            s = IOUtil.loadContent(is, ENCODING);
+            s = IOUtil.loadContent(is, Constants.ENCODING);
         } catch (IOException e) {
             throw new DataAccessException(e);
         }
@@ -149,7 +143,7 @@ public class BoardManager extends AbstractBaseManager {
                         break;
                 }
             } else {
-                // Error
+                // TODO Error
             }
 
         }
@@ -159,7 +153,6 @@ public class BoardManager extends AbstractBaseManager {
         processAnswers(jsonArrayAnswersAndRatings, mapStudents, mapQuestions);
 
         return new Board(mapStudents.values(), mapQuestions.values());
-
     }
 
     private Map<String, Student> processStudents(List<JSONObject> array) {
@@ -172,11 +165,9 @@ public class BoardManager extends AbstractBaseManager {
         }
 
         return map;
-
     }
 
-    private Map<Integer, Question> processQuestions(List<JSONObject> array,
-        Map<String, Student> students) {
+    private Map<Integer, Question> processQuestions(List<JSONObject> array, Map<String, Student> students) {
 
         Map<Integer, Question> map = new HashMap<Integer, Question>();
 
@@ -196,16 +187,13 @@ public class BoardManager extends AbstractBaseManager {
         }
 
         return map;
-
     }
 
-    private void processAnswers(List<JSONObject> array, Map<String, Student> students,
-        Map<Integer, Question> questions) {
+    private void processAnswers(List<JSONObject> array, Map<String, Student> students, Map<Integer, Question> questions) {
 
         for (JSONObject object : array) {
             AnswersAndRatingsJSONParser.process(object, students, questions);
         }
-
     }
 
     private Type identifyType(JSONObject object) {
@@ -216,7 +204,6 @@ public class BoardManager extends AbstractBaseManager {
         } catch (Exception ex) {
             return null;
         }
-
     }
 
 }

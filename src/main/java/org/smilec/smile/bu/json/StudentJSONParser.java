@@ -16,21 +16,17 @@ limitations under the License.
 package org.smilec.smile.bu.json;
 
 import org.json.JSONObject;
+import org.smilec.smile.bu.Constants;
 import org.smilec.smile.domain.Student;
 
 public class StudentJSONParser {
 
-    private static final String IP = "IP";
-    private static final String NAME = "NAME";
-
     public static final Student process(JSONObject object) {
 
-        String ip = object.optString(IP);
-        String name = object.optString(NAME);
+        String ip = object.optString(Constants.IP);
+        String name = object.optString(Constants.NAME);
 
         Student student = new Student(ip, name);
         return student;
-
     }
-
 }

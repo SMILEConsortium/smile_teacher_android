@@ -205,8 +205,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                             Toast.makeText(context, "Error deleting question, reason: " + e.getMessage(), Toast.LENGTH_LONG).show();
 						}
                 		
-            			
-            			
             			confirmDialog.dismiss();
             			detailsDialog.dismiss();
             			

@@ -104,7 +104,7 @@ public class SessionValuesActivity extends Activity {
 //        } else {
 //        	btnCreateSession.setEnabled(false);
 //        }
-        btnCreateSession.setEnabled(true); ///
+        btnCreateSession.setEnabled(true);
     }
 	
 	private class CreateSessionButtonListener implements OnClickListener {
@@ -119,8 +119,8 @@ public class SessionValuesActivity extends Activity {
         Intent intent = new Intent(this, ChooseActivityFlowDialog.class);
         intent.putExtra(GeneralActivity.PARAM_IP, ip_smileplug);
         intent.putExtra(GeneralActivity.PARAM_STATUS, status);
-        //ActivityUtil.showLongToast(this, R.string.connection_established);
-        //this.setVisible(false);
+        
+//        ActivityUtil.showLongToast(this, R.string.connection_established);
         
         // Display toast through the handler
     	Message msg = null;
@@ -129,10 +129,10 @@ public class SessionValuesActivity extends Activity {
 		
 		// Starting ChooseActivityFlowDialog
         startActivity(intent);
-//        this.finish();
         
         // Closing SessionValuesActivity
-        this.setVisible(false); 
+        this.setVisible(false);
+//      this.finish();
     }
     
 	// To manage messages outside onCreate() method

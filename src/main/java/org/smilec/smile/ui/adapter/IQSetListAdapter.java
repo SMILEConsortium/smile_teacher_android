@@ -1,8 +1,5 @@
 package org.smilec.smile.ui.adapter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.smilec.smile.R;

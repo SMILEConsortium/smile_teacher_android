@@ -41,9 +41,7 @@ public class Question implements Serializable {
 
 	private double perCorrect;
 
-	public Question() {
-		// Empty
-	}
+	public Question() { }
 
 	public Question(int number, String owner, String ip, String question,
 			String option1, String option2, String option3, String option4,
@@ -61,64 +59,71 @@ public class Question implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
-	public int getNumber() {
-		return number;
-	}
+	public int getNumber() { return number; }
+	public void setNumber(int number) { this.number = number; }
+	
+	public String getOwner() { return owner; }
+	public void setOwner(String owner) { this.owner = owner; }
 
-	public String getOwner() {
-		return owner;
-	}
+	public String getIp() { return ip; }
+	public void setIp(String ip) { this.ip = ip; }
 
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
+	public String getQuestion() { return question; }
+	public void setQuestion(String question) { this.question = question; }
 
-	public String getIp() {
-		return ip;
-	}
+	public String getOption1() { return option1; }
+	public void setOption1(String option1) { this.option1 = option1; }
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+	public String getOption2() { return option2; }
+	public void setOption2(String option2) { this.option2 = option2; }
+	
+	public String getOption3() { return option3; }
+	public void setOption3(String option3) { this.option3 = option3; }
+	
+	public String getOption4() { return option4; }
+	public void setOption4(String option4) { this.option4 = option4; }
+	
+	public int getAnswer() { return answer; }
+	public void setAnswer(int answer) { this.answer = answer; }
+	
+	public String getImageUrl() { return imageUrl; }
+	public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-	public String getQuestion() {
-		return question;
-	}
+	public double getPerCorrect() { return perCorrect; }
+	public void setPerCorrect(double perCorrect) { this.perCorrect = perCorrect; }
+	
+	
+	public List<Integer> getAnswers() 				{ return answers; }
+	public void setAnswers(List<Integer> answers) 	{ this.answers = answers; }
+	public void addAnswer(int answer) 				{ answers.add(answer); }
 
-	public String getOption1() {
-		return option1;
-	}
+	public List<Float> getRatings() 			{ return ratings; }
+	public void setRatings(List<Float> ratings) { this.ratings = ratings; }
+	public void addRating(float rating) 		{ ratings.add(rating); }
 
-	public String getOption2() {
-		return option2;
-	}
-
-	public String getOption3() {
-		return option3;
-	}
-
-	public String getOption4() {
-		return option4;
-	}
-
-	public int getAnswer() {
-		return answer;
-	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
+	
 	public boolean hasImage() {
 		return imageUrl != null && imageUrl.trim().length() > 0;
 	}
+	
+	public double getRating() {
 
-	public List<Integer> getAnswers() {
-		return answers;
-	}
+		float value = 0;
+		float total = 0;
+		float n = 0;
 
-	public void addAnswer(int answer) {
-		answers.add(answer);
+		for (Float i : ratings) {
+			if (i > 0) {
+				total += i;
+				n++;
+			}
+		}
+		
+		if (total != 0 && n != 0) {
+			value = total / n;
+		}
+
+		return value;
 	}
 
 	public double getHitAverage() {
@@ -137,90 +142,15 @@ public class Question implements Serializable {
 		}
 
 		return value;
-
 	}
 
-	public List<Float> getRatings() {
-		return ratings;
-	}
-
-	public void addRating(float rating) {
-		ratings.add(rating);
-	}
-
-	public double getRating() {
-
-		float total = 0;
-		float n = 0;
-
-		for (Float i : ratings) {
-			if (i > 0) {
-				total += i;
-				n++;
-			}
-		}
-
-		float value = 0;
-		if (total != 0 && n != 0) {
-			value = total / n;
-		}
-
-		return value;
-
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-
-	public void setOption1(String option1) {
-		this.option1 = option1;
-	}
-
-	public void setOption2(String option2) {
-		this.option2 = option2;
-	}
-
-	public void setOption3(String option3) {
-		this.option3 = option3;
-	}
-
-	public void setOption4(String option4) {
-		this.option4 = option4;
-	}
-
-	public void setAnswer(int answer) {
-		this.answer = answer;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
 	
-	public void setAnswers(List<Integer> answers) {
-		this.answers = answers;
-	}
-
-	public void setRatings(List<Float> ratings) {
-		this.ratings = ratings;
-	}
-
-	public double getPerCorrect() {
-		return perCorrect;
-	}
-
-	public void setPerCorrect(double perCorrect) {
-		this.perCorrect = perCorrect;
-	}
-
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(question).append(option1)
-				.append(option2).append(option3).append(option4)
+		return new HashCodeBuilder()
+				.append(question)
+				.append(option1).append(option2)
+				.append(option3).append(option4)
 				.append(imageUrl).toHashCode();
 	}
 

@@ -45,66 +45,58 @@ public class Results implements Serializable {
         this.questionsCorrectPercentage = questionsCorrectPercentage.toString();
     }
 
-    public int getWinnerScore() {
-        return winnerScore;
-    }
-
-    public void setWinnerScore(int winnerScore) {
-        this.winnerScore = winnerScore;
-    }
+    public int getWinnerScore() { 
+    	return winnerScore; 
+	}
+    public void setWinnerScore(int winnerScore) { 
+    	this.winnerScore = winnerScore; 
+	}
 
     public float getWinnerRating() {
-        return winnerRating;
+		return winnerRating;
+    }
+    public void setWinnerRating(float winnerRating) { 
+    	this.winnerRating = winnerRating; 
+	}
+
+    public String getBestScoredStudentNames() { 
+    	return bestScoredStudentNames;
+    }
+    public void setBestScoredStudentNames(String bestScoredStudentNames) { 
+    	this.bestScoredStudentNames = bestScoredStudentNames;
     }
 
-    public void setWinnerRating(float winnerRating) {
-        this.winnerRating = winnerRating;
+    public String getBestRatedQuestionStudentNames() { 
+    	return bestRatedQuestionStudentNames;
     }
-
-    public String getBestScoredStudentNames() {
-        return bestScoredStudentNames;
-    }
-
-    public void setBestScoredStudentNames(String bestScoredStudentNames) {
-        this.bestScoredStudentNames = bestScoredStudentNames;
-    }
-
-    public String getBestRatedQuestionStudentNames() {
-        return bestRatedQuestionStudentNames;
-    }
-
     public void setBestRatedQuestionStudentNames(String bestRatedQuestionStudentNames) {
         this.bestRatedQuestionStudentNames = bestRatedQuestionStudentNames;
     }
 
-    public int getNumberOfQuestions() {
-        return numberOfQuestions;
+    public int getNumberOfQuestions() { 
+    	return numberOfQuestions;
     }
-
     public void setNumberOfQuestions(int numberOfQuestions) {
         this.numberOfQuestions = numberOfQuestions;
     }
 
     public String getRightAnswers() {
-        return rightAnswers;
+    	return rightAnswers;
     }
-
     public void setRightAnswers(String rightAnswers) {
         this.rightAnswers = rightAnswers;
     }
 
     public String getAverageRatings() {
-        return averageRatings;
+    	return averageRatings;
     }
-
     public void setAverageRatings(String averageRatings) {
         this.averageRatings = averageRatings;
     }
 
     public String getQuestionsCorrectPercentage() {
-        return questionsCorrectPercentage;
+		return questionsCorrectPercentage;
     }
-
     public void setQuestionsCorrectPercentage(String questionsCorrectPercentage) {
         this.questionsCorrectPercentage = questionsCorrectPercentage;
     }

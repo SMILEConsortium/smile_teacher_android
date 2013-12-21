@@ -29,12 +29,10 @@ import org.json.JSONObject;
 import org.smilec.smile.bu.exception.DataAccessException;
 import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 import org.smilec.smile.bu.json.IQSetJSONParser;
-import org.smilec.smile.bu.json.ResultsJSONParser;
 import org.smilec.smile.domain.Board;
 import org.smilec.smile.domain.IQSet;
 import org.smilec.smile.domain.LocalQuestionWrapper;
 import org.smilec.smile.domain.Question;
-import org.smilec.smile.domain.Results;
 import org.smilec.smile.domain.ServerQuestionWrapper;
 import org.smilec.smile.util.HttpUtil;
 import org.smilec.smile.util.IOUtil;
@@ -48,16 +46,16 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 public class SmilePlugServerManager extends AbstractBaseManager {
-    private static final String ENCODING = "UTF-8";
 
     public void startMakingQuestions(String ip, Context context) throws NetworkErrorException {
-        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_MAKING_QUESTIONS_URL);
+        
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_MAKING_QUESTIONS_URL);
         put(ip, context, url, "{}");
     }
 
-    public void startUsingPreparedQuestions(String ip, Context context,
-        Collection<Question> questions) throws NetworkErrorException {
-        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.QUESTION_URL);
+    public void startUsingPreparedQuestions(String ip, Context context, Collection<Question> questions) throws NetworkErrorException {
+        
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.QUESTION_URL);
         if (questions != null) {
             for (Question question : questions) {
                 LocalQuestionWrapper questionWrapper = new LocalQuestionWrapper(question);
@@ -73,9 +71,9 @@ public class SmilePlugServerManager extends AbstractBaseManager {
         startMakingQuestions(ip, context);
     }
 
-    public void getResults(String ip, Context context, Collection<Question> questions)
-        throws NetworkErrorException {
-        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS_URL);
+    public void getResults(String ip, Context context, Collection<Question> questions) throws NetworkErrorException {
+        
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.RESULTS_URL);
         if (questions != null) {
             for (Question question : questions) {
                 ServerQuestionWrapper questionWrapper = new ServerQuestionWrapper(question);
@@ -116,8 +114,6 @@ public class SmilePlugServerManager extends AbstractBaseManager {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-    	
-    	//put(ipServer,context,url,iqsetToSave.toString());
     }
     
     // XXX Can we make this static ??? 
@@ -128,7 +124,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     	InputStream is = delete(ipServer,context,url);
         String jsonstring = "";
         try {
-            jsonstring = IOUtil.loadContent(is, ENCODING);
+            jsonstring = IOUtil.loadContent(is, Constants.ENCODING);
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("SMILE_TEACHER:SmilePlugServerManager", "ERROR deleting question, reason: " + e.getMessage());
@@ -269,11 +265,9 @@ public class SmilePlugServerManager extends AbstractBaseManager {
             // Log.e("SmilePlugServerManager", "Loaded IQSet data: " + s);
         	questions = IQSetJSONParser.parseIQSet(new JSONObject(s));
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
             Log.e("SmilePlugServerManager", "Unable to load IQSet, reason: " + e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
             Log.e("SmilePlugServerManager", "Unable to load IQSet, reason: " + e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -337,7 +331,6 @@ public class SmilePlugServerManager extends AbstractBaseManager {
         put(ip, context, url, "{}");
 
         // Always store the results
-        
     }
 
 }
