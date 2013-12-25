@@ -2,11 +2,26 @@
 <resources>
     <string name="logo">Logo</string>
     <string name="separator">-</string>
+    <string name="comma">,</string>
+    <string name="brackets_open">[</string>
+    <string name="brackets_close">]</string>
+    <string name="parenthesis_open">(</string>
+    <string name="parenthesis_close">)</string>
 	<string name="app_name">SMILE Teacher</string>
 	<string name="server">Smileplug IP</string>
 	<string name="connect">Connect</string>
-	<string name="loading">Loading...</string>
+	<string name="loading">Loading…</string>
 	<string name="confirm">Confirm Deletion</string>
+	
+	<!-- 	Toasts -->
+	<string name="toast_connection_established">Connection established</string>
+	<string name="toast_creating_session">Creating session…</string>
+	<string name="toast_starting">Starting…</string>
+	<string name="toast_solving">Solving…</string>
+	<string name="toast_sorting">Sorting…</string>
+	<string name="toast_recovering">Recovering…</string>
+	<string name="toast_retaking">Retaking…</string>
+	<string name="toast_down_or_unavailable">Smileplug is down or unavailable</string>
 	
 	<string name="session_values">Information about teacher\'s session</string>
 	<string name="teacher_name_hint">Teacher name</string>
@@ -55,7 +70,7 @@
 	called the SMILE Teacher, serves to manage and
 	save data from the activity via an ad-hoc network. It is a
 	Graphic User Interface-based application that can be
-	launched on an Android tablet in conjuction with a the Server
+	launched on an Android tablet in conjunction with a the Server
 	running on a PlugComputer. The application
 	allows the teacher to facilitate inquiry-based learning in a collaborative environment
     It also allows the teacher to save the
@@ -77,15 +92,6 @@
 	<string name="question_uppercase">QUESTION</string>
 	<string name="student">Students</string>
 
-<!-- 	Toasts -->
-	<string name="toast_connection_established">Connection established</string>
-	<string name="toast_creating_session">Creating session...</string>
-	<string name="toast_starting">Starting...</string>
-	<string name="toast_solving">Solving...</string>
-	<string name="toast_sorting">Sorting...</string>
-	<string name="toast_recovering">Recovering...</string>
-	<string name="toast_retaking">Retaking...</string>
-	<string name="toast_down_or_unavailable">Smileplug is down or unavailable</string>
 
 	<string name="question_number">Question Number</string>
 	<string name="correct_answer">Correct Answer</string>

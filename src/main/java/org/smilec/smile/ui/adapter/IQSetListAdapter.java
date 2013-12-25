@@ -53,10 +53,10 @@ public class IQSetListAdapter extends ArrayAdapter<IQSet> {
             tvGroupName.setText(String.valueOf(iqset.getGroupName()));
             
             TextView tvDate = (TextView) convertView.findViewById(R.id.tv_date);
-            tvDate.setText(String.valueOf(iqset.getKey()));
+            tvDate.setText(String.valueOf(iqset.getDate()));
             
             String idIQSet;
-            int size = -1;
+            int size = 0;
 			try {
 				
 				idIQSet = new SmilePlugServerManager().getIdIQSetByPosition(ip, getContext(), position);
@@ -65,7 +65,8 @@ public class IQSetListAdapter extends ArrayAdapter<IQSet> {
 			catch (NetworkErrorException e) { e.printStackTrace(); }
             
             TextView tvSize = (TextView) convertView.findViewById(R.id.tv_size);
-            tvSize.setText(String.valueOf(size));
+            if(size < 10) tvSize.setText("0"+String.valueOf(size));
+            else		  tvSize.setText(String.valueOf(size));
         }
 
         return convertView;
