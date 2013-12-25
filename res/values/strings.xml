@@ -14,7 +14,6 @@
 	<string name="group_name_hint">Group name</string>
 	<string name="date_hint">Date</string>
 	<string name="btn_create_session">Create</string>
-	<string name="creating_session">Creating session...</string>
 	<string name="no_picture">No picture</string>
 	<string name="delete_btn">Del btn</string>
 
@@ -70,8 +69,6 @@
 	<string name="minutes">Minutes</string>
 	<string name="hours">Hours</string>
 
-	<string name="connection_established">Connection established</string>
-
 	<string name="created_by">Question(s) created by</string>
 	<string name="top_scorer">Top Scorer</string>
 	<string name="answers">Complete</string>
@@ -79,9 +76,15 @@
 	<string name="question_uppercase">QUESTION</string>
 	<string name="student">Students</string>
 
-	<string name="starting">Starting...</string>
-	<string name="solving">Solving...</string>
-	<string name="recovering">Recovering...</string>
+<!-- 	Toasts -->
+	<string name="toast_connection_established">Connection established</string>
+	<string name="toast_creating_session">Creating session...</string>
+	<string name="toast_starting">Starting...</string>
+	<string name="toast_solving">Solving...</string>
+	<string name="toast_sorting">Sorting...</string>
+	<string name="toast_recovering">Recovering...</string>
+	<string name="toast_retaking">Retaking...</string>
+	<string name="toast_down_or_unavailable">Smileplug is down or unavailable</string>
 
 	<string name="question_number">Question Number</string>
 	<string name="correct_answer">Correct Answer</string>

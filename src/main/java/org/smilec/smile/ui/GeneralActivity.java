@@ -417,16 +417,22 @@ public class GeneralActivity extends FragmentActivity {
                 AlertDialog.Builder builderRestart = new AlertDialog.Builder(this);
                 builderRestart.setMessage(R.string.restart_game).setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
+                        
+                    	@Override
                         public void onClick(DialogInterface dialog, int id) {
-                            try {
+                            
+                    		try {
+                    			//new SmilePlugServerManager().connect(ip, GeneralActivity.this);
+                    			
                                 new SmilePlugServerManager().resetGame(ip, GeneralActivity.this);
                                 // QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
                                 GeneralActivity.this.finish();
                             } catch (NetworkErrorException e) {
+                            	ActivityUtil.showLongToast(GeneralActivity.this, R.string.toast_down_or_unavailable);
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
                             }
                         }
+                    	
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
@@ -444,7 +450,7 @@ public class GeneralActivity extends FragmentActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             try {
                                 new SmilePlugServerManager().startRetakeQuestions(ip, GeneralActivity.this, board);
-                                ActivityUtil.showLongToast(GeneralActivity.this, "Retaking...");
+                                ActivityUtil.showLongToast(GeneralActivity.this, R.string.toast_retaking);
                             } catch (NetworkErrorException e) {
                                 Log.e(Constants.LOG_CATEGORY, "Error: ", e);
                             }
@@ -563,12 +569,12 @@ public class GeneralActivity extends FragmentActivity {
                 vTotal.setVisibility(View.VISIBLE);
             }
 
-            ActivityUtil.showLongToast(GeneralActivity.this, "Sorting...");
+            ActivityUtil.showLongToast(GeneralActivity.this, R.string.toast_sorting);
         }
     }
 
     private void startSolvingQuestion() {
-        ActivityUtil.showLongToast(GeneralActivity.this, R.string.solving);
+        ActivityUtil.showLongToast(GeneralActivity.this, R.string.toast_solving);
 
         status = CurrentMessageStatus.START_SOLVE.name();
         

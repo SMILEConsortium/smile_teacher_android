@@ -30,24 +30,26 @@ import android.content.Context;
 
 public abstract class AbstractBaseManager {
 
-    protected static void checkServer(String ip) throws NetworkErrorException {
+    /**
+     * @return if the server is available or not
+     */
+    protected static boolean checkServer(String ip) throws NetworkErrorException {
 
         InputStream is = null;
         String url = SmilePlugUtil.createUrl(ip);
+        boolean isAvailable = false;
 
         try {
             is = HttpUtil.executeGet(url);
+            if(is != null) isAvailable = true;
         } catch (NetworkErrorException e) {
-            throw new NetworkErrorException("Connection errror: " + e.getMessage(), e);
+        	
+        	throw new NetworkErrorException("Server unavailable: " + e.getMessage(), e);
         } finally {
             IOUtil.silentClose(is);
         }
-
-        if (is == null) {
-            throw new NetworkErrorException("Server unavailable");
-        }
-
-    }
+        return isAvailable;
+    }  
 
     protected static void checkConnection(Context context) throws NetworkErrorException {
 

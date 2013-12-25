@@ -124,7 +124,7 @@ public class SessionValuesActivity extends Activity {
         
         // Display toast through the handler
     	Message msg = null;
-		msg = mHandler.obtainMessage(MSG_OK, getResources().getString(R.string.creating_session));
+		msg = mHandler.obtainMessage(MSG_OK, getResources().getString(R.string.toast_creating_session));
 		mHandler.sendMessage(msg);
 		
 		// Starting ChooseActivityFlowDialog
