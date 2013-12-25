@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <org.smilec.smile.ui.widget.checkbox.CheckableRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:marvinlabs="http://schemas.android.com/apk/res/fr.marvinlabs.selectablelisttutorial"
   	android:layout_width="fill_parent"
   	android:layout_height="fill_parent"
     android:background="@color/white"
@@ -18,7 +17,38 @@
 			android:focusable="false"
 			android:layout_marginLeft="20dip"
 			android:layout_gravity="left|center_vertical" />
+		
+		<TextView
+		    android:text="@string/brackets_open"
+			android:textSize="12sp"
+			android:textColor="@color/black"
+			android:focusable="false"
+			android:layout_gravity="left|center_vertical"/>
+		
+		<TextView
+	        android:id="@+id/tv_size"
+	        android:textSize="12sp"
+	        android:text="@string/size_hint"
+	        android:textStyle="bold"
+	        android:layout_gravity="center_vertical"
+	        android:textColor="@color/blue" />
+		
+		<TextView
+		    android:text="@string/brackets_close"
+			android:textSize="12sp"
+			android:textColor="@color/black"
+			android:focusable="false"
+			android:layout_gravity="left|center_vertical"/>
 
+		<TextView
+	        android:textSize="12sp"
+	        android:text="@string/separator"
+	        android:textStyle="bold"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="4dip"
+	        android:layout_marginRight="4dip"
+	        android:textColor="@color/red" />
+		
 		<TextView
 		    android:id="@+id/tv_file_name"
 			android:textSize="12sp"
@@ -29,28 +59,26 @@
 		
 		<TextView
 	        android:textSize="12sp"
-	        android:text="@string/separator"
-	        android:textStyle="bold"
+	        android:text="@string/parenthesis_open"
 	        android:layout_gravity="center_vertical"
-	        android:layout_marginLeft="10dip"
-	        android:layout_marginRight="10dip"
-	        android:textColor="@color/red" />
+	        android:layout_marginLeft="4dip"
+	        android:textColor="@color/black" />
 		
 		<TextView
 		    android:id="@+id/tv_teacher_name"
 		    android:layout_gravity="center_vertical"
 		    android:text="@string/teacher_name_hint"
+		    android:textStyle="italic"
 		    android:textColor="@color/black"
 		    android:textSize="12sp" />
 		
 		<TextView
 	        android:textSize="12sp"
-	        android:text="@string/separator"
-	        android:textStyle="bold"
+	        android:text="@string/comma"
 	        android:layout_gravity="center_vertical"
-	        android:layout_marginLeft="10dip"
-	        android:layout_marginRight="10dip"
-	        android:textColor="@color/red" />
+	        android:layout_marginLeft="1dip"
+	        android:layout_marginRight="3dip"
+	        android:textColor="@color/black" />
 
 	    <TextView
 	        android:id="@+id/tv_group_name"
@@ -61,13 +89,12 @@
 	    
 	    <TextView
 	        android:textSize="12sp"
-	        android:text="@string/separator"
-	        android:textStyle="bold"
+	        android:text="@string/comma"
 	        android:layout_gravity="center_vertical"
-	        android:layout_marginLeft="10dip"
-	        android:layout_marginRight="10dip"
-	        android:textColor="@color/red" />
-
+	        android:layout_marginLeft="1dip"
+	        android:layout_marginRight="3dip"
+	        android:textColor="@color/black" />
+	    
 	    <TextView
 	        android:id="@+id/tv_date"
 	        android:textSize="12sp"
@@ -77,19 +104,12 @@
 	    
 	    <TextView
 	        android:textSize="12sp"
-	        android:text="@string/separator"
-	        android:textStyle="bold"
+	        android:text="@string/parenthesis_close"
 	        android:layout_gravity="center_vertical"
-	        android:layout_marginLeft="10dip"
-	        android:layout_marginRight="10dip"
-	        android:textColor="@color/red" />
-
-	    <TextView
-	        android:id="@+id/tv_size"
-	        android:textSize="12sp"
-	        android:text="@string/size_hint"
-	        android:layout_gravity="center_vertical"
-	        android:textColor="@color/blue" />
+	        android:layout_marginRight="4dip"
+	        android:textColor="@color/black" />
+	    
+	    
 
     </TableRow>
 
