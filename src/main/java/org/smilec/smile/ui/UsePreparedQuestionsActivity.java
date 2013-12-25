@@ -228,7 +228,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
 			e.printStackTrace();
 		}
         
-		iqsetListAdapter = new IQSetListAdapter(UsePreparedQuestionsActivity.this, iqsets);
+		iqsetListAdapter = new IQSetListAdapter(UsePreparedQuestionsActivity.this, iqsets,ip);
 		lvListQuestions.setAdapter(iqsetListAdapter);
 		
         lvListQuestions.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
