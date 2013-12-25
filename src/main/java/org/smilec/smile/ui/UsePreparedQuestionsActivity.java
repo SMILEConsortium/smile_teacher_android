@@ -178,7 +178,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
             } else {
                 new LoadTask(UsePreparedQuestionsActivity.this).execute();
             }
-            ActivityUtil.showLongToast(UsePreparedQuestionsActivity.this, R.string.starting);
+            ActivityUtil.showLongToast(UsePreparedQuestionsActivity.this, R.string.toast_starting);
         }
 
     }
@@ -209,7 +209,7 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         intent.putExtra(GeneralActivity.PARAM_SECONDS, spinnerSeconds.getSelectedItem().toString());
         startActivity(intent);
 
-        ActivityUtil.showLongToast(this, R.string.starting);
+        ActivityUtil.showLongToast(this, R.string.toast_starting);
 
         this.finish();
     }

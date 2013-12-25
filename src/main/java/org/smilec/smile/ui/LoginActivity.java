@@ -191,7 +191,7 @@ public class LoginActivity extends Activity {
         
         // Display toast through the handler
     	Message msg = null;
-		msg = mHandler.obtainMessage(MSG_OK, getResources().getString(R.string.connection_established));
+		msg = mHandler.obtainMessage(MSG_OK, getResources().getString(R.string.toast_connection_established));
 		mHandler.sendMessage(msg);
 		
 		//Starting SessionValuesActivity

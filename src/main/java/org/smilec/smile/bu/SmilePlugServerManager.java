@@ -60,7 +60,7 @@ public class SmilePlugServerManager extends AbstractBaseManager {
             for (Question question : questions) {
                 LocalQuestionWrapper questionWrapper = new LocalQuestionWrapper(question);
 
-                // Add in a sessionID to inform the server thisz is coming from a teacher
+                // Add in a sessionID to inform the server this is coming from a teacher
                 questionWrapper.setSessionID(Long.toString(System.currentTimeMillis())); // XXX This really should be the sessionID from the server (via couchDB _ID)
                 Gson gson = new Gson();
                 String json = gson.toJson(questionWrapper);

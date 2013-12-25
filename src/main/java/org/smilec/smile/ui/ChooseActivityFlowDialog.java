@@ -108,11 +108,11 @@ public class ChooseActivityFlowDialog extends Activity {
             if (status != null && !status.equals("") && !status.equals("RESET")) {
             	
                 new LoadTask(ChooseActivityFlowDialog.this).execute();
-                ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.recovering);
+                ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.toast_recovering);
 
             } else {
                 new LoadTask(ChooseActivityFlowDialog.this).execute();
-                ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.starting);
+                ActivityUtil.showLongToast(ChooseActivityFlowDialog.this, R.string.toast_starting);
             }
         }
     }
