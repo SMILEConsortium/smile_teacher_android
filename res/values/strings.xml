@@ -13,6 +13,7 @@
 	<string name="session_title_hint">Session title</string>
 	<string name="group_name_hint">Group name</string>
 	<string name="date_hint">Date</string>
+	<string name="size_hint">Size</string>
 	<string name="btn_create_session">Create</string>
 	<string name="no_picture">No picture</string>
 	<string name="delete_btn">Del btn</string>
