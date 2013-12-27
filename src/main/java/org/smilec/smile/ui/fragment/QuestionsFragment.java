@@ -15,15 +15,9 @@ limitations under the License.
 **/
 package org.smilec.smile.ui.fragment;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream.GetField;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -34,10 +28,8 @@ import org.json.JSONException;
 import org.smilec.smile.R;
 import org.smilec.smile.bu.BoardManager;
 import org.smilec.smile.bu.Constants;
-import org.smilec.smile.bu.QuestionsManager;
 import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.bu.exception.DataAccessException;
-import org.smilec.smile.bu.json.CurrentMessageJSONParser;
 import org.smilec.smile.domain.Board;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
@@ -47,7 +39,6 @@ import org.smilec.smile.util.ActivityUtil;
 import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.SendEmailAsyncTask;
 
-import android.R.bool;
 import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.app.Dialog;
@@ -69,7 +60,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class QuestionsFragment extends AbstractFragment {
 

@@ -18,6 +18,7 @@ package org.smilec.smile.ui;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 import org.smilec.smile.R;
@@ -29,6 +30,7 @@ import org.smilec.smile.domain.IQSet;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
 import org.smilec.smile.ui.adapter.IQSetListAdapter;
+import org.smilec.smile.ui.adapter.QuestionListAdapter;
 import org.smilec.smile.util.ActivityUtil;
 import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.DialogUtil;
@@ -72,9 +74,11 @@ public class UsePreparedQuestionsActivity extends ListActivity {
     private String ip;
     private String status;
 
-    private List<IQSet> iqsets;
+//    private List<IQSet> iqsets;
     private IQSet iqset;
     private IQSetListAdapter iqsetListAdapter;
+    
+//    private ArrayAdapter<IQSet> previewIQSetAdapter;
 
     private ListView lvListQuestions;
     private Results results;
@@ -154,35 +158,41 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         spinnerSeconds.setAdapter(adapterSeconds);
     }
 
+    /**
+     * Listener on the button to load iqsets
+     */
     private class LoadButtonListener implements OnClickListener {
 
         @Override
         public void onClick(View v) {
-            if (status != null) {
-                Log.d("SMILE Teacher", "Status = " + status);
-                if (!status.equals("") && !status.equals("START_MAKE")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                        UsePreparedQuestionsActivity.this);
-                    builder.setMessage(R.string.game_running).setCancelable(false)
+            
+        	if (status != null && !status.equals("") && !status.equals("START_MAKE")) {
+                	
+                	Log.d("SMILE Teacher", "Status = " + status);
+                    
+                	AlertDialog.Builder builder = new AlertDialog.Builder(UsePreparedQuestionsActivity.this);
+                    
+                	builder.setMessage(R.string.game_running).setCancelable(false)
                         .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
+                            
+                        	@Override
                             public void onClick(DialogInterface dialog, int id) {
                                 new LoadTask(UsePreparedQuestionsActivity.this).execute();
                             }
                         });
                     AlertDialog alert = builder.create();
                     alert.show();
-                } else {
-                    new LoadTask(UsePreparedQuestionsActivity.this).execute();
-                }
+                
             } else {
                 new LoadTask(UsePreparedQuestionsActivity.this).execute();
             }
             ActivityUtil.showLongToast(UsePreparedQuestionsActivity.this, R.string.toast_starting);
         }
-
     }
 
+    /**
+     * Listener on the checkbox enable/disable timer
+     */
     private class CbQuestionsButtonListener implements OnClickListener {
 
         @Override
@@ -199,34 +209,20 @@ public class UsePreparedQuestionsActivity extends ListActivity {
         }
     }
 
-    private void openGeneralActivity() {
-        Intent intent = new Intent(this, GeneralActivity.class);
-        intent.putExtra(GeneralActivity.PARAM_IP, ip);
-        intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
-        intent.putExtra(GeneralActivity.PARAM_STATUS, status);
-        intent.putExtra(GeneralActivity.PARAM_HOURS, spinnerHours.getSelectedItem().toString());
-        intent.putExtra(GeneralActivity.PARAM_MINUTES, spinnerMinutes.getSelectedItem().toString());
-        intent.putExtra(GeneralActivity.PARAM_SECONDS, spinnerSeconds.getSelectedItem().toString());
-        startActivity(intent);
-
-        ActivityUtil.showLongToast(this, R.string.toast_starting);
-
-        this.finish();
-    }
-
+    
     private File[] getQuestions() throws DataAccessException {
         return new QuestionsManager().getSavedQuestions();
     }
 
-    private void loadQuestionsList() {
+    private void loadIQSets() {
         clearSelection();
 
 		List<IQSet> iqsets = new ArrayList<IQSet>();
-		try {
-			iqsets = new SmilePlugServerManager().getIQSets(ip, UsePreparedQuestionsActivity.this);
-		} catch (NetworkErrorException e) {
-			e.printStackTrace();
-		}
+		
+		try
+			{ iqsets = new SmilePlugServerManager().getIQSets(ip, UsePreparedQuestionsActivity.this); }
+		catch (NetworkErrorException e) 
+			{ e.printStackTrace(); }
         
 		iqsetListAdapter = new IQSetListAdapter(UsePreparedQuestionsActivity.this, iqsets,ip);
 		lvListQuestions.setAdapter(iqsetListAdapter);
@@ -295,24 +291,18 @@ public class UsePreparedQuestionsActivity extends ListActivity {
             return null;
         }
 
-        /* 
-         * File[] fileQuestions contains the 4 preloaded local files, but this is not used anymore
-         * and it is replaced by the iqsets
-         */
         @Override
         protected void onPostExecute(File[] fileQuestions) {
         	
         	boolean iqsetsExist = false;
         	
-        	try {
-				iqsetsExist = new SmilePlugServerManager().iqsetsExist(ip, context);
-			} catch (NetworkErrorException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	try 
+        		{iqsetsExist = new SmilePlugServerManager().iqsetsExist(ip, context); }
+        	catch (NetworkErrorException e) 
+        		{ e.printStackTrace(); }
         	
             if (iqsetsExist) {
-                UsePreparedQuestionsActivity.this.loadQuestionsList();
+                UsePreparedQuestionsActivity.this.loadIQSets();
 
             } else {
             	btOk.setEnabled(false);
@@ -361,5 +351,20 @@ public class UsePreparedQuestionsActivity extends ListActivity {
                 UsePreparedQuestionsActivity.this.openGeneralActivity();
             }
         }
+    }
+    
+    private void openGeneralActivity() {
+        Intent intent = new Intent(this, GeneralActivity.class);
+        intent.putExtra(GeneralActivity.PARAM_IP, ip);
+        intent.putExtra(GeneralActivity.PARAM_RESULTS, results);
+        intent.putExtra(GeneralActivity.PARAM_STATUS, status);
+        intent.putExtra(GeneralActivity.PARAM_HOURS, spinnerHours.getSelectedItem().toString());
+        intent.putExtra(GeneralActivity.PARAM_MINUTES, spinnerMinutes.getSelectedItem().toString());
+        intent.putExtra(GeneralActivity.PARAM_SECONDS, spinnerSeconds.getSelectedItem().toString());
+        startActivity(intent);
+
+        ActivityUtil.showLongToast(this, R.string.toast_starting);
+
+        this.finish();
     }
 }

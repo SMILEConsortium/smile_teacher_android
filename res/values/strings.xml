@@ -90,6 +90,7 @@
 	<string name="answers">Complete</string>
 	<string name="question">Question</string>
 	<string name="question_uppercase">QUESTION</string>
+	<string name="iqset_uppercase">IQSET</string>
 	<string name="student">Students</string>
 
 
