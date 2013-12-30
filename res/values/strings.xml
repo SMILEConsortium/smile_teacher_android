@@ -19,7 +19,7 @@
 	<string name="toast_starting">Starting…</string>
 	<string name="toast_solving">Solving…</string>
 	<string name="toast_sorting">Sorting…</string>
-	<string name="toast_recovering">Recovering…</string>
+	<string name="toast_recovering">Returning to Session ...</string>
 	<string name="toast_retaking">Retaking…</string>
 	<string name="toast_down_or_unavailable">Smileplug is down or unavailable</string>
 	
@@ -66,7 +66,7 @@
 	<string name="top_scores">TOP SCORER</string>
 
 	<string name="about">About</string>
-	<string name="about_text">SMILE Teacher App 0.3.1:  The activity management application for teachers,
+	<string name="about_text">SMILE Teacher App 0.9.8b1:  The activity management application for teachers,
 	called the SMILE Teacher, serves to manage and
 	save data from the activity via an ad-hoc network. It is a
 	Graphic User Interface-based application that can be
