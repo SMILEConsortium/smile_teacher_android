@@ -3,6 +3,7 @@ package org.smilec.smile.domain;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
@@ -15,6 +16,7 @@ public class IQSet {
 	private String sessionTitle;
 	private String teacherName;
 	private String groupName;
+	private Collection<Question> questions;
 	
 	public IQSet() { }
 	
@@ -79,5 +81,12 @@ public class IQSet {
 	}
 	public void setGroupName(String groupName) { 
 		this.groupName = groupName;
+	}
+
+	public Collection<Question> getQuestions() {
+		return questions;
+	}
+	public void setQuestions(Collection<Question> questions) {
+		this.questions = questions;
 	}
 }

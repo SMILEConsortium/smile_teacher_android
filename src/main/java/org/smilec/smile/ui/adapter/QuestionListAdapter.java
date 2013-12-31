@@ -15,38 +15,25 @@ limitations under the License.
 **/
 package org.smilec.smile.ui.adapter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.List;
 
 import org.smilec.smile.R;
 import org.smilec.smile.bu.Constants;
-import org.smilec.smile.bu.QuestionsManager;
 import org.smilec.smile.bu.SmilePlugServerManager;
 import org.smilec.smile.domain.CurrentMessageStatus;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.Results;
 import org.smilec.smile.ui.GeneralActivity;
-import org.smilec.smile.ui.fragment.QuestionsFragment;
 import org.smilec.smile.ui.widget.checkbox.InertCheckBox;
 import org.smilec.smile.util.ActivityUtil;
 import org.smilec.smile.util.CloseClickListenerUtil;
 import org.smilec.smile.util.ImageLoader;
 
 import android.accounts.NetworkErrorException;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,10 +43,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class QuestionListAdapter extends ArrayAdapter<Question> {
     

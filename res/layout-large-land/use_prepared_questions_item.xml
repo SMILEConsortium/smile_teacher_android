@@ -16,7 +16,16 @@
 		    android:button="@drawable/checkbox"
 			android:focusable="false"
 			android:layout_marginLeft="20dip"
+			android:layout_marginRight="5dip"
 			android:layout_gravity="left|center_vertical" />
+		
+		<ImageView
+	        android:id="@+id/iv_details"
+	        android:src="@drawable/details"
+	        android:background="@color/gray"
+	        android:layout_marginBottom="3dip"
+	        android:layout_marginRight="25dip"
+	        android:layout_marginTop="3dip"/>
 		
 		<TextView
 		    android:text="@string/brackets_open"
@@ -31,7 +40,7 @@
 	        android:text="@string/size_hint"
 	        android:textStyle="bold"
 	        android:layout_gravity="center_vertical"
-	        android:textColor="@color/blue" />
+	        android:textColor="@color/pink" />
 		
 		<TextView
 		    android:text="@string/brackets_close"
@@ -39,7 +48,7 @@
 			android:textColor="@color/black"
 			android:focusable="false"
 			android:layout_gravity="left|center_vertical"/>
-
+		
 		<TextView
 	        android:textSize="12sp"
 	        android:text="@string/separator"
