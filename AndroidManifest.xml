@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="org.smilec.smile"
 	android:versionCode="9"
-	android:versionName="0.9.8b1">
+	android:versionName="0.9.9b1">
 
 	<uses-sdk android:minSdkVersion="7" />
 
