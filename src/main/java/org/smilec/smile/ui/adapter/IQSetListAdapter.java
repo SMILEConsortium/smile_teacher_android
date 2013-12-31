@@ -76,6 +76,7 @@ public class IQSetListAdapter extends ArrayAdapter<IQSet> {
             TextView tvDate = (TextView) convertView.findViewById(R.id.tv_date);
             tvDate.setText(String.valueOf(iqset.getDate()));
             
+            // Here we get the list of questions...
             String idIQSet;
             int size = 0;
             Collection<Question> questionsOfIQSet = null;
@@ -87,10 +88,12 @@ public class IQSetListAdapter extends ArrayAdapter<IQSet> {
 			} 
 			catch (NetworkErrorException e) { e.printStackTrace(); }
             
+			// ...to count the number of questions 
             TextView tvSize = (TextView) convertView.findViewById(R.id.tv_size);
             if(size < 10) tvSize.setText("0"+String.valueOf(questionsOfIQSet.size()));
             else		  tvSize.setText(String.valueOf(questionsOfIQSet.size()));
             
+            // ...and get values for the preview if listener is called
             ImageView ivDetails = (ImageView) convertView.findViewById(R.id.iv_details);
             iqset.setQuestions(questionsOfIQSet);
         	ivDetails.setOnClickListener(new OpenIQSetDetailsListener(iqset));
@@ -100,7 +103,7 @@ public class IQSetListAdapter extends ArrayAdapter<IQSet> {
 	}
 	
 	/**
-     * Class called to display the preview of an IQSet 
+     * Listener called to display the preview of an IQSet 
      */
     private class OpenIQSetDetailsListener implements OnClickListener {
 
@@ -125,6 +128,9 @@ public class IQSetListAdapter extends ArrayAdapter<IQSet> {
         }
     }
     
+/**
+ * Preparing the Dialog to show a preview of IQSet
+ */
 private void loadDetailOfIQSet(final Dialog detailsDialog, IQSet iqsetToPreview) {
     	
     	ImageButton btClose = (ImageButton) detailsDialog.findViewById(R.id.bt_close);
@@ -136,32 +142,5 @@ private void loadDetailOfIQSet(final Dialog detailsDialog, IQSet iqsetToPreview)
         ListView lvQuestionsPreviewed = (ListView) detailsDialog.findViewById(R.id.lv_questions_preview);
         ArrayAdapter<Question> data = new IQSetPreviewAdapter(context, (List<Question>) iqsetToPreview.getQuestions());
         lvQuestionsPreviewed.setAdapter(data);
-        
-//        ImageView tvImage = (ImageView) detailsDialog.findViewById(R.id.iv_image);
-
-//        Display displaySize = ActivityUtil.getDisplaySize(context);
-//        float percentWidth = (float) (displaySize.getWidth() * 0.6);
-//        float percentHeight = (float) (displaySize.getHeight() * 0.6);
-//        int width = (int) (displaySize.getWidth() - percentWidth);
-//        int height = (int) (displaySize.getHeight() - percentHeight);
-//        LayoutParams lp = new LayoutParams(width, height);
-//        lp.setMargins(35, 20, 50, 0);
-//        tvImage.setLayoutParams(lp);
-
-//        if (question.hasImage()) {
-//            byte[] data = ImageLoader.loadBitmap(Constants.HTTP + ip + question.getImageUrl());
-//
-//            if (data != null) {
-//                BitmapFactory.Options options = new BitmapFactory.Options();
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
-//                if (bitmap != null) {
-//                    tvImage.setImageBitmap(bitmap);
-//                }
-//            }
-
-//        } else {
-//            tvImage.setVisibility(View.GONE);
-//        }
-
     }
 }

@@ -87,7 +87,6 @@
 	        android:layout_gravity="center_vertical"
 	        android:layout_marginLeft="1dip"
 	        android:layout_marginRight="3dip"
-	        android:background="@color/gray"
 	        android:textColor="@color/black" />
 
 	    <TextView
