@@ -52,6 +52,7 @@
 	<string name="rating_table">Highest\nRating</string>
 	<string name="students_completed">completed</string>
 	<string name="students_correct">correct</string>
+	<string name="limit_to_succeed">Percent limit to succeed</string>
 
 	<string name="send_report">Send a report</string>
 	<string name="send_report_body">Please leave your report:</string>
@@ -66,7 +67,7 @@
 	<string name="top_scores">TOP SCORER</string>
 
 	<string name="about">About</string>
-	<string name="about_text">SMILE Teacher App 0.9.8b1:  The activity management application for teachers,
+	<string name="about_text">SMILE Teacher App 0.9.9b1:  The activity management application for teachers,
 	called the SMILE Teacher, serves to manage and
 	save data from the activity via an ad-hoc network. It is a
 	Graphic User Interface-based application that can be
