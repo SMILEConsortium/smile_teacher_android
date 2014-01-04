@@ -213,16 +213,10 @@ public class SmilePlugServerManager extends AbstractBaseManager {
         try {
         	String s = IOUtil.loadContent(is, "UTF-8");
             iqsets = IQSetJSONParser.parseListOfIQSet(new JSONObject(s));
-            
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-            IOUtil.silentClose(is);
         }
+        catch (JSONException e) { e.printStackTrace(); } 
+        catch (IOException e) { e.printStackTrace(); } 
+        finally { IOUtil.silentClose(is); }
     	
     	return iqsets;
     }

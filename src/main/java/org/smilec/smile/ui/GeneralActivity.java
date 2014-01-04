@@ -66,9 +66,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -127,7 +131,7 @@ public class GeneralActivity extends FragmentActivity {
         tvTime = (TextView) findViewById(R.id.tv_time);
         tvRemaining = (TextView) findViewById(R.id.tv_remaining_time);
         tvStatus = (TextView) findViewById(R.id.tv_status);
-
+        
         if (savedInstanceState != null) {
             Board tmp = (Board) savedInstanceState.getSerializable(PARAM_BOARD);
 
@@ -245,7 +249,7 @@ public class GeneralActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        
         btSolve.setOnClickListener(new SolveButtonListener());
         btResults.setOnClickListener(new ResultsButtonListener());
 
@@ -611,6 +615,30 @@ public class GeneralActivity extends FragmentActivity {
             .findViewById(R.id.rl_top_scorers);
         rlTopScorersContainer.setVisibility(View.VISIBLE);
 
+        
+        Spinner spLimitToSucceed = (Spinner) findViewById(R.id.sp_limit_to_succeed);
+        ArrayAdapter<?> adapterLimit = ArrayAdapter.createFromResource(this, R.array.percent_correct, android.R.layout.simple_spinner_item);
+        adapterLimit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spLimitToSucceed.setAdapter(adapterLimit);
+        
+        // Initialize the spinner to 70%
+        spLimitToSucceed.setSelection(2);
+        
+        // If the teacher clicks on the spinner to set a different limit to succeed
+        spLimitToSucceed.setOnItemSelectedListener(new OnItemSelectedListener() {
+            
+        	@Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+	            String[] bases = getResources().getStringArray(R.array.percent_correct);
+				((StudentsFragment)activeFragment).updatePercentCorrect(Integer.parseInt(bases[position]));
+            }
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) { }
+		});
+        
+        // If the teacher clicks on "Send results" button
         Button btSendResults = (Button) GeneralActivity.this.findViewById(R.id.bt_send_results);
 		btSendResults.setVisibility(View.VISIBLE);
 		btSendResults.setOnClickListener(new OnClickListener() {
@@ -619,7 +647,6 @@ public class GeneralActivity extends FragmentActivity {
 			public void onClick(View v) {
 				SendEmailResultsUtil.send(board, ip, GeneralActivity.this);
 			}
-
 		});
     }
 

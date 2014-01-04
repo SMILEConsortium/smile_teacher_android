@@ -54,6 +54,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class StudentsFragment extends AbstractFragment {
@@ -66,6 +67,8 @@ public class StudentsFragment extends AbstractFragment {
     private Results results;
 
     private boolean run;
+    
+    private int limitToSucceed;
 
     private String ip;
 
@@ -106,9 +109,7 @@ public class StudentsFragment extends AbstractFragment {
         super.onResume();
 
         ip = getActivity().getIntent().getStringExtra(GeneralActivity.PARAM_IP);
-        results = (Results) getActivity().getIntent().getSerializableExtra(
-            GeneralActivity.PARAM_RESULTS);
-
+        results = (Results) getActivity().getIntent().getSerializableExtra(GeneralActivity.PARAM_RESULTS);
         adapter = new StudentListAdapter(getActivity(), students);
 
         ListView lvListStudents = (ListView) getActivity().findViewById(R.id.lv_students);
@@ -190,7 +191,7 @@ public class StudentsFragment extends AbstractFragment {
                     tvAnswers.setText(getString(R.string.answers) + ": " + countAnswers);
 
                     if (results != null) {
-                        setTopScorersArea(results, board);
+                        setTopScorersArea(results);
                     }
                 }
 
@@ -296,7 +297,7 @@ public class StudentsFragment extends AbstractFragment {
 	    		} 
 	    	}
     		// if the student has 70+% of correct answers, we count it 
-    		nbStudentOver70 += nbQuestionsCorrect*100/questions.size() >= 70 ? 1:0;
+    		nbStudentOver70 += nbQuestionsCorrect*100/questions.size() >= this.limitToSucceed ? 1:0;
     	}
 		
     	float percent = !students.isEmpty()? (float) (nbStudentOver70/students.size())*100 : 0;
@@ -306,8 +307,16 @@ public class StudentsFragment extends AbstractFragment {
     							" ("+ String.format("%.0f", nbStudentOver70)+"/"+students.size() +")";
     	return s;
     }
+    
+    public void updatePercentCorrect(int limitToSucceed) {
+    	
+    	this.limitToSucceed = limitToSucceed;
+    	TextView tvPercentCorrect = (TextView) getActivity().findViewById(R.id.tv_percent_correct);
+        tvPercentCorrect.setText(this.getPercentCorrect());
+        tvPercentCorrect.setVisibility(View.VISIBLE);
+    }
 
-    private void setTopScorersArea(Results results, Board board) {
+    private void setTopScorersArea(Results results) {
         try {
             TextView tvTopScorersTop = (TextView) getActivity().findViewById(
                 R.id.tv_top_scorers_top);
@@ -327,10 +336,6 @@ public class StudentsFragment extends AbstractFragment {
             //TextView tvTopScorersRating = (TextView) getActivity().findViewById(R.id.tv_top_scorers_rating);
             //tvTopScorersRating.setText(getString(R.string.rating) + ": " + results.getWinnerRating());
 
-            // Seems useless >> issues 14 
-            //final RatingBar rbRatingBar = (RatingBar) getActivity().findViewById(R.id.rb_ratingbar);
-            //rbRatingBar.setRating(results.getWinnerRating());
-            
         } catch (JSONException e) {
         	new SendEmailAsyncTask(e.getMessage(),JSONException.class.getName(),StudentsFragment.class.getName()).execute();
             Log.e("StudentsFragment", "Error: " + e);
