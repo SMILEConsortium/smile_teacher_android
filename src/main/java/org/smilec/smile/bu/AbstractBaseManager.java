@@ -51,14 +51,14 @@ public abstract class AbstractBaseManager {
         return isAvailable;
     }  
 
-    protected static void checkConnection(Context context) throws NetworkErrorException {
+    protected static boolean checkConnection(Context context) throws NetworkErrorException {
 
         boolean isConnected = DeviceUtil.isConnected(context);
 
         if (!isConnected) {
             throw new NetworkErrorException("Connection unavailable");
         }
-
+        return isConnected;
     }
 
     protected InputStream get(String ip, Context context, String url) throws NetworkErrorException {
@@ -119,9 +119,12 @@ public abstract class AbstractBaseManager {
 
     }
 
-    public void connect(String ip, Context context) throws NetworkErrorException {
-        checkConnection(context);
-        checkServer(ip);
+    public boolean connect(String ip, Context context) throws NetworkErrorException {
+        
+    	if(checkConnection(context) && checkServer(ip)) {
+    		return true;
+    	} else 
+    		return false;
     }
 
 }

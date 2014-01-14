@@ -34,13 +34,16 @@ import org.smilec.smile.domain.IQSet;
 import org.smilec.smile.domain.LocalQuestionWrapper;
 import org.smilec.smile.domain.Question;
 import org.smilec.smile.domain.ServerQuestionWrapper;
+import org.smilec.smile.ui.GeneralActivity;
 import org.smilec.smile.util.HttpUtil;
 import org.smilec.smile.util.IOUtil;
 import org.smilec.smile.util.SendEmailAsyncTask;
 import org.smilec.smile.util.SmilePlugUtil;
 
 import android.accounts.NetworkErrorException;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -289,8 +292,9 @@ public class SmilePlugServerManager extends AbstractBaseManager {
     }
 
     public void startSolvingQuestions(String ip, Context context) throws NetworkErrorException {
-        String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_SOLVING_QUESTIONS_URL);
-        put(ip, context, url, "{}");
+        
+    	String url = SmilePlugUtil.createUrl(ip, SmilePlugUtil.START_SOLVING_QUESTIONS_URL);
+    	put(ip, context, url, "{}");
     }
 
     public void startRetakeQuestions(String ip, Context context, Board board) throws NetworkErrorException {

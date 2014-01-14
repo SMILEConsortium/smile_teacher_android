@@ -75,6 +75,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GeneralActivity extends FragmentActivity {
 
@@ -198,8 +199,7 @@ public class GeneralActivity extends FragmentActivity {
             case KeyEvent.KEYCODE_BACK:
                 AlertDialog.Builder builderBack = new AlertDialog.Builder(GeneralActivity.this);
                 builderBack
-                    .setMessage(
-                        "Are you sure you want to exit? This operation will reset the game and exit.")
+                    .setMessage("Are you sure you want to exit? This operation will reset the game and exit.")
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -427,7 +427,6 @@ public class GeneralActivity extends FragmentActivity {
                             
                     		try {
                     			//new SmilePlugServerManager().connect(ip, GeneralActivity.this);
-                    			
                                 new SmilePlugServerManager().resetGame(ip, GeneralActivity.this);
                                 // QuestionsManager.resetListOfDeletedQuestions(GeneralActivity.this);
                                 GeneralActivity.this.finish();
@@ -685,10 +684,15 @@ public class GeneralActivity extends FragmentActivity {
 
         @Override
         protected String doInBackground(Void... params) {
-            try {
-                new SmilePlugServerManager().startSolvingQuestions(ip, context);
+        	
 
-                return new SmilePlugServerManager().currentMessageGame(ip, context);
+        	SmilePlugServerManager spsm = new SmilePlugServerManager(); 
+        	
+            try {
+            	//spsm.connect(ip, context);
+            	spsm.startSolvingQuestions(ip, context);
+            	//String message = spsm.currentMessageGame(ip, context); 
+                return spsm.currentMessageGame(ip, context); 
             } catch (NetworkErrorException e) {
                 handleException(e);
                 return "";
@@ -807,15 +811,20 @@ public class GeneralActivity extends FragmentActivity {
         @Override
         protected Board doInBackground(Void... arg0) {
 
+        	Board board = null;
+        	
             try {
-                return loadBoard();
+//            	if(new SmilePlugServerManager().connect(ip, getApplicationContext())) {
+            		board = loadBoard();
+//            	}
             } catch (NetworkErrorException e) {
                 Log.e(Constants.LOG_CATEGORY, e.getMessage());
+                board = GeneralActivity.this.board;
             } catch (DataAccessException e) {
                 Log.e(Constants.LOG_CATEGORY, e.getMessage());
             }
 
-            return null;
+            return board;
         }
 
         @Override
