@@ -71,7 +71,7 @@
 	    android:layout_toLeftOf="@+id/view_separator_middle"
 	    android:choiceMode="singleChoice"
 	    android:divider="@android:color/transparent"
-  		android:dividerHeight="10.0sp"/>
+  		android:dividerHeight="10.0sp" />
 	
 	<TextView
         android:id="@+id/tv_hours_spinner"
@@ -138,23 +138,17 @@
     	android:layout_toRightOf="@+id/tv_seconds_spinner"
     	android:layout_below="@+id/tv_minutes_spinner"/>
 	
-	
 
 	<View
 		android:id="@+id/view_separator_middle"
 		android:layout_width="1dip"
 		android:layout_height="wrap_content"
-		
-		android:layout_centerInParent="true"
-		
 		android:layout_above="@+id/view_separator2"
 		android:layout_below="@+id/bt_close"
 		android:layout_marginLeft="10dp"
 	    android:layout_marginRight="10dp"
 	    android:layout_toLeftOf="@+id/cb_questions"
 		android:background="@color/gray" />
-
-	
 
 	<CheckBox
 	    android:id="@+id/cb_questions"
@@ -175,6 +169,5 @@
   		android:layout_centerHorizontal="true"
   		android:text="@string/load"
   		android:textSize="18sp" />
-	
 
 </RelativeLayout>

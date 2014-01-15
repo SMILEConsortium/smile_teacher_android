@@ -51,11 +51,10 @@
             android:id="@+id/view_separator"
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dip"
             android:background="@color/blue" />
-
+        
         <TableRow
             android:id="@+id/tr_row"
             android:layout_marginTop="10dip"
@@ -117,11 +116,10 @@
             android:id="@+id/view_separator_list"
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dip"
             android:background="@color/gray" />
-
+        
         <ListView
             android:id="@+id/lv_students"
             android:layout_width="wrap_content"
@@ -152,9 +150,8 @@
         android:shrinkColumns="*"
         android:stretchColumns="*" >
 
-        
         <TableRow
-            android:id="@+id/tr_row"
+            android:id="@+id/tr_row_students"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip" >
@@ -189,7 +186,7 @@
         </TableRow>
 
 	    <View
-	        android:id="@+id/view_separator"
+	        android:id="@+id/view_separator_invisible"
 	        android:layout_width="fill_parent"
 	        android:layout_height="1dip"
 	        android:layout_marginLeft="10dip"

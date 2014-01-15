@@ -1,97 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_dialog"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:background="@drawable/rounded_border"
-	android:layout_gravity="center"
-	android:layout_margin="200dip">
+    <RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/container"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:background="@drawable/rounded_border"
+  	android:layout_gravity="center"
+  	android:layout_margin="250dip">
 
-	<TextView
+        <TextView
+	  	android:id="@+id/separator"
+	  	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="15dip"
+		android:layout_marginLeft="15dip"
+		android:layout_marginRight="15dip"
+		android:textColor="@color/black"
+		android:text="@string/separator"
+		android:textSize="14sp"
+		android:layout_centerHorizontal="true" />
+        
+    <TextView
 	  	android:id="@+id/tv_title"
 	  	android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="10dip"
 		android:textColor="@color/black"
-		android:textSize="18sp"
-		android:layout_centerHorizontal="true"/>
-
+		android:textSize="14sp"
+		android:layout_toLeftOf="@id/separator"
+		android:layout_alignTop="@id/separator" />
+    
+	<TextView
+	  	android:id="@+id/tv_session_values"
+	  	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/session_values"
+		android:textColor="@color/black"
+		android:textSize="14sp"
+		android:layout_toRightOf="@id/separator"
+		android:layout_alignTop="@id/separator" />	
+	
 	<View
-		android:id="@+id/view_separator2"
+		android:id="@+id/view_separator"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
 		android:background="@color/gray"
+		android:layout_marginTop="4dip"
 		android:layout_marginLeft="5dip"
 		android:layout_marginRight="5dip"
-		android:layout_marginBottom="20dip"
-		android:layout_alignParentBottom="true"/>
-
-	<Button
-	    android:id="@+id/btn_create_session"
-	    android:layout_width="150sp"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginBottom="35dp"
-	    android:text="@string/btn_create_session"
-	    android:textSize="20sp" />
-
+		android:layout_below="@+id/separator" />
+	
 	<EditText
-	    android:id="@+id/session_title"
-	    android:layout_width="200dp"
-	    android:layout_height="50dp"
-	    android:layout_alignLeft="@+id/group_name"
-	    android:layout_centerVertical="true"
-	    android:ems="10"
-	    android:hint="@string/session_title_hint"
-	    android:inputType="textAutoCorrect|textCapSentences"
-	    android:singleLine="true" />
-
+		android:id="@+id/teacher_name"
+		android:layout_width="200dp"
+		android:layout_height="50dp"
+		android:hint="@string/teacher_name_hint"
+		android:singleLine="true"
+		android:inputType="textAutoCorrect|textCapSentences"
+		android:layout_below="@+id/view_separator"
+		android:layout_marginTop="10dp"
+		android:layout_centerHorizontal="true" >
+	</EditText>
+	
 	<EditText
-	    android:id="@+id/group_name"
-	    android:layout_width="200dp"
-	    android:layout_height="50dp"
-	    android:layout_alignLeft="@+id/teacher_name"
-	    android:layout_below="@+id/session_title"
-	    android:ems="10"
-	    android:hint="@string/group_name_hint"
-	    android:inputType="textAutoCorrect|textCapSentences"
-	    android:singleLine="true" />
-
+		android:id="@+id/session_title"
+		android:layout_width="200dp"
+		android:layout_height="50dp"
+		android:hint="@string/session_title_hint"
+		android:singleLine="true"
+		android:inputType="textAutoCorrect|textCapSentences"
+		android:layout_marginTop="2dp"
+		android:layout_below="@+id/teacher_name"
+		android:layout_centerHorizontal="true" >
+	</EditText>
+	
 	<EditText
-	    android:id="@+id/teacher_name"
-	    android:layout_width="200dp"
-	    android:layout_height="50dp"
-	    android:layout_above="@+id/session_title"
-	    android:layout_centerHorizontal="true"
-	    android:ems="10"
-	    android:hint="@string/teacher_name_hint"
-	    android:inputType="textAutoCorrect|textCapSentences"
-	    android:singleLine="true" >
-
-	    <requestFocus />
+		android:id="@+id/group_name"
+		android:layout_width="200dp"
+		android:layout_height="50dp"
+		android:hint="@string/group_name_hint"
+		android:singleLine="true"
+		android:inputType="textAutoCorrect|textCapSentences"
+		android:layout_marginTop="2dp"
+		android:layout_below="@+id/session_title"
+		android:layout_centerHorizontal="true" >
 	</EditText>
 
-	<TextView
-	    android:id="@+id/tv_session_values"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignBaseline="@+id/tv_title"
-	    android:layout_alignBottom="@+id/tv_title"
-	    android:layout_centerHorizontal="true"
-	    android:layout_margin="5dip"
-	    android:text="@string/session_values"
-	    android:textColor="@color/black"
-	    android:textSize="20sp" />
+	<Button
+	  	android:id="@+id/btn_create_session"
+	  	android:layout_width="100sp"
+		android:layout_height="wrap_content"
+		android:text="@string/btn_create_session"
+		android:textSize="18sp" 
+		android:layout_marginLeft="120dip"
+		android:layout_toRightOf="@+id/session_title"
+		android:layout_alignBottom="@+id/session_title"/>
 
-	<View
-	    android:id="@+id/view_separator"
-	    android:layout_width="fill_parent"
-	    android:layout_height="1dip"
-	    android:layout_alignParentLeft="true"
-	    android:layout_below="@+id/tv_title"
-	    android:layout_margin="2dip"
-	    android:background="@color/gray" />
-
-</RelativeLayout>
+    <ImageButton
+        android:id="@+id/bt_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_back"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toLeftOf="@+id/session_title"
+		android:layout_alignBottom="@+id/session_title"
+        android:contentDescription="@string/delete_btn" />
+        
+    </RelativeLayout>
