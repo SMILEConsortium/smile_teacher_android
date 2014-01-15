@@ -91,7 +91,8 @@
 	    android:layout_alignLeft="@+id/sp_seconds"
 	    android:layout_below="@+id/cb_questions"
 	    android:layout_marginRight="20dip"
-	    android:prompt="@string/hours" />
+	    android:prompt="@string/hours"
+	    android:layout_marginTop="10dip" />
 
 	<TextView
 	    android:id="@+id/tv_minutes_spinner"
