@@ -71,7 +71,10 @@
 	    android:ems="10"
 	    android:hint="@string/teacher_name_hint"
 	    android:inputType="textAutoCorrect|textCapSentences"
-	    android:singleLine="true" />
+	    android:singleLine="true" >
+		
+		<requestFocus />
+	</EditText>
 
 	<EditText
 	    android:id="@+id/session_title"
@@ -93,10 +96,7 @@
 	    android:ems="10"
 	    android:hint="@string/group_name_hint"
 	    android:inputType="textAutoCorrect|textCapSentences"
-	    android:singleLine="true" >
-	    
-	    <requestFocus />
-	</EditText>
+	    android:singleLine="true" />
 
 	<Button
 	    android:id="@+id/btn_create_session"
