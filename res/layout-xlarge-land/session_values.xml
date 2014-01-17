@@ -104,6 +104,6 @@
         android:layout_marginBottom="10dp"
         android:layout_toLeftOf="@+id/session_title"
 		android:layout_alignBottom="@+id/session_title"
-        android:contentDescription="@string/delete_btn" />
+        android:contentDescription="@string/btn_back" />
         
     </RelativeLayout>

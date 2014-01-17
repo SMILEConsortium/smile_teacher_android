@@ -80,9 +80,9 @@
         android:text="@string/hours"
         android:textSize="12sp"
         android:textColor="@color/black"
-        android:layout_marginTop="10dip"
-	    android:layout_toRightOf="@+id/view_separator_middle"
-    	android:layout_below="@+id/cb_questions"/>
+        android:layout_alignTop="@+id/sp_hours"
+        android:layout_marginTop="15dip"
+	    android:layout_toRightOf="@+id/view_separator_middle" />
 
 	<Spinner
 	    android:id="@+id/sp_hours"
@@ -92,7 +92,8 @@
 	    android:layout_below="@+id/cb_questions"
 	    android:layout_marginRight="20dip"
 	    android:prompt="@string/hours"
-	    android:layout_marginTop="10dip" />
+	    android:layout_marginTop="10dip"
+	    android:layout_alignParentRight="true" />
 
 	<TextView
 	    android:id="@+id/tv_minutes_spinner"
@@ -101,20 +102,20 @@
         android:text="@string/minutes"
         android:textSize="12sp"
         android:textColor="@color/black"
-        android:layout_marginTop="30dip"
-	    android:layout_toRightOf="@+id/view_separator_middle"
-    	android:layout_below="@+id/tv_hours_spinner"/>
+        android:layout_alignTop="@+id/sp_minutes"
+        android:layout_marginTop="15dip"
+	    android:layout_toRightOf="@+id/view_separator_middle" />
 
 	<Spinner
 	    android:id="@+id/sp_minutes"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:prompt="@string/minutes"
-	    android:layout_marginTop="15dip"
-	    android:layout_marginLeft="20dip"
+	    android:layout_marginTop="5dip"
 	    android:layout_marginRight="20dip"
-    	android:layout_toRightOf="@+id/tv_seconds_spinner"
-    	android:layout_below="@+id/tv_hours_spinner"/>
+    	android:layout_alignLeft="@+id/sp_seconds"
+    	android:layout_alignParentRight="true"
+    	android:layout_below="@+id/sp_hours"/>
 
 	<TextView
 	    android:id="@+id/tv_seconds_spinner"
@@ -123,20 +124,20 @@
         android:text="@string/seconds"
         android:textSize="12sp"
         android:textColor="@color/black"
-        android:layout_marginTop="25dip"
-	    android:layout_toRightOf="@+id/view_separator_middle"
-    	android:layout_below="@+id/tv_minutes_spinner"/>
+        android:layout_alignTop="@+id/sp_seconds"
+        android:layout_marginTop="15dip"
+        android:layout_marginRight="15dip"
+	    android:layout_toRightOf="@+id/view_separator_middle" />
 
 	<Spinner
 	    android:id="@+id/sp_seconds"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:prompt="@string/seconds"
-	    android:layout_marginTop="11dip"
-	    android:layout_marginLeft="20dip"
+	    android:layout_marginTop="5dip"
 	    android:layout_marginRight="20dip"
     	android:layout_toRightOf="@+id/tv_seconds_spinner"
-    	android:layout_below="@+id/tv_minutes_spinner"/>
+    	android:layout_below="@+id/sp_minutes"/>
 
 	<View
 	    android:id="@+id/view_separator_middle"

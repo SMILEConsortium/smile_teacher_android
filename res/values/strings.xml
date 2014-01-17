@@ -23,17 +23,24 @@
 	<string name="toast_retaking">Retaking…</string>
 	<string name="toast_down_or_unavailable">Smileplug is down or unavailable</string>
 	
+<!-- 	Buttons -->
+	<string name="btn_exit">Exit</string>
+	<string name="btn_back">Back</string>
+	<string name="btn_delete">Delete</string>
+	<string name="btn_cancel">Cancel</string>
+	<string name="btn_confirm">Confirm</string>
+	<string name="btn_create_session">Create</string>
+	
+<!-- 	Session values -->
 	<string name="session_values">Information about teacher\'s session</string>
 	<string name="teacher_name_hint">Teacher name</string>
 	<string name="session_title_hint">Session title</string>
 	<string name="group_name_hint">Group name</string>
+	
 	<string name="date_hint">Date</string>
 	<string name="size_hint">Size</string>
-	<string name="btn_create_session">Create</string>
 	<string name="no_picture">No picture</string>
-	<string name="delete_btn">Del btn</string>
-
-	<string name="btn_exit">Exit</string>
+	
 	<string name="start_making">Start Making Questions</string>
 	<string name="use_prepared">Use Prepared Questions</string>
 	<string name="start_solving">Start Solving \n Questions</string>

@@ -10,9 +10,6 @@
   	android:layout_marginRight="280dip"
   	android:layout_marginTop="170dip"
   	android:layout_marginBottom="170dip">
-  	
-  	
-    
 
     <TextView
   	  	android:id="@+id/tv_title"
@@ -44,7 +41,7 @@
         android:layout_above="@+id/view_separator_end"
         android:layout_marginBottom="25dip"
         android:layout_marginRight="20dp"
-        android:contentDescription="@string/delete_btn" />
+        android:contentDescription="@string/btn_cancel" />
     
     <View
 		android:id="@+id/view_separator_vertical"
@@ -64,7 +61,7 @@
         android:layout_above="@+id/view_separator_end"
         android:layout_marginBottom="25dip"
         android:layout_marginLeft="20dp"
-        android:contentDescription="@string/delete_btn" />
+        android:contentDescription="@string/btn_confirm" />
     
     <View
 		android:id="@+id/view_separator_end"

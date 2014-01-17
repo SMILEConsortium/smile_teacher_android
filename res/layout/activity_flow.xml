@@ -15,38 +15,53 @@
 		android:text="@string/choose_a_option"
 		android:textColor="@color/black"
 		android:textSize="18sp"
+		android:layout_above="@+id/view_separator"
 		android:layout_centerHorizontal="true"/>
+  	
+  	<Button
+	  	android:id="@+id/bt_exit"
+	  	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/btn_exit"
+		android:textSize="16sp"
+		android:layout_margin="5dp" 
+		android:layout_alignParentRight="true"/>
 
 	<View
 		android:id="@+id/view_separator"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
 		android:background="@color/gray"
-		android:layout_marginTop="5dip"
-		android:layout_below="@id/tv_title"/>
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:layout_below="@id/bt_exit"/>
 
 	<Button
   		android:id="@+id/bt_start"
-  		android:layout_width="150dip"
-  		android:layout_height="100sp"
+  		android:layout_width="fill_parent"
+  		android:layout_height="fill_parent"
   		android:text="@string/start_making"
-  		android:textSize="18sp"
-  		android:layout_marginLeft="50sp"
-  		android:layout_centerVertical="true"
-  		android:layout_alignParentLeft="true"/>
+  		android:textSize="28sp"
+  		android:layout_margin="5sp"
+  		android:layout_toLeftOf="@+id/view_separator_vertical"
+  		android:layout_alignParentLeft="true"
+  		android:layout_below="@+id/view_separator"
+  		android:layout_above="@+id/view_separator_bottom"/>
 
 	<Button
   		android:id="@+id/bt_use_prerared"
-  		android:layout_width="150sp"
-  		android:layout_height="100sp"
+  		android:layout_width="fill_parent"
+  		android:layout_height="fill_parent"
   		android:text="@string/use_prepared"
-  		android:textSize="18sp"
-  		android:layout_marginRight="50sp"
-		android:layout_centerVertical="true"
-		android:layout_alignParentRight="true"/>
+  		android:textSize="28sp"
+  		android:layout_margin="5sp"
+		android:layout_toRightOf="@+id/view_separator_vertical"
+		android:layout_alignParentRight="true"
+  		android:layout_below="@+id/view_separator"
+  		android:layout_above="@+id/view_separator_bottom"/>
 
 	<View
-		android:id="@+id/view_separator2"
+		android:id="@+id/view_separator_bottom"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
 		android:background="@color/gray"
@@ -56,13 +71,12 @@
 		android:layout_alignParentBottom="true"/>
 
 	<View
-		android:id="@+id/view_separator_middle"
+		android:id="@+id/view_separator_vertical"
 		android:layout_width="1dip"
 		android:layout_height="fill_parent"
 		android:background="@color/gray"
-		android:layout_margin="20dip"
-		android:layout_centerInParent="true"
+		android:layout_centerHorizontal="true"
 		android:layout_below="@+id/view_separator"
-		android:layout_above="@+id/view_separator2"/>
+		android:layout_above="@+id/view_separator_bottom"/>
 
 </RelativeLayout>
