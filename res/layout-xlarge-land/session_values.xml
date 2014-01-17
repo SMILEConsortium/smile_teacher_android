@@ -6,7 +6,10 @@
   	android:layout_height="fill_parent"
   	android:background="@drawable/rounded_border"
   	android:layout_gravity="center"
-  	android:layout_margin="250dip">
+  	android:layout_marginTop="100dip"
+  	android:layout_marginBottom="50dip"
+  	android:layout_marginLeft="200dip"
+  	android:layout_marginRight="200dip" >
 
         <TextView
 	  	android:id="@+id/separator"
@@ -58,8 +61,7 @@
 		android:inputType="textAutoCorrect|textCapSentences"
 		android:layout_below="@+id/view_separator"
 		android:layout_marginTop="10dp"
-		android:layout_centerHorizontal="true" >
-	</EditText>
+		android:layout_centerHorizontal="true" />
 	
 	<EditText
 		android:id="@+id/session_title"
@@ -70,8 +72,7 @@
 		android:inputType="textAutoCorrect|textCapSentences"
 		android:layout_marginTop="2dp"
 		android:layout_below="@+id/teacher_name"
-		android:layout_centerHorizontal="true" >
-	</EditText>
+		android:layout_centerHorizontal="true" />
 	
 	<EditText
 		android:id="@+id/group_name"
@@ -82,25 +83,27 @@
 		android:inputType="textAutoCorrect|textCapSentences"
 		android:layout_marginTop="2dp"
 		android:layout_below="@+id/session_title"
-		android:layout_centerHorizontal="true" >
-	</EditText>
+		android:layout_centerHorizontal="true" />
 
 	<Button
 	  	android:id="@+id/btn_create_session"
-	  	android:layout_width="100sp"
-		android:layout_height="wrap_content"
+	  	android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
 		android:text="@string/btn_create_session"
 		android:textSize="18sp" 
-		android:layout_marginLeft="120dip"
+		android:layout_marginLeft="10dip"
+		android:layout_marginRight="20dip"
 		android:layout_toRightOf="@+id/session_title"
-		android:layout_alignBottom="@+id/session_title"/>
+		android:layout_alignBaseline="@+id/session_title" 
+		android:layout_alignTop="@+id/teacher_name"
+	    android:layout_alignBottom="@+id/group_name" />
 
     <ImageButton
         android:id="@+id/bt_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_back"
-        android:layout_marginRight="120dp"
+        android:layout_marginRight="60dp"
         android:layout_marginBottom="10dp"
         android:layout_toLeftOf="@+id/session_title"
 		android:layout_alignBottom="@+id/session_title"
