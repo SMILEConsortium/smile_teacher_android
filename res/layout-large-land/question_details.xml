@@ -150,7 +150,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="45dp"
-        android:contentDescription="@string/delete_btn" />
+        android:contentDescription="@string/btn_back" />
     
     <ImageButton
         android:id="@+id/bt_trash"
@@ -160,6 +160,6 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:contentDescription="@string/delete_btn" />
+        android:contentDescription="@string/btn_delete" />
     
     </RelativeLayout>
