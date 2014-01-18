@@ -84,8 +84,8 @@
             <ImageView
                 android:id="@+id/iv_image"
                 android:layout_width="fill_parent"
-                android:contentDescription="@string/no_picture"
                 android:layout_height="fill_parent"
+                android:contentDescription="@string/no_picture"
                 android:textColor="@color/black" />
 
             <TextView

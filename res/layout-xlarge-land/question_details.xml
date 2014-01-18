@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
+    <RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/container"
   	android:layout_width="fill_parent"
   	android:layout_height="fill_parent"
-  	android:orientation="vertical"
   	android:background="@drawable/rounded_border"
   	android:layout_gravity="center"
-  	android:gravity="center_horizontal"
   	android:layout_margin="50dip">
   	
     <ImageButton 
@@ -15,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_close"
         android:contentDescription="@string/close_dialog"
-        android:layout_gravity="right"
+        android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp" />
 
@@ -25,32 +24,40 @@
    		android:layout_height="wrap_content"
    		android:text="@string/question_uppercase"
       	android:textStyle="bold"
-      	android:textSize="18sp"
+      	android:textSize="16sp"
       	android:textColor="@color/black"
-      	android:layout_marginTop="10dip"/>
+      	android:layout_marginTop="30dip"
+      	android:layout_centerHorizontal="true" />
 
     <View
 		android:id="@+id/view_separator"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
 		android:background="@color/gray"
+		android:layout_below="@+id/bt_close"
 		android:layout_margin="5dip"/>
-
+    
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="5dip" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_below="@+id/view_separator"
+        android:layout_above="@+id/bt_trash"
+         >
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tv_create_by"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_gravity="center_horizontal" />
 
@@ -61,7 +68,7 @@
                 android:layout_marginLeft="5dip"
                 android:layout_marginTop="10dip"
                 android:text="@string/question"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -71,13 +78,14 @@
                 android:layout_marginLeft="5dip"
                 android:layout_marginRight="5dip"
                 android:layout_marginTop="10dip"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
 
             <ImageView
                 android:id="@+id/iv_image"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:contentDescription="@string/no_picture"
                 android:textColor="@color/black" />
 
             <TextView
@@ -87,7 +95,7 @@
                 android:layout_marginLeft="50dip"
                 android:layout_marginRight="50dip"
                 android:layout_marginTop="20dip"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -97,7 +105,7 @@
                 android:layout_marginLeft="50dip"
                 android:layout_marginRight="50dip"
                 android:layout_marginTop="15dip"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -107,7 +115,7 @@
                 android:layout_marginLeft="50dip"
                 android:layout_marginRight="50dip"
                 android:layout_marginTop="15dip"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -117,7 +125,7 @@
                 android:layout_marginLeft="50dip"
                 android:layout_marginRight="50dip"
                 android:layout_marginTop="15dip"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -126,11 +134,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dip"
                 android:layout_marginTop="30dip"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
 
         </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/bt_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_back"
+        android:layout_toLeftOf="@+id/bt_trash"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="45dp"
+        android:contentDescription="@string/btn_back" />
+    
+    <ImageButton
+        android:id="@+id/bt_trash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_trash"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/btn_delete" />
+    
+    </RelativeLayout>
