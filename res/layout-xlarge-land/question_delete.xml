@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/container"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:background="@drawable/rounded_border"
+  	android:layout_gravity="center"
+  	android:layout_marginLeft="400dip"
+  	android:layout_marginRight="400dip"
+  	android:layout_marginTop="250dip"
+  	android:layout_marginBottom="250dip">
+
+    <TextView
+  	  	android:id="@+id/tv_title"
+  	  	android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:text="@string/confirm"
+      	android:textStyle="bold"
+      	android:textSize="20sp"
+      	android:textColor="@color/black"
+      	android:layout_marginTop="30dip"
+      	android:layout_centerHorizontal="true" />
+
+    <View
+		android:id="@+id/view_separator"
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:layout_marginTop="25dip"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:background="@color/gray"
+		android:layout_margin="5dip"/>
+
+    <ImageButton
+        android:id="@+id/bt_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_cancel_normal"
+        android:layout_toLeftOf="@+id/view_separator_vertical"
+        android:layout_above="@+id/view_separator_end"
+        android:layout_marginBottom="25dip"
+        android:layout_marginRight="20dp"
+        android:contentDescription="@string/btn_cancel" />
+    
+    <View
+		android:id="@+id/view_separator_vertical"
+		android:layout_width="1dip"
+		android:layout_height="fill_parent"
+		android:layout_below="@+id/tv_title"
+		android:layout_centerHorizontal="true"
+		android:background="@color/white"
+		android:layout_margin="5dip"/>
+    
+    <ImageButton
+        android:id="@+id/bt_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_confirm_normal"
+        android:layout_toRightOf="@+id/view_separator_vertical"
+        android:layout_above="@+id/view_separator_end"
+        android:layout_marginBottom="25dip"
+        android:layout_marginLeft="20dp"
+        android:contentDescription="@string/btn_confirm" />
+    
+    <View
+		android:id="@+id/view_separator_end"
+		android:layout_width="fill_parent"
+		android:layout_height="1dip"
+		android:layout_alignParentBottom="true"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:background="@color/gray"
+		android:layout_margin="5dip"/>
+    
+    </RelativeLayout>
