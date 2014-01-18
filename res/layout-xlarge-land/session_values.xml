@@ -89,7 +89,7 @@
 	  	android:id="@+id/btn_create_session"
 	  	android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:text="@string/btn_create_session"
+		android:text="@string/btn_next"
 		android:textSize="18sp" 
 		android:layout_marginLeft="10dip"
 		android:layout_marginRight="20dip"

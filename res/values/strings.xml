@@ -29,7 +29,7 @@
 	<string name="btn_delete">Delete</string>
 	<string name="btn_cancel">Cancel</string>
 	<string name="btn_confirm">Confirm</string>
-	<string name="btn_create_session">Create</string>
+	<string name="btn_next">Next</string>
 	
 <!-- 	Session values -->
 	<string name="session_values">Information about teacher\'s session</string>

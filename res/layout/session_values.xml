@@ -60,7 +60,9 @@
 	    android:layout_alignBottom="@+id/group_name"
 	    android:layout_marginRight="2dp"
 	    android:text="@string/btn_back"
-	    android:textSize="18sp" />
+	    android:textSize="18sp"
+	    android:textColor="@color/white"
+		android:background="@drawable/button_black" />
 
 	<EditText
 	    android:id="@+id/teacher_name"
@@ -107,7 +109,9 @@
 	    android:layout_alignTop="@+id/teacher_name"
 	    android:layout_alignBottom="@+id/group_name"
 	    android:layout_marginLeft="2dp"
-	    android:text="@string/btn_create_session"
-	    android:textSize="18sp" />
+	    android:text="@string/btn_next"
+	    android:textSize="18sp"
+	    android:textColor="@color/white"
+		android:background="@drawable/button_blue" />
 
 </RelativeLayout>

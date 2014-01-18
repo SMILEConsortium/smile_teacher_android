@@ -7,4 +7,13 @@
     <color name="red">#FF0000</color>
     <color name="blue">#3366FF</color>
     <color name="pink">#FF99CC</color>
+    
+<!--     Button style -->
+	<color name="btn_blue_light">#5BC0DE</color>
+    <color name="btn_blue_dark">#3276B1</color>
+    <color name="btn_green_light">#5CB85C</color>
+    <color name="btn_green_dark">#47A447</color>
+    <color name="btn_gray_dark">#5C5C5C</color>
+    <color name="btn_red_light">#D2322D</color>
+    <color name="btn_red_dark">#D9534F</color>
 </resources>
