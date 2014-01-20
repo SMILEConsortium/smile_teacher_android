@@ -85,9 +85,11 @@
 	data from a given learning activity for later access.</string>
 	<string name="ok">OK</string>
 
+<!-- 	Use prepared questions -->
 	<string name="choose_a_option">CHOOSE AN OPTION BELOW: </string>
 	<string name="remaining_time">Remaining Time</string>
 	<string name="use_time">Use Time Limit Mode</string>
+	<string name="countdown">Countdown</string>
 	<string name="select">Select Question File: </string>
 	<string name="seconds">Seconds</string>
 	<string name="minutes">Minutes</string>
