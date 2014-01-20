@@ -19,8 +19,8 @@
   	
   	<ImageButton 
         android:id="@+id/bt_close"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/btn_close"
         android:contentDescription="@string/close_dialog"
         android:layout_alignParentRight="true"
@@ -55,8 +55,8 @@
 		android:background="@color/gray"
 		android:layout_marginLeft="5dip"
 		android:layout_marginRight="5dip"
-		android:layout_marginBottom="10dip"
-		android:layout_marginTop="2dip"
+		android:layout_marginBottom="8dip"
+		android:layout_marginTop="4dip"
 		android:layout_alignParentBottom="true"/>
 
 	<ListView
@@ -67,7 +67,7 @@
 	    android:layout_alignParentLeft="true"
 	    android:layout_below="@+id/tv_select_item"
 	    android:layout_marginTop="5dip"
-	    android:layout_marginBottom="10dip"
+	    android:layout_marginBottom="15dip"
 	    android:layout_marginLeft="10dip"
 	    android:layout_marginRight="10dip"
 	    android:choiceMode="singleChoice"
@@ -80,7 +80,8 @@
 	    android:text="@string/countdown"
 	    android:textColor="@color/black"
 	    android:textSize="10sp"
-	    android:layout_marginRight="15dip"
+	    android:layout_marginLeft="5dip"
+	    android:layout_marginRight="10dip"
 	    android:layout_alignParentLeft="true"
 	    android:layout_alignBaseline="@+id/sp_hours" />
 	
@@ -91,6 +92,7 @@
 	    android:text="@string/hours"
 	    android:textSize="10sp"
 	    android:layout_toRightOf="@+id/cb_questions"
+	    android:layout_marginLeft="10sp"
 	    android:layout_above="@+id/sp_hours"
 	    android:textColor="@color/black" />
 	
@@ -99,8 +101,8 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/view_separator_bottom"
+	    android:layout_alignTop="@+id/bt_ok"
 	    android:layout_marginRight="5dp"
-	    android:layout_marginLeft="5sp"
 	    android:layout_toRightOf="@+id/cb_questions"
 	    android:prompt="@string/hours" />
 	
@@ -112,6 +114,7 @@
 	    android:textSize="10sp"
 	    android:textColor="@color/black"
 	    android:layout_toRightOf="@+id/sp_hours"
+	    android:layout_marginLeft="10sp"
 	    android:layout_above="@+id/sp_minutes" />
 	
 	<Spinner
@@ -121,6 +124,7 @@
 	    android:prompt="@string/minutes"
 	    android:layout_toRightOf="@+id/sp_hours"
 	    android:layout_above="@+id/view_separator_bottom"
+	    android:layout_alignTop="@+id/bt_ok"
 	    android:layout_marginRight="5dp" />
 
 	<TextView
@@ -131,7 +135,8 @@
 	    android:textSize="10sp"
 	    android:layout_above="@+id/sp_seconds"
 	    android:textColor="@color/black"
-	    android:layout_toRightOf="@+id/sp_minutes" />
+	    android:layout_toRightOf="@+id/sp_minutes"
+	    android:layout_marginLeft="10sp" />
 	
 	<Spinner
 	    android:id="@+id/sp_seconds"
@@ -139,7 +144,7 @@
 	    android:layout_height="wrap_content"
 	    android:prompt="@string/seconds"
 	    android:layout_above="@+id/view_separator_bottom"
-	    android:layout_marginRight="10dp"
+	    android:layout_alignTop="@+id/bt_ok"
 	    android:layout_toRightOf="@+id/sp_minutes" />
 
 	<Button

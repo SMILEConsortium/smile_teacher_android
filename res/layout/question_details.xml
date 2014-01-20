@@ -11,13 +11,13 @@
   	
     <ImageButton 
         android:id="@+id/bt_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/btn_close"
         android:contentDescription="@string/close_dialog"
         android:layout_gravity="right"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp" />
 
     <TextView
   	  	android:id="@+id/tv_title"
@@ -25,9 +25,8 @@
    		android:layout_height="wrap_content"
    		android:text="@string/question_uppercase"
       	android:textStyle="bold"
-      	android:textSize="18sp"
-      	android:textColor="@color/black"
-      	android:layout_marginTop="10dip"/>
+      	android:textSize="12sp"
+      	android:textColor="@color/black" />
 
     <View
 		android:id="@+id/view_separator"

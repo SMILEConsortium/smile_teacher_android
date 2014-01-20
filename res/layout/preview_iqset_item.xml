@@ -20,7 +20,7 @@
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"
             android:layout_marginTop="10dip"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:textColor="@color/black" />
 	</TableRow>
             
@@ -39,10 +39,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/alternative1"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
                 android:layout_marginTop="5dip"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/blue" />
             
             <TextView
@@ -50,10 +50,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/alternative2"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
                 android:layout_marginTop="5dip"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/blue" />
             
             <TextView
@@ -61,10 +61,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/alternative3"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
                 android:layout_marginTop="5dip"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/blue" />
             
             <TextView
@@ -72,11 +72,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/alternative4"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
+                android:layout_marginLeft="5dip"
                 android:layout_marginTop="5dip"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/blue" />
+            
 		</TableRow>
 	</TableLayout>
 </TableLayout>
