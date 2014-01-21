@@ -16,4 +16,6 @@
     <color name="btn_gray_dark">#5C5C5C</color>
     <color name="btn_red_light">#D2322D</color>
     <color name="btn_red_dark">#D9534F</color>
+    <color name="btn_yellow_light">#F8C606</color>
+    <color name="btn_yellow_dark">#F89406</color>
 </resources>

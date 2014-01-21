@@ -112,6 +112,6 @@
 	    android:text="@string/btn_next"
 	    android:textSize="18sp"
 	    android:textColor="@color/white"
-		android:background="@drawable/button_blue" />
+		android:background="@drawable/button_green" />
 
 </RelativeLayout>
