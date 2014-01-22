@@ -38,7 +38,7 @@
 		    android:layout_alignTop="@+id/bt_results"
 		    android:text="@string/remaining_time"
 		    android:textColor="@color/black"
-		    android:textSize="18sp" />
+		    android:textSize="12sp" />
 
 		<TextView
 		    android:id="@+id/tv_status"

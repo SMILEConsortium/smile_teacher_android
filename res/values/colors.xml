@@ -10,7 +10,9 @@
     
 <!--     Button style -->
 	<color name="btn_blue_light">#5BC0DE</color>
+    <color name="btn_blue_light_disabled">#7BE0FE</color>
     <color name="btn_blue_dark">#3276B1</color>
+    <color name="btn_blue_dark_disabled">#5296D1</color>
     <color name="btn_green_light">#5CB85C</color>
     <color name="btn_green_dark">#47A447</color>
     <color name="btn_black_dark">#404040</color>

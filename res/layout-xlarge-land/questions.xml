@@ -154,7 +154,7 @@
 	            android:layout_weight="1"
 		        android:gravity="center"
 		        android:layout_gravity="center"
-		      	android:text="@string/rating_table"
+		      	android:text="@string/rating"
 		      	android:textSize="18sp"
 		      	android:textColor="@color/black"
 		      	android:lines="2"/>

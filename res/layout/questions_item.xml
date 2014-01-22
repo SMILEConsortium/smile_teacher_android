@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <org.smilec.smile.ui.widget.checkbox.CheckableRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:marvinlabs="http://schemas.android.com/apk/res/fr.marvinlabs.selectablelisttutorial"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:shrinkColumns="*"
     android:stretchColumns="*"
-    android:background="@color/gray"
-    android:paddingTop="10dip">
+    android:background="@color/gray" >
 
     <TableRow
         android:id="@+id/tr"
@@ -27,32 +25,32 @@
 	        android:src="@drawable/details"
 	        android:gravity="center|center_horizontal"
 	        android:background="@color/gray"
-	        android:layout_marginTop="5dip"/>
+	        android:layout_marginTop="2dip"/>
 
 	    <TextView
 	        android:id="@+id/tv_number"
-	        android:textSize="18sp"
+	        android:textSize="12sp"
 	        android:textColor="@color/black"
 	        android:layout_gravity="right|center_vertical"
 	        android:background="@color/gray"/>
 
 	    <TextView
 	        android:id="@+id/tv_owner"
-	        android:textSize="18sp"
+	        android:textSize="12sp"
 	        android:textColor="@color/black"
 	        android:layout_gravity="center|center_horizontal"
 	        android:background="@color/gray" />
 
 	    <TextView
 	        android:id="@+id/tv_ip"
-	        android:textSize="18sp"
+	        android:textSize="12sp"
 	        android:textColor="@color/black"
 	        android:layout_gravity="left|center_vertical"
 	        android:background="@color/gray" />
 
 	    <TextView
 	        android:id="@+id/tv_hit_average"
-	        android:textSize="18sp"
+	        android:textSize="12sp"
 	        android:textColor="@color/black"
 	        android:layout_gravity="center|center_horizontal"
 	        android:background="@color/gray"
