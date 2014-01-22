@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/container"
   	android:layout_width="fill_parent"
   	android:layout_height="fill_parent"
-  	android:orientation="vertical"
   	android:background="@drawable/rounded_border"
   	android:layout_gravity="center"
-  	android:gravity="center_horizontal"
-  	android:layout_margin="50dip">
+  	android:layout_marginTop="15dip"
+  	android:layout_marginBottom="15dip"
+  	android:layout_marginLeft="15dip"
+  	android:layout_marginRight="15dip">
   	
     <ImageButton 
         android:id="@+id/bt_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/btn_close"
         android:contentDescription="@string/close_dialog"
-        android:layout_gravity="right"
+        android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp" />
 
@@ -22,40 +25,49 @@
   	  	android:id="@+id/tv_title"
   	  	android:layout_width="wrap_content"
    		android:layout_height="wrap_content"
+   		android:layout_marginBottom="5dip"
    		android:text="@string/score_board"
+   		android:layout_centerHorizontal="true"
       	android:textStyle="bold"
       	android:textSize="18sp"
       	android:textColor="@color/black"
-      	android:layout_marginTop="10dip"/>
-
+      	android:layout_above="@+id/view_separator" />
+    
     <View
 		android:id="@+id/view_separator"
+		android:layout_below="@+id/bt_close"
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
-		android:background="@color/gray"
-		android:layout_margin="5dip"/>
-
+		android:layout_marginLeft="4dp"
+		android:layout_marginRight="4dp"
+		android:background="@color/gray" />
+    
     <TextView
   	  	android:id="@+id/tv_name"
   	  	android:layout_width="wrap_content"
    		android:layout_height="wrap_content"
+   		android:layout_marginTop="5dip"
+   		android:layout_toLeftOf="@+id/tv_title"
+   		android:layout_below="@+id/tv_title"
       	android:textStyle="bold"
-      	android:textSize="18sp"
-      	android:textColor="@color/black"
-      	android:layout_marginTop="15dip"/>
+      	android:textSize="14sp"
+      	android:textColor="@color/black" />
 
     <TextView
   	  	android:id="@+id/tv_score"
   	  	android:layout_width="wrap_content"
    		android:layout_height="wrap_content"
+   		android:layout_marginTop="5dip"
+   		android:layout_toRightOf="@+id/tv_title"
+   		android:layout_below="@+id/tv_title"
       	android:textStyle="bold"
-      	android:textSize="18sp"
-      	android:textColor="@color/black"
-      	android:layout_marginTop="5dip"/>
-
+      	android:textSize="14sp"
+      	android:textColor="@color/black" />
+    
     <LinearLayout
 	  	android:layout_width="fill_parent"
 	  	android:layout_height="fill_parent"
+	  	android:layout_below="@+id/tv_name"
 	  	android:layout_marginTop="10dip"
 	  	android:orientation="horizontal">
 
@@ -67,26 +79,25 @@
 	    	android:stretchColumns="*"
 	    	android:layout_margin="5dip">
 
-	    	<View
-				android:id="@+id/view_separator2"
-				android:layout_width="fill_parent"
-				android:layout_height="1dip"
-				android:background="@color/gray"
-				android:layout_marginTop="5dip"/>
+<!-- 	    	<View -->
+<!-- 				android:id="@+id/view_separator2" -->
+<!-- 				android:layout_width="fill_parent" -->
+<!-- 				android:layout_height="1dip" -->
+<!-- 				android:background="@color/gray" /> -->
 
 		  	<TableRow
 		  		android:id="@+id/tr_row"
+		  		android:background="@drawable/box_grey"
 		  		android:layout_width="wrap_content"
 		   	  	android:layout_height="wrap_content"
-		   	  	android:layout_marginTop="5dip"
-		   	  	android:layout_marginLeft="40dip">
+		   	  	android:paddingLeft="30dp" >
 
 			  	<TextView
 			  	  	android:id="@+id/tv_title_number"
 			  	  	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/question_number"
-			      	android:textSize="18sp"
+			      	android:textSize="14sp"
 			      	android:textColor="@color/black"
 			      	android:gravity="center"/>
 
@@ -95,7 +106,7 @@
 			      	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/correct_answer"
-			      	android:textSize="18sp"
+			      	android:textSize="14sp"
 			      	android:textColor="@color/black"
 			      	android:gravity="center"/>
 
@@ -104,7 +115,7 @@
 			    	android:layout_width="20dip"
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/chosen_answer"
-			      	android:textSize="18sp"
+			      	android:textSize="14sp"
 			      	android:textColor="@color/black"
 			      	android:gravity="center"/>
 
@@ -114,7 +125,7 @@
 		  			android:layout_height="wrap_content"
 			      	android:text="@string/give_rating"
 			      	android:textColor="@color/black"
-			      	android:textSize="18sp"
+			      	android:textSize="14sp"
 			      	android:gravity="center"
 			      	android:paddingRight="50dip"/>
 
@@ -124,8 +135,7 @@
 				android:id="@+id/view_separator3"
 				android:layout_width="fill_parent"
 				android:layout_height="1dip"
-				android:background="@color/gray"
-				android:layout_marginTop="5dip"/>
+				android:background="@color/gray" />
 
 		  	<ListView
 				android:id="@+id/list"
@@ -137,4 +147,5 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
+

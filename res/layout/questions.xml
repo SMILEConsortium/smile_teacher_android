@@ -122,8 +122,7 @@
 
 	<Button
 	    android:id="@+id/bt_write_report"
-	    android:textColor="@color/white"
-	    android:background="@drawable/button_blue"
+	    android:textColor="@color/black"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignBaseline="@+id/bt_save"
@@ -135,8 +134,7 @@
 	
 	<Button
   		android:id="@+id/bt_save"
-  		android:textColor="@color/white"
-  		android:background="@drawable/button_blue"
+  		android:textColor="@color/black"
   		android:enabled="false"
   		android:layout_width="wrap_content"
   		android:layout_height="wrap_content"
