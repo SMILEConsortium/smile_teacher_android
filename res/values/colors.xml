@@ -13,7 +13,8 @@
     <color name="btn_blue_dark">#3276B1</color>
     <color name="btn_green_light">#5CB85C</color>
     <color name="btn_green_dark">#47A447</color>
-    <color name="btn_gray_dark">#5C5C5C</color>
+    <color name="btn_black_dark">#404040</color>
+    <color name="btn_black_light">#9C9C9C</color>
     <color name="btn_red_light">#D2322D</color>
     <color name="btn_red_dark">#D9534F</color>
     <color name="btn_yellow_light">#F8C606</color>

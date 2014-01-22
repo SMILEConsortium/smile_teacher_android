@@ -6,10 +6,10 @@
   	android:layout_height="fill_parent"
   	android:background="@drawable/rounded_border"
   	android:layout_gravity="center"
-  	android:layout_marginLeft="60dip"
-  	android:layout_marginRight="60dip"
-  	android:layout_marginTop="40dip"
-  	android:layout_marginBottom="40dip">
+  	android:layout_marginLeft="100dip"
+  	android:layout_marginRight="100dip"
+  	android:layout_marginTop="80dip"
+  	android:layout_marginBottom="80dip">
 
     <TextView
   	  	android:id="@+id/tv_title"
@@ -38,22 +38,13 @@
   		android:text="@string/btn_cancel"
   		android:textSize="24sp"
   		android:textColor="@color/white"
-	    android:background="@drawable/button_blue"
+	    android:background="@drawable/button_black"
   		android:layout_margin="5sp"
   		android:layout_toLeftOf="@+id/view_separator_vertical"
   		android:layout_alignParentLeft="true"
   		android:layout_below="@+id/view_separator"
   		android:layout_above="@+id/view_separator_end"/>
 
-<!--     <ImageButton -->
-<!--         android:id="@+id/bt_cancel" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:background="@drawable/btn_cancel_normal" -->
-<!--         android:layout_toLeftOf="@+id/view_separator_vertical" -->
-<!--         android:layout_above="@+id/view_separator_end" -->
-<!--         android:contentDescription="@string/btn_cancel" /> -->
-    
     <View
 		android:id="@+id/view_separator_vertical"
 		android:layout_width="1dip"
@@ -70,21 +61,12 @@
   		android:text="@string/btn_confirm"
   		android:textSize="24sp"
   		android:textColor="@color/white"
-	    android:background="@drawable/button_blue"
+	    android:background="@drawable/button_red"
   		android:layout_margin="5sp"
   		android:layout_toRightOf="@+id/view_separator_vertical"
   		android:layout_alignParentRight="true"
   		android:layout_below="@+id/view_separator"
   		android:layout_above="@+id/view_separator_end"/>
-    
-<!--     <ImageButton -->
-<!--         android:id="@+id/bt_confirm" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:background="@drawable/btn_confirm_normal" -->
-<!--         android:layout_toRightOf="@+id/view_separator_vertical" -->
-<!--         android:layout_above="@+id/view_separator_end" -->
-<!--         android:contentDescription="@string/btn_confirm" /> -->
     
     <View
 		android:id="@+id/view_separator_end"
