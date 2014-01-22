@@ -92,8 +92,8 @@ public class StudentsFragment extends AbstractFragment {
         tvTopTitle = (TextView) getActivity().findViewById(R.id.tv_top_scorers);
         tvTopTitle.setVisibility(View.INVISIBLE);
 
-        View vSeparatorScore = getActivity().findViewById(R.id.view_separator_score);
-        vSeparatorScore.setVisibility(View.VISIBLE);
+//        View vSeparatorScore = getActivity().findViewById(R.id.view_separator_score);
+//        vSeparatorScore.setVisibility(View.VISIBLE);
 
         RelativeLayout rlTopScorersConatainer = (RelativeLayout) getActivity().findViewById(
             R.id.rl_top_scorers);

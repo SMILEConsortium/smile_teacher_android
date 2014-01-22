@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:tools="http://schemas.android.com/tools" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:background="@color/white"
+    android:layout_height="fill_parent" 
+    android:layout_width="fill_parent" >
+
+    <TableRow
+        android:id="@+id/tr"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content">
+
+		<TextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/question"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="10dip"
+            android:textSize="12sp"
+            android:textColor="@color/black" />
+	</TableRow>
+            
+    <TableLayout
+	    android:orientation="horizontal" 
+	    android:background="@color/white"
+	    android:layout_height="match_parent" 
+	    android:layout_width="fill_parent" >
+
+		<TableRow
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" >
+            
+            <TextView
+                android:id="@+id/tv_alternative1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alternative1"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:textSize="10sp"
+                android:textColor="@color/blue" />
+            
+            <TextView
+                android:id="@+id/tv_alternative2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alternative2"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:textSize="10sp"
+                android:textColor="@color/blue" />
+            
+            <TextView
+                android:id="@+id/tv_alternative3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alternative3"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:textSize="10sp"
+                android:textColor="@color/blue" />
+            
+            <TextView
+                android:id="@+id/tv_alternative4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alternative4"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="5dip"
+                android:textSize="10sp"
+                android:textColor="@color/blue" />
+            
+		</TableRow>
+	</TableLayout>
+</TableLayout>

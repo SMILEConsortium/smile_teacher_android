@@ -20,6 +20,8 @@
   	
   	<Button
 	  	android:id="@+id/bt_exit"
+	  	android:textColor="@color/white"
+	  	android:background="@drawable/button_black"
 	  	android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="@string/btn_exit"
@@ -42,6 +44,8 @@
   		android:layout_height="fill_parent"
   		android:text="@string/start_making"
   		android:textSize="28sp"
+  		android:textColor="@color/white"
+	    android:background="@drawable/button_blue"
   		android:layout_margin="5sp"
   		android:layout_toLeftOf="@+id/view_separator_vertical"
   		android:layout_alignParentLeft="true"
@@ -49,16 +53,18 @@
   		android:layout_above="@+id/view_separator_bottom"/>
 
 	<Button
-  		android:id="@+id/bt_use_prerared"
-  		android:layout_width="fill_parent"
-  		android:layout_height="fill_parent"
-  		android:text="@string/use_prepared"
-  		android:textSize="28sp"
-  		android:layout_margin="5sp"
-		android:layout_toRightOf="@+id/view_separator_vertical"
-		android:layout_alignParentRight="true"
-  		android:layout_below="@+id/view_separator"
-  		android:layout_above="@+id/view_separator_bottom"/>
+	    android:id="@+id/bt_use_prerared"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_above="@+id/view_separator_bottom"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/view_separator"
+	    android:layout_margin="5sp"
+	    android:layout_toRightOf="@+id/view_separator_vertical"
+	    android:textColor="@color/white"
+	    android:background="@drawable/button_blue"
+	    android:text="@string/use_prepared"
+	    android:textSize="28sp" />
 
 	<View
 		android:id="@+id/view_separator_bottom"

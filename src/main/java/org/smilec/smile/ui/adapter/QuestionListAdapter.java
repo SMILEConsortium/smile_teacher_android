@@ -173,8 +173,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				confirmDialog.show();
 				
 				// Adding listeners on each button
-				ImageButton btCancel = (ImageButton) confirmDialog.findViewById(R.id.bt_cancel);
-				ImageButton btConfirm = (ImageButton) confirmDialog.findViewById(R.id.bt_confirm);
+				Button btCancel = (Button) confirmDialog.findViewById(R.id.bt_cancel);
+				Button btConfirm = (Button) confirmDialog.findViewById(R.id.bt_confirm);
              	
                 btCancel.setOnClickListener(new CloseClickListenerUtil(confirmDialog));
                 btConfirm.setOnClickListener(new Button.OnClickListener() {

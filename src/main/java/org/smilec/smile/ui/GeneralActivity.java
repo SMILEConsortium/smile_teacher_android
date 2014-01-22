@@ -607,8 +607,8 @@ public class GeneralActivity extends FragmentActivity {
         TextView tvTopTitle = (TextView) GeneralActivity.this.findViewById(R.id.tv_top_scorers);
         tvTopTitle.setVisibility(View.VISIBLE);
 
-        View vSeparatorScore = findViewById(R.id.view_separator_score);
-        vSeparatorScore.setVisibility(View.VISIBLE);
+//        View vSeparatorScore = findViewById(R.id.view_separator_score);
+//        vSeparatorScore.setVisibility(View.VISIBLE);
 
         RelativeLayout rlTopScorersContainer = (RelativeLayout) GeneralActivity.this
             .findViewById(R.id.rl_top_scorers);

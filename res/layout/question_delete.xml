@@ -6,10 +6,10 @@
   	android:layout_height="fill_parent"
   	android:background="@drawable/rounded_border"
   	android:layout_gravity="center"
-  	android:layout_marginLeft="230dip"
-  	android:layout_marginRight="230dip"
-  	android:layout_marginTop="160dip"
-  	android:layout_marginBottom="160dip">
+  	android:layout_marginLeft="100dip"
+  	android:layout_marginRight="100dip"
+  	android:layout_marginTop="80dip"
+  	android:layout_marginBottom="80dip">
 
     <TextView
   	  	android:id="@+id/tv_title"
@@ -27,10 +27,10 @@
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
 		android:layout_below="@+id/tv_title"
-		android:layout_marginLeft="4dip"
-		android:layout_marginRight="4dip"
+		android:layout_marginLeft="1dip"
+		android:layout_marginRight="1dip"
 		android:background="@color/gray" />
-
+    
     <Button
   		android:id="@+id/bt_cancel"
   		android:layout_width="fill_parent"
@@ -44,7 +44,7 @@
   		android:layout_alignParentLeft="true"
   		android:layout_below="@+id/view_separator"
   		android:layout_above="@+id/view_separator_end"/>
-    
+
     <View
 		android:id="@+id/view_separator_vertical"
 		android:layout_width="1dip"
@@ -53,17 +53,6 @@
 		android:layout_above="@+id/view_separator_end"
 		android:layout_centerHorizontal="true"
 		android:background="@color/gray" />
-    
-<!--     <ImageButton -->
-<!--         android:id="@+id/bt_confirm" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:background="@drawable/btn_confirm_normal" -->
-<!--         android:layout_toRightOf="@+id/view_separator_vertical" -->
-<!--         android:layout_above="@+id/view_separator_end" -->
-<!--         android:layout_marginBottom="25dip" -->
-<!--         android:layout_marginLeft="20dp" -->
-<!--         android:contentDescription="@string/btn_confirm" /> -->
     
     <Button
   		android:id="@+id/bt_confirm"
@@ -84,9 +73,9 @@
 		android:layout_width="fill_parent"
 		android:layout_height="1dip"
 		android:layout_alignParentBottom="true"
-		android:layout_marginLeft="2dip"
-		android:layout_marginRight="2dip"
+		android:layout_marginLeft="1dip"
+		android:layout_marginRight="1dip"
 		android:background="@color/gray"
-		android:layout_marginBottom="10dip"/>
+		android:layout_marginBottom="10dip" />
     
     </RelativeLayout>

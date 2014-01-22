@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--     <item android:state_pressed="true" -->
+<!--         android:state_enabled="false" -->
+<!--         android:textColor="#9D9FA2" -->
+<!--         android:drawable="@drawable/button"/> -->
+    
+    <item android:state_pressed="true" >
+        <shape>
+            <gradient
+                android:startColor="@color/btn_blue_dark"
+                android:endColor="@color/btn_blue_light"
+                android:angle="270" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/btn_blue_light" />
+            <corners
+                android:radius="3dp" />
+            <padding
+                android:left="10dp"
+                android:top="10dp"
+                android:right="10dp"
+                android:bottom="10dp" />
+        </shape>
+    </item>
+    
+    <item android:state_enabled="false"
+        android:textColor="#CDCFC2" >
+    	<shape>
+            <gradient
+                android:startColor="@color/btn_blue_light_disabled"
+                android:endColor="@color/btn_blue_dark_disabled"
+                android:angle="270" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/btn_blue_dark_disabled" />
+            <corners
+                android:radius="3dp" />
+            <padding
+                android:left="10dp"
+                android:top="10dp"
+                android:right="10dp"
+                android:bottom="10dp" />
+        </shape>
+    </item>
+    
+    <item>        
+        <shape>
+            <gradient
+                android:startColor="@color/btn_blue_light"
+                android:endColor="@color/btn_blue_dark"
+                android:angle="270" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/btn_blue_dark" />
+            <corners
+                android:radius="3dp" />
+            <padding
+                android:left="10dp"
+                android:top="10dp"
+                android:right="10dp"
+                android:bottom="10dp" />
+        </shape>
+    </item>
+</selector>

@@ -3,12 +3,15 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
   	android:layout_width="fill_parent"
   	android:layout_height="fill_parent"
-  	android:layout_gravity="center"
   	android:background="@drawable/rounded_border"
-  	android:layout_margin="50dip">
+  	android:layout_marginTop="20dip"
+  	android:layout_marginBottom="20dip"
+  	android:layout_marginRight="20dip"
+  	android:layout_marginLeft="20dip">
 
   	<TextView
 	  	android:id="@+id/tv_title"
+	  	android:background="@drawable/box_white"
 	  	android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="10dip"
@@ -17,20 +20,13 @@
 		android:textSize="18sp"
 		android:layout_centerHorizontal="true"/>
 
-	<View
-		android:id="@+id/view_separator"
-		android:layout_width="fill_parent"
-		android:layout_height="1dip"
-		android:background="@color/gray"
-		android:layout_margin="5dip"
-		android:layout_below="@id/tv_title"/>
-
 	<EditText
 	  	android:id="@+id/et_message"
-	  	android:layout_width="250sp"
+	  	android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:maxLines="2"
 		android:inputType="text"
+		android:layout_below="@+id/tv_name_file"
+		android:layout_above="@+id/bt_send_report"
         android:singleLine="true"
         android:textSize="18sp"
         android:layout_margin="10dip"
@@ -40,38 +36,32 @@
 	    android:id="@+id/tv_name_file"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/et_message"
-	    android:layout_centerInParent="true"
-	    android:layout_margin="10dip"
+	    android:layout_below="@+id/tv_title"
+	    android:layout_marginLeft="10dip"
+	    android:layout_marginTop="10dip"
 	    android:text="@string/send_report_body"
 	    android:textColor="@color/black"
 	    android:textSize="16sp" />
-
-	<View
-		android:id="@+id/view_separator2"
-		android:layout_width="fill_parent"
-		android:layout_height="1dip"
-		android:background="@color/gray"
-		android:layout_marginLeft="5dip"
-		android:layout_marginRight="5dip"
-		android:layout_marginBottom="20dip"
-		android:layout_alignParentBottom="true"/>
 
 	<ImageButton
 	    android:id="@+id/bt_close"
 	    android:layout_width="30dip"
 	    android:layout_height="30dip"
-	    android:layout_alignBottom="@+id/view_separator"
-	    android:layout_alignRight="@+id/view_separator"
+	    android:layout_marginTop="5dp"
+	    android:layout_marginRight="5dp"
+	    android:layout_alignParentRight="true"
 	    android:background="@drawable/btn_close"
 	    android:contentDescription="@string/close_dialog" />
 
 	<Button
 	    android:id="@+id/bt_send_report"
+	    android:background="@drawable/button_green"
 	    android:layout_width="150sp"
+	    android:layout_marginBottom="5dp"
 	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/view_separator2"
+	    android:layout_alignParentBottom="true"
 	    android:layout_centerHorizontal="true"
+	    android:textColor="@color/white"
 	    android:enabled="false"
 	    android:text="@string/send_report_btn"
 	    android:textSize="18sp" />

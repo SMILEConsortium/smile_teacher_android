@@ -11,7 +11,7 @@
 	<string name="server">Smileplug IP</string>
 	<string name="connect">Connect</string>
 	<string name="loading">Loading…</string>
-	<string name="confirm">Confirm Deletion</string>
+	<string name="confirm">Confirm Deletion?</string>
 	
 	<!-- 	Toasts -->
 	<string name="toast_connection_established">Connection established</string>
@@ -29,7 +29,7 @@
 	<string name="btn_delete">Delete</string>
 	<string name="btn_cancel">Cancel</string>
 	<string name="btn_confirm">Confirm</string>
-	<string name="btn_create_session">Create</string>
+	<string name="btn_next">Next</string>
 	
 <!-- 	Session values -->
 	<string name="session_values">Information about teacher\'s session</string>
@@ -56,7 +56,7 @@
 	<string name="owner">Owner</string>
 	<string name="correct">%Correct</string>
 	<string name="rating">Highest Rating</string>
-	<string name="rating_table">Highest\nRating</string>
+	<string name="rating_small">Rating</string>
 	<string name="students_completed">completed</string>
 	<string name="students_correct">correct</string>
 	<string name="limit_to_succeed">Percent limit to succeed</string>
@@ -85,9 +85,11 @@
 	data from a given learning activity for later access.</string>
 	<string name="ok">OK</string>
 
+<!-- 	Use prepared questions -->
 	<string name="choose_a_option">CHOOSE AN OPTION BELOW: </string>
 	<string name="remaining_time">Remaining Time</string>
 	<string name="use_time">Use Time Limit Mode</string>
+	<string name="countdown">Countdown</string>
 	<string name="select">Select Question File: </string>
 	<string name="seconds">Seconds</string>
 	<string name="minutes">Minutes</string>
@@ -144,7 +146,8 @@
 	<string name="preview_send_email">Preview Send Email</string>
 	<string name="enter_e_mails_bellow_">Enter e-mails bellow:</string>
 	<string name="email_informative">( For more than one, separate by commas(,) )</string>
-	<string name="email_informative_small">separate emails by commas \',\'</string>
+	<string name="email_informative_small">Emails (use commas \',\' for 2+)</string>
 	<string name="enter_subject_bellow">Enter subject bellow:</string>
+	<string name="subject">Subject</string>
 	<string name="send">Send</string>
 </resources>
