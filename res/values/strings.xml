@@ -11,7 +11,7 @@
 	<string name="server">Smileplug IP</string>
 	<string name="connect">Connect</string>
 	<string name="loading">Loading…</string>
-	<string name="confirm">Confirm Deletion</string>
+	<string name="confirm">Confirm Deletion?</string>
 	
 	<!-- 	Toasts -->
 	<string name="toast_connection_established">Connection established</string>
