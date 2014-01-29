@@ -49,6 +49,20 @@
 		android:layout_marginRight="5dip"
 		android:layout_below="@+id/separator" />
 	
+	<Button
+	    android:id="@+id/bt_back"
+	    android:layout_width="150sp"
+	    android:layout_height="fill_parent"
+	    android:layout_alignBaseline="@+id/session_title"
+	    android:layout_toLeftOf="@+id/session_title"
+	    android:layout_alignTop="@+id/teacher_name"
+	    android:layout_alignBottom="@+id/group_name"
+	    android:layout_marginRight="2dp"
+	    android:text="@string/btn_back"
+	    android:textSize="18sp"
+	    android:textColor="@color/white"
+		android:background="@drawable/button_black" />
+	
 	<EditText
 		android:id="@+id/teacher_name"
 		android:layout_width="200dp"
@@ -81,26 +95,19 @@
 		android:layout_marginTop="2dp"
 		android:layout_below="@+id/session_title"
 		android:layout_centerHorizontal="true" />
-
+	
 	<Button
-	  	android:id="@+id/btn_create_session"
-	  	android:layout_width="100sp"
-		android:layout_height="wrap_content"
-		android:text="@string/btn_next"
-		android:textSize="18sp" 
-		android:layout_marginLeft="120dip"
-		android:layout_toRightOf="@+id/session_title"
-		android:layout_alignBottom="@+id/session_title"/>
-
-    <ImageButton
-        android:id="@+id/bt_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_back"
-        android:layout_marginRight="120dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toLeftOf="@+id/session_title"
-		android:layout_alignBottom="@+id/session_title"
-        android:contentDescription="@string/btn_back" />
+	    android:id="@+id/btn_create_session"
+	    android:layout_width="150sp"
+	    android:layout_height="fill_parent"
+	    android:layout_alignBaseline="@+id/session_title"
+	    android:layout_toRightOf="@+id/session_title"
+	    android:layout_alignTop="@+id/teacher_name"
+	    android:layout_alignBottom="@+id/group_name"
+	    android:layout_marginLeft="2dp"
+	    android:text="@string/btn_next"
+	    android:textSize="18sp"
+	    android:textColor="@color/white"
+		android:background="@drawable/button_green" />
         
     </RelativeLayout>

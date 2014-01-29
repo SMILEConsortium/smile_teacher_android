@@ -82,7 +82,9 @@
 
 	<Button
 	  	android:id="@+id/bt_connect"
+	  	android:background="@drawable/button_green"
 	  	android:layout_width="100sp"
+	  	android:textColor="@color/white"
 		android:layout_height="wrap_content"
 		android:text="@string/connect"
 		android:layout_toRightOf="@+id/separator"

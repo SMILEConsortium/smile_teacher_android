@@ -163,6 +163,8 @@
 
 <Button
 	    android:id="@+id/bt_ok"
+	    android:background="@drawable/button_green"
+	    android:textColor="@color/white"
 	    android:layout_width="100dip"
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/view_separator2"
