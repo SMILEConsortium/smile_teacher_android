@@ -2,8 +2,8 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="org.smilec.smile"
-	android:versionCode="9"
-	android:versionName="0.9.9b1">
+	android:versionCode="10"
+	android:versionName="0.9.9b2-jamsj">
 
 	<uses-sdk android:minSdkVersion="7" />
 
