@@ -51,15 +51,14 @@
 	
 	<Button
 	    android:id="@+id/bt_back"
-	    android:layout_width="150sp"
+	    android:layout_width="220sp"
 	    android:layout_height="fill_parent"
-	    android:layout_alignBaseline="@+id/session_title"
 	    android:layout_toLeftOf="@+id/session_title"
 	    android:layout_alignTop="@+id/teacher_name"
 	    android:layout_alignBottom="@+id/group_name"
 	    android:layout_marginRight="2dp"
 	    android:text="@string/btn_back"
-	    android:textSize="18sp"
+	    android:textSize="24sp"
 	    android:textColor="@color/white"
 		android:background="@drawable/button_black" />
 	
@@ -98,15 +97,14 @@
 	
 	<Button
 	    android:id="@+id/btn_create_session"
-	    android:layout_width="150sp"
+	    android:layout_width="220sp"
 	    android:layout_height="fill_parent"
-	    android:layout_alignBaseline="@+id/session_title"
 	    android:layout_toRightOf="@+id/session_title"
 	    android:layout_alignTop="@+id/teacher_name"
 	    android:layout_alignBottom="@+id/group_name"
 	    android:layout_marginLeft="2dp"
 	    android:text="@string/btn_next"
-	    android:textSize="18sp"
+	    android:textSize="24sp"
 	    android:textColor="@color/white"
 		android:background="@drawable/button_green" />
         

@@ -68,7 +68,7 @@ public class StudentsFragment extends AbstractFragment {
 
     private boolean run;
     
-    private int limitToSucceed;
+    private static int limitToSucceed = 70;
 
     private String ip;
 
@@ -297,7 +297,7 @@ public class StudentsFragment extends AbstractFragment {
 	    		} 
 	    	}
     		// if the student has 70+% of correct answers, we count it 
-    		nbStudentOver70 += nbQuestionsCorrect*100/questions.size() >= this.limitToSucceed ? 1:0;
+    		nbStudentOver70 += nbQuestionsCorrect*100/questions.size() >= limitToSucceed ? 1:0;
     	}
 		
     	float percent = !students.isEmpty()? (float) (nbStudentOver70/students.size())*100 : 0;
