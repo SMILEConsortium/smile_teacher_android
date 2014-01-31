@@ -105,6 +105,7 @@ public class GeneralActivity extends FragmentActivity {
     private TextView tvTime, tvRemaining;
     private TextView btnStudents, btnQuestions;
     private TextView tvStatus;
+    private Spinner spLimitToSucceed;
 
     private final List<Fragment> fragments = new Vector<Fragment>();
 
@@ -615,7 +616,7 @@ public class GeneralActivity extends FragmentActivity {
         rlTopScorersContainer.setVisibility(View.VISIBLE);
 
         
-        Spinner spLimitToSucceed = (Spinner) findViewById(R.id.sp_limit_to_succeed);
+        spLimitToSucceed = (Spinner) findViewById(R.id.sp_limit_to_succeed);
         ArrayAdapter<?> adapterLimit = ArrayAdapter.createFromResource(this, R.array.percent_correct, android.R.layout.simple_spinner_item);
         adapterLimit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spLimitToSucceed.setAdapter(adapterLimit);
@@ -630,7 +631,9 @@ public class GeneralActivity extends FragmentActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
 	            String[] bases = getResources().getStringArray(R.array.percent_correct);
-				((StudentsFragment)activeFragment).updatePercentCorrect(Integer.parseInt(bases[position]));
+	            if(activeFragment instanceof StudentsFragment) {
+	            	((StudentsFragment)activeFragment).updatePercentCorrect(Integer.parseInt(bases[position]));
+	            }
             }
 
 			@Override
@@ -747,7 +750,7 @@ public class GeneralActivity extends FragmentActivity {
 
         @Override
         public void onPageSelected(int currentIndex) {
-            activeFragment = (AbstractFragment) fragments.get(currentIndex);
+        	activeFragment = (AbstractFragment) fragments.get(currentIndex);
             updateCurrentFragment(board);
         }
 
